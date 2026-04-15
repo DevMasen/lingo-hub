@@ -7,7 +7,7 @@ function HomePage() {
       <PageNav />
       <main className="flex flex-col items-center justify-center text-center">
         <section className="m-3 mt-36 text-slate-200">
-          <h1 className="text-[58px] font-bold"> آکادمی زبان هوش افزار نوآفرین </h1>
+          <h1 className="font-sans text-[58px] font-bold"> آکادمی زبان هوش افزار نوآفرین </h1>
           <p className="mt-6 text-xl text-slate-400">
             {' '}
             معلمان و استادان گرامی برای ادامه همکاری با مجموعه از طریق پیوند زیر به حساب کاربری خود
