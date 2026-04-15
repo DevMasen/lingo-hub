@@ -3,7 +3,7 @@ import Logo from './Logo';
 
 function PageNav() {
   return (
-    <nav className="m-3 flex items-center justify-between rounded-lg bg-slate-600 px-5 py-3 text-slate-200">
+    <nav className="m-3 flex items-center justify-between rounded-lg bg-slate-600 bg-opacity-65 px-5 py-3 text-slate-200">
       <Logo />
       <ul className="flex items-center gap-6 font-medium">
         <li>
@@ -14,7 +14,7 @@ function PageNav() {
         </li>
         <li>
           <NavLink to="/login" className="rounded-md bg-slate-800 px-4 py-2">
-            ورود / ثبت نام
+            ورود / ثبت‌نام
           </NavLink>
         </li>
       </ul>

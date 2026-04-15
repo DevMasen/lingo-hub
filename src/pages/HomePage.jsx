@@ -3,19 +3,22 @@ import PageNav from '../components/PageNav';
 
 function HomePage() {
   return (
-    <div>
+    <div className="overflow-y-hidden">
       <PageNav />
       <main className="flex flex-col items-center justify-center text-center">
-        <section className="m-3 mt-36 text-slate-200">
-          <h1 className="font-sans text-[58px] font-bold"> آکادمی زبان هوش افزار نوآفرین </h1>
-          <p className="mt-6 text-xl text-slate-400">
+        <section className="mt-28 text-slate-200">
+          <h1 className="text-6xl font-bold"> آکادمی زبان لینگوهاب </h1>
+          <h2 className="mt-8 font-mono text-2xl font-semibold">
+            اینجا زبان مزه دیگه ای می‌ده!😉{' '}
+          </h2>
+          <p className="mt-8 text-xl text-slate-400">
             {' '}
             معلمان و استادان گرامی برای ادامه همکاری با مجموعه از طریق پیوند زیر به حساب کاربری خود
             وارد شوید{' '}
           </p>
         </section>
         <Link
-          className="m-3 rounded-lg bg-slate-600 px-5 py-3 text-lg font-medium text-slate-200"
+          className="mt-8 rounded-lg bg-slate-600 bg-opacity-65 px-5 py-3 text-lg font-medium text-slate-200"
           to="/login"
         >
           {' '}
