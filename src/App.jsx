@@ -4,7 +4,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 //////////////////////////////////
 import AppLayout from './ui/AppLayout';
 import HomePage from './pages/HomePage';
-import ProtectedRoute from './pages/ProtectedRoute';
+import ProtectedRoute from './ui/ProtectedRoute';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import RoomList from './components/RoomList';

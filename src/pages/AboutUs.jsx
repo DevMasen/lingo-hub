@@ -2,9 +2,8 @@ import PageNav from '../components/PageNav';
 
 function AboutUs() {
   return (
-    <div>
+    <div className="background overflow-y-hidden">
       <PageNav />
-      درباره ما
     </div>
   );
 }

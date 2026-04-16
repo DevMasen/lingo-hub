@@ -2,15 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    @apply text-slate-800;
-    @apply font-sans;
-  }
-}
-
 @layer components {
-  .homepage {
+  .background {
     height: 100dvh;
     background-image: linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url('/bg.png');
     background-size: cover;

@@ -1,3 +1,20 @@
+<h1 align="center"> Lingo Hub Academy 🎓</h1>
+<p align="center">
+<img align="center" width="720px" src="./public/banner.png" alt="Banner Image">
+</p>
+
+# این یک وب اپلیکیشن برای استادان و معلمان است جهت مدیریت امور آموزش زبان
+
+## برنامه نویس : محمدحسین محسنی
+
+## کارفرما : شرکت هوش‌افزار نوآفرین
+
+## نسخه دمو سایت را در [این آدرس](https://devmasen-fast-react-pizza.netlify.app/) مشاهده کنید
+
+## ممنون از حسن توجه شما 🫡♥️
+
+---
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
