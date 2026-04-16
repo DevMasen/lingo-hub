@@ -3,199 +3,81 @@
     {
       "id": 0,
       "roomName": "100",
-      "daysFromToday": {
-        "1days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": 0,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "2days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "3days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        }
+      "timeLines": {
+        "part0": null,
+        "part1": null,
+        "part2": null,
+        "part3": null,
+        "part4": 0,
+        "part5": null,
+        "part6": null,
+        "part7": null,
+        "part8": null,
+        "part9": null
       }
     },
     {
       "id": 1,
       "roomName": "101",
-      "daysFromToday": {
-        "1days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "2days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "3days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        }
+      "timeLines": {
+        "part0": null,
+        "part1": null,
+        "part2": null,
+        "part3": null,
+        "part4": null,
+        "part5": null,
+        "part6": null,
+        "part7": null,
+        "part8": null,
+        "part9": null
       }
     },
     {
       "id": 2,
       "roomName": "102",
-      "daysFromToday": {
-        "1days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "2days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "3days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        }
+      "timeLines": {
+        "part0": null,
+        "part1": null,
+        "part2": null,
+        "part3": null,
+        "part4": null,
+        "part5": null,
+        "part6": null,
+        "part7": null,
+        "part8": null,
+        "part9": null
       }
     },
     {
       "id": 3,
       "roomName": "103",
-      "daysFromToday": {
-        "1days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "2days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "3days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        }
+      "timeLines": {
+        "part0": null,
+        "part1": null,
+        "part2": null,
+        "part3": null,
+        "part4": null,
+        "part5": null,
+        "part6": null,
+        "part7": null,
+        "part8": 0,
+        "part9": null
       }
     },
     {
       "id": 4,
       "roomName": "104",
-      "daysFromToday": {
-        "1days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "2days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "3days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        }
-      }
-    },
-    {
-      "id": 5,
-      "roomName": "105",
-      "daysFromToday": {
-        "1days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "2days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": null,
-            "time4": null,
-            "time5": null
-          }
-        },
-        "3days": {
-          "dailyTimelines": {
-            "time1": null,
-            "time2": null,
-            "time3": 0,
-            "time4": null,
-            "time5": null
-          }
-        }
+      "timeLines": {
+        "part0": null,
+        "part1": null,
+        "part2": null,
+        "part3": null,
+        "part4": null,
+        "part5": null,
+        "part6": null,
+        "part7": null,
+        "part8": null,
+        "part9": null
       }
     }
   ],
@@ -207,12 +89,13 @@
       "phoneNumber": "09339602368",
       "language": "انگلیسی",
       "level": "پیشرفته",
+      "explanation": "",
       "email": "jack@example.com",
       "password": "qwerty",
       "signupStatus": "confirmed",
       "reservedRooms": [
-        { "roomId": 0, "day": 1, "time": 2 },
-        { "roomId": 5, "day": 3, "time": 3 }
+        { "roomId": 0, "timePart": 4 },
+        { "roomId": 3, "timePart": 8 }
       ],
       "maxReserveCount": 3
     }

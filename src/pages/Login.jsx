@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loader from '../components/Loader';
 import LoginTabs from '../components/LoginTabs';
 import Button from '../components/Button';
 import HidePasswordButton from '../components/HidePasswordButton';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
+import makeNumericInput from '../utils/makeNumericInput';
 
 function Login() {
   const [activeTab, setActiveTab] = useState('mobile');
@@ -12,6 +13,18 @@ function Login() {
   const [isLoading] = useState(false);
   const [error] = useState('');
   const [isPassHidden, setIsPassHidden] = useState(true);
+
+  // Controlled Elements
+  const [phoneNumberInput, setPhoneNumberInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+
+  useEffect(
+    function () {
+      setPhoneNumberInput((cur) => makeNumericInput(cur));
+    },
+    [phoneNumberInput]
+  );
 
   function handleActiveTab(option = '') {
     setActiveTab(option);
@@ -41,7 +54,11 @@ function Login() {
               <div className="mt-4 flex w-full justify-between rounded-md border-slate-700 bg-slate-300">
                 <input
                   name="phone-number"
-                  type="number"
+                  id="phone-number"
+                  value={phoneNumberInput}
+                  onChange={(e) => setPhoneNumberInput(e.target.value)}
+                  maxlength="10"
+                  type="text"
                   placeholder="9167432385"
                   className="w-full rounded-md bg-inherit px-3 py-3 text-end text-slate-800 placeholder:text-end focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed"
                   required
@@ -57,6 +74,8 @@ function Login() {
                 <input
                   name="email"
                   type="email"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
                   className="w-full rounded-md bg-slate-300 px-3 py-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed"
                   placeholder="آدرس ایمیل"
                   required
@@ -71,6 +90,8 @@ function Login() {
             <div className="mt-4 flex items-center justify-center rounded-md bg-slate-300">
               <input
                 name="password"
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
                 type={isPassHidden ? 'password' : 'text'}
                 placeholder="رمز عبور"
                 className="w-full rounded-md bg-inherit px-3 py-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed"
