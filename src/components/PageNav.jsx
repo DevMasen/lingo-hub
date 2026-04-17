@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import Logo from './Logo';
 
 function PageNav() {
@@ -7,15 +7,15 @@ function PageNav() {
       <Logo />
       <ul className="flex items-center gap-6 font-medium">
         <li>
-          <NavLink to="/">خانه</NavLink>
+          <Link to="/">خانه</Link>
         </li>
         <li>
-          <NavLink to="/aboutus">درباره ما</NavLink>
+          <Link to="/aboutus">درباره ما</Link>
         </li>
         <li>
-          <NavLink to="/login" className="rounded-md bg-slate-800 px-4 py-2">
+          <Link to="/login" className="rounded-md bg-slate-800 px-4 py-2">
             ورود / ثبت‌نام
-          </NavLink>
+          </Link>
         </li>
       </ul>
     </nav>

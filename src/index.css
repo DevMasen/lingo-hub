@@ -10,11 +10,55 @@
     background-position: center;
   }
   .active-tab {
-    /* oklch(0.869 0.022 252.894) = text-slate-300 */
+    /* text-slate-300 */
     border-bottom: 2px solid oklch(0.869 0.022 252.894);
     color: oklch(0.869 0.022 252.894);
     font-weight: 600;
     padding-bottom: 2px;
+  }
+
+  .nav-link {
+    &:hover,
+    &:active,
+    &.active:link,
+    &.active:visited {
+      /* bg-slate-200 */
+      color: oklch(0.929 0.013 255.508);
+      /* bg-slate-800 */
+      background-color: oklch(0.279 0.041 260.031);
+      /* rounded-xl */
+      border-radius: 0.75rem;
+    }
+
+    & svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      /* text-slate-500 */
+      color: oklch(0.554 0.046 257.417);
+      transition: all 0.3s;
+    }
+
+    &:hover svg,
+    &:active svg,
+    &.active:link svg,
+    &.active:visited svg {
+      /* text-indigo-700 */
+      color: oklch(0.457 0.24 277.023);
+    }
+  }
+
+  .exit {
+    & svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      /* text-slate-500 */
+      color: oklch(0.554 0.046 257.417);
+      transition: all 0.3s;
+    }
+
+    &:hover svg {
+      color: red;
+    }
   }
 
   .loader {

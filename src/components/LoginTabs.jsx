@@ -1,6 +1,6 @@
 function LoginTabs({ activeTab, onActiveTab }) {
   return (
-    <div className="mt-6 flex gap-4 text-sm font-semibold text-slate-800">
+    <div className="flex gap-4 text-sm font-semibold text-slate-800">
       <span
         className={`${activeTab === 'mobile' ? 'active-tab' : ''} cursor-pointer`}
         onClick={() => onActiveTab('mobile')}

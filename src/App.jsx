@@ -8,9 +8,10 @@ import ProtectedRoute from './ui/ProtectedRoute';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import RoomList from './components/RoomList';
-import User from './components/User';
 import PageNotFound from './pages/PageNotFound';
 import AboutUs from './pages/AboutUs';
+import Dashboard from './components/Dashboard';
+import UserInfo from './components/UserInfo';
 
 const router = createBrowserRouter([
   {
@@ -34,9 +35,10 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { index: true, element: <Navigate to="user" replace /> },
-      { path: 'user', element: <User /> },
+      { index: true, element: <Navigate to="dashboard" replace /> },
+      { path: 'dashboard', element: <Dashboard /> },
       { path: 'rooms', element: <RoomList /> },
+      { path: 'setting/user', element: <UserInfo /> },
     ],
   },
   {

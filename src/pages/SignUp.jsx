@@ -3,14 +3,20 @@ import Loader from '../components/Loader';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
 import Button from '../components/Button';
+import { HiCheckBadge } from 'react-icons/hi2';
+import { HiOutlineClipboardList } from 'react-icons/hi';
 
-const inputContainerStyles = 'mt-2 rounded-md bg-slate-300 text-slate-800';
+const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800';
 const inputStyles =
-  'w-full rounded-md bg-inherit px-3 py-2 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed';
+  'w-full rounded-md bg-inherit px-3 py-2 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function SignUp() {
   const [isLoading] = useState(false);
   const [error] = useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
   return (
     <div className="background flex h-dvh items-center justify-center">
       {isLoading && <Loader />}
@@ -18,11 +24,12 @@ function SignUp() {
 
       <form
         action="POST"
-        className="text-md h-[500px] w-[450px] overflow-auto scroll-smooth rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200"
+        onSubmit={handleSubmit}
+        className="text-md h-[500px] w-[450px] space-y-3 overflow-auto scroll-smooth rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200"
       >
         <legend className="flex items-center gap-2 text-2xl font-bold">
           <span> ثبت‌نام کاربر </span>
-          <img src="/checklist.svg" alt="✅" className="h-8 w-8" />
+          <HiOutlineClipboardList className="text-3xl" />
         </legend>
 
         <div className={`${inputContainerStyles}`}>
@@ -138,7 +145,10 @@ function SignUp() {
           />
         </div>
 
-        <Button src={'/check.svg'}> ثبت‌نام </Button>
+        <Button>
+          <span className="text-lg font-medium">ثبت‌نام</span>
+          <HiCheckBadge className="text-xl" />
+        </Button>
         <Error error={error} />
       </form>
     </div>
