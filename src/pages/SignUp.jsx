@@ -1,25 +1,25 @@
-import { useState } from 'react';
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
 import Button from '../components/Button';
 import { HiCheckBadge } from 'react-icons/hi2';
 import { HiOutlineClipboardList } from 'react-icons/hi';
+import { useSignup } from '../context/SignupContext';
 
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800';
 const inputStyles =
   'w-full rounded-md bg-inherit px-3 py-2 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
+const inputErrorStyles = 'border-2 border-red-600 text-red-600';
 
 function SignUp() {
-  const [isLoading] = useState(false);
-  const [error] = useState('');
+  const { loading, error, errorField } = useSignup();
 
   function handleSubmit(e) {
     e.preventDefault();
   }
   return (
     <div className="background flex h-dvh items-center justify-center">
-      {isLoading && <Loader />}
+      {loading && <Loader />}
       <CloseFormButton />
 
       <form
@@ -32,37 +32,37 @@ function SignUp() {
           <HiOutlineClipboardList className="text-3xl" />
         </legend>
 
-        <div className={`${inputContainerStyles}`}>
+        <div className={`${inputContainerStyles} ${errorField === '1' && 'bg-red-100'}`}>
           <input
-            className={`${inputStyles}`}
+            className={`${inputStyles} ${errorField === '1' && inputErrorStyles}`}
             type="text"
             name="firstName"
             placeholder=" نام "
             required
             aria-required="true"
-            maxlength="30"
+            maxLength="30"
           />
         </div>
-        <div className={`${inputContainerStyles}`}>
+        <div className={`${inputContainerStyles} ${errorField === '2' && 'bg-red-100'}`}>
           <input
-            className={`${inputStyles}`}
+            className={`${inputStyles} ${errorField === '2' && inputErrorStyles}`}
             type="text"
             name="lastName"
             placeholder=" نام خانوادگی "
             required
             aria-required="true"
-            maxlength="30"
+            maxLength="30"
           />
         </div>
-        <div className={`${inputContainerStyles}`}>
+        <div className={`${inputContainerStyles} ${errorField === '3' && 'bg-red-100'}`}>
           <input
-            className={`${inputStyles}`}
+            className={`${inputStyles} ${errorField === '3' && inputErrorStyles}`}
             type="text"
             name="phoneNumber"
             placeholder=" شماره موبایل "
             required
             aria-required="true"
-            maxlength="11"
+            maxLength="11"
           />
         </div>
         <div className={`${inputContainerStyles} flex px-3 py-2`}>
@@ -107,41 +107,42 @@ function SignUp() {
             placeholder=" توضیحات تکمیلی ..."
             required
             aria-required="true"
+            maxLength="100"
           />
         </div>
 
-        <div className={`${inputContainerStyles}`}>
+        <div className={`${inputContainerStyles} ${errorField === '7' && 'bg-red-100'}`}>
           <input
-            className={`${inputStyles}`}
+            className={`${inputStyles} ${errorField === '7' && inputErrorStyles}`}
             type="email"
             name="email"
             placeholder=" آدرس ایمیل "
             required
             aria-required="true"
-            maxlength="40"
+            maxLength="40"
           />
         </div>
 
-        <div className={`${inputContainerStyles}`}>
+        <div className={`${inputContainerStyles} ${errorField === '8' && 'bg-red-100'}`}>
           <input
-            className={`${inputStyles}`}
+            className={`${inputStyles} ${errorField === '8' && inputErrorStyles}`}
             type="password"
             name="password"
             placeholder=" رمز عبور "
             required
             aria-required="true"
-            maxlength="16"
+            maxLength="16"
           />
         </div>
-        <div className={`${inputContainerStyles}`}>
+        <div className={`${inputContainerStyles} ${errorField === '9' && 'bg-red-100'}`}>
           <input
-            className={`${inputStyles}`}
+            className={`${inputStyles} ${errorField === '9' && inputErrorStyles}`}
             type="password"
             name="password-repeat"
             placeholder=" تکرار رمز عبور "
             required
             aria-required="true"
-            maxlength="16"
+            maxLength="16"
           />
         </div>
 
@@ -149,7 +150,7 @@ function SignUp() {
           <span className="text-lg font-medium">ثبت‌نام</span>
           <HiCheckBadge className="text-xl" />
         </Button>
-        <Error error={error} />
+        {error.length > 0 && <Error error={error} />}
       </form>
     </div>
   );

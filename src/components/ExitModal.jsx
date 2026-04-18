@@ -5,7 +5,7 @@ function ExitModal() {
   const { isExitOpen, toggleExitWindow } = useExit();
   return (
     <div
-      className={`fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-600/40 backdrop-blur-sm transition-all duration-300 ${!isExitOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
+      className={`fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-600/40 backdrop-blur-sm transition-all duration-100 ${!isExitOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
     >
       <div
         className={`w-[400px] flex-col items-center space-y-3 rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 ${!isExitOpen ? 'hidden' : 'flex'}`}

@@ -5,9 +5,11 @@ import { AiOutlineSetting } from 'react-icons/ai';
 import { BiExit } from 'react-icons/bi';
 import ExitModal from './ExitModal';
 import { useSidebar } from '../context/SidebarContext';
+import { useExit } from '../context/ExitContex';
 
 function NavList() {
   const { isSidebarOpen } = useSidebar();
+  const { toggleExitWindow } = useExit();
   return (
     <ul className="my-3 flex w-full flex-col justify-between">
       <ExitModal />
@@ -30,6 +32,7 @@ function NavList() {
         <NavItem
           extraClasses="exit hover:text-slate-200 hover:bg-slate-800 hover:rounded-xl"
           to="dashboard"
+          onClick={toggleExitWindow}
         >
           <BiExit />
           {isSidebarOpen && <span> خروج </span>}

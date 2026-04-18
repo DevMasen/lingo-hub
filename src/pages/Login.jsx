@@ -59,7 +59,7 @@ function Login() {
                   id="phone-number"
                   value={phoneNumberInput}
                   onChange={(e) => setPhoneNumberInput(e.target.value)}
-                  maxlength="10"
+                  maxLength="10"
                   type="text"
                   placeholder="9167432385"
                   className={`${inputStyles} ${error && 'border-2 border-red-600'} placeholder:text-end`}
@@ -100,6 +100,7 @@ function Login() {
                 type={isPassHidden ? 'password' : 'text'}
                 placeholder="رمز عبور"
                 className={`${inputStyles} ${error && 'border-2 border-red-600'}`}
+                maxLength="16"
                 required
               />
               <HidePasswordButton />
@@ -110,7 +111,7 @@ function Login() {
             </Button>
           </>
         )}
-        <Error error={error} />
+        {error.length > 0 && <Error error={error} />}
       </form>
     </div>
   );
