@@ -57,7 +57,8 @@
     }
 
     &:hover svg {
-      color: red;
+      /* text-red-600 */
+      color: oklch(0.577 0.245 27.325);
     }
   }
 

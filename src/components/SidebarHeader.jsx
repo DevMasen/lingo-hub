@@ -1,8 +1,10 @@
 import { Link } from 'react-router';
 import SidebarLogo from './SidebarLogo';
 import { BsLayoutSidebarInsetReverse } from 'react-icons/bs';
+import { useSidebar } from '../context/SidebarContext';
 
-function SidebarHeader({ isSidebarOpen, onSidebarStatus }) {
+function SidebarHeader() {
+  const { isSidebarOpen, toggleSidebar } = useSidebar();
   return (
     <div
       className={`flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b-[1px] border-slate-500 px-3 py-1`}
@@ -13,7 +15,7 @@ function SidebarHeader({ isSidebarOpen, onSidebarStatus }) {
           <h2 className="text-2xl font-semibold"> لینگوهاب </h2>
         </Link>
       )}
-      <button className="sidebar-btn" onClick={onSidebarStatus}>
+      <button className="sidebar-btn" onClick={toggleSidebar}>
         <BsLayoutSidebarInsetReverse className="h-[20px] w-[20px] text-slate-500 transition-all duration-300 hover:text-indigo-700" />
       </button>
     </div>

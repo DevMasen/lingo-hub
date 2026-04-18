@@ -9,17 +9,15 @@ import makeNumericInput from '../utils/makeNumericInput';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
 import { CgEnter } from 'react-icons/cg';
+import { useAuth } from '../context/AuthContext';
 
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function Login() {
-  const [activeTab, setActiveTab] = useState('mobile');
-  const [step] = useState(0);
-  const [isLoading] = useState(false);
-  const [error] = useState('');
-  const [isPassHidden, setIsPassHidden] = useState(true);
+  const { activeTab, step, isPassHidden, loading, error } = useAuth();
+  ///////////////////////////
 
   // Controlled Elements
   const [phoneNumberInput, setPhoneNumberInput] = useState('');
@@ -33,21 +31,13 @@ function Login() {
     [phoneNumberInput]
   );
 
-  function handleActiveTab(option = '') {
-    setActiveTab(option);
-  }
-
-  function handleHidePassword() {
-    setIsPassHidden((cur) => !cur);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
   }
 
   return (
     <div className="background flex h-dvh items-center justify-center">
-      {isLoading && <Loader />}
+      {loading && <Loader />}
       <CloseFormButton />
 
       <form
@@ -59,9 +49,9 @@ function Login() {
           <span> ورود / ثبت‌نام </span>
           <CgEnter className="text-3xl text-slate-300" />
         </legend>
-        {step === 0 && (
+        {step === 'first' && (
           <>
-            <LoginTabs activeTab={activeTab} onActiveTab={handleActiveTab} />
+            <LoginTabs />
             {activeTab === 'mobile' && (
               <div className={`${inputContainerStyles}`}>
                 <input
@@ -72,7 +62,7 @@ function Login() {
                   maxlength="10"
                   type="text"
                   placeholder="9167432385"
-                  className={`${inputStyles} placeholder:text-end`}
+                  className={`${inputStyles} ${error && 'border-2 border-red-600'} placeholder:text-end`}
                   required
                 />
                 <span className="w-18 flex items-center justify-center gap-2 px-6 text-slate-800">
@@ -88,7 +78,7 @@ function Login() {
                   type="email"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  className={`${inputStyles}`}
+                  className={`${inputStyles} ${error && 'border-2 border-red-600'}`}
                   placeholder="آدرس ایمیل"
                   required
                 />
@@ -100,7 +90,7 @@ function Login() {
             </Button>
           </>
         )}
-        {true && (
+        {step === 'second' && (
           <>
             <div className={`${inputContainerStyles}`}>
               <input
@@ -109,10 +99,10 @@ function Login() {
                 onChange={(e) => setPasswordInput(e.target.value)}
                 type={isPassHidden ? 'password' : 'text'}
                 placeholder="رمز عبور"
-                className={`${inputStyles}`}
+                className={`${inputStyles} ${error && 'border-2 border-red-600'}`}
                 required
               />
-              <HidePasswordButton isPassHidden={isPassHidden} onHidePassword={handleHidePassword} />
+              <HidePasswordButton />
             </div>
             <Button>
               <span className="text-lg font-medium">ورود</span>

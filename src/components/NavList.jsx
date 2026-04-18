@@ -3,17 +3,14 @@ import { AiOutlineDashboard } from 'react-icons/ai';
 import { HiOutlineBookOpen } from 'react-icons/hi';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { BiExit } from 'react-icons/bi';
-import { useState } from 'react';
 import ExitModal from './ExitModal';
+import { useSidebar } from '../context/SidebarContext';
 
-function NavList({ isSidebarOpen }) {
-  const [exitModalStatus, setExitModalStatus] = useState('close');
-  function handleExitModal() {
-    setExitModalStatus((cur) => (cur === 'close' ? 'open' : 'close'));
-  }
+function NavList() {
+  const { isSidebarOpen } = useSidebar();
   return (
     <ul className="my-3 flex w-full flex-col justify-between">
-      <ExitModal exitModalStatus={exitModalStatus} onExitModal={handleExitModal} />
+      <ExitModal />
       <section className="space-y-3 px-3">
         <NavItem extraClasses="nav-link" to={'dashboard'}>
           <AiOutlineDashboard />
@@ -26,13 +23,12 @@ function NavList({ isSidebarOpen }) {
       </section>
 
       <section className="space-y-3 px-3">
-        <NavItem extraClasses="nav-link" to={'setting/user'}>
+        <NavItem extraClasses="nav-link" to={'setting'}>
           <AiOutlineSetting />
           {isSidebarOpen && <span> تنظیمات </span>}
         </NavItem>
         <NavItem
           extraClasses="exit hover:text-slate-200 hover:bg-slate-800 hover:rounded-xl"
-          onClick={handleExitModal}
           to="dashboard"
         >
           <BiExit />
