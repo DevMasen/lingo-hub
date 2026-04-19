@@ -1,7 +1,7 @@
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
-import Button from '../components/Button';
+import HomeButton from '../components/HomeButton';
 import { HiCheckBadge } from 'react-icons/hi2';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { useSignup } from '../context/SignupContext';
@@ -146,10 +146,10 @@ function SignUp() {
           />
         </div>
 
-        <Button>
+        <HomeButton>
           <span className="text-lg font-medium">ثبت‌نام</span>
           <HiCheckBadge className="text-xl" />
-        </Button>
+        </HomeButton>
         {error.length > 0 && <Error error={error} />}
       </form>
     </div>

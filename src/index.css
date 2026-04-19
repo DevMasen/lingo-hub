@@ -5,9 +5,17 @@
 @layer components {
   .background {
     height: 100dvh;
-    background-image: linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url('/bg.png');
+    background-image:
+      linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url('/home-bg.jpg');
     background-size: cover;
-    background-position: center;
+    background-position-y: bottom;
+  }
+  .background-aboutus {
+    height: 100dvh;
+    background-image:
+      linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url('/aboutus-bg.jpeg');
+    background-size: cover;
+    background-position-y: top;
   }
   .active-tab {
     /* text-slate-300 */

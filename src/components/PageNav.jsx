@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import Logo from './Logo';
+import HomeButton from './HomeButton';
 
 function PageNav() {
   return (
@@ -13,9 +14,9 @@ function PageNav() {
           <Link to="/aboutus">درباره ما</Link>
         </li>
         <li>
-          <Link to="/login" className="rounded-md bg-slate-800 px-4 py-2">
+          <HomeButton to={'/login'} extraClasses={'px-3 py-2 rounded-lg'}>
             ورود / ثبت‌نام
-          </Link>
+          </HomeButton>
         </li>
       </ul>
     </nav>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Loader from '../components/Loader';
 import LoginTabs from '../components/LoginTabs';
-import Button from '../components/Button';
+import HomeButton from '../components/HomeButton';
 import HidePasswordButton from '../components/HidePasswordButton';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
@@ -84,10 +84,10 @@ function Login() {
                 />
               </div>
             )}
-            <Button>
+            <HomeButton extraClasses={'py-2 rounded-md'}>
               <span className="text-lg font-medium">ادامه</span>
               <HiOutlineArrowLeft className="text-xl text-slate-300" />
-            </Button>
+            </HomeButton>
           </>
         )}
         {step === 'second' && (
@@ -105,10 +105,10 @@ function Login() {
               />
               <HidePasswordButton />
             </div>
-            <Button>
+            <HomeButton extraClasses={'py-2 rounded-md'}>
               <span className="text-lg font-medium">ورود</span>
               <AiOutlineEnter className="text-2xl text-slate-300" />
-            </Button>
+            </HomeButton>
           </>
         )}
         {error.length > 0 && <Error error={error} />}
