@@ -14,6 +14,7 @@ import Dashboard from './components/Dashboard';
 import UserInfo from './components/UserInfo';
 import Setting from './components/Setting';
 import PasswordChange from './components/PasswordChange';
+import Support from './components/Support';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to="dashboard" replace /> },
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'rooms', element: <RoomList /> },
+      { path: 'support', element: <Support /> },
       {
         path: 'setting',
         element: <Setting />,
