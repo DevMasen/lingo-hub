@@ -11,19 +11,34 @@ import { AiOutlineEnter } from 'react-icons/ai';
 import { CgEnter } from 'react-icons/cg';
 import { useAuth } from '../context/AuthContext';
 import { BsArrowRight } from 'react-icons/bs';
+import validateEmail from '../utils/validateEmail';
+import { useNavigate } from 'react-router';
 
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function Login() {
-  const { activeTab, step, setStep, isPassHidden, loading, error } = useAuth();
+  const {
+    activeTab,
+    step,
+    setStep,
+    isPassHidden,
+    loading,
+    error,
+    submitByMobile,
+    submitByEmail,
+    currentUser,
+    setError,
+  } = useAuth();
   ///////////////////////////
 
   // Controlled Elements
   const [phoneNumberInput, setPhoneNumberInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(
     function () {
@@ -32,8 +47,60 @@ function Login() {
     [phoneNumberInput]
   );
 
+  useEffect(
+    function () {
+      if (activeTab === 'mobile') return;
+      if (emailInput.length === 0) return;
+      const isEmailValid = validateEmail(emailInput);
+      if (!isEmailValid) {
+        setError('ایمیل معتبر نیست');
+        return;
+      }
+      setError('');
+      submitByEmail(emailInput);
+    },
+    [emailInput, setError, activeTab, submitByEmail]
+  );
+
+  useEffect(
+    function () {
+      if (phoneNumberInput.length < 10) return;
+      submitByMobile(phoneNumberInput);
+    },
+    [phoneNumberInput, submitByMobile]
+  );
+
   function handleSubmit(e) {
     e.preventDefault();
+  }
+
+  function handleContinue() {
+    if (activeTab === 'mobile') {
+      if (phoneNumberInput.length < 10) {
+        setError('شماره موبایل باید ۱۰ رقمی باشد');
+        return;
+      }
+      setError('');
+      if (currentUser === undefined) {
+        navigate('/signup');
+        return;
+      }
+      setStep('second');
+      return;
+    }
+    if (!emailInput) {
+      setError('لطفا ایمیل خود را وارد کنید');
+      return;
+    }
+    if (!validateEmail(emailInput)) {
+      return;
+    }
+    if (currentUser === undefined) {
+      navigate('/signup');
+      return;
+    }
+    setStep('second');
+    return;
   }
 
   return (
@@ -88,7 +155,7 @@ function Login() {
                 />
               </div>
             )}
-            <HomeButton extraClasses={'py-2 rounded-md'}>
+            <HomeButton extraClasses={'py-2 rounded-md'} onClick={handleContinue}>
               <span className="text-lg font-medium">ادامه</span>
               <HiOutlineArrowLeft className="text-xl text-slate-300" />
             </HomeButton>

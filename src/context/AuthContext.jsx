@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useCallback, useContext, useEffect, useReducer } from 'react';
 /////////////////////////////////////////////////////////////
 import PropTypes from 'prop-types';
 AuthProvider.propTypes = {
@@ -6,6 +6,7 @@ AuthProvider.propTypes = {
 };
 /////////////////////////////////////
 const AuthContext = createContext();
+const BASE_URL = 'http://localhost:8000';
 // const FAKE_USERS = [
 //   {
 //     id: 0,
@@ -31,7 +32,8 @@ const initialState = {
   isPassHidden: true,
   loading: false,
   error: '',
-  user: null,
+  users: [],
+  currentUser: undefined,
   isAuthenticated: true,
 };
 
@@ -41,6 +43,7 @@ function reducer(state, action) {
       return {
         ...state,
         activeTab: state.activeTab === 'mobile' ? 'email' : 'mobile',
+        error: '',
       };
     case 'auth/setStep':
       return {
@@ -62,15 +65,40 @@ function reducer(state, action) {
         ...state,
         error: action.payload,
       };
-    case 'auth/login':
-      return { ...state };
+    case 'auth/usersLoaded':
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case 'auth/setCurrentUser':
+      return {
+        ...state,
+        currentUser: action.payload,
+      };
+
     default:
       throw new Error('Unknown Action!');
   }
 }
 function AuthProvider({ children }) {
-  const [{ activeTab, step, isPassHidden, loading, error, user, isAuthenticated }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { activeTab, step, isPassHidden, loading, error, users, currentUser, isAuthenticated },
+    dispatch,
+  ] = useReducer(reducer, initialState);
+
+  useEffect(function () {
+    async function getUsers() {
+      try {
+        const res = await fetch(`${BASE_URL}/users`);
+        if (!res.ok) throw new Error('Network Error : code01');
+        const data = await res.json();
+        dispatch({ type: 'auth/usersLoaded', payload: data });
+      } catch (e) {
+        console.error(e.message);
+      }
+    }
+    getUsers();
+  }, []);
 
   function toggleActiveTab() {
     dispatch({ type: 'auth/toggleActiveTab' });
@@ -88,11 +116,25 @@ function AuthProvider({ children }) {
     dispatch({ type: 'auth/toggleLoading' });
   }
 
-  function setError(errorMessage = '') {
+  const setError = useCallback(function setError(errorMessage = '') {
     dispatch({ type: 'auth/setError', payload: errorMessage });
-  }
+  }, []);
 
-  function login() {}
+  const submitByMobile = useCallback(
+    function submitByMobile(phoneNumber = '') {
+      const user = users.find((user) => user.phoneNumber === phoneNumber);
+      dispatch({ type: 'auth/setCurrentUser', payload: user });
+    },
+    [users]
+  );
+
+  const submitByEmail = useCallback(
+    function submitByEmail(email = '') {
+      const user = users.find((user) => user.email === email);
+      dispatch({ type: 'auth/setCurrentUser', payload: user });
+    },
+    [users]
+  );
 
   return (
     <AuthContext.Provider
@@ -102,14 +144,15 @@ function AuthProvider({ children }) {
         isPassHidden,
         loading,
         error,
-        user,
+        currentUser,
         isAuthenticated,
         toggleActiveTab,
         setStep,
         togglePassHidden,
         toggleLoading,
         setError,
-        login,
+        submitByMobile,
+        submitByEmail,
       }}
     >
       {children}
