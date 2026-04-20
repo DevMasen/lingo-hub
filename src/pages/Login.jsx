@@ -10,13 +10,14 @@ import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
 import { CgEnter } from 'react-icons/cg';
 import { useAuth } from '../context/AuthContext';
+import { BsArrowRight } from 'react-icons/bs';
 
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function Login() {
-  const { activeTab, step, isPassHidden, loading, error } = useAuth();
+  const { activeTab, step, setStep, isPassHidden, loading, error } = useAuth();
   ///////////////////////////
 
   // Controlled Elements
@@ -108,10 +109,18 @@ function Login() {
               />
               <HidePasswordButton />
             </div>
-            <HomeButton extraClasses={'py-2 rounded-md'}>
-              <span className="text-lg font-medium">ورود</span>
-              <AiOutlineEnter className="text-2xl text-slate-300" />
-            </HomeButton>
+            <div className="flex gap-3">
+              <HomeButton
+                extraClasses={'py-2 rounded-md flex-grow'}
+                onClick={() => setStep('first')}
+              >
+                <BsArrowRight className="text-2xl text-slate-300" />
+              </HomeButton>
+              <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'}>
+                <span className="text-lg font-medium">ورود</span>
+                <AiOutlineEnter className="text-2xl text-slate-300" />
+              </HomeButton>
+            </div>
           </>
         )}
         {error.length > 0 && <Error error={error} />}

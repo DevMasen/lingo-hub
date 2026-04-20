@@ -3,6 +3,7 @@ import { createContext, useContext, useReducer } from 'react';
 const SignupContext = createContext();
 
 const initialState = {
+  step: '1',
   loading: false,
   error: '',
   errorField: '',
@@ -11,6 +12,8 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'signup/setStep':
+      return { ...state, step: action.payload };
     case 'signup/toggleLoading':
       return { ...state, loading: !state.loading };
     case 'signup/setError':
@@ -23,7 +26,11 @@ function reducer(state, action) {
 }
 
 function SignupProvider({ children }) {
-  const [{ loading, error, errorField, user }, dispatch] = useReducer(reducer, initialState);
+  const [{ step, loading, error, errorField, user }, dispatch] = useReducer(reducer, initialState);
+
+  function setStep(step) {
+    dispatch({ type: 'signup/setStep', payload: step });
+  }
 
   function toggleLoading() {
     dispatch({ type: 'signup/toggleLoading' });
@@ -39,7 +46,17 @@ function SignupProvider({ children }) {
 
   return (
     <SignupContext.Provider
-      value={{ loading, error, errorField, user, toggleLoading, setError, setErrorField }}
+      value={{
+        step,
+        loading,
+        error,
+        errorField,
+        user,
+        setStep,
+        toggleLoading,
+        setError,
+        setErrorField,
+      }}
     >
       {children}
     </SignupContext.Provider>

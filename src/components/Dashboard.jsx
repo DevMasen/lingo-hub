@@ -1,7 +1,7 @@
 import PanelButton from './PanelButton';
 
 const sectionPartsStyles =
-  'bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-indigo-800))] rounded-lg border border-slate-500 p-3';
+  'bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-indigo-900))] rounded-lg border border-slate-500 p-3';
 
 function Dashboard() {
   return (
