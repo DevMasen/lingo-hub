@@ -14,6 +14,13 @@ const inputErrorStyles = 'border-2 border-red-600 text-red-600';
 function SignUp() {
   const { loading, error, errorField } = useSignup();
 
+  // useEffect(
+  //   function () {
+  //     setPhoneNumberInput((cur) => makeNumericInput(cur));
+  //   },
+  //   [phoneNumberInput]
+  // );
+
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -146,7 +153,7 @@ function SignUp() {
           />
         </div>
 
-        <HomeButton>
+        <HomeButton extraClasses={'py-2 rounded-md'}>
           <span className="text-lg font-medium">ثبت‌نام</span>
           <HiCheckBadge className="text-xl" />
         </HomeButton>

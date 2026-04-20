@@ -61,12 +61,15 @@ function Login() {
                   onChange={(e) => setPhoneNumberInput(e.target.value)}
                   maxLength="10"
                   type="text"
-                  placeholder="9167432385"
+                  placeholder="۹۱۳۱۲۳۴۵۶۷"
                   className={`${inputStyles} ${error && 'border-2 border-red-600'} placeholder:text-end`}
                   required
                 />
                 <span className="w-18 flex items-center justify-center gap-2 px-6 text-slate-800">
-                  <span>98+</span>
+                  <span className="flex gap-1">
+                    <span>۹۸</span>
+                    <span>+</span>
+                  </span>
                   <img src="/flag.webp" alt="!fg" className="w-5 rounded-sm" />
                 </span>
               </div>

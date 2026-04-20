@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-slate-800: oklch(0.279 0.041 260.031);
+  --color-indigo-800: oklch(0.398 0.195 277.366);
+}
+
 @layer components {
   .background {
     height: 100dvh;
