@@ -34,7 +34,7 @@ const initialState = {
   error: '',
   users: [],
   currentUser: undefined,
-  isAuthenticated: true,
+  isAuthenticated: false,
 };
 
 function reducer(state, action) {
@@ -75,6 +75,19 @@ function reducer(state, action) {
         ...state,
         currentUser: action.payload,
       };
+    case 'auth/login':
+      return {
+        ...state,
+        isAuthenticated: true,
+      };
+    case 'auth/logout':
+      return {
+        ...state,
+        isAuthenticated: false,
+        currentUser: undefined,
+        step: 'first',
+        activeTab: 'mobile',
+      };
 
     default:
       throw new Error('Unknown Action!');
@@ -104,9 +117,9 @@ function AuthProvider({ children }) {
     dispatch({ type: 'auth/toggleActiveTab' });
   }
 
-  function setStep(step = 'first') {
+  const setStep = useCallback(function setStep(step = 'first') {
     dispatch({ type: 'auth/setStep', payload: step });
-  }
+  }, []);
 
   function togglePassHidden() {
     dispatch({ type: 'auth/togglePassHidden' });
@@ -136,6 +149,17 @@ function AuthProvider({ children }) {
     [users]
   );
 
+  function login(password = '') {
+    if (currentUser.password === password) {
+      dispatch({ type: 'auth/login' });
+      return true;
+    }
+    return false;
+  }
+
+  function logout() {
+    dispatch({ type: 'auth/logout' });
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -153,6 +177,8 @@ function AuthProvider({ children }) {
         setError,
         submitByMobile,
         submitByEmail,
+        login,
+        logout,
       }}
     >
       {children}

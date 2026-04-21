@@ -1,8 +1,10 @@
 import { Link } from 'react-router';
 import { useExit } from '../context/ExitContex';
+import { useAuth } from '../context/AuthContext';
 
 function ExitModal() {
   const { isExitOpen, toggleExitWindow } = useExit();
+  const { logout } = useAuth();
   return (
     <div
       className={`fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-800/20 backdrop-blur-sm transition-all duration-100 ${!isExitOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
@@ -15,7 +17,10 @@ function ExitModal() {
         </h2>
         <Link
           to="/"
-          onClick={toggleExitWindow}
+          onClick={() => {
+            toggleExitWindow();
+            logout();
+          }}
           className="w-full rounded-lg bg-red-700 p-3 text-center text-lg font-medium text-slate-100 transition-all duration-300 hover:bg-red-600"
         >
           آره خارج شو!

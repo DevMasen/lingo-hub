@@ -6,6 +6,7 @@ import { HiOutlineArrowRight, HiOutlineArrowLeft, HiOutlineClipboardList } from 
 import { HiCheckBadge } from 'react-icons/hi2';
 import { useSignup } from '../context/SignupContext';
 import { useState } from 'react';
+import { Link } from 'react-router';
 
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800';
 const inputStyles =
@@ -69,6 +70,14 @@ function SignUp() {
               <span className="text-lg font-medium">ادامه</span>
               <HiOutlineArrowLeft />
             </HomeButton>
+            <div className="flex h-6 justify-between px-5 font-medium text-indigo-400">
+              <Link
+                to={'/login'}
+                className="transition-colors duration-200 hover:border-b hover:border-indigo-300 hover:text-indigo-300"
+              >
+                ورود به حساب کاربری
+              </Link>
+            </div>
           </>
         )}
         {step === '2' && (

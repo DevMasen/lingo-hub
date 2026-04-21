@@ -6,13 +6,13 @@ import HidePasswordButton from '../components/HidePasswordButton';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
 import makeNumericInput from '../utils/makeNumericInput';
-import { HiOutlineArrowLeft } from 'react-icons/hi';
+import { HiOutlineArrowLeft, HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
 import { CgEnter } from 'react-icons/cg';
 import { useAuth } from '../context/AuthContext';
 import { BsArrowRight } from 'react-icons/bs';
 import validateEmail from '../utils/validateEmail';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
@@ -30,6 +30,7 @@ function Login() {
     submitByEmail,
     currentUser,
     setError,
+    login,
   } = useAuth();
   ///////////////////////////
 
@@ -70,8 +71,25 @@ function Login() {
     [phoneNumberInput, submitByMobile]
   );
 
+  useEffect(
+    function () {
+      if (currentUser === undefined) setStep('first');
+    },
+    [currentUser, setStep]
+  );
+
   function handleSubmit(e) {
     e.preventDefault();
+  }
+
+  function handleLogin() {
+    const isLoginSuccessful = login(passwordInput);
+    if (!isLoginSuccessful) {
+      setError('رمز عبور اشتباه است!');
+      return;
+    }
+    setError('');
+    navigate('/app');
   }
 
   function handleContinue() {
@@ -123,15 +141,16 @@ function Login() {
             {activeTab === 'mobile' && (
               <div className={`${inputContainerStyles}`}>
                 <input
+                  type="text"
                   name="phone-number"
                   id="phone-number"
                   value={phoneNumberInput}
                   onChange={(e) => setPhoneNumberInput(e.target.value)}
                   maxLength="10"
-                  type="text"
                   placeholder="۹۱۳۱۲۳۴۵۶۷"
-                  className={`${inputStyles} ${error && 'border-2 border-red-600'} placeholder:text-end`}
                   required
+                  aria-required="true"
+                  className={`${inputStyles} ${error && 'border-2 border-red-600'} placeholder:text-end`}
                 />
                 <span className="w-18 flex items-center justify-center gap-2 px-6 text-slate-800">
                   <span className="flex gap-1">
@@ -145,16 +164,18 @@ function Login() {
             {activeTab === 'email' && (
               <div className={`${inputContainerStyles}`}>
                 <input
-                  name="email"
                   type="email"
+                  name="email"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
-                  className={`${inputStyles} ${error && 'border-2 border-red-600'}`}
                   placeholder="آدرس ایمیل"
                   required
+                  aria-required="true"
+                  className={`${inputStyles} ${error && 'border-2 border-red-600'}`}
                 />
               </div>
             )}
+
             <HomeButton extraClasses={'py-2 rounded-md'} onClick={handleContinue}>
               <span className="text-lg font-medium">ادامه</span>
               <HiOutlineArrowLeft className="text-xl text-slate-300" />
@@ -165,14 +186,15 @@ function Login() {
           <>
             <div className={`${inputContainerStyles}`}>
               <input
+                type={isPassHidden ? 'password' : 'text'}
                 name="password"
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
-                type={isPassHidden ? 'password' : 'text'}
                 placeholder="رمز عبور"
-                className={`${inputStyles} ${error && 'border-2 border-red-600'}`}
                 maxLength="16"
                 required
+                aria-required="true"
+                className={`${inputStyles} ${error && 'border-2 border-red-600'}`}
               />
               <HidePasswordButton />
             </div>
@@ -183,12 +205,85 @@ function Login() {
               >
                 <BsArrowRight className="text-2xl text-slate-300" />
               </HomeButton>
-              <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'}>
+              <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'} onClick={handleLogin}>
                 <span className="text-lg font-medium">ورود</span>
                 <AiOutlineEnter className="text-2xl text-slate-300" />
               </HomeButton>
             </div>
+            <div className="flex h-6 justify-between px-5 font-medium text-indigo-400">
+              <Link
+                className="transition-colors duration-200 hover:border-b hover:border-indigo-300 hover:text-indigo-300"
+                onClick={() => setStep('third')}
+              >
+                فراموشی رمز عبور
+              </Link>
+            </div>
           </>
+        )}
+        {step === 'third' && (
+          <div className="flex flex-col items-center gap-4">
+            <div>
+              {activeTab === 'mobile' ? (
+                <h3> کد پیامک شده به شماره تلفن خود را وارد کنید </h3>
+              ) : (
+                <h3> کد ارسال شده به ایمیل خود را وارد کنید </h3>
+              )}
+            </div>
+            <div className="flex w-60 gap-3 text-lg font-semibold" dir="ltr">
+              <div className={`${inputContainerStyles}`}>
+                <input
+                  type="text"
+                  name="recoveryCode1"
+                  maxLength="1"
+                  required
+                  aria-required="true"
+                  className={`${inputStyles} text-center`}
+                />
+              </div>
+              <div className={`${inputContainerStyles}`}>
+                <input
+                  type="text"
+                  name="recoveryCode2"
+                  maxLength="1"
+                  required
+                  aria-required="true"
+                  className={`${inputStyles} text-center`}
+                />
+              </div>
+              <div className={`${inputContainerStyles}`}>
+                <input
+                  type="text"
+                  name="recoveryCode3"
+                  maxLength="1"
+                  required
+                  aria-required="true"
+                  className={`${inputStyles} text-center`}
+                />
+              </div>
+              <div className={`${inputContainerStyles}`}>
+                <input
+                  type="text"
+                  name="recoveryCode4"
+                  maxLength="1"
+                  required
+                  aria-required="true"
+                  className={`${inputStyles} text-center`}
+                />
+              </div>
+            </div>
+            <div className="flex w-full gap-2">
+              <HomeButton
+                extraClasses={'py-2 rounded-md flex-grow'}
+                onClick={() => setStep('second')}
+              >
+                <HiOutlineArrowRight />
+              </HomeButton>
+              <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'}>
+                <span className="text-lg font-medium"> ورود</span>
+                <AiOutlineEnter className="text-2xl text-slate-300" />
+              </HomeButton>
+            </div>
+          </div>
         )}
         {error.length > 0 && <Error error={error} />}
       </form>
