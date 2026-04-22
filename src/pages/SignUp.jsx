@@ -6,11 +6,12 @@ import { HiOutlineArrowRight, HiOutlineArrowLeft, HiOutlineClipboardList } from 
 import { HiCheckBadge } from 'react-icons/hi2';
 import { useSignup } from '../context/SignupContext';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import { Form, Link, redirect, useNavigation } from 'react-router';
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
 import { useAuth } from '../context/AuthContext';
 import HidePasswordButton from '../components/HidePasswordButton';
+import { createUser } from '../services/apiUsers';
 
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
 const inputStyles =
@@ -44,9 +45,8 @@ function SignUp() {
   const [inputPassword, setInputPassword] = useState('');
   const [inputPasswordRepeat, setInputPasswordRepeat] = useState('');
 
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
 
   function handleContinue() {
     switch (step) {
@@ -189,14 +189,37 @@ function SignUp() {
     [step, setError, setErrorField]
   );
 
+  useEffect(
+    function () {
+      if (step !== '6') return;
+      if (inputPassword.length === 0) {
+        setError('');
+        setErrorField('');
+        return;
+      }
+      if (inputPassword.length < 8) {
+        setError('رمز عبور باید حداقل ۸ کاراکتر باشد');
+        setErrorField('8');
+        return;
+      }
+      if (inputPassword !== inputPasswordRepeat) {
+        setError('رمز عبور با تکرار آن یکسان نیست');
+        setErrorField('9');
+        return;
+      }
+      setError('');
+      setErrorField('');
+    },
+    [step, inputPassword, inputPasswordRepeat, setError, setErrorField]
+  );
+
   return (
     <div className="background flex h-dvh items-center justify-center">
-      {loading && <Loader />}
+      {loading || (isSubmitting && <Loader />)}
       <CloseFormButton />
 
-      <form
-        action="POST"
-        onSubmit={handleSubmit}
+      <Form
+        method="POST"
         className="text-md w-[500px] space-y-3 overflow-auto scroll-smooth rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200"
       >
         <legend className="flex items-center gap-2 text-2xl font-bold">
@@ -208,7 +231,6 @@ function SignUp() {
             <div className={`${inputContainerStyles} ${errorField === '1' && 'bg-red-100'}`}>
               <input
                 type="text"
-                name="firstName"
                 value={inputFirstName}
                 onChange={(e) => setInputFirstName(e.target.value)}
                 placeholder=" نام "
@@ -237,7 +259,6 @@ function SignUp() {
             <div className={`${inputContainerStyles} ${errorField === '2' && 'bg-red-100'}`}>
               <input
                 type="text"
-                name="lastName"
                 value={inputLastName}
                 onChange={(e) => setInputLastName(e.target.value)}
                 placeholder=" نام خانوادگی "
@@ -262,7 +283,6 @@ function SignUp() {
             <div className={`${inputContainerStyles} ${errorField === '3' && 'bg-red-100'}`}>
               <input
                 type="text"
-                name="phoneNumber"
                 value={inputPhoneNumber}
                 onChange={(e) => setInputPhoneNumber(e.target.value)}
                 placeholder=" شماره موبایل "
@@ -298,7 +318,6 @@ function SignUp() {
               </label>
               <select
                 id="lang"
-                name="language"
                 value={inputLanguage}
                 onChange={(e) => setInputLanguage(e.target.value)}
                 required
@@ -317,7 +336,6 @@ function SignUp() {
               </label>
               <select
                 id="level"
-                name="level"
                 value={inputLevel}
                 onChange={(e) => setInputLevel(e.target.value)}
                 required
@@ -333,7 +351,6 @@ function SignUp() {
 
             <div className={`${inputContainerStyles}`}>
               <textarea
-                name="explanation"
                 value={inputExplanation}
                 onChange={(e) => setInputExplanation(e.target.value)}
                 placeholder=" توضیحات تکمیلی ..."
@@ -359,7 +376,6 @@ function SignUp() {
             <div className={`${inputContainerStyles} ${errorField === '7' && 'bg-red-100'}`}>
               <input
                 type="email"
-                name="email"
                 value={inputEmail}
                 onChange={(e) => setInputEmail(e.target.value)}
                 placeholder=" آدرس ایمیل "
@@ -381,6 +397,13 @@ function SignUp() {
         )}
         {step === '6' && (
           <>
+            <input type="hidden" name="firstName" value={inputFirstName} />
+            <input type="hidden" name="lastName" value={inputLastName} />
+            <input type="hidden" name="phoneNumber" value={inputPhoneNumber} />
+            <input type="hidden" name="language" value={inputLanguage} />
+            <input type="hidden" name="level" value={inputLevel} />
+            <input type="hidden" name="explanation" value={inputExplanation} />
+            <input type="hidden" name="email" value={inputEmail} />
             <div className={`${inputContainerStyles} ${errorField === '8' && 'bg-red-100'}`}>
               <input
                 type={isPassHidden ? 'password' : 'text'}
@@ -391,7 +414,6 @@ function SignUp() {
                 required
                 aria-required="true"
                 maxLength="16"
-                autoComplete="false"
                 className={`${inputStyles} ${errorField === '8' && inputErrorStyles}`}
               />
               <HidePasswordButton isPassHidden={isPassHidden} onPassHidden={toggleHidePass} />
@@ -399,7 +421,7 @@ function SignUp() {
             <div className={`${inputContainerStyles} ${errorField === '9' && 'bg-red-100'}`}>
               <input
                 type={isPassRepHidden ? 'password' : 'text'}
-                name="passwordRepeat"
+                name="password"
                 value={inputPasswordRepeat}
                 onChange={(e) => setInputPasswordRepeat(e.target.value)}
                 placeholder=" تکرار رمز عبور "
@@ -414,7 +436,11 @@ function SignUp() {
               <HomeButton extraClasses={'py-2 rounded-md flex-grow'} onClick={handlePrevious}>
                 <HiOutlineArrowRight />
               </HomeButton>
-              <HomeButton extraClasses={'py-2 rounded-md flex-grow'}>
+              <HomeButton
+                type={'submit'}
+                extraClasses={'py-2 rounded-md flex-grow'}
+                disabled={inputPassword.length === 0 || inputPasswordRepeat.length === 0}
+              >
                 <span className="text-lg font-medium">ثبت‌نام</span>
                 <HiCheckBadge className="text-xl" />
               </HomeButton>
@@ -424,9 +450,17 @@ function SignUp() {
         {error.length > 0 && (
           <Error error={error} inputPhoneNumber={inputPhoneNumber} inputEmail={inputEmail} />
         )}
-      </form>
+      </Form>
     </div>
   );
+}
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const user = { ...data, signupStatus: 'waiting', reservedRooms: [], maxReserveCount: 3 };
+  await createUser(user);
+  return redirect('/login');
 }
 
 export default SignUp;

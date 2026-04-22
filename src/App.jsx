@@ -6,7 +6,7 @@ import AppLayout from './ui/AppLayout';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Login from './pages/Login';
-import SignUp from './pages/SignUp';
+import SignUp, { action as createUserAction } from './pages/SignUp';
 import RoomList from './components/RoomList';
 import PageNotFound from './pages/PageNotFound';
 import AboutUs from './pages/AboutUs';
@@ -28,6 +28,7 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignUp />,
+    action: createUserAction,
   },
   { path: '/aboutus', element: <AboutUs /> },
   {

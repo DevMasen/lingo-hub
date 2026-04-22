@@ -7,25 +7,7 @@ AuthProvider.propTypes = {
 /////////////////////////////////////
 const AuthContext = createContext();
 const BASE_URL = 'http://localhost:8000';
-// const FAKE_USERS = [
-//   {
-//     id: 0,
-//     firstName: 'محمدحسین',
-//     lastName: 'محسنی',
-//     phoneNumber: '09339602368',
-//     language: 'انگلیسی',
-//     level: 'پیشرفته',
-//     explanation: '',
-//     email: 'jack@example.com',
-//     password: 'qwerty',
-//     signupStatus: 'confirmed',
-//     reservedRooms: [
-//       { roomId: 0, timePart: 4 },
-//       { roomId: 3, timePart: 8 },
-//     ],
-//     maxReserveCount: 3,
-//   },
-// ];
+
 const initialState = {
   activeTab: 'mobile',
   step: 'first',

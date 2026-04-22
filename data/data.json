@@ -81,23 +81,5 @@
       }
     }
   ],
-  "users": [
-    {
-      "id": 0,
-      "firstName": "محمدحسین",
-      "lastName": "محسنی",
-      "phoneNumber": "۹۳۳۹۶۰۲۳۶۸",
-      "language": "انگلیسی",
-      "level": "پیشرفته",
-      "explanation": "",
-      "email": "jack@example.com",
-      "password": "qwerty",
-      "signupStatus": "confirmed",
-      "reservedRooms": [
-        { "roomId": 0, "timePart": 4 },
-        { "roomId": 3, "timePart": 8 }
-      ],
-      "maxReserveCount": 3
-    }
-  ]
+  "users": []
 }
