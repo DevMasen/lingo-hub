@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useCallback, useContext, useReducer } from 'react';
 
 const SignupContext = createContext();
 
@@ -7,7 +7,8 @@ const initialState = {
   loading: false,
   error: '',
   errorField: '',
-  user: null,
+  isPassHidden: true,
+  isPassRepHidden: true,
 };
 
 function reducer(state, action) {
@@ -20,13 +21,18 @@ function reducer(state, action) {
       return { ...state, error: action.payload };
     case 'signup/setErrorField':
       return { ...state, errorField: action.payload };
+    case 'signup/toggleHidePass':
+      return { ...state, isPassHidden: !state.isPassHidden };
+    case 'signup/toggleHidePassRep':
+      return { ...state, isPassRepHidden: !state.isPassRepHidden };
     default:
       throw new Error('Unknown Action');
   }
 }
 
 function SignupProvider({ children }) {
-  const [{ step, loading, error, errorField, user }, dispatch] = useReducer(reducer, initialState);
+  const [{ step, loading, error, errorField, isPassHidden, isPassRepHidden }, dispatch] =
+    useReducer(reducer, initialState);
 
   function setStep(step) {
     dispatch({ type: 'signup/setStep', payload: step });
@@ -36,12 +42,20 @@ function SignupProvider({ children }) {
     dispatch({ type: 'signup/toggleLoading' });
   }
 
-  function setError(errorMessage = 'Unknown Error!') {
+  const setError = useCallback(function setError(errorMessage = 'Unknown Error!') {
     dispatch({ type: 'signup/setError', payload: errorMessage });
+  }, []);
+
+  const setErrorField = useCallback(function setErrorField(field = '') {
+    dispatch({ type: 'signup/setErrorField', payload: field });
+  }, []);
+
+  function toggleHidePass() {
+    dispatch({ type: 'signup/toggleHidePass' });
   }
 
-  function setErrorField(field = '') {
-    dispatch({ type: 'signup/setErrorField', payload: field });
+  function toggleHidePassRep() {
+    dispatch({ type: 'signup/toggleHidePassRep' });
   }
 
   return (
@@ -51,11 +65,14 @@ function SignupProvider({ children }) {
         loading,
         error,
         errorField,
-        user,
+        isPassHidden,
+        isPassRepHidden,
         setStep,
         toggleLoading,
         setError,
         setErrorField,
+        toggleHidePass,
+        toggleHidePassRep,
       }}
     >
       {children}

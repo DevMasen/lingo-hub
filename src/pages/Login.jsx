@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Loader from '../components/Loader';
 import LoginTabs from '../components/LoginTabs';
 import HomeButton from '../components/HomeButton';
-import HidePasswordButton from '../components/HidePasswordButton';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
 import makeNumericInput from '../utils/makeNumericInput';
@@ -13,6 +12,7 @@ import { useAuth } from '../context/AuthContext';
 import { BsArrowRight } from 'react-icons/bs';
 import validateEmail from '../utils/validateEmail';
 import { Link, useNavigate } from 'react-router';
+import HidePasswordButton from '../components/HidePasswordButton';
 
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
@@ -24,6 +24,7 @@ function Login() {
     step,
     setStep,
     isPassHidden,
+    togglePassHidden,
     loading,
     error,
     submitByMobile,
@@ -129,7 +130,7 @@ function Login() {
       <form
         action="GET"
         onSubmit={handleSubmit}
-        className="text-md w-[450px] space-y-3 rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200"
+        className="text-md w-[500px] space-y-3 rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200"
       >
         <legend className="flex items-end gap-2 text-2xl font-bold">
           <span> ورود / ثبت‌نام </span>
@@ -196,7 +197,7 @@ function Login() {
                 aria-required="true"
                 className={`${inputStyles} ${error && 'border-2 border-red-600'}`}
               />
-              <HidePasswordButton />
+              <HidePasswordButton isPassHidden={isPassHidden} onPassHidden={togglePassHidden} />
             </div>
             <div className="flex gap-3">
               <HomeButton

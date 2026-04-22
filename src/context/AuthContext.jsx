@@ -141,6 +141,12 @@ function AuthProvider({ children }) {
     [users]
   );
 
+  function checkPhoneExist(phoneNumber = '') {
+    const user = users.find((user) => user.phoneNumber === phoneNumber);
+    if (user === undefined) return false;
+    return true;
+  }
+
   const submitByEmail = useCallback(
     function submitByEmail(email = '') {
       const user = users.find((user) => user.email === email);
@@ -148,6 +154,12 @@ function AuthProvider({ children }) {
     },
     [users]
   );
+
+  function checkEmailExist(email = '') {
+    const user = users.find((user) => user.email === email);
+    if (user === undefined) return false;
+    return true;
+  }
 
   function login(password = '') {
     if (currentUser.password === password) {
@@ -160,6 +172,7 @@ function AuthProvider({ children }) {
   function logout() {
     dispatch({ type: 'auth/logout' });
   }
+
   return (
     <AuthContext.Provider
       value={{
@@ -179,6 +192,8 @@ function AuthProvider({ children }) {
         submitByEmail,
         login,
         logout,
+        checkPhoneExist,
+        checkEmailExist,
       }}
     >
       {children}
