@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useReducer } from 'react';
+import { createContext, useCallback, useContext, useReducer } from 'react';
 /////////////////////////////////////////////////////////////
 import PropTypes from 'prop-types';
 AuthProvider.propTypes = {
@@ -6,7 +6,6 @@ AuthProvider.propTypes = {
 };
 /////////////////////////////////////
 const AuthContext = createContext();
-const BASE_URL = 'http://localhost:8000';
 
 const initialState = {
   activeTab: 'mobile',
@@ -81,18 +80,8 @@ function AuthProvider({ children }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  useEffect(function () {
-    async function getUsers() {
-      try {
-        const res = await fetch(`${BASE_URL}/users`);
-        if (!res.ok) throw new Error('Network Error : code01');
-        const data = await res.json();
-        dispatch({ type: 'auth/usersLoaded', payload: data });
-      } catch (e) {
-        console.error(e.message);
-      }
-    }
-    getUsers();
+  const setUsersData = useCallback(function setUsersData(data) {
+    dispatch({ type: 'auth/usersLoaded', payload: data });
   }, []);
 
   function toggleActiveTab() {
@@ -176,6 +165,7 @@ function AuthProvider({ children }) {
         logout,
         checkPhoneExist,
         checkEmailExist,
+        setUsersData,
       }}
     >
       {children}

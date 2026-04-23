@@ -13,6 +13,7 @@ import { BsArrowRight } from 'react-icons/bs';
 import validateEmail from '../utils/validateEmail';
 import { Link, useNavigate } from 'react-router';
 import HidePasswordButton from '../components/HidePasswordButton';
+import { getUsers } from '../services/apiUsers';
 
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
@@ -32,6 +33,7 @@ function Login() {
     currentUser,
     setError,
     login,
+    setUsersData,
   } = useAuth();
   ///////////////////////////
 
@@ -77,6 +79,17 @@ function Login() {
       if (currentUser === undefined) setStep('first');
     },
     [currentUser, setStep]
+  );
+
+  useEffect(
+    function () {
+      async function setUsers() {
+        const data = await getUsers();
+        setUsersData(data);
+      }
+      setUsers();
+    },
+    [setUsersData]
   );
 
   function handleSubmit(e) {

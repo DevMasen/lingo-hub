@@ -81,5 +81,20 @@
       }
     }
   ],
-  "users": []
+  "users": [
+    {
+      "firstName": "محمدحسین",
+      "lastName": "محسنی",
+      "phoneNumber": "۹۳۳۹۶۰۲۳۶۸",
+      "language": "انگلیسی",
+      "level": "مبتدی",
+      "explanation": "",
+      "email": "mohammadwh400@gmail.com",
+      "password": "12345678",
+      "signupStatus": "waiting",
+      "reservedRooms": [],
+      "maxReserveCount": 3,
+      "id": 1
+    }
+  ]
 }
