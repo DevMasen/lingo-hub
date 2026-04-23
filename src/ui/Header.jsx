@@ -6,12 +6,16 @@ import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
 import LinkItem from '../components/LinkItem';
 import { useExit } from '../context/ExitContex';
+import { useAuth } from '../context/AuthContext';
 
 function Header() {
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const { toggleExitWindow } = useExit();
+
+  const { currentUser } = useAuth();
+
   return (
     <header className="flex items-center justify-between border-b border-slate-500 p-4">
       {/* overlay */}
@@ -47,8 +51,8 @@ function Header() {
             {isProfileOpen && (
               <>
                 <div className="space-y-2 border-b border-slate-500 pb-3 text-start">
-                  <p> محمد حسین </p>
-                  <p className="text-slate-400"> mohammadwh400@gmail.com </p>
+                  <p> {currentUser.firstName} </p>
+                  <p className="text-slate-400"> {currentUser.email} </p>
                 </div>
                 <ul className="mt-3 space-y-3 text-start">
                   <li>
