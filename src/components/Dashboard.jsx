@@ -1,4 +1,5 @@
 import PanelButton from './PanelButton';
+import ReserveRecord from './ReserveRecord';
 
 const sectionPartsStyles =
   'bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-indigo-900))] rounded-lg border border-slate-500 p-3';
@@ -29,87 +30,7 @@ function Dashboard() {
             </h3>
             {true ? (
               <ul className="flex flex-col gap-3">
-                <li className="flex justify-between rounded-lg bg-slate-700 bg-opacity-70 p-3">
-                  <div className="flex gap-8">
-                    <span>
-                      <span>۱</span>
-                      <span>.</span>
-                    </span>
-                    <span className="flex gap-1">
-                      <span>اتاق</span>
-                      <span>۱۰۱</span>
-                    </span>
-                    <span className="flex gap-1">
-                      <span>۳۰</span>
-                      <span>فروردین</span>
-                      <span>۱۴۰۵</span>
-                    </span>
-                    <span className="flex gap-2">
-                      <span>
-                        <span>۷</span>:<span>۰۰</span>
-                      </span>
-                      <span>تا</span>
-                      <span>
-                        <span>۸</span>:<span>۳۰</span>
-                      </span>
-                    </span>
-                  </div>
-                  <span> لغو شد ❌ </span>
-                </li>
-                <li className="flex justify-between rounded-lg bg-slate-700 bg-opacity-70 p-3">
-                  <div className="flex gap-8">
-                    <span>
-                      <span>۲</span>
-                      <span>.</span>
-                    </span>
-                    <span className="flex gap-1">
-                      <span>اتاق</span>
-                      <span>۱۰۲</span>
-                    </span>
-                    <span className="flex gap-1">
-                      <span>۳۱</span>
-                      <span>فروردین</span>
-                      <span>۱۴۰۵</span>
-                    </span>
-                    <span className="flex gap-2">
-                      <span>
-                        <span>۸</span>:<span>۳۰</span>
-                      </span>
-                      <span>تا</span>
-                      <span>
-                        <span>۱۰</span>:<span>۰۰</span>
-                      </span>
-                    </span>
-                  </div>
-                  <span> رزرو شد ✅ </span>
-                </li>
-                <li className="flex justify-between rounded-lg bg-slate-700 bg-opacity-70 p-3">
-                  <div className="flex gap-8">
-                    <span>
-                      <span>۳</span>
-                      <span>.</span>
-                    </span>
-                    <span className="flex gap-1">
-                      <span>اتاق</span>
-                      <span>۱۰۳</span>
-                    </span>
-                    <span className="flex gap-1">
-                      <span>۳۱</span>
-                      <span>فروردین</span>
-                      <span>۱۴۰۵</span>
-                    </span>
-                    <span className="flex gap-2">
-                      <span>
-                        <span>۱۰</span>:<span>۰۰</span>
-                      </span>
-                      <span>تا</span>
-                      <span>
-                        <span>۱۱</span>:<span>۳۰</span>
-                      </span>
-                    </span>
-                  </div>
-                  <span> رزرو شد ✅ </span>
-                </li>
+                <ReserveRecord number={1} roomName="100" timePart={0} status="waiting" />
               </ul>
             ) : (
               <p className="flex items-center justify-center p-2 text-xl text-slate-500">
