@@ -9,10 +9,13 @@ function ReserveRecord({
   date = new persianDate(),
   timePart = 0,
   status = 'waiting', // reserved/canceled/waiting
+  extraClasses = '',
 }) {
   const { startTime, stopTime } = mapTime(timePart);
   return (
-    <li className="flex justify-between rounded-lg bg-slate-700 bg-opacity-70 p-3">
+    <div
+      className={`flex justify-between gap-4 rounded-xl bg-slate-700 bg-opacity-70 p-3 ${extraClasses}`}
+    >
       <div className="flex gap-6">
         <span>
           <span>{makePersianNumberString(number + '')}</span>
@@ -38,7 +41,7 @@ function ReserveRecord({
         {status === 'reserved' && 'رزرو شد ✅'}
         {status === 'canceled' && 'لغو شد ❌'}
       </span>
-    </li>
+    </div>
   );
 }
 

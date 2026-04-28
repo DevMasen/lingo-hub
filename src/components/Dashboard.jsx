@@ -30,7 +30,9 @@ function Dashboard() {
             </h3>
             {true ? (
               <ul className="flex flex-col gap-3">
-                <ReserveRecord number={1} roomName="100" timePart={0} status="waiting" />
+                <li>
+                  <ReserveRecord number={1} roomName="100" timePart={0} status="waiting" />
+                </li>
               </ul>
             ) : (
               <p className="flex items-center justify-center p-2 text-xl text-slate-500">
