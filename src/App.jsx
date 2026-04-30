@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Login from './pages/Login';
 import SignUp, { action as createUserAction } from './pages/SignUp';
-import RoomList from './components/RoomList';
+import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
 import PageNotFound from './pages/PageNotFound';
 import AboutUs from './pages/AboutUs';
 import Dashboard from './components/Dashboard';
@@ -15,6 +15,7 @@ import UserInfo from './components/UserInfo';
 import Setting from './components/Setting';
 import PasswordChange from './components/PasswordChange';
 import Support from './components/Support';
+import ErrorPage from './pages/ErrorPage';
 //////////////////////////////////////
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
     path: '/signup',
     element: <SignUp />,
     action: createUserAction,
+    errorElement: <ErrorPage />,
   },
   { path: '/aboutus', element: <AboutUs /> },
   {
@@ -41,7 +43,12 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="dashboard" replace /> },
       { path: 'dashboard', element: <Dashboard /> },
-      { path: 'rooms', element: <RoomList /> },
+      {
+        path: 'reserve',
+        element: <ReserveRoom />,
+        loader: reserveRoomLoader,
+        errorElement: <ErrorPage />,
+      },
       { path: 'support', element: <Support /> },
       {
         path: 'setting',

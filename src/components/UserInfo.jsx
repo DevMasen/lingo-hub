@@ -35,14 +35,14 @@ function UserInfo() {
             <span>زبان تدریس : </span>
             <span className="rounded-xl bg-slate-800 px-4 py-2">{currentUser.language}</span>
             <div className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700">
-              <BiPencil className="h-6 w-6" />
+              <BiPencil className="h-4 w-4" />
             </div>
           </li>
           <li className="flex items-center gap-2">
             <span>سطح تدریس : </span>
             <span className="rounded-xl bg-slate-800 px-4 py-2">{currentUser.level}</span>
             <div className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700">
-              <BiPencil className="h-6 w-6" />
+              <BiPencil className="h-4 w-4" />
             </div>
           </li>
           <li>
@@ -66,8 +66,8 @@ function UserInfo() {
               status="waiting"
               extraClasses="w-[525px]"
             />
-            <PanelButton extraClasses="text-base px-5"> پرداخت </PanelButton>
-            <PanelButton extraClasses="bg-red-800 border-red-300 hover:bg-red-700 px-5">
+            <PanelButton extraClasses="text-sm px-5"> پرداخت </PanelButton>
+            <PanelButton extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5">
               لغو
             </PanelButton>
           </li>
@@ -79,8 +79,8 @@ function UserInfo() {
               status="waiting"
               extraClasses="w-[525px]"
             />
-            <PanelButton extraClasses="text-base px-5 "> پرداخت </PanelButton>
-            <PanelButton extraClasses="bg-red-800 border-red-300 hover:bg-red-700 px-5">
+            <PanelButton extraClasses="text-sm px-5 "> پرداخت </PanelButton>
+            <PanelButton extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5">
               لغو
             </PanelButton>
           </li>

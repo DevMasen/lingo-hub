@@ -1,0 +1,125 @@
+{
+  "date": [
+    {
+      "id": 0,
+      "reserveDate": "۱۴۰۵۰۲۱۱"
+    }
+  ],
+  "rooms": [
+    {
+      "id": 0,
+      "roomName": "100",
+      "timeLines": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 1,
+      "roomName": "101",
+      "timeLines": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 2,
+      "roomName": "102",
+      "timeLines": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 3,
+      "roomName": "103",
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 4,
+      "roomName": "104",
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "users": [
+    {
+      "firstName": "محمدحسین",
+      "lastName": "محسنی",
+      "phoneNumber": "۹۳۳۹۶۰۲۳۶۸",
+      "language": "انگلیسی",
+      "level": "مبتدی",
+      "explanation": "",
+      "email": "mohammadwh400@gmail.com",
+      "password": "qwertyui",
+      "signupStatus": "comfirmed",
+      "reservedRooms": [
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "100",
+          "timePart": 0,
+          "status": "reserved"
+        },
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "101",
+          "timePart": 0,
+          "status": "reserved"
+        },
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "102",
+          "timePart": 0,
+          "status": "waiting"
+        }
+      ],
+      "maxReserveCount": 3,
+      "id": 1
+    }
+  ]
+}

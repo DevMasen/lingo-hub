@@ -1,87 +1,35 @@
 {
-  "date": {
-    "reserveDate": "1405/02/06"
-  },
+  "date": [
+    {
+      "id": 0,
+      "reserveDate": "۱۴۰۵۰۲۱۱"
+    }
+  ],
   "rooms": [
     {
       "id": 0,
       "roomName": "100",
-      "timeLines": {
-        "part0": 0,
-        "part1": null,
-        "part2": null,
-        "part3": null,
-        "part4": null,
-        "part5": null,
-        "part6": null,
-        "part7": null,
-        "part8": null,
-        "part9": null
-      }
+      "timeLines": [1, null, null, null, null, null, null, null, null, null]
     },
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": {
-        "part0": null,
-        "part1": null,
-        "part2": null,
-        "part3": null,
-        "part4": null,
-        "part5": null,
-        "part6": null,
-        "part7": null,
-        "part8": null,
-        "part9": null
-      }
+      "timeLines": [1, null, null, null, 2, null, null, null, null, null]
     },
     {
       "id": 2,
       "roomName": "102",
-      "timeLines": {
-        "part0": null,
-        "part1": null,
-        "part2": null,
-        "part3": null,
-        "part4": null,
-        "part5": null,
-        "part6": null,
-        "part7": null,
-        "part8": null,
-        "part9": null
-      }
+      "timeLines": [1, null, null, null, null, null, null, null, null, null]
     },
     {
       "id": 3,
       "roomName": "103",
-      "timeLines": {
-        "part0": null,
-        "part1": null,
-        "part2": null,
-        "part3": null,
-        "part4": null,
-        "part5": null,
-        "part6": null,
-        "part7": null,
-        "part8": null,
-        "part9": null
-      }
+      "timeLines": [null, null, 2, null, null, null, null, "untouchable", null, null]
     },
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": {
-        "part0": null,
-        "part1": null,
-        "part2": null,
-        "part3": null,
-        "part4": null,
-        "part5": null,
-        "part6": null,
-        "part7": null,
-        "part8": null,
-        "part9": null
-      }
+      "timeLines": [null, null, "untouchable", 2, null, null, null, null, null, null]
     }
   ],
   "users": [
@@ -94,12 +42,62 @@
       "explanation": "",
       "email": "mohammadwh400@gmail.com",
       "password": "qwertyui",
-      "signupStatus": "waiting",
+      "signupStatus": "comfirmed",
       "reservedRooms": [
-        { "date": "1405/02/06", "roomName": "100", "timePart": 0, "status": "waiting" }
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "100",
+          "timePart": 0,
+          "status": "reserved"
+        },
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "101",
+          "timePart": 0,
+          "status": "reserved"
+        },
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "102",
+          "timePart": 0,
+          "status": "waiting"
+        }
       ],
       "maxReserveCount": 3,
       "id": 1
+    },
+    {
+      "firstName": "امیرعلی",
+      "lastName": "حسینی",
+      "phoneNumber": "۰۹۱۶۲۰۸۶۶۱",
+      "language": "چینی",
+      "level": "پیشرفته",
+      "explanation": "",
+      "email": "amirhosseini@gmail.com",
+      "password": "12345678",
+      "signupStatus": "waiting",
+      "reservedRooms": [
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "101",
+          "timePart": 4,
+          "status": "reserved"
+        },
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "103",
+          "timePart": 2,
+          "status": "waiting"
+        },
+        {
+          "date": "۱۴۰۵۰۲۱۱",
+          "roomName": "104",
+          "timePart": 3,
+          "status": "reserved"
+        }
+      ],
+      "maxReserveCount": 3,
+      "id": 2
     }
   ]
 }

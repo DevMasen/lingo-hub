@@ -18,7 +18,7 @@ function NavList() {
           <AiOutlineDashboard />
           {isSidebarOpen && <span> داشبورد </span>}
         </NavItem>
-        <NavItem extraClasses="nav-link" to={'rooms'}>
+        <NavItem extraClasses="nav-link" to={'reserve'}>
           <HiOutlineBookOpen />
           {isSidebarOpen && <span> رزرو اتاق </span>}
         </NavItem>

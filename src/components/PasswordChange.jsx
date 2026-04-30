@@ -65,8 +65,11 @@ function PasswordChange() {
   );
 
   return (
-    <div className="border-b border-slate-500 p-5">
-      <Form method="PATCH" className="flex flex-col items-start gap-4">
+    <div className="border-b border-slate-500 p-3">
+      <Form
+        method="PATCH"
+        className="flex h-full flex-col items-start gap-4 rounded-xl bg-[linear-gradient(45deg,var(--color-indigo-900),var(--color-slate-800))] p-5"
+      >
         <div
           className={
             `${errorField === '1' ? 'border-red-700 focus-within:border-red-700' : 'border-slate-500'} ` +
@@ -143,7 +146,7 @@ function PasswordChange() {
           </button>
         </div>
         {inputOldPass && inputNewPass && inputNewPassRep && (
-          <PanelButton extraClasses="px-4 py-2 text-sm" disabled={error.length > 0}>
+          <PanelButton extraClasses="px-4 py-3 text-sm" disabled={error.length > 0}>
             تغییر رمز عبور
           </PanelButton>
         )}

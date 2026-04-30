@@ -9,7 +9,7 @@ function Dashboard() {
     <div className="grid grid-cols-1 grid-rows-[auto_1fr]">
       <header className="flex items-center justify-between border-b border-slate-500 bg-slate-800 p-4">
         <span className="text-xl"> داشبورد </span>
-        <PanelButton to={'/app/rooms'} extraClasses="px-4 py-2">
+        <PanelButton to={'/app/reserve'} extraClasses="px-4 py-2">
           رزرو اتاق
         </PanelButton>
       </header>
