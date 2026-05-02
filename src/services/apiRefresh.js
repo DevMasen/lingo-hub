@@ -3,7 +3,7 @@ import { getDate } from './apiDate';
 
 const API_URL = 'http://localhost:8000';
 
-export async function refreshData() {
+export async function refreshTableData() {
   const date = await getDate();
   const tommarrow = new persianDate(new Date().getTime() + 86400000)
     .format()

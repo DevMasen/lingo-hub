@@ -2,19 +2,19 @@
   "date": [
     {
       "id": 0,
-      "reserveDate": "۱۴۰۵۰۲۱۱"
+      "reserveDate": "۱۴۰۵۰۲۱۳"
     }
   ],
   "rooms": [
     {
       "id": 0,
       "roomName": "100",
-      "timeLines": [1, 1, null, null, null, null, null, null, null, null]
+      "timeLines": [1, 1, 1, null, null, null, null, null, null, null]
     },
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": [2, 2, null, null, null, null, null, null, null, null]
+      "timeLines": [2, 2, 2, null, null, null, null, null, null, null]
     },
     {
       "id": 2,
@@ -29,18 +29,7 @@
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": [
-        "untouchable",
-        "untouchable",
-        "untouchable",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
+      "timeLines": [null, null, null, null, null, null, null, null, null, null]
     }
   ],
   "users": [
@@ -56,19 +45,19 @@
       "signupStatus": "comfirmed",
       "reservedRooms": [
         {
-          "date": "۱۴۰۵۰۲۱۱",
+          "date": "۱۴۰۵۰۲۱۳",
           "roomName": "100",
           "timePart": 0,
           "status": "reserved"
         },
         {
-          "date": "۱۴۰۵۰۲۱۱",
+          "date": "۱۴۰۵۰۲۱۳",
           "roomName": "100",
           "timePart": 1,
           "status": "waiting"
         },
         {
-          "date": "۱۴۰۵۰۲۱۱",
+          "date": "۱۴۰۵۰۲۱۳",
           "roomName": "100",
           "timePart": 2,
           "status": "canceled"
@@ -89,19 +78,19 @@
       "signupStatus": "comfirmed",
       "reservedRooms": [
         {
-          "date": "۱۴۰۵۰۲۱۱",
+          "date": "۱۴۰۵۰۲۱۳",
           "roomName": "101",
           "timePart": 0,
           "status": "reserved"
         },
         {
-          "date": "۱۴۰۵۰۲۱۱",
+          "date": "۱۴۰۵۰۲۱۳",
           "roomName": "101",
           "timePart": 1,
           "status": "waiting"
         },
         {
-          "date": "۱۴۰۵۰۲۱۱",
+          "date": "۱۴۰۵۰۲۱۳",
           "roomName": "101",
           "timePart": 2,
           "status": "canceled"

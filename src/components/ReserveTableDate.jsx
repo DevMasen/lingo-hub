@@ -1,26 +1,9 @@
+// import { useAuth } from '../context/AuthContext';
+
 const publicStyles = 'rounded-xl border-b border-slate-800 transition-all duration-200';
 
-function ReserveTableData({ timePartStatus, roomData, reserveDate, currentUser }) {
-  console.log(currentUser);
-  function someReservedCallback(reserve) {
-    if (
-      reserve.date === reserveDate &&
-      reserve.roomName === roomData.roomName &&
-      reserve.status === 'reserved'
-    )
-      return true;
-    return false;
-  }
-
-  function someWaitingCallback(reserve) {
-    if (
-      reserve.date === reserveDate &&
-      reserve.roomName === roomData.roomName &&
-      reserve.status === 'waiting'
-    )
-      return true;
-    return false;
-  }
+function ReserveTableData({ timePartStatus, roomData, reserveDate }) {
+  // const { currentUser } = useAuth();
 
   if (timePartStatus === null)
     return (
@@ -32,10 +15,9 @@ function ReserveTableData({ timePartStatus, roomData, reserveDate, currentUser }
         <span>رزرو</span>
       </td>
     );
-  if (
-    timePartStatus === currentUser.id &&
-    currentUser.reservedRooms.some((reserve) => someReservedCallback(reserve))
-  )
+  if (false)
+    //TODO CONDITION
+
     return (
       <td
         className={publicStyles + ' cursor-pointer bg-green-600 text-green-100 hover:bg-green-500'}
@@ -43,10 +25,9 @@ function ReserveTableData({ timePartStatus, roomData, reserveDate, currentUser }
         <span> رزرو شد ✅</span>
       </td>
     );
-  if (
-    timePartStatus === currentUser.id &&
-    currentUser.reservedRooms.some((reserve) => someWaitingCallback(reserve))
-  )
+  if (false)
+    //TODO CONDITION
+
     return (
       <td
         className={
@@ -56,7 +37,8 @@ function ReserveTableData({ timePartStatus, roomData, reserveDate, currentUser }
         <span> در انتظار پرداخت⏳ </span>
       </td>
     );
-  if (typeof timePartStatus === 'number' && timePartStatus !== currentUser.id)
+  if (false)
+    //TODO CONDITION)
     return (
       <td className={publicStyles + ' cursor-not-allowed bg-red-600 text-red-100'}>
         <span>رزرو شده </span>
@@ -71,5 +53,3 @@ function ReserveTableData({ timePartStatus, roomData, reserveDate, currentUser }
 }
 
 export default ReserveTableData;
-
-// className={`${part === null ? 'cursor-pointer hover:bg-indigo-700' : part === currentUser.id && currentUser.reservedRooms.some((reserve) => reserve.roomName === rooms[0].roomName && reserve.date === date[0].reserveDate) && currentUser.reservedRooms.some((reserve) => reserve.roomName === rooms[0].roomName && reserve.status === 'reserved') ? 'bg-green-700' : part === currentUser.id && currentUser.reservedRooms.some((reserve) => reserve.roomName === rooms[0].roomName && reserve.date === date[0].reserveDate) && currentUser.reservedRooms.some((reserve) => reserve.roomName === rooms[0].roomName && reserve.status === 'waiting') ? 'cursor-pointer bg-yellow-600' : 'cursor-not-allowed bg-red-700 hover:bg-red-600'}`}
