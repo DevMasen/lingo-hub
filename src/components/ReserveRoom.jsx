@@ -5,8 +5,12 @@ import makePersianNumberString from '../utils/makePersianNumbersString';
 import mapTime from '../utils/mapTime';
 import { refreshData } from '../services/apiRefresh';
 import ReserveTableData from './ReserveTableDate';
+import { getUsers } from '../services/apiUsers';
+import { useAuth } from '../context/AuthContext';
 function ReserveRoom() {
-  const { date, rooms } = useLoaderData();
+  const { date, rooms, users } = useLoaderData();
+  const { currentUser: oldUser } = useAuth();
+  const currentUser = users.find((user) => user.id === oldUser.id);
   return (
     <div className="border-b border-slate-500 p-3">
       <div className="text-xl">
@@ -37,6 +41,7 @@ function ReserveRoom() {
             <th className="bg-slate-800 py-5">{rooms[0].roomName}</th>
             {rooms[0].timeLines.map((timePartStatus, i) => (
               <ReserveTableData
+                currentUser={currentUser}
                 key={i}
                 reserveDate={date[0].reserveDate}
                 timePartStatus={timePartStatus}
@@ -48,6 +53,7 @@ function ReserveRoom() {
             <th className="bg-slate-800 py-5">{rooms[1].roomName}</th>
             {rooms[1].timeLines.map((timePartStatus, i) => (
               <ReserveTableData
+                currentUser={currentUser}
                 key={i}
                 reserveDate={date[0].reserveDate}
                 timePartStatus={timePartStatus}
@@ -59,6 +65,7 @@ function ReserveRoom() {
             <th className="bg-slate-800 py-5">{rooms[2].roomName}</th>
             {rooms[2].timeLines.map((timePartStatus, i) => (
               <ReserveTableData
+                currentUser={currentUser}
                 key={i}
                 reserveDate={date[0].reserveDate}
                 timePartStatus={timePartStatus}
@@ -70,6 +77,7 @@ function ReserveRoom() {
             <th className="bg-slate-800 py-5">{rooms[3].roomName}</th>
             {rooms[3].timeLines.map((timePartStatus, i) => (
               <ReserveTableData
+                currentUser={currentUser}
                 key={i}
                 reserveDate={date[0].reserveDate}
                 timePartStatus={timePartStatus}
@@ -81,6 +89,7 @@ function ReserveRoom() {
             <th className="rounded-es-xl bg-slate-800 py-5">{rooms[4].roomName}</th>
             {rooms[4].timeLines.map((timePartStatus, i) => (
               <ReserveTableData
+                currentUser={currentUser}
                 key={i}
                 reserveDate={date[0].reserveDate}
                 timePartStatus={timePartStatus}
@@ -98,7 +107,8 @@ export async function loader() {
   await refreshData();
   const date = await getDate();
   const rooms = await getRooms();
-  return { date, rooms };
+  const users = await getUsers();
+  return { date, rooms, users };
 }
 
 export default ReserveRoom;

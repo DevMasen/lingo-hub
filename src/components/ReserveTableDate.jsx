@@ -1,10 +1,7 @@
-import { useAuth } from '../context/AuthContext';
-
 const publicStyles = 'rounded-xl border-b border-slate-800 transition-all duration-200';
 
-function ReserveTableData({ timePartStatus, roomData, reserveDate }) {
-  const { currentUser } = useAuth();
-
+function ReserveTableData({ timePartStatus, roomData, reserveDate, currentUser }) {
+  console.log(currentUser);
   function someReservedCallback(reserve) {
     if (
       reserve.date === reserveDate &&

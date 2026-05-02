@@ -9,27 +9,38 @@
     {
       "id": 0,
       "roomName": "100",
-      "timeLines": [1, null, null, null, null, null, null, null, null, null]
+      "timeLines": [1, 1, null, null, null, null, null, null, null, null]
     },
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": [1, null, null, null, 2, null, null, null, null, null]
+      "timeLines": [2, 2, null, null, null, null, null, null, null, null]
     },
     {
       "id": 2,
       "roomName": "102",
-      "timeLines": [1, null, null, null, null, null, null, null, null, null]
+      "timeLines": [null, null, null, null, null, null, null, null, null, null]
     },
     {
       "id": 3,
       "roomName": "103",
-      "timeLines": [null, null, 2, null, null, null, null, "untouchable", null, null]
+      "timeLines": [null, null, null, null, null, null, null, null, null, null]
     },
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": [null, null, "untouchable", 2, null, null, null, null, null, null]
+      "timeLines": [
+        "untouchable",
+        "untouchable",
+        "untouchable",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     }
   ],
   "users": [
@@ -52,48 +63,48 @@
         },
         {
           "date": "۱۴۰۵۰۲۱۱",
-          "roomName": "101",
-          "timePart": 0,
-          "status": "reserved"
+          "roomName": "100",
+          "timePart": 1,
+          "status": "waiting"
         },
         {
           "date": "۱۴۰۵۰۲۱۱",
-          "roomName": "102",
-          "timePart": 0,
-          "status": "waiting"
+          "roomName": "100",
+          "timePart": 2,
+          "status": "canceled"
         }
       ],
       "maxReserveCount": 3,
       "id": 1
     },
     {
-      "firstName": "امیرعلی",
-      "lastName": "حسینی",
-      "phoneNumber": "۰۹۱۶۲۰۸۶۶۱",
-      "language": "چینی",
-      "level": "پیشرفته",
+      "firstName": "علی",
+      "lastName": "سیدی",
+      "phoneNumber": "۹۱۶۲۰۸۶۶۱۴",
+      "language": "انگلیسی",
+      "level": "مبتدی",
       "explanation": "",
-      "email": "amirhosseini@gmail.com",
+      "email": "ali@gmail.com",
       "password": "12345678",
-      "signupStatus": "waiting",
+      "signupStatus": "comfirmed",
       "reservedRooms": [
         {
           "date": "۱۴۰۵۰۲۱۱",
           "roomName": "101",
-          "timePart": 4,
+          "timePart": 0,
           "status": "reserved"
         },
         {
           "date": "۱۴۰۵۰۲۱۱",
-          "roomName": "103",
-          "timePart": 2,
+          "roomName": "101",
+          "timePart": 1,
           "status": "waiting"
         },
         {
           "date": "۱۴۰۵۰۲۱۱",
-          "roomName": "104",
-          "timePart": 3,
-          "status": "reserved"
+          "roomName": "101",
+          "timePart": 2,
+          "status": "canceled"
         }
       ],
       "maxReserveCount": 3,
