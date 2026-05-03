@@ -1,24 +1,38 @@
+import { useEffect, useState } from 'react';
+import { Form, redirect, useLoaderData, useNavigation } from 'react-router';
+/////////////////////////////////////////////////////////////
+import { HiOutlineArrowRight, HiOutlineArrowLeft, HiOutlineClipboardList } from 'react-icons/hi';
+import { HiCheckBadge } from 'react-icons/hi2';
+import { CgEnter } from 'react-icons/cg';
+//////////////////////////////////////////
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
 import HomeButton from '../components/HomeButton';
-import { HiOutlineArrowRight, HiOutlineArrowLeft, HiOutlineClipboardList } from 'react-icons/hi';
-import { HiCheckBadge } from 'react-icons/hi2';
+import HidePasswordButton from '../components/HidePasswordButton';
+//////////////////////////////////////////////////////////////////
 import { useSignup } from '../context/SignupContext';
-import { useEffect, useState } from 'react';
-import { Form, Link, redirect, useNavigation } from 'react-router';
+/////////////////////////////////////////////////////
+import { createUser, getUsers } from '../services/apiUsers';
+//////////////////////////////////////////////////
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
-import HidePasswordButton from '../components/HidePasswordButton';
-import { createUser } from '../services/apiUsers';
-import { CgEnter } from 'react-icons/cg';
+import { createHash } from '../services/apiHash';
+///////////////////////////////////////////////////
 
+//! Constant Styles
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
 const inputStyles =
   'w-full rounded-md bg-inherit px-3 py-3 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 const inputErrorStyles = 'border-2 border-red-600 text-red-600';
 
 function SignUp() {
+  //! React Router
+  const users = useLoaderData();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
+
+  //! Context Data
   const {
     step,
     loading,
@@ -33,7 +47,7 @@ function SignUp() {
     toggleHidePassRep,
   } = useSignup();
 
-  // Controlled Elements
+  //!Controlled Elements
   const [inputFirstName, setInputFirstName] = useState('');
   const [inputLastName, setInputLastName] = useState('');
   const [inputPhoneNumber, setInputPhoneNumber] = useState('');
@@ -44,85 +58,7 @@ function SignUp() {
   const [inputPassword, setInputPassword] = useState('');
   const [inputPasswordRepeat, setInputPasswordRepeat] = useState('');
 
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'submitting';
-
-  function handleContinue() {
-    switch (step) {
-      case '1':
-        if (!inputFirstName) {
-          setError('لطفا نام خود را وارد کنید');
-          setErrorField('1');
-          break;
-        }
-        setStep('2');
-        break;
-      case '2':
-        if (!inputLastName) {
-          setError('لطفا نام خانوادگی خود را وارد کنید');
-          setErrorField('2');
-          break;
-        }
-        setStep('3');
-        break;
-      case '3':
-        if (inputPhoneNumber.length < 10) {
-          setError('شماره موبایل باید 10 رقمی باشد');
-          setErrorField('3');
-          break;
-        }
-        // if (checkPhoneExist(inputPhoneNumber)) {
-        //   setError('کاربر با این شماره موبایل قبلا ثبت نام کرده است.');
-        //   setErrorField('3');
-        //   break;
-        // }
-        setStep('4');
-        break;
-      case '4':
-        setStep('5');
-        break;
-      case '5':
-        if (!inputEmail) {
-          setError('لطفا ایمیل خود را وارد کنید');
-          setErrorField('7');
-          break;
-        }
-        if (error) break;
-        // if (!error && checkEmailExist(inputEmail)) {
-        //   setError(' کاربر با این ایمیل قبلا ثبت نام کرده است.');
-        //   setErrorField('7');
-        //   break;
-        // }
-        setStep('6');
-        break;
-      default:
-        break;
-    }
-  }
-
-  function handlePrevious() {
-    switch (step) {
-      case '2':
-        setStep('1');
-        break;
-      case '3':
-        setStep('2');
-        break;
-      case '4':
-        setStep('3');
-        break;
-      case '5':
-        if (!validateEmail(inputEmail)) setInputEmail('');
-        setStep('4');
-        break;
-      case '6':
-        setStep('5');
-        break;
-      default:
-        break;
-    }
-  }
-
+  //! Effects
   useEffect(
     function () {
       setInputPhoneNumber((cur) => makeNumericInput(cur));
@@ -212,9 +148,87 @@ function SignUp() {
     [step, inputPassword, inputPasswordRepeat, setError, setErrorField]
   );
 
+  //! Handlers
+  function handleContinue() {
+    switch (step) {
+      case '1':
+        if (!inputFirstName) {
+          setError('لطفا نام خود را وارد کنید');
+          setErrorField('1');
+          break;
+        }
+        setStep('2');
+        break;
+      case '2':
+        if (!inputLastName) {
+          setError('لطفا نام خانوادگی خود را وارد کنید');
+          setErrorField('2');
+          break;
+        }
+        setStep('3');
+        break;
+      case '3':
+        if (inputPhoneNumber.length < 10) {
+          setError('شماره موبایل باید 10 رقمی باشد');
+          setErrorField('3');
+          break;
+        }
+        if (users.some((user) => user.phoneNumber === inputPhoneNumber)) {
+          setError('کاربر با این شماره موبایل قبلا ثبت نام کرده است.');
+          setErrorField('3');
+          break;
+        }
+        setStep('4');
+        break;
+      case '4':
+        setStep('5');
+        break;
+      case '5':
+        if (!inputEmail) {
+          setError('لطفا ایمیل خود را وارد کنید');
+          setErrorField('7');
+          break;
+        }
+        if (error) break;
+        if (users.some((user) => user.email === inputEmail)) {
+          setError(' کاربر با این ایمیل قبلا ثبت نام کرده است.');
+          setErrorField('7');
+          break;
+        }
+        setStep('6');
+        break;
+      default:
+        break;
+    }
+  }
+
+  function handlePrevious() {
+    switch (step) {
+      case '2':
+        setStep('1');
+        break;
+      case '3':
+        setStep('2');
+        break;
+      case '4':
+        setStep('3');
+        break;
+      case '5':
+        if (!validateEmail(inputEmail)) setInputEmail('');
+        setStep('4');
+        break;
+      case '6':
+        setStep('5');
+        break;
+      default:
+        break;
+    }
+  }
+
+  //! JSX
   return (
     <div className="background flex h-dvh items-center justify-center">
-      {loading || (isSubmitting && <Loader />)}
+      {(loading || isSubmitting) && <Loader />}
       <CloseFormButton />
 
       <Form
@@ -450,11 +464,29 @@ function SignUp() {
   );
 }
 
+export async function loader() {
+  const users = await getUsers();
+  return users;
+}
+
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  const user = { ...data, signupStatus: 'waiting', reservedRooms: [], maxReserveCount: 3 };
+  const user = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    phoneNumber: data.phoneNumber,
+    language: data.language,
+    level: data.level,
+    explanation: data.explanation,
+    email: data.email,
+    signupStatus: 'waiting',
+    reservedRooms: [],
+    maxReserveCount: 3,
+  };
+  const hashData = { property: data.password };
   await createUser(user);
+  await createHash(hashData);
   return redirect('/login');
 }
 

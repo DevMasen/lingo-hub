@@ -15,8 +15,8 @@ function reducer(state, action) {
   switch (action.type) {
     case 'signup/setStep':
       return { ...state, step: action.payload };
-    case 'signup/toggleLoading':
-      return { ...state, loading: !state.loading };
+    case 'signup/setLoading':
+      return { ...state, loading: action.payload };
     case 'signup/setError':
       return { ...state, error: action.payload };
     case 'signup/setErrorField':
@@ -34,12 +34,12 @@ function SignupProvider({ children }) {
   const [{ step, loading, error, errorField, isPassHidden, isPassRepHidden }, dispatch] =
     useReducer(reducer, initialState);
 
-  function setStep(step) {
+  function setStep(step = '1') {
     dispatch({ type: 'signup/setStep', payload: step });
   }
 
-  function toggleLoading() {
-    dispatch({ type: 'signup/toggleLoading' });
+  function setLoading(isLoading) {
+    dispatch({ type: 'signup/setLoading', payload: isLoading });
   }
 
   const setError = useCallback(function setError(errorMessage = 'Unknown Error!') {
@@ -68,7 +68,7 @@ function SignupProvider({ children }) {
         isPassHidden,
         isPassRepHidden,
         setStep,
-        toggleLoading,
+        setLoading,
         setError,
         setErrorField,
         toggleHidePass,

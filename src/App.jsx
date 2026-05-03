@@ -2,23 +2,25 @@ import './index.css';
 //////////////////////
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 //////////////////////////////////
-import AppLayout from './ui/AppLayout';
-import HomePage from './pages/HomePage';
-import ProtectedRoute from './ui/ProtectedRoute';
-import Login from './pages/Login';
-import SignUp, { action as createUserAction } from './pages/SignUp';
 import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
-import PageNotFound from './pages/PageNotFound';
-import AboutUs from './pages/AboutUs';
 import Dashboard from './components/Dashboard';
-import UserInfo from './components/UserInfo';
 import Setting from './components/Setting';
+import UserInfo from './components/UserInfo';
 import PasswordChange from './components/PasswordChange';
 import Support from './components/Support';
-import ErrorPage from './pages/ErrorPage';
+///////////////////////////////////////////
+import HomePage from './pages/HomePage';
+import Login from './pages/Login';
 import LoginOptions, { loader as loginOptionsLoader } from './pages/LoginOptions';
 import LoginUser, { action as loginUserAction } from './pages/LoginUser';
 import LoginByOTP from './pages/LoginByOTP';
+import SignUp, { action as createUserAction, loader as usersLoader } from './pages/SignUp';
+import AboutUs from './pages/AboutUs';
+import ErrorPage from './pages/ErrorPage';
+import PageNotFound from './pages/PageNotFound';
+////////////////////////////////////////////////
+import AppLayout from './ui/AppLayout';
+import ProtectedRoute from './ui/ProtectedRoute';
 //////////////////////////////////////
 const router = createBrowserRouter([
   {
@@ -49,6 +51,7 @@ const router = createBrowserRouter([
     path: '/signup',
     element: <SignUp />,
     action: createUserAction,
+    loader: usersLoader,
     errorElement: <ErrorPage />,
   },
   { path: '/aboutus', element: <AboutUs /> },

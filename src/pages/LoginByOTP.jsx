@@ -68,6 +68,7 @@ function LoginByOTP() {
         <HomeButton to={-1} extraClasses={'py-2 rounded-md flex-grow'}>
           <HiOutlineArrowRight />
         </HomeButton>
+        {/* TODO OTP authentication */}
         <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'}>
           <span className="text-lg font-medium"> ورود</span>
           <AiOutlineEnter className="text-2xl text-slate-300" />
