@@ -1,9 +1,7 @@
 import { BiPencil, BiUserCircle } from 'react-icons/bi';
-import { useAuth } from '../context/AuthContext';
 import PanelButton from './PanelButton';
 import ReserveRecord from './ReserveRecord';
 function UserInfo() {
-  const { currentUser } = useAuth();
   return (
     <div className="space-y-5 border-b border-slate-500 p-3">
       <div className="flex items-center gap-5 rounded-2xl bg-[linear-gradient(45deg,var(--color-indigo-900),var(--color-slate-800))] px-5 py-2">
@@ -12,9 +10,7 @@ function UserInfo() {
             <BiUserCircle className="h-24 w-24 text-indigo-600" />
           </div>
           <div className="text-2xl font-semibold text-slate-400">
-            <span>
-              {currentUser.firstName} {currentUser.lastName}
-            </span>
+            <span>{/* {currentUser.firstName} {currentUser.lastName} */}</span>
           </div>
         </div>
         <div className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700">
@@ -25,35 +21,35 @@ function UserInfo() {
         <ul className="mt-5 space-y-7 text-lg">
           <li>
             <span>شماره تلفن : </span>
-            <span className="rounded-xl bg-slate-800 px-4 py-2">۰{currentUser.phoneNumber}</span>
+            {/* <span className="rounded-xl bg-slate-800 px-4 py-2">۰{currentUser.phoneNumber}</span> */}
           </li>
           <li>
             <span>ایمیل : </span>
-            <span className="rounded-xl bg-slate-800 px-4 py-2">{currentUser.email}</span>
+            {/* <span className="rounded-xl bg-slate-800 px-4 py-2">{currentUser.email}</span> */}
           </li>
           <li className="flex items-center gap-2">
             <span>زبان تدریس : </span>
-            <span className="rounded-xl bg-slate-800 px-4 py-2">{currentUser.language}</span>
+            {/* <span className="rounded-xl bg-slate-800 px-4 py-2">{currentUser.language}</span> */}
             <div className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700">
               <BiPencil className="h-4 w-4" />
             </div>
           </li>
           <li className="flex items-center gap-2">
             <span>سطح تدریس : </span>
-            <span className="rounded-xl bg-slate-800 px-4 py-2">{currentUser.level}</span>
+            {/* <span className="rounded-xl bg-slate-800 px-4 py-2">{currentUser.level}</span> */}
             <div className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700">
               <BiPencil className="h-4 w-4" />
             </div>
           </li>
           <li>
             <span>وضعیت ثبت نام : </span>
-            <span
+            {/* <span
               className={`rounded-xl px-4 py-2 ${currentUser.signupStatus === 'waiting' ? 'bg-yellow-500/65' : currentUser.signupStatus === 'comfirmed' ? 'bg-green-500/65' : currentUser.signupStatus === 'rejected' ? 'bg-red-500/65' : ''}`}
             >
               {currentUser.signupStatus === 'waiting' && 'در حال بررسی...'}
               {currentUser.signupStatus === 'comfirmed' && 'تأیید شده'}
               {currentUser.signupStatus === 'rejected' && 'رد شده'}
-            </span>
+            </span> */}
           </li>
         </ul>
         <ul className="space-y-3">

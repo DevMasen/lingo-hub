@@ -14,8 +14,6 @@ function Header() {
 
   const { toggleExitWindow } = useExit();
 
-  const { currentUser } = useAuth();
-
   return (
     <header className="flex items-center justify-between border-b border-slate-500 p-4">
       {/* overlay */}
@@ -51,8 +49,8 @@ function Header() {
             {isProfileOpen && (
               <>
                 <div className="space-y-2 border-b border-slate-500 pb-3 text-start">
-                  <p> {currentUser.firstName} </p>
-                  <p className="text-slate-400"> {currentUser.email} </p>
+                  {/* <p> {currentUser.firstName} </p> */}
+                  {/* <p className="text-slate-400"> {currentUser.email} </p> */}
                 </div>
                 <ul className="mt-3 space-y-3 text-start">
                   <li>

@@ -9,9 +9,9 @@ import { HiOutlineArrowLeft, HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
 import { CgEnter } from 'react-icons/cg';
 import { useAuth } from '../context/AuthContext';
-import { BsArrowRight } from 'react-icons/bs';
+import { BsArrowRight, BsListCheck } from 'react-icons/bs';
 import validateEmail from '../utils/validateEmail';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLoaderData, useNavigate } from 'react-router';
 import HidePasswordButton from '../components/HidePasswordButton';
 import { getUsers } from '../services/apiUsers';
 
@@ -20,22 +20,12 @@ const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function Login() {
-  const {
-    activeTab,
-    step,
-    setStep,
-    isPassHidden,
-    togglePassHidden,
-    loading,
-    error,
-    submitByMobile,
-    submitByEmail,
-    currentUser,
-    setError,
-    login,
-    setUsersData,
-  } = useAuth();
+  const { activeTab, step, setStep, isPassHidden, togglePassHidden, loading, error, setError } =
+    useAuth();
   ///////////////////////////
+  const [path, setPath] = useState('');
+
+  const users = useLoaderData();
 
   // Controlled Elements
   const [phoneNumberInput, setPhoneNumberInput] = useState('');
@@ -53,86 +43,63 @@ function Login() {
 
   useEffect(
     function () {
-      if (activeTab === 'mobile') return;
-      if (emailInput.length === 0) return;
-      const isEmailValid = validateEmail(emailInput);
-      if (!isEmailValid) {
-        setError('ایمیل معتبر نیست');
-        return;
-      }
       setError('');
-      submitByEmail(emailInput);
+      setPath('');
     },
-    [emailInput, setError, activeTab, submitByEmail]
-  );
-
-  useEffect(
-    function () {
-      if (phoneNumberInput.length < 10) return;
-      submitByMobile(phoneNumberInput);
-    },
-    [phoneNumberInput, submitByMobile]
-  );
-
-  useEffect(
-    function () {
-      if (currentUser === undefined) setStep('first');
-    },
-    [currentUser, setStep]
-  );
-
-  useEffect(
-    function () {
-      async function setUsers() {
-        const data = await getUsers();
-        setUsersData(data);
-      }
-      setUsers();
-    },
-    [setUsersData]
+    [setError, setPath]
   );
 
   function handleSubmit(e) {
     e.preventDefault();
   }
 
-  function handleLogin() {
-    const isLoginSuccessful = login(passwordInput);
-    if (!isLoginSuccessful) {
-      setError('رمز عبور اشتباه است!');
-      return;
-    }
-    setError('');
-    navigate('/app');
-  }
-
   function handleContinue() {
-    if (activeTab === 'mobile') {
-      if (phoneNumberInput.length < 10) {
-        setError('شماره موبایل باید ۱۰ رقمی باشد');
+    switch (activeTab) {
+      case 'mobile':
+        if (phoneNumberInput.length < 10) {
+          setError('شماره موبایل باید ۱۰ رقمی باشد.');
+          setPath('');
+          break;
+        }
+        if (phoneNumberInput.at(0) !== '۹') {
+          setError('شماره موبایل نامعتبر است.');
+          setPath('');
+          break;
+        }
+        const userByPhone = users.find((user) => user.phoneNumber === phoneNumberInput);
+        if (userByPhone === undefined) {
+          setError(' کاربری با این شماره موبایل وجود ندارد. ');
+          setPath('/signup');
+          break;
+        }
+        // TODO Next step by mobile
+        setError('');
+        setPath('');
+        break;
+      case 'email':
+        if (!emailInput) {
+          setError('لطفا ایمیل خود را وارد کنید.');
+          setPath('');
+          break;
+        }
+        if (!validateEmail(emailInput)) {
+          setError('ایمیل نا معتبر است.');
+          setPath('');
+          break;
+        }
+        const userByEmail = users.find((user) => user.email === emailInput);
+        if (userByEmail === undefined) {
+          setError(' کاربری با این ایمیل وجود ندارد. ');
+          setPath('/signup');
+          break;
+        }
+        // TODO Next step by email
+        setError('');
+        setPath('');
+        break;
+      default:
         return;
-      }
-      setError('');
-      if (currentUser === undefined) {
-        navigate('/signup');
-        return;
-      }
-      setStep('second');
-      return;
     }
-    if (!emailInput) {
-      setError('لطفا ایمیل خود را وارد کنید');
-      return;
-    }
-    if (!validateEmail(emailInput)) {
-      return;
-    }
-    if (currentUser === undefined) {
-      navigate('/signup');
-      return;
-    }
-    setStep('second');
-    return;
   }
 
   return (
@@ -146,14 +113,14 @@ function Login() {
         className="text-md w-[500px] space-y-3 rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200"
       >
         <legend className="flex items-end gap-2 text-2xl font-bold">
-          <span> ورود / ثبت‌نام </span>
+          <span> ورود کاربر </span>
           <CgEnter className="text-3xl text-slate-300" />
         </legend>
         {step === 'first' && (
           <>
             <LoginTabs />
             {activeTab === 'mobile' && (
-              <div className={`${inputContainerStyles}`}>
+              <div className={inputContainerStyles}>
                 <input
                   type="text"
                   name="phone-number"
@@ -176,7 +143,7 @@ function Login() {
               </div>
             )}
             {activeTab === 'email' && (
-              <div className={`${inputContainerStyles}`}>
+              <div className={inputContainerStyles}>
                 <input
                   type="email"
                   name="email"
@@ -190,15 +157,21 @@ function Login() {
               </div>
             )}
 
-            <HomeButton extraClasses={'py-2 rounded-md'} onClick={handleContinue}>
-              <span className="text-lg font-medium">ادامه</span>
-              <HiOutlineArrowLeft className="text-xl text-slate-300" />
-            </HomeButton>
+            <div className="flex gap-3">
+              <HomeButton to={'/signup'} extraClasses={'py-2 rounded-md grow'}>
+                <span className="text-lg font-medium">ثبت‌نام</span>{' '}
+                <BsListCheck className="text-xl text-slate-300" />
+              </HomeButton>
+              <HomeButton extraClasses={'py-2 px-12 rounded-md grow'} onClick={handleContinue}>
+                <span className="text-lg font-medium">ادامه</span>
+                <HiOutlineArrowLeft />
+              </HomeButton>
+            </div>
           </>
         )}
         {step === 'second' && (
           <>
-            <div className={`${inputContainerStyles}`}>
+            <div className={inputContainerStyles}>
               <input
                 type={isPassHidden ? 'password' : 'text'}
                 name="password"
@@ -219,7 +192,7 @@ function Login() {
               >
                 <BsArrowRight className="text-2xl text-slate-300" />
               </HomeButton>
-              <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'} onClick={handleLogin}>
+              <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'}>
                 <span className="text-lg font-medium">ورود</span>
                 <AiOutlineEnter className="text-2xl text-slate-300" />
               </HomeButton>
@@ -244,7 +217,7 @@ function Login() {
               )}
             </div>
             <div className="flex w-60 gap-3 text-lg font-semibold" dir="ltr">
-              <div className={`${inputContainerStyles}`}>
+              <div className={inputContainerStyles}>
                 <input
                   type="text"
                   name="recoveryCode1"
@@ -254,7 +227,7 @@ function Login() {
                   className={`${inputStyles} text-center`}
                 />
               </div>
-              <div className={`${inputContainerStyles}`}>
+              <div className={inputContainerStyles}>
                 <input
                   type="text"
                   name="recoveryCode2"
@@ -264,7 +237,7 @@ function Login() {
                   className={`${inputStyles} text-center`}
                 />
               </div>
-              <div className={`${inputContainerStyles}`}>
+              <div className={inputContainerStyles}>
                 <input
                   type="text"
                   name="recoveryCode3"
@@ -274,7 +247,7 @@ function Login() {
                   className={`${inputStyles} text-center`}
                 />
               </div>
-              <div className={`${inputContainerStyles}`}>
+              <div className={inputContainerStyles}>
                 <input
                   type="text"
                   name="recoveryCode4"
@@ -299,10 +272,16 @@ function Login() {
             </div>
           </div>
         )}
-        {error.length > 0 && <Error error={error} />}
+        {error.length > 0 && <Error error={error} toPath={path} />}
       </form>
     </div>
   );
+}
+
+export async function loader() {
+  const users = await getUsers();
+
+  return users;
 }
 
 export default Login;

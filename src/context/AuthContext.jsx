@@ -13,8 +13,7 @@ const initialState = {
   isPassHidden: true,
   loading: false,
   error: '',
-  users: [],
-  currentUser: undefined,
+
   isAuthenticated: false,
 };
 
@@ -46,16 +45,7 @@ function reducer(state, action) {
         ...state,
         error: action.payload,
       };
-    case 'auth/usersLoaded':
-      return {
-        ...state,
-        users: action.payload,
-      };
-    case 'auth/setCurrentUser':
-      return {
-        ...state,
-        currentUser: action.payload,
-      };
+
     case 'auth/login':
       return {
         ...state,
@@ -65,7 +55,6 @@ function reducer(state, action) {
       return {
         ...state,
         isAuthenticated: false,
-        currentUser: undefined,
         step: 'first',
         activeTab: 'mobile',
       };
@@ -75,14 +64,10 @@ function reducer(state, action) {
   }
 }
 function AuthProvider({ children }) {
-  const [
-    { activeTab, step, isPassHidden, loading, error, users, currentUser, isAuthenticated },
-    dispatch,
-  ] = useReducer(reducer, initialState);
-
-  const setUsersData = useCallback(function setUsersData(data) {
-    dispatch({ type: 'auth/usersLoaded', payload: data });
-  }, []);
+  const [{ activeTab, step, isPassHidden, loading, error, isAuthenticated }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   function toggleActiveTab() {
     dispatch({ type: 'auth/toggleActiveTab' });
@@ -104,42 +89,6 @@ function AuthProvider({ children }) {
     dispatch({ type: 'auth/setError', payload: errorMessage });
   }, []);
 
-  const submitByMobile = useCallback(
-    function submitByMobile(phoneNumber = '') {
-      const user = users.find((user) => user.phoneNumber === phoneNumber);
-      dispatch({ type: 'auth/setCurrentUser', payload: user });
-    },
-    [users]
-  );
-
-  function checkPhoneExist(phoneNumber = '') {
-    const user = users.find((user) => user.phoneNumber === phoneNumber);
-    if (user === undefined) return false;
-    return true;
-  }
-
-  const submitByEmail = useCallback(
-    function submitByEmail(email = '') {
-      const user = users.find((user) => user.email === email);
-      dispatch({ type: 'auth/setCurrentUser', payload: user });
-    },
-    [users]
-  );
-
-  function checkEmailExist(email = '') {
-    const user = users.find((user) => user.email === email);
-    if (user === undefined) return false;
-    return true;
-  }
-
-  function login(password = '') {
-    if (currentUser.password === password) {
-      dispatch({ type: 'auth/login' });
-      return true;
-    }
-    return false;
-  }
-
   function logout() {
     dispatch({ type: 'auth/logout' });
   }
@@ -152,20 +101,13 @@ function AuthProvider({ children }) {
         isPassHidden,
         loading,
         error,
-        currentUser,
         isAuthenticated,
         toggleActiveTab,
         setStep,
         togglePassHidden,
         toggleLoading,
         setError,
-        submitByMobile,
-        submitByEmail,
-        login,
         logout,
-        checkPhoneExist,
-        checkEmailExist,
-        setUsersData,
       }}
     >
       {children}

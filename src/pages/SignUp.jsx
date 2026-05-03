@@ -9,9 +9,9 @@ import { useEffect, useState } from 'react';
 import { Form, Link, redirect, useNavigation } from 'react-router';
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
-import { useAuth } from '../context/AuthContext';
 import HidePasswordButton from '../components/HidePasswordButton';
 import { createUser } from '../services/apiUsers';
+import { CgEnter } from 'react-icons/cg';
 
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
 const inputStyles =
@@ -32,7 +32,6 @@ function SignUp() {
     toggleHidePass,
     toggleHidePassRep,
   } = useSignup();
-  const { checkPhoneExist, checkEmailExist } = useAuth();
 
   // Controlled Elements
   const [inputFirstName, setInputFirstName] = useState('');
@@ -72,11 +71,11 @@ function SignUp() {
           setErrorField('3');
           break;
         }
-        if (checkPhoneExist(inputPhoneNumber)) {
-          setError('کاربر با این شماره موبایل قبلا ثبت نام کرده است.');
-          setErrorField('3');
-          break;
-        }
+        // if (checkPhoneExist(inputPhoneNumber)) {
+        //   setError('کاربر با این شماره موبایل قبلا ثبت نام کرده است.');
+        //   setErrorField('3');
+        //   break;
+        // }
         setStep('4');
         break;
       case '4':
@@ -89,11 +88,11 @@ function SignUp() {
           break;
         }
         if (error) break;
-        if (!error && checkEmailExist(inputEmail)) {
-          setError(' کاربر با این ایمیل قبلا ثبت نام کرده است.');
-          setErrorField('7');
-          break;
-        }
+        // if (!error && checkEmailExist(inputEmail)) {
+        //   setError(' کاربر با این ایمیل قبلا ثبت نام کرده است.');
+        //   setErrorField('7');
+        //   break;
+        // }
         setStep('6');
         break;
       default:
@@ -240,17 +239,15 @@ function SignUp() {
                 className={`${inputStyles} ${errorField === '1' && inputErrorStyles}`}
               />
             </div>
-            <HomeButton extraClasses={'py-2 rounded-md'} onClick={handleContinue}>
-              <span className="text-lg font-medium">ادامه</span>
-              <HiOutlineArrowLeft />
-            </HomeButton>
-            <div className="flex h-6 justify-between px-5 font-medium text-indigo-400">
-              <Link
-                to={'/login'}
-                className="transition-colors duration-200 hover:border-b hover:border-indigo-300 hover:text-indigo-300"
-              >
-                ورود به حساب کاربری
-              </Link>
+            <div className="flex gap-3">
+              <HomeButton to={'/login'} extraClasses={'py-2 rounded-md grow'}>
+                <span className="text-lg font-medium"> ورود </span>
+                <CgEnter />
+              </HomeButton>
+              <HomeButton extraClasses={'py-2 px-12 rounded-md grow'} onClick={handleContinue}>
+                <span className="text-lg font-medium">ادامه</span>
+                <HiOutlineArrowLeft />
+              </HomeButton>
             </div>
           </>
         )}
@@ -447,9 +444,7 @@ function SignUp() {
             </div>
           </>
         )}
-        {error.length > 0 && (
-          <Error error={error} inputPhoneNumber={inputPhoneNumber} inputEmail={inputEmail} />
-        )}
+        {error.length > 0 && <Error error={error} />}
       </Form>
     </div>
   );

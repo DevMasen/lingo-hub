@@ -9,12 +9,34 @@
     {
       "id": 0,
       "roomName": "100",
-      "timeLines": [1, 1, 1, null, null, null, null, null, null, null]
+      "timeLines": [
+        [1, "reserved"],
+        [1, "waiting"],
+        [1, "canceled"],
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     },
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": [2, 2, 2, null, null, null, null, null, null, null]
+      "timeLines": [
+        [2, "reserved"],
+        [2, "waiting"],
+        [2, "canceled"],
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     },
     {
       "id": 2,
@@ -41,7 +63,6 @@
       "level": "مبتدی",
       "explanation": "",
       "email": "mohammadwh400@gmail.com",
-      "password": "qwertyui",
       "signupStatus": "comfirmed",
       "reservedRooms": [
         {
@@ -74,7 +95,6 @@
       "level": "مبتدی",
       "explanation": "",
       "email": "ali@gmail.com",
-      "password": "12345678",
       "signupStatus": "comfirmed",
       "reservedRooms": [
         {
@@ -98,6 +118,16 @@
       ],
       "maxReserveCount": 3,
       "id": 2
+    }
+  ],
+  "hash": [
+    {
+      "id": 1,
+      "property": "qwertyui"
+    },
+    {
+      "id": 2,
+      "property": "12345678"
     }
   ]
 }

@@ -5,7 +5,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 import AppLayout from './ui/AppLayout';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './ui/ProtectedRoute';
-import Login from './pages/Login';
+import Login, { loader as loginLoader } from './pages/Login';
 import SignUp, { action as createUserAction } from './pages/SignUp';
 import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
 import PageNotFound from './pages/PageNotFound';
@@ -25,6 +25,8 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+    loader: loginLoader,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/signup',
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
   },
   { path: '/aboutus', element: <AboutUs /> },
   {
-    path: '/app',
+    path: '/app/:userId',
     element: (
       <ProtectedRoute>
         <AppLayout />
