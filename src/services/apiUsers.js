@@ -21,7 +21,7 @@ export async function createUser(newUser) {
       },
     });
 
-    if (!res.ok) throw new Error('Fetch Error: code03');
+    if (!res.ok) throw new Error('Fetch Error: code02');
     const data = await res.json();
     return data;
   } catch {

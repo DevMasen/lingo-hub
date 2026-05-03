@@ -48,6 +48,7 @@ function reducer(state, action) {
       return {
         ...state,
         isAuthenticated: true,
+        activeTab: 'mobile',
       };
     case 'auth/logout':
       return {
@@ -86,6 +87,10 @@ function AuthProvider({ children }) {
     dispatch({ type: 'auth/setPath', payload: toPath });
   }, []);
 
+  function login() {
+    dispatch({ type: 'auth/login' });
+  }
+
   function logout() {
     dispatch({ type: 'auth/logout' });
   }
@@ -104,6 +109,7 @@ function AuthProvider({ children }) {
         setLoading,
         setError,
         setPath,
+        login,
         logout,
       }}
     >

@@ -2,7 +2,7 @@
   "date": [
     {
       "id": 0,
-      "reserveDate": "۱۴۰۵۰۲۱۳"
+      "reserveDate": "۱۴۰۵۰۲۱۴"
     }
   ],
   "rooms": [
@@ -10,9 +10,9 @@
       "id": 0,
       "roomName": "100",
       "timeLines": [
-        [1, "reserved"],
-        [1, "waiting"],
-        [1, "canceled"],
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -26,9 +26,9 @@
       "id": 1,
       "roomName": "101",
       "timeLines": [
-        [2, "reserved"],
-        [2, "waiting"],
-        [2, "canceled"],
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -41,17 +41,50 @@
     {
       "id": 2,
       "roomName": "102",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null]
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     },
     {
       "id": 3,
       "roomName": "103",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null]
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     },
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null]
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
     }
   ],
   "users": [

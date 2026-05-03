@@ -25,7 +25,7 @@ export async function refreshTableData() {
       },
     });
 
-    if (!res.ok) throw Error();
+    if (!res.ok) throw Error('Fetch Error: code04');
   } catch {
     throw Error('Failed Updating Date');
   }
@@ -41,7 +41,7 @@ export async function refreshTableData() {
           'Content-Type': 'application/json',
         },
       });
-      if (!res.ok) throw Error();
+      if (!res.ok) throw Error('Fetch Error: code05');
     } catch {
       throw Error('Failed Reset Rooms');
     }

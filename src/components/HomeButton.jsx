@@ -10,6 +10,7 @@ function HomeButton({ children, to, onClick = () => {}, extraClasses, type = 'bu
     return (
       <button
         type="submit"
+        onClick={onClick}
         className={`flex items-center justify-center gap-2 border-2 border-slate-800 bg-slate-900/80 text-slate-200 shadow-md shadow-slate-700 transition-all duration-200 hover:bg-slate-800 disabled:cursor-not-allowed ${extraClasses}`}
         disabled={loginError.length > 0 || signupError.length > 0 || disabled}
       >

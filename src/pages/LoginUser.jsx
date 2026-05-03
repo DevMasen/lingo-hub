@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Form, Link, useActionData, useNavigation } from 'react-router';
+import { useState } from 'react';
+import { Form, Link, redirect, useActionData } from 'react-router';
 /////////////////////////////////////
 import { useAuth } from '../context/AuthContext';
 ////////////////////////////////////////////////
@@ -8,6 +8,7 @@ import HomeButton from '../components/HomeButton';
 import { BsArrowRight } from 'react-icons/bs';
 import { AiOutlineEnter } from 'react-icons/ai';
 import Error from '../components/Error';
+import { hash } from '../services/apiHash';
 ////////////////////////////////////////////////
 //! Styles Constant
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
@@ -17,30 +18,22 @@ const inputStyles =
 function LoginUser() {
   //! React Router
   const errors = useActionData();
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'submitting';
 
   //! Context Data
-  const { isPassHidden, togglePassHidden, setLoading } = useAuth();
+  const { isPassHidden, togglePassHidden, login } = useAuth();
 
   //! Controlled Elements
   const [passwordInput, setPasswordInput] = useState('');
 
-  //! Effects
-  useEffect(
-    function () {
-      if (isSubmitting) {
-        setLoading(true);
-        return;
-      }
-      setLoading(false);
-    },
-    [isSubmitting, setLoading]
-  );
+  //! Handlers
+  function handleSubmit() {
+    if (errors?.wrongPassword) return;
+    login();
+  }
 
   //! JSX
   return (
-    <Form method="PATCH" className="space-y-3">
+    <Form method="PATCH" className="space-y-3" onSubmit={handleSubmit}>
       <div className={inputContainerStyles}>
         <input
           type={isPassHidden ? 'password' : 'text'}
@@ -59,7 +52,11 @@ function LoginUser() {
         <HomeButton extraClasses={'py-2 rounded-md flex-grow'} to={'/login/options'}>
           <BsArrowRight className="text-2xl text-slate-300" />
         </HomeButton>
-        <HomeButton type="submit" extraClasses={'px-5 py-2 rounded-md flex-grow'}>
+        <HomeButton
+          type="submit"
+          disabled={!passwordInput}
+          extraClasses={'px-5 py-2 rounded-md flex-grow'}
+        >
           <span className="text-lg font-medium">ورود</span>
           <AiOutlineEnter className="text-2xl text-slate-300" />
         </HomeButton>
@@ -72,8 +69,7 @@ function LoginUser() {
           فراموشی رمز عبور
         </Link>
       </div>
-      {errors?.x && <Error error={errors.x} />}
-      {errors?.y && <Error error={errors.y} />}
+      {errors?.wrongPassword && <Error error={errors.wrongPassword} />}
     </Form>
   );
 }
@@ -81,22 +77,17 @@ function LoginUser() {
 export async function action({ request, params }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
-  //TODO handle login
+
+  const hashData = await hash(params.userId);
 
   const errors = {};
-  if (false) //Error X CONDITION
-  {
-    errors.x = 'BLA BLA BLA';
-  }
-  if (false) //Error Y CONDITION
-  {
-    errors.y = 'BLA BLA BLA';
+  if (data.password !== hashData.property) {
+    errors.wrongPassword = 'رمز عبور اشتباه است';
   }
 
   if (Object.keys(errors).length > 0) return errors;
 
-  return null;
+  return redirect(`/app/${params.userId}`);
 }
 
 export default LoginUser;
