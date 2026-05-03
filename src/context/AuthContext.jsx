@@ -9,11 +9,10 @@ const AuthContext = createContext();
 
 const initialState = {
   activeTab: 'mobile',
-  step: 'first',
   isPassHidden: true,
   loading: false,
   error: '',
-
+  path: '',
   isAuthenticated: false,
 };
 
@@ -25,27 +24,26 @@ function reducer(state, action) {
         activeTab: state.activeTab === 'mobile' ? 'email' : 'mobile',
         error: '',
       };
-    case 'auth/setStep':
-      return {
-        ...state,
-        step: action.payload,
-      };
     case 'auth/togglePassHidden':
       return {
         ...state,
         isPassHidden: !state.isPassHidden,
       };
-    case 'auth/toggleLoading':
+    case 'auth/setLoading':
       return {
         ...state,
-        loading: !state.loading,
+        loading: action.payload,
       };
     case 'auth/setError':
       return {
         ...state,
         error: action.payload,
       };
-
+    case 'auth/setPath':
+      return {
+        ...state,
+        path: action.payload,
+      };
     case 'auth/login':
       return {
         ...state,
@@ -55,7 +53,6 @@ function reducer(state, action) {
       return {
         ...state,
         isAuthenticated: false,
-        step: 'first',
         activeTab: 'mobile',
       };
 
@@ -64,7 +61,7 @@ function reducer(state, action) {
   }
 }
 function AuthProvider({ children }) {
-  const [{ activeTab, step, isPassHidden, loading, error, isAuthenticated }, dispatch] = useReducer(
+  const [{ activeTab, isPassHidden, loading, error, path, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -73,20 +70,20 @@ function AuthProvider({ children }) {
     dispatch({ type: 'auth/toggleActiveTab' });
   }
 
-  const setStep = useCallback(function setStep(step = 'first') {
-    dispatch({ type: 'auth/setStep', payload: step });
-  }, []);
-
   function togglePassHidden() {
     dispatch({ type: 'auth/togglePassHidden' });
   }
 
-  function toggleLoading() {
-    dispatch({ type: 'auth/toggleLoading' });
-  }
+  const setLoading = useCallback(function setLoading(isLoading) {
+    dispatch({ type: 'auth/setLoading', payload: isLoading });
+  }, []);
 
   const setError = useCallback(function setError(errorMessage = '') {
     dispatch({ type: 'auth/setError', payload: errorMessage });
+  }, []);
+
+  const setPath = useCallback(function setPath(toPath = '') {
+    dispatch({ type: 'auth/setPath', payload: toPath });
   }, []);
 
   function logout() {
@@ -97,16 +94,16 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         activeTab,
-        step,
         isPassHidden,
         loading,
         error,
+        path,
         isAuthenticated,
         toggleActiveTab,
-        setStep,
         togglePassHidden,
-        toggleLoading,
+        setLoading,
         setError,
+        setPath,
         logout,
       }}
     >

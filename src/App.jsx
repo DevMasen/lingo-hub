@@ -5,7 +5,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 import AppLayout from './ui/AppLayout';
 import HomePage from './pages/HomePage';
 import ProtectedRoute from './ui/ProtectedRoute';
-import Login, { loader as loginLoader } from './pages/Login';
+import Login from './pages/Login';
 import SignUp, { action as createUserAction } from './pages/SignUp';
 import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
 import PageNotFound from './pages/PageNotFound';
@@ -16,6 +16,9 @@ import Setting from './components/Setting';
 import PasswordChange from './components/PasswordChange';
 import Support from './components/Support';
 import ErrorPage from './pages/ErrorPage';
+import LoginOptions, { loader as loginOptionsLoader } from './pages/LoginOptions';
+import LoginUser, { action as loginUserAction } from './pages/LoginUser';
+import LoginByOTP from './pages/LoginByOTP';
 //////////////////////////////////////
 const router = createBrowserRouter([
   {
@@ -25,8 +28,22 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
-    loader: loginLoader,
-    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <Navigate to="options" replace /> },
+      {
+        path: 'options',
+        element: <LoginOptions />,
+        loader: loginOptionsLoader,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: ':userId',
+        element: <LoginUser />,
+        action: loginUserAction,
+        errorElement: <ErrorPage />,
+      },
+      { path: ':userId/otp', element: <LoginByOTP /> },
+    ],
   },
   {
     path: '/signup',
