@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, redirect, useLoaderData, useNavigation } from 'react-router';
+import { Form, redirect, useActionData, useLoaderData, useNavigation } from 'react-router';
 /////////////////////////////////////////////////////////////
 import { HiOutlineArrowRight, HiOutlineArrowLeft, HiOutlineClipboardList } from 'react-icons/hi';
 import { HiCheckBadge } from 'react-icons/hi2';
@@ -18,6 +18,7 @@ import { createUser, getUsers } from '../services/apiUsers';
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
 import { createHash } from '../services/apiHash';
+import { useKey } from '../hooks/useKey';
 ///////////////////////////////////////////////////
 
 //! Constant Styles
@@ -31,6 +32,7 @@ function SignUp() {
   const users = useLoaderData();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+  const errors = useActionData();
 
   //! Context Data
   const {
@@ -59,6 +61,7 @@ function SignUp() {
   const [inputPasswordRepeat, setInputPasswordRepeat] = useState('');
 
   //! Effects
+
   useEffect(
     function () {
       setInputPhoneNumber((cur) => makeNumericInput(cur));
@@ -147,6 +150,8 @@ function SignUp() {
     },
     [step, inputPassword, inputPasswordRepeat, setError, setErrorField]
   );
+
+  useKey('enter', handleContinue);
 
   //! Handlers
   function handleContinue() {
@@ -459,6 +464,7 @@ function SignUp() {
           </>
         )}
         {error.length > 0 && <Error error={error} />}
+        {errors?.emptyFields && <Error error={errors?.emptyFields} />}
       </Form>
     </div>
   );
@@ -472,6 +478,17 @@ export async function loader() {
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
+
+  const errors = {};
+  if (data.password.length === 0) {
+    errors.emptyFields = 'لطفا مشخصات را تا انتها تکمیل کنید';
+  }
+
+  if (Object.keys(errors).length > 0) {
+    console.log(errors);
+    return errors;
+  }
+
   const user = {
     firstName: data.firstName,
     lastName: data.lastName,
@@ -488,6 +505,7 @@ export async function action({ request }) {
   await createUser(user);
   await createHash(hashData);
   return redirect('/login');
+  // return null;
 }
 
 export default SignUp;

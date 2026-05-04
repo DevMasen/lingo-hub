@@ -13,6 +13,8 @@ import HomeButton from '../components/HomeButton';
 import { BsListCheck } from 'react-icons/bs';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import Error from '../components/Error';
+import { useSignup } from '../context/SignupContext';
+import { useKey } from '../hooks/useKey';
 ////////////////////////////////////////////////////
 //! Constant Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
@@ -26,6 +28,7 @@ function LoginOptions() {
 
   //! Context Data
   const { error, setError, path, setPath, activeTab } = useAuth();
+  const { setStep } = useSignup();
 
   //! Controlled Elements
   const [phoneNumberInput, setPhoneNumberInput] = useState('');
@@ -46,6 +49,8 @@ function LoginOptions() {
     },
     [setError, setPath]
   );
+
+  useKey('enter', handleContinue);
 
   //! Handlers
   function handleContinue() {
@@ -141,7 +146,14 @@ function LoginOptions() {
       )}
 
       <div className="flex gap-3">
-        <HomeButton to={'/signup'} extraClasses={'py-2 rounded-md grow'}>
+        <HomeButton
+          to={'/signup'}
+          onClick={() => {
+            setError('');
+            setStep('1');
+          }}
+          extraClasses={'py-2 rounded-md grow'}
+        >
           <span className="text-lg font-medium">ثبت‌نام</span>{' '}
           <BsListCheck className="text-xl text-slate-300" />
         </HomeButton>

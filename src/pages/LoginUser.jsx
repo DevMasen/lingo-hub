@@ -9,6 +9,7 @@ import { BsArrowRight } from 'react-icons/bs';
 import { AiOutlineEnter } from 'react-icons/ai';
 import Error from '../components/Error';
 import { hash } from '../services/apiHash';
+import { useKey } from '../hooks/useKey';
 ////////////////////////////////////////////////
 //! Styles Constant
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
