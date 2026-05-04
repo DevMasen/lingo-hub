@@ -1,19 +1,15 @@
 import { Outlet } from 'react-router';
 ////////////////////////////////////////////
-import { useAuth } from '../context/AuthContext';
-/////////////////////////////////////////////////
-import Loader from '../components/Loader';
-import CloseFormButton from '../components/CloseFormButton';
 import { CgEnter } from 'react-icons/cg';
+/////////////////////////////////////////////////
+import CloseFormButton from '../components/CloseFormButton';
 ///////////////////////////////////////
 function Login() {
   //! Context Data
-  const { loading } = useAuth();
 
   //! JSX
   return (
     <div className="background flex h-dvh items-center justify-center">
-      {loading && <Loader />}
       <CloseFormButton />
 
       <section className="text-md w-[500px] space-y-3 rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200">

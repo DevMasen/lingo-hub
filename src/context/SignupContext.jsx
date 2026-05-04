@@ -1,10 +1,8 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
 ///////////////////////////////////////////////////////////////////////////
 const SignupContext = createContext();
-//TODO DELETE UNNECESSARY STATES
 const initialState = {
   step: '1',
-  loading: false,
   error: '',
   errorField: '',
   isPassHidden: true,
@@ -15,8 +13,6 @@ function reducer(state, action) {
   switch (action.type) {
     case 'signup/setStep':
       return { ...state, step: action.payload };
-    case 'signup/setLoading':
-      return { ...state, loading: action.payload };
     case 'signup/setError':
       return { ...state, error: action.payload };
     case 'signup/setErrorField':
@@ -31,15 +27,13 @@ function reducer(state, action) {
 }
 
 function SignupProvider({ children }) {
-  const [{ step, loading, error, errorField, isPassHidden, isPassRepHidden }, dispatch] =
-    useReducer(reducer, initialState);
+  const [{ step, error, errorField, isPassHidden, isPassRepHidden }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   function setStep(step = '1') {
     dispatch({ type: 'signup/setStep', payload: step });
-  }
-
-  function setLoading(isLoading) {
-    dispatch({ type: 'signup/setLoading', payload: isLoading });
   }
 
   const setError = useCallback(function setError(errorMessage = 'Unknown Error!') {
@@ -62,13 +56,11 @@ function SignupProvider({ children }) {
     <SignupContext.Provider
       value={{
         step,
-        loading,
         error,
         errorField,
         isPassHidden,
         isPassRepHidden,
         setStep,
-        setLoading,
         setError,
         setErrorField,
         toggleHidePass,

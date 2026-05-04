@@ -1,11 +1,16 @@
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 ////////////////////////////////////
 import { useExit } from '../context/ExitContex';
 import { useAuth } from '../context/AuthContext';
 /////////////////////////////////////////////////
 function ExitModal() {
+  //! React Router
+  const params = useParams();
+  //! Context Data
   const { isExitOpen, toggleExitWindow } = useExit();
   const { logout } = useAuth();
+
+  //! JSX
   return (
     <div
       className={`fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-800/20 backdrop-blur-sm transition-all duration-100 ${!isExitOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
@@ -27,7 +32,7 @@ function ExitModal() {
           آره خارج شو!
         </Link>
         <Link
-          to="/app"
+          to={`/app/${params.userId}`}
           onClick={toggleExitWindow}
           className="w-full rounded-lg bg-slate-800 p-3 text-center text-lg font-medium text-slate-100 transition-all duration-300 hover:bg-slate-900"
         >

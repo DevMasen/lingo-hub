@@ -1,18 +1,28 @@
-import { useLoaderData } from 'react-router';
-/////////////////////////////////////////////
+import { useEffect } from 'react';
+import { useFetcher, useParams } from 'react-router';
+//////////////////////////////////////////
 import PanelButton from './PanelButton';
 import ReserveRecord from './ReserveRecord';
 ////////////////////////////////////////////
-import { getUser } from '../services/apiUsers';
-///////////////////////////////////////////////
-
 const sectionPartsStyles =
   'bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-indigo-900))] rounded-lg border border-slate-500 p-3';
 
 //TODO BREAK INTO SMALLER COMPS
 function Dashboard() {
-  const user = useLoaderData();
+  //! React Router
+  const fetcher = useFetcher();
+  const params = useParams();
 
+  //! Effects
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === 'idle')
+        fetcher.load(`/app/${params.userId}/setting/user`);
+    },
+    [fetcher, params.userId]
+  );
+
+  //! JSX
   return (
     <div className="grid grid-cols-1 grid-rows-[auto_1fr]">
       <header className="flex items-center justify-between border-b border-slate-500 bg-slate-800 p-4">
@@ -25,7 +35,7 @@ function Dashboard() {
         <div className={`${sectionPartsStyles} col-span-2 flex items-center justify-between pl-9`}>
           <div className="space-y-3">
             <h2 className="text-slate-400">
-              <span>{user.firstName}</span> به آکادمی زبان لینگوهاب خوش اومدی
+              <span>{fetcher.data?.firstName}</span> به آکادمی زبان لینگوهاب خوش اومدی
             </h2>
             <p className="text-lg font-semibold"> اینجا زبان مزه دیگه ای میده 😉 </p>
           </div>
@@ -38,9 +48,9 @@ function Dashboard() {
             <h3 className="flex border-b border-slate-500 pb-3 text-lg font-semibold text-slate-400">
               تاریخچه رزرو ها
             </h3>
-            {user.reservedRooms.length > 0 ? (
+            {fetcher.data?.reservedRooms.length > 0 ? (
               <ul className="flex flex-col gap-3">
-                {user.reservedRooms.map((record) => (
+                {fetcher.data?.reservedRooms.map((record) => (
                   <li key={record.id}>
                     <ReserveRecord
                       number={record.id}
@@ -93,11 +103,6 @@ function Dashboard() {
       </section>
     </div>
   );
-}
-
-export async function loader({ params }) {
-  const user = await getUser(params.userId);
-  return user;
 }
 
 export default Dashboard;

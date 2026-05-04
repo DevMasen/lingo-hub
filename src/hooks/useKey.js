@@ -4,7 +4,7 @@ export function useKey(key = '', action = function () {}) {
   useEffect(
     function () {
       function callBack(e) {
-        if (e.code.toLowerCase() === key.toLowerCase()) {
+        if (e.code?.toLowerCase() === key.toLowerCase()) {
           action();
         }
       }

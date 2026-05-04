@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useFetcher } from 'react-router';
 /////////////////////////////////
 import { HiOutlineBell, HiOutlineUser } from 'react-icons/hi';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
@@ -11,11 +12,25 @@ import LinkItem from '../components/LinkItem';
 import { useExit } from '../context/ExitContex';
 /////////////////////////////////////////////////
 function Header() {
+  //! React Router
+  const fetcher = useFetcher();
+
+  //! Context Data
+  const { toggleExitWindow } = useExit();
+
+  //! Local States
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  const { toggleExitWindow } = useExit();
+  //! Effects
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('setting/user');
+    },
+    [fetcher]
+  );
 
+  //! JSX
   return (
     <header className="flex items-center justify-between border-b border-slate-500 p-4">
       {/* overlay */}
@@ -51,9 +66,8 @@ function Header() {
             {isProfileOpen && (
               <>
                 <div className="space-y-2 border-b border-slate-500 pb-3 text-start">
-                  {/* //TODO LOAD USER DATA ON THIS PAGE */}
-                  {/* <p> {currentUser.firstName} </p> */}
-                  {/* <p className="text-slate-400"> {currentUser.email} </p> */}
+                  <p> {fetcher.data?.firstName} </p>
+                  <p className="text-slate-400"> {fetcher.data?.email} </p>
                 </div>
                 <ul className="mt-3 space-y-3 text-start">
                   <li>

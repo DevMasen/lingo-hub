@@ -1,11 +1,9 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
 /////////////////////////////////////////////////////////////
 const AuthContext = createContext();
-//TODO DELETE UNNECESSARY STATES
 const initialState = {
   activeTab: 'mobile',
   isPassHidden: true,
-  loading: false,
   error: '',
   path: '',
   isAuthenticated: false,
@@ -24,11 +22,7 @@ function reducer(state, action) {
         ...state,
         isPassHidden: !state.isPassHidden,
       };
-    case 'auth/setLoading':
-      return {
-        ...state,
-        loading: action.payload,
-      };
+
     case 'auth/setError':
       return {
         ...state,
@@ -57,7 +51,7 @@ function reducer(state, action) {
   }
 }
 function AuthProvider({ children }) {
-  const [{ activeTab, isPassHidden, loading, error, path, isAuthenticated }, dispatch] = useReducer(
+  const [{ activeTab, isPassHidden, error, path, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -69,10 +63,6 @@ function AuthProvider({ children }) {
   function togglePassHidden() {
     dispatch({ type: 'auth/togglePassHidden' });
   }
-
-  const setLoading = useCallback(function setLoading(isLoading) {
-    dispatch({ type: 'auth/setLoading', payload: isLoading });
-  }, []);
 
   const setError = useCallback(function setError(errorMessage = '') {
     dispatch({ type: 'auth/setError', payload: errorMessage });
@@ -95,13 +85,11 @@ function AuthProvider({ children }) {
       value={{
         activeTab,
         isPassHidden,
-        loading,
         error,
         path,
         isAuthenticated,
         toggleActiveTab,
         togglePassHidden,
-        setLoading,
         setError,
         setPath,
         login,

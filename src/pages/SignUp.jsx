@@ -37,7 +37,6 @@ function SignUp() {
   //! Context Data
   const {
     step,
-    loading,
     error,
     errorField,
     setStep,
@@ -233,7 +232,7 @@ function SignUp() {
   //! JSX
   return (
     <div className="background flex h-dvh items-center justify-center">
-      {(loading || isSubmitting) && <Loader />}
+      {isSubmitting && <Loader />}
       <CloseFormButton />
 
       <Form
@@ -505,7 +504,6 @@ export async function action({ request }) {
   await createUser(user);
   await createHash(hashData);
   return redirect('/login');
-  // return null;
 }
 
 export default SignUp;
