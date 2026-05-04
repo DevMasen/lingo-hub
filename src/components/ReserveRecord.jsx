@@ -1,14 +1,13 @@
 import makePersianNumberString from '../utils/makePersianNumbersString';
-import mapTime from '../utils/mapTime';
 import mapToPersianMonth from '../utils/mapToPersianMonth';
-import persianDate from 'persian-date/dist/persian-date';
-
+import mapTime from '../utils/mapTime';
+///////////////////////////////////////
 function ReserveRecord({
-  number = 1,
-  roomName = 'نامشخص',
-  date = new persianDate(),
+  number = 0,
+  roomName = '',
+  date = '',
   timePart = 0,
-  status = 'waiting', // reserved/canceled/waiting
+  status = '', // reserved/canceled/waiting
   extraClasses = '',
 }) {
   const { startTime, stopTime } = mapTime(timePart);
@@ -26,9 +25,9 @@ function ReserveRecord({
           <span>{roomName}</span>
         </span>
         <span className="flex gap-1">
-          <span>{makePersianNumberString(String(date.date()).padStart(2, '0'))}</span>
-          <span>{mapToPersianMonth(date.month())}</span>
-          <span>{makePersianNumberString(String(date.year()).padStart(4, '0'))}</span>
+          <span>{date.slice(6, 8)}</span>
+          <span>{mapToPersianMonth(date.slice(4, 6))}</span>
+          <span>{date.slice(0, 4)}</span>
         </span>
         <span className="flex gap-1">
           <span>{makePersianNumberString(startTime)}</span>

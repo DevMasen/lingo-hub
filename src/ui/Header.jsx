@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import SearchBar from '../components/SearchBar';
+/////////////////////////////////
 import { HiOutlineBell, HiOutlineUser } from 'react-icons/hi';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
-import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
+import { CgPassword } from 'react-icons/cg';
+////////////////////////////////////////////
+import SearchBar from '../components/SearchBar';
 import LinkItem from '../components/LinkItem';
+///////////////////////////////////////////////
 import { useExit } from '../context/ExitContex';
-import { useAuth } from '../context/AuthContext';
-
+/////////////////////////////////////////////////
 function Header() {
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -49,6 +51,7 @@ function Header() {
             {isProfileOpen && (
               <>
                 <div className="space-y-2 border-b border-slate-500 pb-3 text-start">
+                  {/* //TODO LOAD USER DATA ON THIS PAGE */}
                   {/* <p> {currentUser.firstName} </p> */}
                   {/* <p className="text-slate-400"> {currentUser.email} </p> */}
                 </div>

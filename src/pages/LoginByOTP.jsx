@@ -1,7 +1,9 @@
-import HomeButton from '../components/HomeButton';
-import { useAuth } from '../context/AuthContext';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
+/////////////////////////////////////////////////
+import HomeButton from '../components/HomeButton';
+//////////////////////////////////////////////////
+import { useAuth } from '../context/AuthContext';
 ////////////////////////////////////////////////
 //! Constant Data
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
@@ -68,7 +70,7 @@ function LoginByOTP() {
         <HomeButton to={-1} extraClasses={'py-2 rounded-md flex-grow'}>
           <HiOutlineArrowRight />
         </HomeButton>
-        {/* TODO OTP authentication */}
+        {/* TODO COMPLETE OTP AUTHENTICATION */}
         <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'}>
           <span className="text-lg font-medium"> ورود</span>
           <AiOutlineEnter className="text-2xl text-slate-300" />

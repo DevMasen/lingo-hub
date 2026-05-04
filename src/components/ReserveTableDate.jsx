@@ -1,5 +1,6 @@
 const publicStyles = 'rounded-xl border-b border-slate-800 transition-all duration-200';
 
+//TODO USE USER DATA TO FIX THIS COMPONENT
 function ReserveTableData({ timePartStatus, roomData, reserveDate }) {
   if (timePartStatus === null || timePartStatus?.at(1) === 'canceled')
     return (

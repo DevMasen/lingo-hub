@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
-
+///////////////////////////////////////////////////////////////////////////
 const SignupContext = createContext();
-
+//TODO DELETE UNNECESSARY STATES
 const initialState = {
   step: '1',
   loading: false,

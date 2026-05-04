@@ -1,6 +1,9 @@
 import { BiPencil, BiUserCircle } from 'react-icons/bi';
+////////////////////////////////////////////////////////
 import PanelButton from './PanelButton';
 import ReserveRecord from './ReserveRecord';
+////////////////////////////////////////////
+//TODO LOAD USER DATA ON THIS PAGE
 function UserInfo() {
   return (
     <div className="space-y-5 border-b border-slate-500 p-3">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
+////////////////////////////////////
 import { HiOutlineHome } from 'react-icons/hi';
-
+///////////////////////////////////////////////
 function PageNotFound() {
   return (
     <div dir="ltr" className="flex h-dvh flex-col items-center justify-center gap-4 bg-slate-900">

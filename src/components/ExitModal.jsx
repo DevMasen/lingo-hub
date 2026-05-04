@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
+////////////////////////////////////
 import { useExit } from '../context/ExitContex';
 import { useAuth } from '../context/AuthContext';
-
+/////////////////////////////////////////////////
 function ExitModal() {
   const { isExitOpen, toggleExitWindow } = useExit();
   const { logout } = useAuth();

@@ -1,12 +1,7 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
 /////////////////////////////////////////////////////////////
-import PropTypes from 'prop-types';
-AuthProvider.propTypes = {
-  children: PropTypes.element,
-};
-/////////////////////////////////////
 const AuthContext = createContext();
-
+//TODO DELETE UNNECESSARY STATES
 const initialState = {
   activeTab: 'mobile',
   isPassHidden: true,

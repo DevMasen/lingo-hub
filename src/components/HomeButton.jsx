@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
+/////////////////////////////////////
 import { useAuth } from '../context/AuthContext';
 import { useSignup } from '../context/SignupContext';
-
+/////////////////////////////////////////////////////
 function HomeButton({ children, to, onClick = () => {}, extraClasses, type = 'button', disabled }) {
   const { error: loginError } = useAuth();
   const { error: signupError } = useSignup();

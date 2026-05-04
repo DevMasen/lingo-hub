@@ -1,10 +1,12 @@
+import { useEffect, useState } from 'react';
 import { Form } from 'react-router';
+/////////////////////////////////////
+import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
+////////////////////////////////////////////////////////
 import PanelButton from './PanelButton';
 import Error from './Error';
-import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
-import { useEffect, useState } from 'react';
 import Success from './Success';
-
+////////////////////////////////
 const inputContainerStyles =
   'flex items-center rounded-lg border px-3 py-2 transition-all duration-300 focus-within:border-indigo-700';
 const inputStyles = 'bg-inherit outline-none w-80';

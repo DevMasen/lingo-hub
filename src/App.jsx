@@ -3,7 +3,7 @@ import './index.css';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 //////////////////////////////////
 import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
-import Dashboard from './components/Dashboard';
+import Dashboard, { loader as userLoader } from './components/Dashboard';
 import Setting from './components/Setting';
 import UserInfo from './components/UserInfo';
 import PasswordChange from './components/PasswordChange';
@@ -64,7 +64,12 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <Navigate to="dashboard" replace /> },
-      { path: 'dashboard', element: <Dashboard /> },
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+        loader: userLoader,
+        errorElement: <ErrorPage />,
+      },
       {
         path: 'reserve',
         element: <ReserveRoom />,

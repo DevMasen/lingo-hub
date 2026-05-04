@@ -1,12 +1,14 @@
-import NavItem from './NavItem';
-import { AiOutlineDashboard } from 'react-icons/ai';
 import { HiOutlineBookOpen } from 'react-icons/hi';
+import { AiOutlineDashboard } from 'react-icons/ai';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { BiExit } from 'react-icons/bi';
+////////////////////////////////////////
+import NavItem from './NavItem';
 import ExitModal from './ExitModal';
+////////////////////////////////////////
 import { useSidebar } from '../context/SidebarContext';
 import { useExit } from '../context/ExitContex';
-
+////////////////////////////////////////////////
 function NavList() {
   const { isSidebarOpen } = useSidebar();
   const { toggleExitWindow } = useExit();

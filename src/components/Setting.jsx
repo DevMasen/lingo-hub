@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useResolvedPath } from 'react-router';
-import { Link, Outlet } from 'react-router';
-
+import { useResolvedPath, Link, Outlet } from 'react-router';
+////////////////////////////////////////////////////////////
 function Setting() {
   const { pathname } = useResolvedPath();
   const path = pathname.split('/').at(-1);

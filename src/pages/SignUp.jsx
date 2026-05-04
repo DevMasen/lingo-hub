@@ -13,14 +13,14 @@ import HidePasswordButton from '../components/HidePasswordButton';
 //////////////////////////////////////////////////////////////////
 import { useSignup } from '../context/SignupContext';
 /////////////////////////////////////////////////////
+import { useKey } from '../hooks/useKey';
+////////////////////////////////////////
 import { createUser, getUsers } from '../services/apiUsers';
+import { createHash } from '../services/apiHash';
 //////////////////////////////////////////////////
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
-import { createHash } from '../services/apiHash';
-import { useKey } from '../hooks/useKey';
 ///////////////////////////////////////////////////
-
 //! Constant Styles
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
 const inputStyles =

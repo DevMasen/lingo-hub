@@ -1,8 +1,8 @@
-const BASE_URL = 'http://localhost:8000';
+const API_URL = 'http://localhost:8000';
 
 export async function getUsers() {
   try {
-    const res = await fetch(`${BASE_URL}/users`);
+    const res = await fetch(`${API_URL}/users`);
     if (!res.ok) throw new Error('Fetch Error : code01');
     const data = await res.json();
     return data;
@@ -13,7 +13,7 @@ export async function getUsers() {
 
 export async function createUser(newUser) {
   try {
-    const res = await fetch(`${BASE_URL}/users`, {
+    const res = await fetch(`${API_URL}/users`, {
       method: 'POST',
       body: JSON.stringify(newUser),
       headers: {
@@ -26,5 +26,16 @@ export async function createUser(newUser) {
     return data;
   } catch {
     throw Error('Failed creating user');
+  }
+}
+
+export async function getUser(id) {
+  try {
+    const res = await fetch(`${API_URL}/users/${id}`);
+    if (!res.ok) throw Error('Fetch Error: code09');
+    const data = await res.json();
+    return data;
+  } catch {
+    throw Error('Failed getting user');
   }
 }

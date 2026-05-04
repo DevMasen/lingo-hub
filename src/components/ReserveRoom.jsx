@@ -1,10 +1,15 @@
 import { useLoaderData } from 'react-router';
+/////////////////////////////////////////////
+import ReserveTableData from './ReserveTableDate';
+//////////////////////////////////////////////////
+import { refreshTableData } from '../services/apiRefresh';
 import { getRooms } from '../services/apiRooms';
 import { getDate } from '../services/apiDate';
+/////////////////////////////////////////////
 import makePersianNumberString from '../utils/makePersianNumbersString';
 import mapTime from '../utils/mapTime';
-import { refreshTableData } from '../services/apiRefresh';
-import ReserveTableData from './ReserveTableDate';
+///////////////////////////////////////
+//TODO BREAK INTO SMALLER COMPS
 function ReserveRoom() {
   const { date, rooms } = useLoaderData();
   return (

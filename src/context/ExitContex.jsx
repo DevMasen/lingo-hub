@@ -1,10 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
-///////////////////////////
-import PropTypes from 'prop-types';
-ExitProvider.propTypes = {
-  children: PropTypes.element,
-};
-///////////////////////////
+//////////////////////////////////////////////////////////////
 const ExitContext = createContext();
 const initialState = {
   isExitOpen: false,

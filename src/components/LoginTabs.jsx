@@ -1,4 +1,5 @@
 import { useAuth } from '../context/AuthContext';
+/////////////////////////////////////////////////
 
 function LoginTabs() {
   const { activeTab, toggleActiveTab } = useAuth();
