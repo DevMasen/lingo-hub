@@ -2,14 +2,25 @@
   "date": [
     {
       "id": 0,
-      "reserveDate": "۱۴۰۵۰۲۱۵"
+      "reserveDate": "۱۴۰۵۰۲۱۶"
     }
   ],
   "rooms": [
     {
       "id": 0,
       "roomName": "100",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null]
+      "timeLines": [
+        [1, "waiting"],
+        [1, "reserved"],
+        [1, "canceled"],
+        [2, "waiting"],
+        [2, "reserved"],
+        [3, "reserved"],
+        "untouchable",
+        "untouchable",
+        null,
+        null
+      ]
     },
     {
       "id": 1,
@@ -41,14 +52,28 @@
       "level": "پیشرفته",
       "explanation": "",
       "email": "mohammadwh400@gmail.com",
-      "signupStatus": "waiting",
+      "signupStatus": "confirmed",
       "reservedRooms": [
         {
           "id": 1,
           "roomName": "100",
-          "date": "۱۴۰۵۰۲۱۵",
+          "date": "۱۴۰۵۰۲۱۶",
           "timePart": 0,
           "status": "waiting"
+        },
+        {
+          "id": 2,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۱۶",
+          "timePart": 1,
+          "status": "reserved"
+        },
+        {
+          "id": 3,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۱۶",
+          "timePart": 2,
+          "status": "canceled"
         }
       ],
       "maxReserveCount": 3,
@@ -63,7 +88,29 @@
       "explanation": "",
       "email": "ali@gmail.com",
       "signupStatus": "waiting",
-      "reservedRooms": [],
+      "reservedRooms": [
+        {
+          "id": 1,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۱۶",
+          "timePart": 3,
+          "status": "waiting"
+        },
+        {
+          "id": 2,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۱۶",
+          "timePart": 4,
+          "status": "reserved"
+        },
+        {
+          "id": 3,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۱۶",
+          "timePart": 5,
+          "status": "canceled"
+        }
+      ],
       "maxReserveCount": 3,
       "id": 2
     },
@@ -76,7 +123,15 @@
       "explanation": "",
       "email": "mahdi@gmail.com",
       "signupStatus": "waiting",
-      "reservedRooms": [],
+      "reservedRooms": [
+        {
+          "id": 1,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۱۶",
+          "timePart": 5,
+          "status": "reserved"
+        }
+      ],
       "maxReserveCount": 3,
       "id": 3
     },

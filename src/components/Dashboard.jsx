@@ -7,7 +7,6 @@ import ReserveRecord from './ReserveRecord';
 const sectionPartsStyles =
   'bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-indigo-900))] rounded-lg border border-slate-500 p-3';
 
-//TODO BREAK INTO SMALLER COMPS
 function Dashboard() {
   //! React Router
   const fetcher = useFetcher();
@@ -27,7 +26,7 @@ function Dashboard() {
     <div className="grid grid-cols-1 grid-rows-[auto_1fr]">
       <header className="flex items-center justify-between border-b border-slate-500 bg-slate-800 p-4">
         <span className="text-xl"> داشبورد </span>
-        <PanelButton to={'/app/reserve'} extraClasses="px-4 py-2">
+        <PanelButton to={`/app/${params.userId}/reserve`} extraClasses="px-4 py-2">
           رزرو اتاق
         </PanelButton>
       </header>

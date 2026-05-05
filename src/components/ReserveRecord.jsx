@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react';
+///////////////////////////////////
 import makePersianNumberString from '../utils/makePersianNumbersString';
 import mapToPersianMonth from '../utils/mapToPersianMonth';
 import mapTime from '../utils/mapTime';
 ///////////////////////////////////////
 function ReserveRecord({
+  focusReserveId = null,
   number = 0,
   roomName = '',
   date = '',
@@ -11,9 +14,23 @@ function ReserveRecord({
   extraClasses = '',
 }) {
   const { startTime, stopTime } = mapTime(timePart);
+
+  const [recordBGColor, setRecordBGColor] = useState('bg-slate-700');
+
+  useEffect(
+    function () {
+      if (focusReserveId === null || focusReserveId !== number) return;
+      setRecordBGColor('bg-slate-500');
+      setTimeout(function () {
+        setRecordBGColor('bg-slate-700');
+      }, 700);
+    },
+    [focusReserveId, number]
+  );
+
   return (
     <div
-      className={`flex justify-between gap-4 rounded-xl bg-slate-700 bg-opacity-70 p-3 ${extraClasses}`}
+      className={`flex justify-between gap-4 rounded-xl ${recordBGColor} bg-opacity-70 p-3 transition-colors duration-300 ${extraClasses}`}
     >
       <div className="flex gap-6">
         <span>

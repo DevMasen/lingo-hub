@@ -1,4 +1,5 @@
-import { useLoaderData } from 'react-router';
+import { useEffect, useState } from 'react';
+import { useLoaderData, useSearchParams } from 'react-router';
 //////////////////////////////////////////
 import { BiPencil, BiUserCircle } from 'react-icons/bi';
 import { PiEmpty } from 'react-icons/pi';
@@ -13,7 +14,44 @@ import mapToPersian from '../utils/mapToPersian';
 function UserInfo() {
   //! React Router
   const user = useLoaderData();
+  const [query] = useSearchParams();
+  const [focusReserveId, setFocusReserveId] = useState(null);
 
+  const reserveRemainCount =
+    user.reservedRooms.length === 0
+      ? user.maxReserveCount
+      : user.maxReserveCount -
+        user.reservedRooms.reduce((acc, reserve) => {
+          if (reserve.status !== 'canceled') return acc + 1;
+          return acc;
+        }, 0);
+
+  useEffect(
+    function () {
+      const currentFocusReserve = user.reservedRooms.find(
+        (reserve) =>
+          reserve.roomName === query.get('roomName') &&
+          String(reserve.timePart) === query.get('timePart') &&
+          reserve.status === query.get('status')
+      );
+      if (currentFocusReserve === undefined) {
+        setFocusReserveId(null);
+        return;
+      }
+      setFocusReserveId(currentFocusReserve.id);
+    },
+    [query, user.reservedRooms]
+  );
+
+  useEffect(
+    function () {
+      if (focusReserveId === null) return;
+      const reserveListElement = document.getElementById('reserve-list');
+      const scrollPosition = reserveListElement.getBoundingClientRect().top;
+      window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+    },
+    [focusReserveId]
+  );
   //! JSX
   return (
     <div className="space-y-5 border-b border-slate-500 p-3">
@@ -28,9 +66,9 @@ function UserInfo() {
             </span>
           </div>
         </div>
-        <div className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700">
+        <button className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700">
           <BiPencil className="h-6 w-6" />
-        </div>
+        </button>
       </div>
       <div className="space-y-7 rounded-2xl bg-[linear-gradient(45deg,var(--color-indigo-900),var(--color-slate-800))] px-5 py-2">
         <ul className="mt-5 space-y-7 text-lg">
@@ -59,34 +97,35 @@ function UserInfo() {
           <li>
             <span>وضعیت ثبت نام : </span>
             <span
-              className={`rounded-xl px-4 py-2 ${user.signupStatus === 'waiting' ? 'bg-yellow-500/65' : user.signupStatus === 'comfirmed' ? 'bg-green-500/65' : user.signupStatus === 'rejected' ? 'bg-red-500/65' : ''}`}
+              className={`rounded-xl px-4 py-2 ${user.signupStatus === 'waiting' ? 'bg-yellow-500/65' : user.signupStatus === 'confirmed' ? 'bg-green-500/65' : user.signupStatus === 'rejected' ? 'bg-red-500/65' : ''}`}
             >
               {user.signupStatus === 'waiting' && 'در حال بررسی...'}
-              {user.signupStatus === 'comfirmed' && 'تأیید شده'}
-              {user.signupStatus === 'rejected' && 'رد شده'}
+              {user.signupStatus === 'confirmed' && 'تأیید شده'}
+              {user.signupStatus === 'rejected' && 'مسدود شده'}
             </span>
           </li>
           <li>
             <span> تعداد رزرو باقی مانده : </span>
             <span className="rounded-xl bg-slate-800 px-4 py-2">
-              {mapToPersian(String(user.maxReserveCount - user.reservedRooms.length))}
+              {mapToPersian(String(reserveRemainCount))}
             </span>
           </li>
         </ul>
-        <ul className="space-y-3">
+        <ul id="reserve-list" className="space-y-3">
           <h3 className="text-lg">اتاق های رزرو شده : </h3>
           {user.reservedRooms.length > 0 ? (
-            user.reservedRooms.map((reserve) => (
-              <li className="flex gap-3" key={reserve.id}>
+            user.reservedRooms.map((record) => (
+              <li className="flex gap-3" key={record.id}>
                 <ReserveRecord
-                  number={reserve.id}
-                  roomName={reserve.roomName}
-                  date={reserve.date}
-                  timePart={reserve.timePart}
-                  status={reserve.status}
+                  focusReserveId={focusReserveId}
+                  number={record.id}
+                  roomName={record.roomName}
+                  date={record.date}
+                  timePart={record.timePart}
+                  status={record.status}
                   extraClasses="w-[525px]"
                 />
-                {reserve.status === 'waiting' && (
+                {record.status === 'waiting' && (
                   <>
                     <PanelButton extraClasses="text-sm px-5"> پرداخت </PanelButton>
 
