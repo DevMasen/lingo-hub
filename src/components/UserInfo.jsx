@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData, useSearchParams } from 'react-router';
+import { useFetcher, useLoaderData, useSearchParams } from 'react-router';
 //////////////////////////////////////////
 import { BiPencil, BiUserCircle } from 'react-icons/bi';
 import { PiEmpty } from 'react-icons/pi';
@@ -15,8 +15,10 @@ function UserInfo() {
   //! React Router
   const user = useLoaderData();
   const [query] = useSearchParams();
-  const [focusReserveId, setFocusReserveId] = useState(null);
+  const fetcher = useFetcher();
 
+  //! Local States
+  const [focusReserveId, setFocusReserveId] = useState(null);
   const reserveRemainCount =
     user.reservedRooms.length === 0
       ? user.maxReserveCount
@@ -25,6 +27,13 @@ function UserInfo() {
           if (reserve.status !== 'canceled') return acc + 1;
           return acc;
         }, 0);
+
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === 'idle') fetcher.load(`/app/${user.id}/reserve`);
+    },
+    [fetcher, user.id]
+  );
 
   useEffect(
     function () {
@@ -52,6 +61,10 @@ function UserInfo() {
     },
     [focusReserveId]
   );
+
+  //! Handlers
+  function handleCancel() {}
+
   //! JSX
   return (
     <div className="space-y-5 border-b border-slate-500 p-3">
@@ -127,9 +140,21 @@ function UserInfo() {
                 />
                 {record.status === 'waiting' && (
                   <>
+                    <div className="flex flex-col items-center justify-center rounded-xl bg-slate-700 px-3 text-sm">
+                      <span>
+                        {new Intl.NumberFormat('fa-IR').format(
+                          fetcher.data?.rooms.find((room) => room.roomName === record.roomName)
+                            .reservePricePerHalfHour * 3
+                        )}
+                      </span>
+                      <span>تومان</span>
+                    </div>
                     <PanelButton extraClasses="text-sm px-5"> پرداخت </PanelButton>
 
-                    <PanelButton extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5">
+                    <PanelButton
+                      onClick={handleCancel}
+                      extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5"
+                    >
                       لغو
                     </PanelButton>
                   </>

@@ -9,87 +9,32 @@
     {
       "id": 0,
       "roomName": "100",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "reservePrice": 240000
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePricePerHalfHour": 80000
     },
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "reservePrice": 240000
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePricePerHalfHour": 80000
     },
     {
       "id": 2,
       "roomName": "102",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "reservePrice": 240000
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePricePerHalfHour": 80000
     },
     {
       "id": 3,
       "roomName": "103",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "reservePrice": 240000
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePricePerHalfHour": 80000
     },
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "reservePrice": 240000
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePricePerHalfHour": 80000
     }
   ],
   "users": [
@@ -125,7 +70,7 @@
           "status": "canceled"
         }
       ],
-      "creditBalance": 0,
+      "creditBalance": 500000,
       "maxReserveCount": 3,
       "id": 1
     },

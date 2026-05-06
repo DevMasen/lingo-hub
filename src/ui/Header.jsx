@@ -4,15 +4,14 @@ import { Link, useFetcher } from 'react-router';
 import { HiOutlineBell, HiOutlineUser } from 'react-icons/hi';
 import { HiOutlineUserCircle } from 'react-icons/hi2';
 import { BiExit, BiWallet } from 'react-icons/bi';
-import { CgAddR, CgPassword } from 'react-icons/cg';
+import { GrAddCircle } from 'react-icons/gr';
+import { CgPassword } from 'react-icons/cg';
+import { Tooltip } from 'react-tooltip';
 ////////////////////////////////////////////
 import SearchBar from '../components/SearchBar';
 import LinkItem from '../components/LinkItem';
 ///////////////////////////////////////////////
 import { useExit } from '../context/ExitContex';
-import { Tooltip } from 'react-tooltip';
-import { GrAdd, GrAddCircle } from 'react-icons/gr';
-import { FcAddColumn } from 'react-icons/fc';
 /////////////////////////////////////////////////
 //TODO Break into smaller Components
 function Header() {
@@ -53,7 +52,7 @@ function Header() {
         <div className="ml-3 flex items-center gap-2 rounded-lg border border-slate-500 p-2">
           <BiWallet className="h-6 w-6 text-slate-200" />
           <div>
-            <span> ۰ </span>
+            <span> {new Intl.NumberFormat('fa-IR').format(fetcher.data?.creditBalance)} </span>
             <span> تومان </span>
           </div>
           <Link

@@ -22,6 +22,7 @@ import PageNotFound from './pages/PageNotFound';
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Wallet from './components/Wallet';
+import Error from './components/Error';
 //////////////////////////////////////
 const router = createBrowserRouter([
   {
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
         path: 'reserve',
         element: <ReserveRoom />,
         loader: reserveRoomLoader,
-        errorElement: <ErrorPage />,
+        // errorElement: <ErrorPage />,
       },
       { path: 'wallet', element: <Wallet /> },
       { path: 'support', element: <Support /> },
@@ -82,7 +83,12 @@ const router = createBrowserRouter([
         element: <Setting />,
         children: [
           { index: true, element: <Navigate to="user" replace /> },
-          { path: 'user', element: <UserInfo />, loader: userLoader, errorElement: <ErrorPage /> },
+          {
+            path: 'user',
+            element: <UserInfo />,
+            loader: userLoader,
+            errorElement: <ErrorPage />,
+          },
           { path: 'password', element: <PasswordChange /> },
         ],
       },
