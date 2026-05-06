@@ -1,7 +1,7 @@
 import { HiOutlineBookOpen } from 'react-icons/hi';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { AiOutlineSetting } from 'react-icons/ai';
-import { BiExit } from 'react-icons/bi';
+import { BiExit, BiWallet } from 'react-icons/bi';
 ////////////////////////////////////////
 import NavItem from './NavItem';
 import ExitModal from './ExitModal';
@@ -16,24 +16,28 @@ function NavList() {
     <ul className="my-3 flex w-full flex-col justify-between">
       <ExitModal />
       <section className="space-y-3 px-3">
-        <NavItem extraClasses="nav-link" to={'dashboard'}>
+        <NavItem extraClasses="nav-link" tooltipContent={'داشبورد'} to={'dashboard'}>
           <AiOutlineDashboard />
           {isSidebarOpen && <span> داشبورد </span>}
         </NavItem>
-        <NavItem extraClasses="nav-link" to={'reserve'}>
+        <NavItem extraClasses="nav-link" tooltipContent={'رزرو اتاق'} to={'reserve'}>
           <HiOutlineBookOpen />
           {isSidebarOpen && <span> رزرو اتاق </span>}
         </NavItem>
       </section>
 
       <section className="space-y-3 px-3">
-        {/* TODO Add NavItem for "کیف پول" */}
-        <NavItem extraClasses="nav-link" to={'setting'}>
+        <NavItem extraClasses="nav-link" tooltipContent={'افزایش وجه'} to={'wallet'}>
+          <BiWallet />
+          {isSidebarOpen && <span> افزایش وجه </span>}
+        </NavItem>
+        <NavItem extraClasses="nav-link" tooltipContent={'تنظیمات'} to={'setting'}>
           <AiOutlineSetting />
           {isSidebarOpen && <span> تنظیمات </span>}
         </NavItem>
         <NavItem
           extraClasses="exit hover:text-slate-200 hover:bg-slate-800 hover:rounded-xl"
+          tooltipContent={'خروج'}
           to="dashboard"
           onClick={toggleExitWindow}
         >

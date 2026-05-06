@@ -21,6 +21,7 @@ import PageNotFound from './pages/PageNotFound';
 ////////////////////////////////////////////////
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
+import Wallet from './components/Wallet';
 //////////////////////////////////////
 const router = createBrowserRouter([
   {
@@ -74,8 +75,7 @@ const router = createBrowserRouter([
         loader: reserveRoomLoader,
         errorElement: <ErrorPage />,
       },
-      //TODO Add "wallet" path and <Wallet/> component
-      //TODO Add creditBalance property for each user
+      { path: 'wallet', element: <Wallet /> },
       { path: 'support', element: <Support /> },
       {
         path: 'setting',
