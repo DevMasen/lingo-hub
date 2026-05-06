@@ -20,27 +20,32 @@
         "untouchable",
         null,
         null
-      ]
+      ],
+      "reservePrice": 100000
     },
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null]
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePrice": 100000
     },
     {
       "id": 2,
       "roomName": "102",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null]
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePrice": 100000
     },
     {
       "id": 3,
       "roomName": "103",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null]
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePrice": 100000
     },
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null]
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "reservePrice": 100000
     }
   ],
   "users": [
@@ -76,6 +81,7 @@
           "status": "canceled"
         }
       ],
+      "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 1
     },
@@ -111,6 +117,7 @@
           "status": "canceled"
         }
       ],
+      "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 2
     },
@@ -132,6 +139,7 @@
           "status": "reserved"
         }
       ],
+      "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 3
     },
@@ -145,6 +153,7 @@
       "email": "masomeh@gamil.com",
       "signupStatus": "waiting",
       "reservedRooms": [],
+      "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 4
     },
@@ -158,6 +167,7 @@
       "email": "amirali@gmail.com",
       "signupStatus": "waiting",
       "reservedRooms": [],
+      "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 5
     }

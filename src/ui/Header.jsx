@@ -11,6 +11,7 @@ import LinkItem from '../components/LinkItem';
 ///////////////////////////////////////////////
 import { useExit } from '../context/ExitContex';
 /////////////////////////////////////////////////
+//TODO Break into smaller Components
 function Header() {
   //! React Router
   const fetcher = useFetcher();
@@ -45,6 +46,7 @@ function Header() {
       )}
       <SearchBar />
       <div className="flex items-center gap-2">
+        {/* TODO Add wallet credit access from header */}
         <div className="relative flex items-center">
           <button className="z-40" onClick={() => setIsNotifOpen((cur) => !cur)}>
             <HiOutlineBell className="h-8 w-8 rounded-xl p-1 text-slate-200 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700" />

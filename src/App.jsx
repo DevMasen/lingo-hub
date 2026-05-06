@@ -74,6 +74,8 @@ const router = createBrowserRouter([
         loader: reserveRoomLoader,
         errorElement: <ErrorPage />,
       },
+      //TODO Add "wallet" path and <Wallet/> component
+      //TODO Add creditBalance property for each user
       { path: 'support', element: <Support /> },
       {
         path: 'setting',

@@ -498,6 +498,7 @@ export async function action({ request }) {
     email: data.email,
     signupStatus: 'waiting',
     reservedRooms: [],
+    creditBalance: 0,
     maxReserveCount: 3,
   };
   const hashData = { property: data.password };

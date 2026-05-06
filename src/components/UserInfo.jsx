@@ -88,7 +88,7 @@ function UserInfo() {
             </div>
           </li>
           <li className="flex items-center gap-2">
-            <span>سطح تدریس : </span>
+            <span> سطح تدریس : </span>
             <span className="rounded-xl bg-slate-800 px-4 py-2">{user.level}</span>
             <div className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700">
               <BiPencil className="h-4 w-4" />

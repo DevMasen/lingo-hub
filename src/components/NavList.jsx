@@ -27,6 +27,7 @@ function NavList() {
       </section>
 
       <section className="space-y-3 px-3">
+        {/* TODO Add NavItem for "کیف پول" */}
         <NavItem extraClasses="nav-link" to={'setting'}>
           <AiOutlineSetting />
           {isSidebarOpen && <span> تنظیمات </span>}
