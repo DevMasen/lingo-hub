@@ -8,12 +8,13 @@ import PanelButton from './PanelButton';
 import ReserveRecord from './ReserveRecord';
 ////////////////////////////////////////////
 import { getUser } from '../services/apiUsers';
+import { getDate } from '../services/apiDate';
 ///////////////////////////////////////////////
 import mapToPersian from '../utils/mapToPersian';
 /////////////////////////////////////////////////
 function UserInfo() {
   //! React Router
-  const user = useLoaderData();
+  const { user, date } = useLoaderData();
   const [query] = useSearchParams();
   const fetcher = useFetcher();
 
@@ -125,45 +126,54 @@ function UserInfo() {
           </li>
         </ul>
         <ul id="reserve-list" className="space-y-3">
-          <h3 className="text-lg">اتاق های رزرو شده : </h3>
+          <h3 className="text-lg"> اتاق های رزرو شده برای فردا : </h3>
           {user.reservedRooms.length > 0 ? (
-            user.reservedRooms.map((record) => (
-              <li className="flex gap-3" key={record.id}>
-                <ReserveRecord
-                  focusReserveId={focusReserveId}
-                  number={record.id}
-                  roomName={record.roomName}
-                  date={record.date}
-                  timePart={record.timePart}
-                  status={record.status}
-                  extraClasses="w-[525px]"
-                />
-                {record.status === 'waiting' && (
-                  <>
-                    <div className="flex flex-col items-center justify-center rounded-xl bg-slate-700 px-3 text-sm">
-                      <span>
-                        {new Intl.NumberFormat('fa-IR').format(
-                          fetcher.data?.rooms.find((room) => room.roomName === record.roomName)
-                            .reservePricePerHalfHour * 3
-                        )}
-                      </span>
-                      <span>تومان</span>
-                    </div>
-                    <PanelButton extraClasses="text-sm px-5"> پرداخت </PanelButton>
+            user.reservedRooms.map(
+              (record) =>
+                record.date === date[0].reserveDate && (
+                  <li className="flex gap-3" key={record.id}>
+                    <ReserveRecord
+                      focusReserveId={focusReserveId}
+                      number={record.id}
+                      roomName={record.roomName}
+                      date={record.date}
+                      timePart={record.timePart}
+                      status={record.status}
+                      extraClasses="w-[525px]"
+                    />
+                    {record.status === 'waiting' && (
+                      <>
+                        <div className="flex flex-col items-center justify-center rounded-xl bg-slate-700 px-3 text-sm">
+                          <span>
+                            {new Intl.NumberFormat('fa-IR').format(
+                              fetcher.data?.rooms.find((room) => room.roomName === record.roomName)
+                                .reservePricePerHalfHour * 3
+                            )}
+                          </span>
+                          <span>تومان</span>
+                        </div>
+                        <PanelButton extraClasses="text-sm px-5"> پرداخت </PanelButton>
 
-                    <PanelButton
-                      onClick={handleCancel}
-                      extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5"
-                    >
-                      لغو
-                    </PanelButton>
-                  </>
-                )}
-              </li>
-            ))
+                        <PanelButton
+                          onClick={handleCancel}
+                          extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5"
+                        >
+                          لغو
+                        </PanelButton>
+                      </>
+                    )}
+                  </li>
+                )
+            )
           ) : (
             <p className="flex items-center justify-center gap-2 rounded-xl bg-slate-800 py-8 text-xl text-slate-400">
               <span>رزروی وجود ندارد</span>
+              <PiEmpty />
+            </p>
+          )}
+          {!user.reservedRooms.some((record) => record.date === date[0].reserveDate) && (
+            <p className="flex items-center justify-center gap-2 rounded-xl bg-slate-800 py-8 text-xl text-slate-400">
+              <span>رزروی برای فردا وجود ندارد</span>
               <PiEmpty />
             </p>
           )}
@@ -175,7 +185,8 @@ function UserInfo() {
 
 export async function loader({ params }) {
   const user = await getUser(params.userId);
-  return user;
+  const date = await getDate();
+  return { user, date };
 }
 
 export default UserInfo;

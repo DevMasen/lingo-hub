@@ -22,7 +22,6 @@ import PageNotFound from './pages/PageNotFound';
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Wallet from './components/Wallet';
-import Error from './components/Error';
 //////////////////////////////////////
 const router = createBrowserRouter([
   {
@@ -74,7 +73,7 @@ const router = createBrowserRouter([
         path: 'reserve',
         element: <ReserveRoom />,
         loader: reserveRoomLoader,
-        // errorElement: <ErrorPage />,
+        errorElement: <ErrorPage />,
       },
       { path: 'wallet', element: <Wallet /> },
       { path: 'support', element: <Support /> },

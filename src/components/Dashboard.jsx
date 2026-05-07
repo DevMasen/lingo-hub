@@ -34,11 +34,11 @@ function Dashboard() {
         <div className={`${sectionPartsStyles} col-span-2 flex items-center justify-between pl-9`}>
           <div className="space-y-3">
             <h2 className="text-slate-400">
-              <span>{fetcher.data?.firstName}</span> به آکادمی زبان لینگوهاب خوش اومدی
+              <span>{fetcher.data?.user.firstName}</span> به آکادمی زبان لینگوهاب خوش اومدی
             </h2>
             <p className="text-lg font-semibold"> اینجا زبان مزه دیگه ای میده 😉 </p>
           </div>
-          <img src="/icon.png" className="w-16" alt="logo" />
+          <img src="/icon.png" className="w-16 rounded-lg" alt="logo" />
         </div>
         <div>
           <div
@@ -47,9 +47,9 @@ function Dashboard() {
             <h3 className="flex border-b border-slate-500 pb-3 text-lg font-semibold text-slate-400">
               تاریخچه رزرو ها
             </h3>
-            {fetcher.data?.reservedRooms.length > 0 ? (
+            {fetcher.data?.user.reservedRooms?.length > 0 ? (
               <ul className="flex flex-col gap-3">
-                {fetcher.data?.reservedRooms.map((record) => (
+                {fetcher.data?.user.reservedRooms.map((record) => (
                   <li key={record.id}>
                     <ReserveRecord
                       number={record.id}

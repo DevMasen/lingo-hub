@@ -52,7 +52,7 @@ function Header() {
         <div className="ml-3 flex items-center gap-2 rounded-lg border border-slate-500 p-2">
           <BiWallet className="h-6 w-6 text-slate-200" />
           <div>
-            <span> {new Intl.NumberFormat('fa-IR').format(fetcher.data?.creditBalance)} </span>
+            <span> {new Intl.NumberFormat('fa-IR').format(fetcher.data?.user.creditBalance)} </span>
             <span> تومان </span>
           </div>
           <Link
@@ -112,8 +112,8 @@ function Header() {
             {isProfileOpen && (
               <>
                 <div className="space-y-2 border-b border-slate-500 pb-3 text-start">
-                  <p> {fetcher.data?.firstName} </p>
-                  <p className="text-slate-400"> {fetcher.data?.email} </p>
+                  <p> {fetcher.data?.user.firstName} </p>
+                  <p className="text-slate-400"> {fetcher.data?.user.email} </p>
                 </div>
                 <ul className="mt-3 space-y-3 text-start">
                   <li>
