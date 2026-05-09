@@ -9,6 +9,7 @@ import UserInfo, { loader as userLoader } from './components/UserInfo';
 import PasswordChange from './components/PasswordChange';
 import Support from './components/Support';
 ///////////////////////////////////////////
+import { action as confirmReserveAction } from './components/ConfirmReserveModal';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import LoginOptions, { loader as loginOptionsLoader } from './pages/LoginOptions';
@@ -73,6 +74,7 @@ const router = createBrowserRouter([
         path: 'reserve',
         element: <ReserveRoom />,
         loader: reserveRoomLoader,
+        action: confirmReserveAction,
         errorElement: <ErrorPage />,
       },
       { path: 'wallet', element: <Wallet /> },

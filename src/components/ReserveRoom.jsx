@@ -21,7 +21,7 @@ function ReserveRoom() {
     date[0].reserveDate.slice(6, 8);
   return (
     <div className="border-b border-slate-500 p-3">
-      <ConfirmReserveModal />
+      <ConfirmReserveModal date={formatDate} />
       <div className="text-xl">
         <span className="font-semibold text-slate-300"> رزرو اتاق برای تاریخ : </span>{' '}
         <span className="rounded-lg bg-slate-800 px-3 py-1">{formatDate}</span>

@@ -6,6 +6,7 @@ function Modal({
   onClick = { confirm: () => {}, cancel: () => {} },
   path = { confirm: '', cancel: '' },
   text = { confirm: '', cancel: '' },
+  type = 'default',
 }) {
   return (
     <div
@@ -15,13 +16,24 @@ function Modal({
         className={`w-[400px] flex-col items-center space-y-3 rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 ${!isOpen ? 'hidden' : 'flex'}`}
       >
         <h2 className="text-center text-2xl font-semibold">{message}</h2>
-        <Link
-          to={path.confirm}
-          onClick={onClick.confirm}
-          className="w-full rounded-lg bg-red-700 p-3 text-center text-lg font-medium text-slate-100 transition-all duration-300 hover:bg-red-600"
-        >
-          {text.confirm}
-        </Link>
+        {type === 'default' && (
+          <Link
+            to={path.confirm}
+            onClick={onClick.confirm}
+            className="w-full rounded-lg bg-red-700 p-3 text-center text-lg font-medium text-slate-100 transition-all duration-300 hover:bg-red-600"
+          >
+            {text.confirm}
+          </Link>
+        )}
+        {type === 'form' && (
+          <button
+            type="submit"
+            onClick={onClick.confirm}
+            className="w-full rounded-lg bg-red-700 p-3 text-center text-lg font-medium text-slate-100 transition-all duration-300 hover:bg-red-600"
+          >
+            {text.confirm}
+          </button>
+        )}
         <Link
           to={path.cancel}
           onClick={onClick.cancel}

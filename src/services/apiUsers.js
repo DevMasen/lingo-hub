@@ -39,3 +39,18 @@ export async function getUser(id) {
     throw Error('Failed getting user');
   }
 }
+
+export async function updateUserReserveHistory(id, updatedUser) {
+  try {
+    const res = await fetch(`${API_URL}/users/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(updatedUser),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!res.ok) throw Error();
+  } catch {
+    throw Error('Failed creating your order');
+  }
+}

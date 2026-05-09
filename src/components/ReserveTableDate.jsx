@@ -1,23 +1,26 @@
 import { useNavigate } from 'react-router';
+import { useConfirmReserve } from '../context/ConfirmReserveContext';
 ///////////////////////////////////////////
 const publicStyles = 'rounded-xl border-b border-slate-800 transition-all duration-200';
 
 //TODO Add functionality to <td></td> elementes
 function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate, userId }) {
+  const { toggleConfirmWindow } = useConfirmReserve();
   const navigate = useNavigate();
   function handleClickReserved() {
     const query = `?roomName=${roomData.roomName}&timePart=${timePartIndex}&status=${timePartStatus?.at(1)}`;
     navigate(`/app/${userId}/setting/user${query}`);
   }
-  function handleReserve() {
-    const reserveTimePart = timePartIndex;
-    const reserveRoomId = roomData.id;
-  }
 
   if (timePartStatus === null || timePartStatus?.at(1) === 'canceled')
     return (
       <td
-        onClick={handleReserve}
+        onClick={() => {
+          toggleConfirmWindow();
+          navigate(
+            `/app/${userId}/reserve?roomName=${roomData.roomName}&timePart=${timePartIndex}`
+          );
+        }}
         className={
           publicStyles + ' cursor-pointer text-transparent hover:bg-indigo-700 hover:text-slate-200'
         }

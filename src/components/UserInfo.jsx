@@ -20,6 +20,7 @@ function UserInfo() {
 
   //! Local States
   const [focusReserveId, setFocusReserveId] = useState(null);
+  // const [focusReserveCount, setFocusReserveCount] = useState(false);
   const reserveRemainCount =
     user.reservedRooms.length === 0
       ? user.maxReserveCount
@@ -52,6 +53,8 @@ function UserInfo() {
     },
     [query, user.reservedRooms]
   );
+
+  //TODO Complete reserve Count Limit Highlight Effect
 
   useEffect(
     function () {
