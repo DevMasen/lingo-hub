@@ -9,10 +9,15 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
     const query = `?roomName=${roomData.roomName}&timePart=${timePartIndex}&status=${timePartStatus?.at(1)}`;
     navigate(`/app/${userId}/setting/user${query}`);
   }
+  function handleReserve() {
+    const reserveTimePart = timePartIndex;
+    const reserveRoomId = roomData.id;
+  }
 
   if (timePartStatus === null || timePartStatus?.at(1) === 'canceled')
     return (
       <td
+        onClick={handleReserve}
         className={
           publicStyles + ' cursor-pointer text-transparent hover:bg-indigo-700 hover:text-slate-200'
         }

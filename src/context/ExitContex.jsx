@@ -6,16 +6,6 @@ const initialState = {
 };
 function reducer(state, action) {
   switch (action.type) {
-    case 'exit/showExitWindow':
-      return {
-        ...state,
-        isExitOpen: true,
-      };
-    case 'exit/hideExitWindow':
-      return {
-        ...state,
-        isExitOpen: false,
-      };
     case 'exit/toggleExitWindow':
       return {
         ...state,
@@ -29,22 +19,12 @@ function reducer(state, action) {
 function ExitProvider({ children }) {
   const [{ isExitOpen }, dispatch] = useReducer(reducer, initialState);
 
-  function showExitWindow() {
-    dispatch({ type: 'exit/showExitWindow' });
-  }
-
-  function hideExitWindow() {
-    dispatch({ type: 'exit/hideExitWindow' });
-  }
-
   function toggleExitWindow() {
     dispatch({ type: 'exit/toggleExitWindow' });
   }
 
   return (
-    <ExitContext.Provider value={{ isExitOpen, showExitWindow, hideExitWindow, toggleExitWindow }}>
-      {children}
-    </ExitContext.Provider>
+    <ExitContext.Provider value={{ isExitOpen, toggleExitWindow }}>{children}</ExitContext.Provider>
   );
 }
 

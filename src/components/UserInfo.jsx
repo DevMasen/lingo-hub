@@ -126,7 +126,7 @@ function UserInfo() {
           </li>
         </ul>
         <ul id="reserve-list" className="space-y-3">
-          <h3 className="text-lg"> اتاق های رزرو شده برای فردا : </h3>
+          <h3 className="text-lg"> اتاق های رزرو شده :</h3>
           {user.reservedRooms.length > 0 ? (
             user.reservedRooms.map(
               (record) =>
@@ -168,12 +168,6 @@ function UserInfo() {
           ) : (
             <p className="flex items-center justify-center gap-2 rounded-xl bg-slate-800 py-8 text-xl text-slate-400">
               <span>رزروی وجود ندارد</span>
-              <PiEmpty />
-            </p>
-          )}
-          {!user.reservedRooms.some((record) => record.date === date[0].reserveDate) && (
-            <p className="flex items-center justify-center gap-2 rounded-xl bg-slate-800 py-8 text-xl text-slate-400">
-              <span>رزروی برای فردا وجود ندارد</span>
               <PiEmpty />
             </p>
           )}

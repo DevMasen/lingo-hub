@@ -1,45 +1,33 @@
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 ////////////////////////////////////
 import { useExit } from '../context/ExitContex';
 import { useAuth } from '../context/AuthContext';
 /////////////////////////////////////////////////
+import Modal from '../ui/Modal';
+////////////////////////////////
 function ExitModal() {
   //! React Router
   const params = useParams();
+
   //! Context Data
   const { isExitOpen, toggleExitWindow } = useExit();
   const { logout } = useAuth();
 
   //! JSX
   return (
-    <div
-      className={`fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-800/20 backdrop-blur-sm transition-all duration-100 ${!isExitOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
-    >
-      <div
-        className={`w-[400px] flex-col items-center space-y-3 rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 ${!isExitOpen ? 'hidden' : 'flex'}`}
-      >
-        <h2 className="text-center text-2xl font-semibold">
-          میخواهید از حساب کاربری خود خارج شوید؟
-        </h2>
-        <Link
-          to="/"
-          onClick={() => {
-            toggleExitWindow();
-            logout();
-          }}
-          className="w-full rounded-lg bg-red-700 p-3 text-center text-lg font-medium text-slate-100 transition-all duration-300 hover:bg-red-600"
-        >
-          آره خارج شو!
-        </Link>
-        <Link
-          to={`/app/${params.userId}`}
-          onClick={toggleExitWindow}
-          className="w-full rounded-lg bg-slate-800 p-3 text-center text-lg font-medium text-slate-100 transition-all duration-300 hover:bg-slate-900"
-        >
-          نه می‌مونم
-        </Link>
-      </div>
-    </div>
+    <Modal
+      isOpen={isExitOpen}
+      message="آیا مطمئن هستید میخواهید خارج شوید ؟"
+      onClick={{
+        confirm: () => {
+          toggleExitWindow();
+          logout();
+        },
+        cancel: toggleExitWindow,
+      }}
+      path={{ confirm: '/', cancel: `/app/${params.userId}` }}
+      text={{ confirm: 'آره خارج شو!', cancel: 'نه می‌مونم.' }}
+    />
   );
 }
 

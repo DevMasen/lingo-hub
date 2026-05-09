@@ -3,6 +3,7 @@ import '@fontsource/vazir';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 ///////////////////////////////////////////////
+import { ConfirmReserveProvider } from './context/ConfirmReserveContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import { ExitProvider } from './context/ExitContex.jsx';
 import { SidebarProvider } from './context/SidebarContext.jsx';
@@ -16,7 +17,9 @@ createRoot(document.getElementById('root')).render(
       <SignupProvider>
         <ExitProvider>
           <SidebarProvider>
-            <App />
+            <ConfirmReserveProvider>
+              <App />
+            </ConfirmReserveProvider>
           </SidebarProvider>
         </ExitProvider>
       </SignupProvider>

@@ -49,17 +49,20 @@ function Dashboard() {
             </h3>
             {fetcher.data?.user.reservedRooms?.length > 0 ? (
               <ul className="flex flex-col gap-3">
-                {fetcher.data?.user.reservedRooms.map((record) => (
-                  <li key={record.id}>
-                    <ReserveRecord
-                      number={record.id}
-                      roomName={record.roomName}
-                      date={record.date}
-                      timePart={record.timePart}
-                      status={record.status}
-                    />
-                  </li>
-                ))}
+                {fetcher.data?.user.reservedRooms.map(
+                  (record) =>
+                    record.date !== fetcher.data.date[0].reserveDate && (
+                      <li key={record.id}>
+                        <ReserveRecord
+                          number={record.id}
+                          roomName={record.roomName}
+                          date={record.date}
+                          timePart={record.timePart}
+                          status={record.status}
+                        />
+                      </li>
+                    )
+                )}
               </ul>
             ) : (
               <p className="flex items-center justify-center p-2 text-xl text-slate-500">

@@ -2,7 +2,7 @@
   "date": [
     {
       "id": 0,
-      "reserveDate": "۱۴۰۵۰۲۱۸"
+      "reserveDate": "۱۴۰۵۰۲۲۰"
     }
   ],
   "rooms": [
@@ -47,29 +47,7 @@
       "explanation": "",
       "email": "mohammadwh400@gmail.com",
       "signupStatus": "confirmed",
-      "reservedRooms": [
-        {
-          "id": 1,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۱۶",
-          "timePart": 0,
-          "status": "waiting"
-        },
-        {
-          "id": 2,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۱۶",
-          "timePart": 1,
-          "status": "reserved"
-        },
-        {
-          "id": 3,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۱۸",
-          "timePart": 2,
-          "status": "canceled"
-        }
-      ],
+      "reservedRooms": [],
       "creditBalance": 500000,
       "maxReserveCount": 3,
       "id": 1
@@ -83,29 +61,7 @@
       "explanation": "",
       "email": "ali@gmail.com",
       "signupStatus": "waiting",
-      "reservedRooms": [
-        {
-          "id": 1,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۱۶",
-          "timePart": 3,
-          "status": "waiting"
-        },
-        {
-          "id": 2,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۱۶",
-          "timePart": 4,
-          "status": "reserved"
-        },
-        {
-          "id": 3,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۱۶",
-          "timePart": 5,
-          "status": "canceled"
-        }
-      ],
+      "reservedRooms": [],
       "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 2
@@ -119,15 +75,7 @@
       "explanation": "",
       "email": "mahdi@gmail.com",
       "signupStatus": "waiting",
-      "reservedRooms": [
-        {
-          "id": 1,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۱۶",
-          "timePart": 5,
-          "status": "reserved"
-        }
-      ],
+      "reservedRooms": [],
       "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 3
