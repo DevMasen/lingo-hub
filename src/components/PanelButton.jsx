@@ -24,6 +24,7 @@ function PanelButton({
   return (
     <Link
       to={to}
+      onClick={onClick}
       className={`${extraClasses} flex items-center justify-center rounded-xl bg-indigo-700/90 text-lg font-medium transition-all duration-300 hover:bg-indigo-500`}
     >
       {children}

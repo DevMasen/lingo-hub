@@ -11,6 +11,11 @@ function reducer(state, action) {
         ...state,
         isConfirmOpen: !state.isConfirmOpen,
       };
+    case 'confirm/hideConfirmWindow':
+      return {
+        ...state,
+        isConfirmOpen: false,
+      };
     default:
       throw new Error('Action Unknown!');
   }
@@ -23,8 +28,12 @@ function ConfirmReserveProvider({ children }) {
     dispatch({ type: 'confirm/toggleConfirmWindow' });
   }
 
+  function hideConfirmWindow() {
+    dispatch({ type: 'confirm/hideConfirmWindow' });
+  }
+
   return (
-    <ConfirmReserve.Provider value={{ isConfirmOpen, toggleConfirmWindow }}>
+    <ConfirmReserve.Provider value={{ isConfirmOpen, toggleConfirmWindow, hideConfirmWindow }}>
       {children}
     </ConfirmReserve.Provider>
   );

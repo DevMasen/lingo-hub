@@ -10,6 +10,7 @@ import { SidebarProvider } from './context/SidebarContext.jsx';
 import { SignupProvider } from './context/SignupContext.jsx';
 /////////////////////////////////////////////////////////////
 import App from './App.jsx';
+import { PayProvider } from './context/PayContext.jsx';
 ////////////////////////////
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -18,7 +19,9 @@ createRoot(document.getElementById('root')).render(
         <ExitProvider>
           <SidebarProvider>
             <ConfirmReserveProvider>
-              <App />
+              <PayProvider>
+                <App />
+              </PayProvider>
             </ConfirmReserveProvider>
           </SidebarProvider>
         </ExitProvider>

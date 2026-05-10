@@ -30,6 +30,7 @@ function ConfirmReserveModal({ date }) {
   return (
     <fetcher.Form method="PATCH">
       <Modal
+        name="confirmReserveModal"
         isOpen={isConfirmOpen}
         message={message}
         onClick={{

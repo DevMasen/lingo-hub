@@ -9,31 +9,101 @@
     {
       "id": 0,
       "roomName": "100",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "timeLines": [
+        [
+          1,
+          "reserved"
+        ],
+        null,
+        null,
+        "untouchable",
+        null,
+        [
+          1,
+          "waiting"
+        ],
+        [
+          1,
+          "waiting"
+        ],
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "timeLines": [
+        [
+          3,
+          "canceled"
+        ],
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 2,
       "roomName": "102",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "timeLines": [
+        null,
+        [
+          3,
+          "waiting"
+        ],
+        null,
+        "untouchable",
+        "untouchable",
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 3,
       "roomName": "103",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "timeLines": [
+        null,
+        null,
+        null,
+        "untouchable",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     }
   ],
@@ -47,7 +117,36 @@
       "explanation": "",
       "email": "mohammadwh400@gmail.com",
       "signupStatus": "confirmed",
-      "reservedRooms": [],
+      "reservedRooms": [
+        {
+          "id": 1,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۱",
+          "timePart": 0,
+          "status": "reserved"
+        },
+        {
+          "id": 2,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۱",
+          "timePart": 5,
+          "status": "canceled"
+        },
+        {
+          "id": 3,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۱",
+          "timePart": 6,
+          "status": "waiting"
+        },
+        {
+          "id": 4,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۱",
+          "timePart": 5,
+          "status": "waiting"
+        }
+      ],
       "creditBalance": 500000,
       "maxReserveCount": 3,
       "id": 1
@@ -74,8 +173,23 @@
       "level": "مبتدی",
       "explanation": "",
       "email": "mahdi@gmail.com",
-      "signupStatus": "waiting",
-      "reservedRooms": [],
+      "signupStatus": "confirmed",
+      "reservedRooms": [
+        {
+          "id": 1,
+          "roomName": "101",
+          "date": "۱۴۰۵۰۲۲۱",
+          "timePart": 0,
+          "status": "canceled"
+        },
+        {
+          "id": 2,
+          "roomName": "102",
+          "date": "۱۴۰۵۰۲۲۱",
+          "timePart": 1,
+          "status": "waiting"
+        }
+      ],
       "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 3

@@ -12,12 +12,16 @@ import { getDate } from '../services/apiDate';
 ///////////////////////////////////////////////
 import mapToPersian from '../utils/mapToPersian';
 import { getRooms, updateTimeLines } from '../services/apiRooms';
+import { usePay } from '../context/PayContext';
 /////////////////////////////////////////////////
 function UserInfo() {
   //! React Router
   const { user, date } = useLoaderData();
   const [query] = useSearchParams();
   const fetcher = useFetcher();
+
+  //! Context Data
+  const { togglePayWindow } = usePay();
 
   //! Local States
   const [focusReserveId, setFocusReserveId] = useState(null);
@@ -168,7 +172,16 @@ function UserInfo() {
                         </span>
                         <span>تومان</span>
                       </div>
-                      <PanelButton extraClasses="text-sm px-5"> پرداخت </PanelButton>
+                      <PanelButton
+                        to={`pay?cost=${
+                          fetcher.data?.rooms.find((room) => room.roomName === record.roomName)
+                            .reservePricePerHalfHour * 3
+                        }`}
+                        onClick={togglePayWindow}
+                        extraClasses="text-sm px-5"
+                      >
+                        پرداخت
+                      </PanelButton>
 
                       <fetcher.Form method="PATCH">
                         <PanelButton

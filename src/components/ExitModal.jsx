@@ -16,6 +16,7 @@ function ExitModal() {
   //! JSX
   return (
     <Modal
+      name="exitModal"
       isOpen={isExitOpen}
       message="آیا مطمئن هستید میخواهید خارج شوید ؟"
       onClick={{

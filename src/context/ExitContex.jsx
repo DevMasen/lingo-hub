@@ -11,6 +11,8 @@ function reducer(state, action) {
         ...state,
         isExitOpen: !state.isExitOpen,
       };
+    case 'exit/hideExitWindow':
+      return { ...state, isExitOpen: false };
     default:
       throw new Error('Action Unknown!');
   }
@@ -23,8 +25,14 @@ function ExitProvider({ children }) {
     dispatch({ type: 'exit/toggleExitWindow' });
   }
 
+  function hideExitWindow() {
+    dispatch({ type: 'exit/hideExitWindow' });
+  }
+
   return (
-    <ExitContext.Provider value={{ isExitOpen, toggleExitWindow }}>{children}</ExitContext.Provider>
+    <ExitContext.Provider value={{ isExitOpen, toggleExitWindow, hideExitWindow }}>
+      {children}
+    </ExitContext.Provider>
   );
 }
 
