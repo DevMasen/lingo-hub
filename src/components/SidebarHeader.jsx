@@ -2,8 +2,6 @@ import { Link } from 'react-router';
 ////////////////////////////////////
 import { BsLayoutSidebarInsetReverse } from 'react-icons/bs';
 /////////////////////////////////////////////////////////////
-import SidebarLogo from './SidebarLogo';
-////////////////////////////////////////
 import { useSidebar } from '../context/SidebarContext';
 ///////////////////////////////////////////////////////
 function SidebarHeader() {
@@ -14,7 +12,7 @@ function SidebarHeader() {
     >
       {isSidebarOpen && (
         <Link to="dashboard" className="flex items-center gap-3">
-          <SidebarLogo />
+          <img src="/icon2.png" className="w-12 rounded-md invert" alt="logo" />
           <h2 className="text-2xl font-semibold"> لینگوهاب </h2>
         </Link>
       )}

@@ -20,7 +20,8 @@ function UserInfo() {
 
   //! Local States
   const [focusReserveId, setFocusReserveId] = useState(null);
-  // const [focusReserveCount, setFocusReserveCount] = useState(false);
+  const [reserveRemainCountBG, setReserveRemainCountBg] = useState('bg-slate-800');
+
   const reserveRemainCount =
     user.reservedRooms.length === 0
       ? user.maxReserveCount
@@ -54,8 +55,6 @@ function UserInfo() {
     [query, user.reservedRooms]
   );
 
-  //TODO Complete reserve Count Limit Highlight Effect
-
   useEffect(
     function () {
       if (focusReserveId === null) return;
@@ -64,6 +63,20 @@ function UserInfo() {
       window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
     },
     [focusReserveId]
+  );
+
+  useEffect(
+    function () {
+      if (query.get('reserveCountLimit') === null) return;
+      const reserveRemainCounter = document.getElementById('reserve-remain-counter');
+      const scrollPosition = reserveRemainCounter.getBoundingClientRect().top;
+      window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+      setReserveRemainCountBg('bg-slate-700');
+      setTimeout(function () {
+        setReserveRemainCountBg('bg-slate-800');
+      }, 1000);
+    },
+    [query]
   );
 
   //! Handlers
@@ -122,8 +135,10 @@ function UserInfo() {
             </span>
           </li>
           <li>
-            <span> تعداد رزرو باقی مانده : </span>
-            <span className="rounded-xl bg-slate-800 px-4 py-2">
+            <span id="reserve-remain-counter"> تعداد رزرو باقی مانده : </span>
+            <span
+              className={`rounded-xl px-4 py-2 transition-colors duration-200 ${reserveRemainCountBG}`}
+            >
               {mapToPersian(String(reserveRemainCount))}
             </span>
           </li>

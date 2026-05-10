@@ -13,7 +13,7 @@ function Footer() {
         </li>
       </ul>
 
-      <div className="text-sm"> تمام حقوق این وبسایت برای هوش افزار نوآفرین محفوظ است.&copy;</div>
+      <div className="text-sm"> تمام حقوق این وبسایت برای لینگوهاب محفوظ است.&copy;</div>
     </div>
   );
 }

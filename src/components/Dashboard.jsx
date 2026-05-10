@@ -31,14 +31,14 @@ function Dashboard() {
         </PanelButton>
       </header>
       <section className="grid grid-cols-[2fr_1fr] grid-rows-[auto_1fr] gap-4 p-4">
-        <div className={`${sectionPartsStyles} col-span-2 flex items-center justify-between pl-9`}>
+        <div className={`${sectionPartsStyles} col-span-2 flex items-center gap-4 pl-9`}>
+          <img src="/icon.png" className="w-36 rounded-xl invert" alt="logo" />
           <div className="space-y-3">
             <h2 className="text-slate-400">
               <span>{fetcher.data?.user.firstName}</span> به آکادمی زبان لینگوهاب خوش اومدی
             </h2>
             <p className="text-lg font-semibold"> اینجا زبان مزه دیگه ای میده 😉 </p>
           </div>
-          <img src="/icon.png" className="w-16 rounded-lg" alt="logo" />
         </div>
         <div>
           <div

@@ -3,7 +3,6 @@ import { useConfirmReserve } from '../context/ConfirmReserveContext';
 ///////////////////////////////////////////
 const publicStyles = 'rounded-xl border-b border-slate-800 transition-all duration-200';
 
-//TODO Add functionality to <td></td> elementes
 function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate, userId }) {
   const { toggleConfirmWindow } = useConfirmReserve();
   const navigate = useNavigate();
