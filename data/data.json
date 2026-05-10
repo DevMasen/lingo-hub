@@ -9,18 +9,7 @@
     {
       "id": 0,
       "roomName": "100",
-      "timeLines": [
-        [1, "waiting"],
-        [1, "waiting"],
-        [1, "waiting"],
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
       "reservePricePerHalfHour": 80000
     },
     {
@@ -58,29 +47,7 @@
       "explanation": "",
       "email": "mohammadwh400@gmail.com",
       "signupStatus": "confirmed",
-      "reservedRooms": [
-        {
-          "id": 1,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۲۱",
-          "timePart": 0,
-          "status": "waiting"
-        },
-        {
-          "id": 2,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۲۱",
-          "timePart": 1,
-          "status": "waiting"
-        },
-        {
-          "id": 3,
-          "roomName": "100",
-          "date": "۱۴۰۵۰۲۲۱",
-          "timePart": 2,
-          "status": "waiting"
-        }
-      ],
+      "reservedRooms": [],
       "creditBalance": 500000,
       "maxReserveCount": 3,
       "id": 1

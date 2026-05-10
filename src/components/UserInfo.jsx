@@ -7,10 +7,11 @@ import { PiEmpty } from 'react-icons/pi';
 import PanelButton from './PanelButton';
 import ReserveRecord from './ReserveRecord';
 ////////////////////////////////////////////
-import { getUser } from '../services/apiUsers';
+import { getUser, updateUserReserveHistory } from '../services/apiUsers';
 import { getDate } from '../services/apiDate';
 ///////////////////////////////////////////////
 import mapToPersian from '../utils/mapToPersian';
+import { getRooms, updateTimeLines } from '../services/apiRooms';
 /////////////////////////////////////////////////
 function UserInfo() {
   //! React Router
@@ -79,9 +80,6 @@ function UserInfo() {
     [query]
   );
 
-  //! Handlers
-  function handleCancel() {}
-
   //! JSX
   return (
     <div className="space-y-5 border-b border-slate-500 p-3">
@@ -146,43 +144,47 @@ function UserInfo() {
         <ul id="reserve-list" className="space-y-3">
           <h3 className="text-lg"> اتاق های رزرو شده :</h3>
           {user.reservedRooms.length > 0 ? (
-            user.reservedRooms.map(
-              (record) =>
-                record.date === date[0].reserveDate && (
-                  <li className="flex gap-3" key={record.id}>
-                    <ReserveRecord
-                      focusReserveId={focusReserveId}
-                      number={record.id}
-                      roomName={record.roomName}
-                      date={record.date}
-                      timePart={record.timePart}
-                      status={record.status}
-                      extraClasses="w-[525px]"
-                    />
-                    {record.status === 'waiting' && (
-                      <>
-                        <div className="flex flex-col items-center justify-center rounded-xl bg-slate-700 px-3 text-sm">
-                          <span>
-                            {new Intl.NumberFormat('fa-IR').format(
-                              fetcher.data?.rooms.find((room) => room.roomName === record.roomName)
-                                .reservePricePerHalfHour * 3
-                            )}
-                          </span>
-                          <span>تومان</span>
-                        </div>
-                        <PanelButton extraClasses="text-sm px-5"> پرداخت </PanelButton>
+            user.reservedRooms
+              .filter((rec) => rec.date === date[0].reserveDate)
+              .map((record) => (
+                <li className="flex gap-3" key={record.id}>
+                  <ReserveRecord
+                    focusReserveId={focusReserveId}
+                    number={record.id}
+                    roomName={record.roomName}
+                    date={record.date}
+                    timePart={record.timePart}
+                    status={record.status}
+                    extraClasses="w-[525px]"
+                  />
+                  {record.status === 'waiting' && (
+                    <>
+                      <div className="flex flex-col items-center justify-center rounded-xl bg-slate-700 px-3 text-sm">
+                        <span>
+                          {new Intl.NumberFormat('fa-IR').format(
+                            fetcher.data?.rooms.find((room) => room.roomName === record.roomName)
+                              .reservePricePerHalfHour * 3
+                          )}
+                        </span>
+                        <span>تومان</span>
+                      </div>
+                      <PanelButton extraClasses="text-sm px-5"> پرداخت </PanelButton>
 
+                      <fetcher.Form method="PATCH">
                         <PanelButton
-                          onClick={handleCancel}
-                          extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5"
+                          type="submit"
+                          extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5 w-full h-full"
                         >
                           لغو
                         </PanelButton>
-                      </>
-                    )}
-                  </li>
-                )
-            )
+                        <input type="hidden" name="recordId" value={record.id} />
+                        <input type="hidden" name="roomName" value={record.roomName} />
+                        <input type="hidden" name="timePartIndex" value={record.timePart} />
+                      </fetcher.Form>
+                    </>
+                  )}
+                </li>
+              ))
           ) : (
             <p className="flex items-center justify-center gap-2 rounded-xl bg-slate-800 py-8 text-xl text-slate-400">
               <span>رزروی وجود ندارد</span>
@@ -199,6 +201,38 @@ export async function loader({ params }) {
   const user = await getUser(params.userId);
   const date = await getDate();
   return { user, date };
+}
+
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const rooms = await getRooms();
+  const user = await getUser(params.userId);
+
+  const currentRoomTimeLines = rooms.find((room) => room.roomName === data.roomName)?.timeLines;
+  const roomId = rooms.find((room) => room.roomName === data.roomName)?.id;
+
+  const updatedTimeLines = {
+    timeLines: Array.from({ length: 10 }, (_, k) =>
+      k === +data.timePartIndex ? [+params.userId, 'canceled'] : currentRoomTimeLines[k]
+    ),
+  };
+
+  await updateTimeLines(roomId, updatedTimeLines);
+
+  const updatedUser = {
+    reservedRooms: Array.from({ length: user.reservedRooms.length }, (_, k) =>
+      k + 1 === +data.recordId
+        ? { ...user.reservedRooms[k], status: 'canceled' }
+        : user.reservedRooms[k]
+    ),
+  };
+
+  console.log(updatedUser);
+
+  await updateUserReserveHistory(params.userId, updatedUser);
+
+  return null;
 }
 
 export default UserInfo;

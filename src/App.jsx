@@ -5,7 +5,10 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
 import Dashboard from './components/Dashboard';
 import Setting from './components/Setting';
-import UserInfo, { loader as userLoader } from './components/UserInfo';
+import UserInfo, {
+  loader as userLoader,
+  action as CancelReserveAction,
+} from './components/UserInfo';
 import PasswordChange from './components/PasswordChange';
 import Support from './components/Support';
 ///////////////////////////////////////////
@@ -88,6 +91,7 @@ const router = createBrowserRouter([
             path: 'user',
             element: <UserInfo />,
             loader: userLoader,
+            action: CancelReserveAction,
             errorElement: <ErrorPage />,
           },
           { path: 'password', element: <PasswordChange /> },
