@@ -54,3 +54,16 @@ export async function updateUserReserveHistory(id, updatedUser) {
     throw Error('Failed creating your order');
   }
 }
+
+export async function updateBalace(id, newBalance) {
+  try {
+    const res = await fetch(`${API_URL}/users/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(newBalance),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (!res.ok) throw Error();
+  } catch {
+    throw Error('Failed updating Balace');
+  }
+}

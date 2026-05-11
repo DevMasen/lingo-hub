@@ -1,7 +1,11 @@
 import { redirect, useFetcher, useSearchParams } from 'react-router';
-import Modal from '../ui/Modal';
+/////////////////////////////////////////////////////////////////////
 import { usePay } from '../context/PayContext';
-
+///////////////////////////////////////////////
+import { getUser, updateBalace } from '../services/apiUsers';
+//////////////////////////////
+import Modal from '../ui/Modal';
+////////////////////////////////
 function PayModal() {
   //! React Router
   const fetcher = useFetcher();
@@ -26,14 +30,26 @@ function PayModal() {
           confirm: 'disabled:bg-green-500 disabled:hover:bg-green-500 disabled:opacity-70',
         }}
       />
+      <input type="hidden" name="cost" value={query.get('cost')} />
     </fetcher.Form>
   );
 }
 
-//TODO Complete this action
 export async function action({ request, params }) {
-  // return redirect(`/app/${params.userId}/status`);
-  return null;
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const user = await getUser(params.userId);
+  const userBalance = user.creditBalance;
+
+  const newBalace = {
+    creditBalance: userBalance - +data.cost,
+  };
+
+  if (userBalance >= +data.cost) await updateBalace(params.userId, newBalace);
+
+  return redirect(
+    `/app/${params.userId}/status?status=${userBalance - +data.cost >= 0 ? 'success' : 'failed'}`
+  );
 }
 
 export default PayModal;

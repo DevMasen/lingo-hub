@@ -1,8 +1,11 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
+import { useParams } from 'react-router';
 //////////////////////////////////////////////////////////////
+const API_URL = 'http://localhost:8000';
 const PayContext = createContext();
 const initialState = {
   isPayOpen: false,
+  userBalace: 0,
 };
 function reducer(state, action) {
   switch (action.type) {
@@ -23,6 +26,24 @@ function reducer(state, action) {
 
 function PayProvider({ children }) {
   const [{ isPayOpen }, dispatch] = useReducer(reducer, initialState);
+  const params = useParams();
+
+  //TODO fix that shit
+  // useEffect(
+  //   function () {
+  //     async function getUserBalance(userId) {
+  //       try {
+  //         const res = await fetch(`${API_URL}/users/${userId}`);
+  //         if (!res.ok) throw Error();
+
+  //         return user.creditBalance;
+  //       } catch {
+  //         throw Error('Failed getting userBalace');
+  //       }
+  //     }
+  //   },
+  //   [params.userId]
+  // );
 
   function togglePayWindow() {
     dispatch({ type: 'pay/togglePayWindow' });
