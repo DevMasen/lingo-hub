@@ -27,6 +27,7 @@ import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Wallet from './components/Wallet';
 import PayModal, { action as payAction } from './components/PayModal';
+import PaymentStatus from './pages/PaymentStatus';
 //////////////////////////////////////
 const router = createBrowserRouter([
   {
@@ -99,11 +100,12 @@ const router = createBrowserRouter([
             path: 'user/pay',
             element: <PayModal />,
             action: payAction,
-            errorElement: <ErrorPage />,
+            // errorElement: <ErrorPage />,
           },
           { path: 'password', element: <PasswordChange /> },
         ],
       },
+      { path: 'status', element: <PaymentStatus /> },
     ],
   },
   {

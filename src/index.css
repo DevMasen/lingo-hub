@@ -7,6 +7,29 @@
   --color-indigo-900: oklch(0.208 0.042 265.755);
 }
 
+@layer base {
+  progress[value] {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  }
+  progress[value]::-webkit-progress-value {
+    background-color: #444;
+
+    border-radius: 2px;
+    background-size:
+      35px 20px,
+      100% 100%,
+      100% 100%;
+    /* transition: all ease-in-out 200ms; */
+  }
+}
+
 @layer components {
   .background {
     height: 100dvh;

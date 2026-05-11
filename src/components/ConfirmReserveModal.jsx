@@ -70,10 +70,12 @@ export async function action({ request, params }) {
     user.reservedRooms.length === 0
       ? user.maxReserveCount
       : user.maxReserveCount -
-        user.reservedRooms.reduce((acc, reserve) => {
-          if (reserve.status !== 'canceled') return acc + 1;
-          return acc;
-        }, 0);
+        user.reservedRooms
+          .filter((res) => res.date === data.date.split('/').join(''))
+          .reduce((acc, reserve) => {
+            if (reserve.status !== 'canceled') return acc + 1;
+            return acc;
+          }, 0);
 
   if (reserveRemainCount === 0)
     return redirect(`/app/${params.userId}/setting/user?reserveCountLimit=true`);

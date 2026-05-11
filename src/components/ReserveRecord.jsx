@@ -7,6 +7,7 @@ import mapTime from '../utils/mapTime';
 function ReserveRecord({
   focusReserveId = null,
   number = 0,
+  roomId = 0,
   roomName = '',
   date = '',
   timePart = 0,
@@ -19,13 +20,13 @@ function ReserveRecord({
 
   useEffect(
     function () {
-      if (focusReserveId === null || focusReserveId !== number) return;
+      if (focusReserveId === null || focusReserveId !== roomId) return;
       setRecordBGColor('bg-slate-500');
       setTimeout(function () {
         setRecordBGColor('bg-slate-700');
       }, 700);
     },
-    [focusReserveId, number]
+    [focusReserveId, roomId]
   );
 
   return (

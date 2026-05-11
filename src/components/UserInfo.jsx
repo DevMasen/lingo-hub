@@ -31,10 +31,12 @@ function UserInfo() {
     user.reservedRooms.length === 0
       ? user.maxReserveCount
       : user.maxReserveCount -
-        user.reservedRooms.reduce((acc, reserve) => {
-          if (reserve.status !== 'canceled') return acc + 1;
-          return acc;
-        }, 0);
+        user.reservedRooms
+          .filter((res) => res.date === date[0].reserveDate)
+          .reduce((acc, reserve) => {
+            if (reserve.status !== 'canceled') return acc + 1;
+            return acc;
+          }, 0);
 
   useEffect(
     function () {
@@ -150,11 +152,12 @@ function UserInfo() {
           {user.reservedRooms.length > 0 ? (
             user.reservedRooms
               .filter((rec) => rec.date === date[0].reserveDate)
-              .map((record) => (
+              .map((record, i) => (
                 <li className="flex gap-3" key={record.id}>
                   <ReserveRecord
                     focusReserveId={focusReserveId}
-                    number={record.id}
+                    number={i + 1}
+                    roomId={record.id}
                     roomName={record.roomName}
                     date={record.date}
                     timePart={record.timePart}
@@ -204,6 +207,13 @@ function UserInfo() {
               <PiEmpty />
             </p>
           )}
+          {user.reservedRooms.length > 0 &&
+            !user.reservedRooms.some((record) => record.date === date[0].reserveDate) && (
+              <p className="flex items-center justify-center gap-2 rounded-xl bg-slate-800 py-8 text-xl text-slate-400">
+                <span> رزروی برای فردا وجود ندارد </span>
+                <PiEmpty />
+              </p>
+            )}
         </ul>
       </div>
     </div>
@@ -240,8 +250,6 @@ export async function action({ request, params }) {
         : user.reservedRooms[k]
     ),
   };
-
-  console.log(updatedUser);
 
   await updateUserReserveHistory(params.userId, updatedUser);
 

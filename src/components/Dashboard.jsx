@@ -49,10 +49,10 @@ function Dashboard() {
             </h3>
             {fetcher.data?.user.reservedRooms?.length > 0 ? (
               <ul className="flex flex-col gap-3">
-                {fetcher.data?.user.reservedRooms.map((record) => (
+                {[...fetcher.data?.user.reservedRooms].reverse().map((record, i) => (
                   <li key={record.id}>
                     <ReserveRecord
-                      number={record.id}
+                      number={i + 1}
                       roomName={record.roomName}
                       date={record.date}
                       timePart={record.timePart}

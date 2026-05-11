@@ -2,7 +2,7 @@
   "date": [
     {
       "id": 0,
-      "reserveDate": "۱۴۰۵۰۲۲۱"
+      "reserveDate": "۱۴۰۵۰۲۲۲"
     }
   ],
   "rooms": [
@@ -12,20 +12,17 @@
       "timeLines": [
         [
           1,
-          "reserved"
-        ],
-        null,
-        null,
-        "untouchable",
-        null,
-        [
-          1,
-          "waiting"
+          "canceled"
         ],
         [
           1,
-          "waiting"
+          "canceled"
         ],
+        null,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null
@@ -36,15 +33,15 @@
       "id": 1,
       "roomName": "101",
       "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
         [
-          3,
-          "canceled"
+          1,
+          "waiting"
         ],
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         null,
         null,
@@ -57,13 +54,10 @@
       "roomName": "102",
       "timeLines": [
         null,
-        [
-          3,
-          "waiting"
-        ],
         null,
-        "untouchable",
-        "untouchable",
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -79,8 +73,11 @@
         null,
         null,
         null,
-        "untouchable",
         null,
+        [
+          1,
+          "canceled"
+        ],
         null,
         null,
         null,
@@ -143,6 +140,34 @@
           "id": 4,
           "roomName": "100",
           "date": "۱۴۰۵۰۲۲۱",
+          "timePart": 5,
+          "status": "waiting"
+        },
+        {
+          "id": 5,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۲",
+          "timePart": 0,
+          "status": "canceled"
+        },
+        {
+          "id": 6,
+          "roomName": "103",
+          "date": "۱۴۰۵۰۲۲۲",
+          "timePart": 4,
+          "status": "canceled"
+        },
+        {
+          "id": 7,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۲",
+          "timePart": 1,
+          "status": "canceled"
+        },
+        {
+          "id": 8,
+          "roomName": "101",
+          "date": "۱۴۰۵۰۲۲۲",
           "timePart": 5,
           "status": "waiting"
         }
