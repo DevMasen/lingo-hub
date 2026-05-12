@@ -8,9 +8,9 @@ import { AuthProvider } from './context/AuthContext.jsx';
 import { ExitProvider } from './context/ExitContex.jsx';
 import { SidebarProvider } from './context/SidebarContext.jsx';
 import { SignupProvider } from './context/SignupContext.jsx';
+import { PayProvider } from './context/PayContext.jsx';
 /////////////////////////////////////////////////////////////
 import App from './App.jsx';
-import { PayProvider } from './context/PayContext.jsx';
 ////////////////////////////
 createRoot(document.getElementById('root')).render(
   <StrictMode>

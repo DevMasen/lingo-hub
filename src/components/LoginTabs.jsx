@@ -2,7 +2,10 @@ import { useAuth } from '../context/AuthContext';
 /////////////////////////////////////////////////
 
 function LoginTabs() {
+  //! Context Data
   const { activeTab, toggleActiveTab } = useAuth();
+
+  //! JSX
   return (
     <div className="flex gap-4 text-sm font-semibold text-slate-800">
       <span

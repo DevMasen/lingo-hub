@@ -7,26 +7,27 @@ import PanelButton from './PanelButton';
 import Error from './Error';
 import Success from './Success';
 ////////////////////////////////
+//! Global Styles
 const inputContainerStyles =
   'flex items-center rounded-lg border px-3 py-2 transition-all duration-300 focus-within:border-indigo-700';
 const inputStyles = 'bg-inherit outline-none w-80';
-
 const hideButtonStyles = 'text-slate-500 transition-colors duration-300 hover:text-indigo-700';
 
 function PasswordChange() {
+  //! Local States
   const [error, setError] = useState('');
   const [errorField, setErrorField] = useState('');
   const [successMessage] = useState('');
-
   const [isOldHidden, setIsOldHidden] = useState(true);
   const [isNewHidden, setIsNewHidden] = useState(true);
   const [isNewRepHidden, setIsNewRepHidden] = useState(true);
 
-  // controlled elements
+  //! Controlled Elements
   const [inputOldPass, setInputOldPass] = useState('');
   const [inputNewPass, setInputNewPass] = useState('');
   const [inputNewPassRep, setInputNewPassRep] = useState('');
 
+  //! Effect
   useEffect(
     function () {
       if (!inputOldPass && !inputNewPass && !inputNewPassRep) {
@@ -66,6 +67,7 @@ function PasswordChange() {
     [inputOldPass, inputNewPass, inputNewPassRep]
   );
 
+  //! JSX
   return (
     <div className="border-b border-slate-500 p-3">
       <Form

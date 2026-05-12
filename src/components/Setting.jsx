@@ -2,10 +2,16 @@ import { useEffect, useState } from 'react';
 import { useResolvedPath, Link, Outlet } from 'react-router';
 ////////////////////////////////////////////////////////////
 function Setting() {
+  //! React Router
   const { pathname } = useResolvedPath();
-  const path = pathname.split('/').at(-1);
+
+  //! Local States
   const [activeTab, setActiveTab] = useState(0);
 
+  //! Derived States
+  const path = pathname.split('/').at(-1);
+
+  //! Effects
   useEffect(
     function () {
       if (path === 'user') setActiveTab(0);
@@ -14,6 +20,7 @@ function Setting() {
     [path]
   );
 
+  //! JSX
   return (
     <div className="grid grid-cols-1 grid-rows-[auto_1fr]">
       <nav className="flex items-center justify-between border-b border-slate-500 bg-slate-800 px-4 py-5">
@@ -33,7 +40,6 @@ function Setting() {
           </li>
         </ul>
       </nav>
-
       <Outlet />
     </div>
   );

@@ -10,8 +10,11 @@ import { useSidebar } from '../context/SidebarContext';
 import { useExit } from '../context/ExitContex';
 ////////////////////////////////////////////////
 function NavList() {
+  //! Context Data
   const { isSidebarOpen } = useSidebar();
   const { toggleExitWindow } = useExit();
+
+  //!JSX
   return (
     <ul className="my-3 flex w-full flex-col justify-between">
       <ExitModal />

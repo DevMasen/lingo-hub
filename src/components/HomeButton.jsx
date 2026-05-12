@@ -4,9 +4,11 @@ import { useAuth } from '../context/AuthContext';
 import { useSignup } from '../context/SignupContext';
 /////////////////////////////////////////////////////
 function HomeButton({ children, to, onClick = () => {}, extraClasses, type = 'button', disabled }) {
+  //! Context Data
   const { error: loginError } = useAuth();
   const { error: signupError } = useSignup();
 
+  //! JSX
   if (type === 'submit')
     return (
       <button

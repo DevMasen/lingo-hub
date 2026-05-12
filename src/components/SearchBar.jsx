@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { HiOutlineSearch } from 'react-icons/hi';
 /////////////////////////////////////////////////
 function SearchBar() {
+  //! Local States
   const [searchQuery, setSearchQuery] = useState('');
+
+  //! JSX
   return (
     <div className="relative flex gap-2 rounded-lg border border-slate-500 px-3 py-2 transition-all duration-300 focus-within:border-indigo-700">
       <label htmlFor="search-bar" className="cursor-pointer">

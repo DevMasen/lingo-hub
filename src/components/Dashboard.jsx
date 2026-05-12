@@ -4,9 +4,11 @@ import { useFetcher, useParams } from 'react-router';
 import PanelButton from './PanelButton';
 import ReserveRecord from './ReserveRecord';
 ////////////////////////////////////////////
+//! Global Styles
 const sectionPartsStyles =
   'bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-indigo-900))] rounded-lg border border-slate-500 p-3';
 
+//TODO break into smaller components
 function Dashboard() {
   //! React Router
   const fetcher = useFetcher();

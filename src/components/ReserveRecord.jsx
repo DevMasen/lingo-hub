@@ -14,10 +14,13 @@ function ReserveRecord({
   status = '', // reserved/canceled/waiting
   extraClasses = '',
 }) {
-  const { startTime, stopTime } = mapTime(timePart);
-
+  //! Local States
   const [recordBGColor, setRecordBGColor] = useState('bg-slate-700');
 
+  //! Derived States
+  const { startTime, stopTime } = mapTime(timePart);
+
+  //! Effects
   useEffect(
     function () {
       if (focusReserveId === null || focusReserveId !== roomId) return;
@@ -29,6 +32,7 @@ function ReserveRecord({
     [focusReserveId, roomId]
   );
 
+  //! JSX
   return (
     <div
       className={`flex justify-between gap-4 rounded-xl ${recordBGColor} bg-opacity-70 p-3 transition-colors duration-300 ${extraClasses}`}

@@ -4,8 +4,11 @@ import { useAuth } from '../context/AuthContext';
 import { useSignup } from '../context/SignupContext';
 /////////////////////////////////////////////////////
 function Error({ error = '', toPath = '' }) {
+  //! Context Data
   const { setError } = useAuth();
   const { setStep } = useSignup();
+
+  //! JSX
   return (
     <div className="mt-4 flex flex-col items-center justify-center rounded-md bg-red-800 p-3 text-red-100">
       <span>خطا : {error}</span>

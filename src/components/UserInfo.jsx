@@ -7,18 +7,20 @@ import { PiEmpty } from 'react-icons/pi';
 import PanelButton from './PanelButton';
 import ReserveRecord from './ReserveRecord';
 ////////////////////////////////////////////
+import { usePay } from '../context/PayContext';
+////////////////////////////////////////////////
 import { getUser, updateUserReserveHistory } from '../services/apiUsers';
 import { getDate } from '../services/apiDate';
+import { getRooms, updateTimeLines } from '../services/apiRooms';
 ///////////////////////////////////////////////
 import mapToPersian from '../utils/mapToPersian';
-import { getRooms, updateTimeLines } from '../services/apiRooms';
-import { usePay } from '../context/PayContext';
 /////////////////////////////////////////////////
+//TODO break into smaller components
 function UserInfo() {
   //! React Router
-  const { user, date } = useLoaderData();
-  const [query] = useSearchParams();
   const fetcher = useFetcher();
+  const [query] = useSearchParams();
+  const { user, date } = useLoaderData();
 
   //! Context Data
   const { togglePayWindow } = usePay();
@@ -27,6 +29,7 @@ function UserInfo() {
   const [focusReserveId, setFocusReserveId] = useState(null);
   const [reserveRemainCountBG, setReserveRemainCountBg] = useState('bg-slate-800');
 
+  //! Derived States
   const reserveRemainCount =
     user.reservedRooms.length === 0
       ? user.maxReserveCount
@@ -38,30 +41,31 @@ function UserInfo() {
             return acc;
           }, 0);
 
+  //! Effects
   useEffect(
     function () {
       if (!fetcher.data && fetcher.state === 'idle') fetcher.load(`/app/${user.id}/reserve`);
     },
     [fetcher, user.id]
   );
-
   useEffect(
     function () {
-      const currentFocusReserve = user.reservedRooms.find(
-        (reserve) =>
-          reserve.roomName === query.get('roomName') &&
-          String(reserve.timePart) === query.get('timePart') &&
-          reserve.status === query.get('status')
-      );
+      const currentFocusReserve = user.reservedRooms
+        .filter((record) => record.date === date[0].reserveDate)
+        .find(
+          (reserve) =>
+            reserve.roomName === query.get('roomName') &&
+            String(reserve.timePart) === query.get('timePart') &&
+            reserve.status === query.get('status')
+        );
       if (currentFocusReserve === undefined) {
         setFocusReserveId(null);
         return;
       }
       setFocusReserveId(currentFocusReserve.id);
     },
-    [query, user.reservedRooms]
+    [query, user.reservedRooms, date]
   );
-
   useEffect(
     function () {
       if (focusReserveId === null) return;
@@ -71,7 +75,6 @@ function UserInfo() {
     },
     [focusReserveId]
   );
-
   useEffect(
     function () {
       if (query.get('reserveCountLimit') === null) return;
@@ -179,7 +182,7 @@ function UserInfo() {
                         to={`pay?cost=${
                           fetcher.data?.rooms.find((room) => room.roomName === record.roomName)
                             .reservePricePerHalfHour * 3
-                        }`}
+                        }&recordId=${record.id}&roomName=${record.roomName}&timePartIndex=${record.timePart}`}
                         onClick={togglePayWindow}
                         extraClasses="text-sm px-5"
                       >
@@ -235,13 +238,13 @@ export async function action({ request, params }) {
   const currentRoomTimeLines = rooms.find((room) => room.roomName === data.roomName)?.timeLines;
   const roomId = rooms.find((room) => room.roomName === data.roomName)?.id;
 
-  const updatedTimeLines = {
-    timeLines: Array.from({ length: 10 }, (_, k) =>
+  const updatedRoom = {
+    timeLines: Array.from({ length: currentRoomTimeLines.length }, (_, k) =>
       k === +data.timePartIndex ? [+params.userId, 'canceled'] : currentRoomTimeLines[k]
     ),
   };
 
-  await updateTimeLines(roomId, updatedTimeLines);
+  await updateTimeLines(roomId, updatedRoom);
 
   const updatedUser = {
     reservedRooms: Array.from({ length: user.reservedRooms.length }, (_, k) =>

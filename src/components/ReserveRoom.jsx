@@ -1,6 +1,7 @@
 import { useLoaderData } from 'react-router';
 /////////////////////////////////////////////
 import ReserveTableData from './ReserveTableDate';
+import ConfirmReserveModal from './ConfirmReserveModal';
 //////////////////////////////////////////////////
 import { refreshTableData } from '../services/apiRefresh';
 import { getRooms } from '../services/apiRooms';
@@ -9,16 +10,20 @@ import { getUser } from '../services/apiUsers';
 /////////////////////////////////////////////
 import makePersianNumberString from '../utils/makePersianNumbersString';
 import mapTime from '../utils/mapTime';
-import ConfirmReserveModal from './ConfirmReserveModal';
 ///////////////////////////////////////
 function ReserveRoom() {
+  //! React Router
   const { date, rooms, user } = useLoaderData();
+
+  //! Derived States
   const formatDate =
     date[0].reserveDate.slice(0, 4) +
     '/' +
     date[0].reserveDate.slice(4, 6) +
     '/' +
     date[0].reserveDate.slice(6, 8);
+
+  //!JSX
   return (
     <div className="border-b border-slate-500 p-3">
       <ConfirmReserveModal date={formatDate} />

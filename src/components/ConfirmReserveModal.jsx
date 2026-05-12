@@ -1,23 +1,30 @@
 import { redirect, useFetcher, useSearchParams } from 'react-router';
+/////////////////////////////////////////////////////////////////////
 import { useConfirmReserve } from '../context/ConfirmReserveContext';
-import Modal from '../ui/Modal';
-import mapTime from '../utils/mapTime';
-import makePersianNumberString from '../utils/makePersianNumbersString';
+/////////////////////////////////////////////////////////////////////
 import { getRooms, updateTimeLines } from '../services/apiRooms';
 import { getUser, updateUserReserveHistory } from '../services/apiUsers';
-
+/////////////////////////////////////////////////////////////////////////
+import Modal from '../ui/Modal';
+////////////////////////////////
+import makePersianNumberString from '../utils/makePersianNumbersString';
+import mapTime from '../utils/mapTime';
+///////////////////////////////////////
 function ConfirmReserveModal({ date }) {
+  //! React Router
   const fetcher = useFetcher();
-  const { isConfirmOpen, toggleConfirmWindow } = useConfirmReserve();
   const [query] = useSearchParams();
 
+  //! Context Data
+  const { isConfirmOpen, toggleConfirmWindow } = useConfirmReserve();
+
+  //! Derived States
   const roomName = query.get('roomName') ?? '  ';
   const dateString = date;
   const timePartString =
     makePersianNumberString(mapTime(+query.get('timePart')).startTime) +
     ' تا ' +
     makePersianNumberString(mapTime(+query.get('timePart')).stopTime);
-
   const message =
     ' آیا از رزرو اتاق ' +
     roomName +
@@ -27,6 +34,7 @@ function ConfirmReserveModal({ date }) {
     timePartString +
     ' مطمئن هستید؟ ';
 
+  //! JSX
   return (
     <fetcher.Form method="PATCH">
       <Modal
@@ -51,21 +59,18 @@ function ConfirmReserveModal({ date }) {
 }
 
 export async function action({ request, params }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
   const rooms = await getRooms();
   const user = await getUser(params.userId);
 
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-
   const currentRoomTimeLines = rooms.find((room) => room.roomName === data.roomName)?.timeLines;
   const currentRoomId = rooms.find((room) => room.roomName === data.roomName)?.id;
-
   const updatedRoom = {
     timeLines: Array.from({ length: 10 }, (_, i) =>
       i === +data.timePartIndex ? [+params.userId, 'waiting'] : currentRoomTimeLines.at(i)
     ),
   };
-
   const reserveRemainCount =
     user.reservedRooms.length === 0
       ? user.maxReserveCount
@@ -81,6 +86,7 @@ export async function action({ request, params }) {
     return redirect(`/app/${params.userId}/setting/user?reserveCountLimit=true`);
 
   await updateTimeLines(currentRoomId, updatedRoom);
+
   const newReserve = {
     id: user.reservedRooms.length + 1,
     roomName: data.roomName,
@@ -92,6 +98,7 @@ export async function action({ request, params }) {
     reservedRooms: [...user.reservedRooms, newReserve],
   };
   await updateUserReserveHistory(params.userId, updatedUser);
+
   return null;
 }
 

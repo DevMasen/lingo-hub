@@ -1,5 +1,6 @@
-import { BiHome } from 'react-icons/bi';
 import { Link } from 'react-router';
+////////////////////////////////////
+import { BiHome } from 'react-icons/bi';
 ///////////////////////////////////
 function ErrorPage() {
   return (

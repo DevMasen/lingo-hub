@@ -18,7 +18,7 @@ import { getUsers } from '../services/apiUsers';
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
 ///////////////////////////////////////////////////
-//! Constant Styles
+//! Global Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
@@ -43,7 +43,6 @@ function LoginOptions() {
     },
     [phoneNumberInput]
   );
-
   useEffect(
     function () {
       setError('');
@@ -52,6 +51,7 @@ function LoginOptions() {
     [setError, setPath]
   );
 
+  //! Custom Hooks
   useKey('enter', handleContinue);
 
   //! Handlers

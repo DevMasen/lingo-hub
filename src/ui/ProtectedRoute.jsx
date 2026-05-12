@@ -4,8 +4,13 @@ import { useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 ////////////////////////////////////
 function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useAuth();
+  //! React Router
   const navigate = useNavigate();
+
+  //! Context Data
+  const { isAuthenticated } = useAuth();
+
+  //! Effects
   useEffect(
     function () {
       if (!isAuthenticated) navigate('/');
@@ -13,6 +18,7 @@ function ProtectedRoute({ children }) {
     [isAuthenticated, navigate]
   );
 
+  //! JSX
   return isAuthenticated ? children : null;
 }
 

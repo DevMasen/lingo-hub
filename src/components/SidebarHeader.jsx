@@ -5,7 +5,10 @@ import { BsLayoutSidebarInsetReverse } from 'react-icons/bs';
 import { useSidebar } from '../context/SidebarContext';
 ///////////////////////////////////////////////////////
 function SidebarHeader() {
+  //! Context Data
   const { isSidebarOpen, toggleSidebar } = useSidebar();
+
+  //! JSX
   return (
     <div
       className={`flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b-[1px] border-slate-500 px-3 py-1`}

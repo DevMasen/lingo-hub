@@ -16,21 +16,26 @@ function Modal({
   hoverColor = { confirm: 'hover:bg-red-600', cancel: 'hover:bg-slate-900' },
   disabledStyles = { confirm: '', cancel: '' },
 }) {
+  //! React Router
+  const params = useParams();
   const navigate = useNavigate();
+
+  //! Context Data
   const { hideExitWindow } = useExit();
   const { hideConfirmWindow } = useConfirmReserve();
   const { hidePayWindow } = usePay();
-  const params = useParams();
 
+  //! JSX
   return (
     <div
-      onClick={() => {
+      onClick={(e) => {
+        if (!e.target.classList.contains('overlay')) return;
         hideExitWindow();
         hideConfirmWindow();
         hidePayWindow();
         if (name === 'payModal') navigate(`/app/${params.userId}/setting/user`);
       }}
-      className={`fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-800/20 backdrop-blur-sm transition-all duration-100 ${!isOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
+      className={`overlay fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-800/20 backdrop-blur-sm transition-all duration-100 ${!isOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
     >
       <div
         className={`z-[60] w-[400px] flex-col items-center space-y-3 rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 ${!isOpen ? 'hidden' : 'flex'}`}

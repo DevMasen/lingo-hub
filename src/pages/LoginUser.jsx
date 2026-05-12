@@ -12,7 +12,7 @@ import { useAuth } from '../context/AuthContext';
 /////////////////////////////////////////////////
 import { hash } from '../services/apiHash';
 ///////////////////////////////////////////
-//! Styles Constant
+//! Global Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';

@@ -1,16 +1,24 @@
 import { useNavigate } from 'react-router';
+///////////////////////////////////////////
 import { useConfirmReserve } from '../context/ConfirmReserveContext';
 ///////////////////////////////////////////
+//! Global Styles
 const publicStyles = 'rounded-xl border-b border-slate-800 transition-all duration-200';
 
 function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate, userId }) {
-  const { toggleConfirmWindow } = useConfirmReserve();
+  //! React Router
   const navigate = useNavigate();
+
+  //! Context Data
+  const { toggleConfirmWindow } = useConfirmReserve();
+
+  //! Handlers
   function handleClickReserved() {
     const query = `?roomName=${roomData.roomName}&timePart=${timePartIndex}&status=${timePartStatus?.at(1)}`;
     navigate(`/app/${userId}/setting/user${query}`);
   }
 
+  //! JSX
   if (timePartStatus === null || timePartStatus?.at(1) === 'canceled')
     return (
       <td

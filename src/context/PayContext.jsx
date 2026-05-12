@@ -1,11 +1,9 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
-import { useParams } from 'react-router';
+import { createContext, useCallback, useContext, useReducer } from 'react';
 //////////////////////////////////////////////////////////////
-const API_URL = 'http://localhost:8000';
 const PayContext = createContext();
 const initialState = {
   isPayOpen: false,
-  userBalace: 0,
+  userBalance: 0,
 };
 function reducer(state, action) {
   switch (action.type) {
@@ -19,31 +17,18 @@ function reducer(state, action) {
         ...state,
         isPayOpen: false,
       };
+    case 'pay/setUserBalance':
+      return {
+        ...state,
+        userBalance: action.payload,
+      };
     default:
       throw new Error('Action Unknown!');
   }
 }
 
 function PayProvider({ children }) {
-  const [{ isPayOpen }, dispatch] = useReducer(reducer, initialState);
-  const params = useParams();
-
-  //TODO fix that shit
-  // useEffect(
-  //   function () {
-  //     async function getUserBalance(userId) {
-  //       try {
-  //         const res = await fetch(`${API_URL}/users/${userId}`);
-  //         if (!res.ok) throw Error();
-
-  //         return user.creditBalance;
-  //       } catch {
-  //         throw Error('Failed getting userBalace');
-  //       }
-  //     }
-  //   },
-  //   [params.userId]
-  // );
+  const [{ isPayOpen, userBalance }, dispatch] = useReducer(reducer, initialState);
 
   function togglePayWindow() {
     dispatch({ type: 'pay/togglePayWindow' });
@@ -53,8 +38,14 @@ function PayProvider({ children }) {
     dispatch({ type: 'pay/hidePayWindow' });
   }
 
+  const setUserBalance = useCallback(function setUserBalance(newBalance = 0) {
+    dispatch({ type: 'pay/setUserBalance', payload: newBalance });
+  }, []);
+
   return (
-    <PayContext.Provider value={{ isPayOpen, togglePayWindow, hidePayWindow }}>
+    <PayContext.Provider
+      value={{ isPayOpen, userBalance, togglePayWindow, hidePayWindow, setUserBalance }}
+    >
       {children}
     </PayContext.Provider>
   );

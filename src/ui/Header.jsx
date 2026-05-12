@@ -12,6 +12,7 @@ import SearchBar from '../components/SearchBar';
 import LinkItem from '../components/LinkItem';
 ///////////////////////////////////////////////
 import { useExit } from '../context/ExitContex';
+import { usePay } from '../context/PayContext';
 /////////////////////////////////////////////////
 //TODO Break into smaller Components
 function Header() {
@@ -20,6 +21,7 @@ function Header() {
 
   //! Context Data
   const { toggleExitWindow } = useExit();
+  const { userBalance, setUserBalance } = usePay();
 
   //! Local States
   const [isNotifOpen, setIsNotifOpen] = useState(false);
@@ -31,6 +33,12 @@ function Header() {
       if (!fetcher.data && fetcher.state === 'idle') fetcher.load('setting/user');
     },
     [fetcher]
+  );
+  useEffect(
+    function () {
+      setUserBalance(+fetcher.data?.user.creditBalance);
+    },
+    [fetcher.data?.user.creditBalance, setUserBalance]
   );
 
   //! JSX
@@ -52,7 +60,7 @@ function Header() {
         <div className="ml-3 flex items-center gap-2 rounded-lg border border-slate-500 p-2">
           <BiWallet className="h-6 w-6 text-slate-200" />
           <div>
-            <span> {new Intl.NumberFormat('fa-IR').format(fetcher.data?.user.creditBalance)} </span>
+            <span> {new Intl.NumberFormat('fa-IR').format(userBalance)} </span>
             <span> تومان </span>
           </div>
           <Link

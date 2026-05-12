@@ -12,7 +12,10 @@ function NavItem({
   tooltipContent = '',
   onClick = () => {},
 }) {
+  //! Context Data
   const { isSidebarOpen } = useSidebar();
+
+  //! JSX
   return (
     <li>
       <NavLink

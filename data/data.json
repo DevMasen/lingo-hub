@@ -2,7 +2,7 @@
   "date": [
     {
       "id": 0,
-      "reserveDate": "۱۴۰۵۰۲۲۲"
+      "reserveDate": "۱۴۰۵۰۲۲۳"
     }
   ],
   "rooms": [
@@ -11,19 +11,25 @@
       "roomName": "100",
       "timeLines": [
         [
-          1,
-          "canceled"
+          4,
+          "reserved"
+        ],
+        null,
+        null,
+        null,
+        [
+          4,
+          "waiting"
         ],
         [
-          1,
+          2,
           "canceled"
         ],
         null,
-        null,
-        null,
-        null,
-        null,
-        null,
+        [
+          4,
+          "canceled"
+        ],
         null,
         null
       ],
@@ -34,14 +40,14 @@
       "roomName": "101",
       "timeLines": [
         null,
-        null,
-        null,
-        null,
-        null,
         [
-          1,
-          "waiting"
+          2,
+          "reserved"
         ],
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -53,12 +59,24 @@
       "id": 2,
       "roomName": "102",
       "timeLines": [
+        [
+          3,
+          "reserved"
+        ],
+        [
+          3,
+          "reserved"
+        ],
+        [
+          3,
+          "reserved"
+        ],
         null,
         null,
-        null,
-        null,
-        null,
-        null,
+        [
+          4,
+          "reserved"
+        ],
         null,
         null,
         null,
@@ -70,18 +88,27 @@
       "id": 3,
       "roomName": "103",
       "timeLines": [
-        null,
-        null,
-        null,
-        null,
         [
           1,
-          "canceled"
+          "reserved"
+        ],
+        [
+          1,
+          "waiting"
+        ],
+        [
+          1,
+          "reserved"
         ],
         null,
         null,
         null,
         null,
+        null,
+        [
+          2,
+          "reserved"
+        ],
         null
       ],
       "reservePricePerHalfHour": 80000
@@ -92,7 +119,10 @@
       "timeLines": [
         null,
         null,
-        null,
+        [
+          2,
+          "reserved"
+        ],
         null,
         null,
         null,
@@ -170,9 +200,30 @@
           "date": "۱۴۰۵۰۲۲۲",
           "timePart": 5,
           "status": "waiting"
+        },
+        {
+          "id": 9,
+          "roomName": "103",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 0,
+          "status": "reserved"
+        },
+        {
+          "id": 10,
+          "roomName": "103",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 1,
+          "status": "waiting"
+        },
+        {
+          "id": 11,
+          "roomName": "103",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 2,
+          "status": "reserved"
         }
       ],
-      "creditBalance": 260000,
+      "creditBalance": 240000,
       "maxReserveCount": 3,
       "id": 1
     },
@@ -184,8 +235,37 @@
       "level": "مبتدی",
       "explanation": "",
       "email": "ali@gmail.com",
-      "signupStatus": "waiting",
-      "reservedRooms": [],
+      "signupStatus": "confirmed",
+      "reservedRooms": [
+        {
+          "id": 1,
+          "roomName": "104",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 2,
+          "status": "reserved"
+        },
+        {
+          "id": 2,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 5,
+          "status": "canceled"
+        },
+        {
+          "id": 3,
+          "roomName": "101",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 1,
+          "status": "reserved"
+        },
+        {
+          "id": 4,
+          "roomName": "103",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 8,
+          "status": "reserved"
+        }
+      ],
       "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 2
@@ -213,6 +293,27 @@
           "date": "۱۴۰۵۰۲۲۱",
           "timePart": 1,
           "status": "waiting"
+        },
+        {
+          "id": 3,
+          "roomName": "102",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 0,
+          "status": "reserved"
+        },
+        {
+          "id": 4,
+          "roomName": "102",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 1,
+          "status": "reserved"
+        },
+        {
+          "id": 5,
+          "roomName": "102",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 2,
+          "status": "reserved"
         }
       ],
       "creditBalance": 0,
@@ -227,9 +328,45 @@
       "level": "مبتدی",
       "explanation": "",
       "email": "masomeh@gamil.com",
-      "signupStatus": "waiting",
-      "reservedRooms": [],
-      "creditBalance": 0,
+      "signupStatus": "confirmed",
+      "reservedRooms": [
+        {
+          "id": 1,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 0,
+          "status": "canceled"
+        },
+        {
+          "id": 2,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 7,
+          "status": "canceled"
+        },
+        {
+          "id": 3,
+          "roomName": "102",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 5,
+          "status": "reserved"
+        },
+        {
+          "id": 4,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 0,
+          "status": "reserved"
+        },
+        {
+          "id": 5,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۳",
+          "timePart": 4,
+          "status": "waiting"
+        }
+      ],
+      "creditBalance": 240000,
       "maxReserveCount": 3,
       "id": 4
     },
@@ -243,7 +380,7 @@
       "email": "amirali@gmail.com",
       "signupStatus": "waiting",
       "reservedRooms": [],
-      "creditBalance": 0,
+      "creditBalance": 720000,
       "maxReserveCount": 3,
       "id": 5
     }

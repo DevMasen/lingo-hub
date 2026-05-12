@@ -1,23 +1,45 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router';
+import { useFetcher, useNavigate, useParams, useSearchParams } from 'react-router';
+////////////////////////////////////////////////////////////////////
+import { usePay } from '../context/PayContext';
+///////////////////////////////////////////////
 
 function PaymentStatus() {
+  //! React Router
+  const fetcher = useFetcher();
+  const params = useParams();
+  const [query] = useSearchParams();
+  const navigate = useNavigate();
+
+  //! Context Data
+  const { setUserBalance } = usePay();
+
+  //! Local States
   const [isOpen, setIsOpen] = useState(true);
   const [milliseconds, setmilliseconds] = useState(0);
-  const [query] = useSearchParams();
-  const status = query.get('status');
-  const message = 'kir';
-  const navigate = useNavigate();
-  const params = useParams();
 
+  //! Derived States
+  const status = query.get('status');
+  const message =
+    status === 'success' ? 'تراکنش با موفقیت انجام شد ✅' : 'موجودی کیف پول کافی نیست ⚠️';
+
+  //! Const variables
   const maxMiliSecondsWait = 5000;
 
+  //! Effects
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === 'idle')
+        fetcher.load(`/app/${params.userId}/setting/user`);
+    },
+    [fetcher, params.userId]
+  );
   useEffect(
     function () {
       setTimeout(() => {
         setIsOpen(false);
         navigate(`/app/${params.userId}/setting/user`);
-      }, maxMiliSecondsWait + 3000);
+      }, maxMiliSecondsWait + 2000);
     },
     [navigate, params.userId]
   );
@@ -34,7 +56,14 @@ function PaymentStatus() {
     },
     [milliseconds]
   );
+  useEffect(
+    function () {
+      if (status === 'success') setUserBalance(fetcher.data?.user.creditBalance);
+    },
+    [status, setUserBalance, fetcher.data?.user.creditBalance]
+  );
 
+  //! JSX
   return (
     <div
       onClick={() => {
@@ -44,7 +73,7 @@ function PaymentStatus() {
       className={`fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-800/20 backdrop-blur-sm transition-all duration-100 ${!isOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
     >
       <div
-        className={`relative w-[400px] flex-col items-center space-y-3 rounded-lg bg-opacity-65 px-12 py-8 ${(status === null || status === 'failed') && 'bg-red-700'} ${status === 'success' && 'bg-green-500'} ${!isOpen ? 'hidden' : 'flex'}`}
+        className={`w-[45 0px] relative h-40 flex-col items-center justify-center space-y-3 rounded-lg bg-opacity-65 px-12 py-8 ${(status === null || status === 'failed') && 'bg-red-700'} ${status === 'success' && 'bg-green-500'} ${!isOpen ? 'hidden' : 'flex'}`}
       >
         <progress
           max={maxMiliSecondsWait}

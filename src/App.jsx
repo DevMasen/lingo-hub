@@ -11,8 +11,10 @@ import UserInfo, {
 } from './components/UserInfo';
 import PasswordChange from './components/PasswordChange';
 import Support from './components/Support';
-///////////////////////////////////////////
 import { action as confirmReserveAction } from './components/ConfirmReserveModal';
+import Wallet from './components/Wallet';
+import PayModal, { action as payAction } from './components/PayModal';
+///////////////////////////////////////////
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import LoginOptions, { loader as loginOptionsLoader } from './pages/LoginOptions';
@@ -22,12 +24,10 @@ import SignUp, { action as createUserAction, loader as usersLoader } from './pag
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
 import PageNotFound from './pages/PageNotFound';
+import PaymentStatus from './pages/PaymentStatus';
 ////////////////////////////////////////////////
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
-import Wallet from './components/Wallet';
-import PayModal, { action as payAction } from './components/PayModal';
-import PaymentStatus from './pages/PaymentStatus';
 //////////////////////////////////////
 const router = createBrowserRouter([
   {
@@ -100,7 +100,7 @@ const router = createBrowserRouter([
             path: 'user/pay',
             element: <PayModal />,
             action: payAction,
-            // errorElement: <ErrorPage />,
+            errorElement: <ErrorPage />,
           },
           { path: 'password', element: <PasswordChange /> },
         ],

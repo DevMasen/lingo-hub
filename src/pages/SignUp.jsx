@@ -21,7 +21,7 @@ import { createHash } from '../services/apiHash';
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
 ///////////////////////////////////////////////////
-//! Constant Styles
+//! Global Styles
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
 const inputStyles =
   'w-full rounded-md bg-inherit px-3 py-3 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
@@ -30,9 +30,11 @@ const inputErrorStyles = 'border-2 border-red-600 text-red-600';
 function SignUp() {
   //! React Router
   const users = useLoaderData();
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === 'submitting';
   const errors = useActionData();
+  const navigation = useNavigation();
+
+  //! Derived States
+  const isSubmitting = navigation.state === 'submitting';
 
   //! Context Data
   const {
@@ -60,14 +62,12 @@ function SignUp() {
   const [inputPasswordRepeat, setInputPasswordRepeat] = useState('');
 
   //! Effects
-
   useEffect(
     function () {
       setInputPhoneNumber((cur) => makeNumericInput(cur));
     },
     [inputPhoneNumber]
   );
-
   useEffect(
     function () {
       if (inputEmail.length === 0) {
@@ -86,7 +86,6 @@ function SignUp() {
     },
     [inputEmail, setError, setErrorField]
   );
-
   useEffect(
     function () {
       switch (step) {
@@ -117,7 +116,6 @@ function SignUp() {
     },
     [step, inputFirstName, inputLastName, inputPhoneNumber, setError, setErrorField]
   );
-
   useEffect(
     function () {
       setError('');
@@ -125,7 +123,6 @@ function SignUp() {
     },
     [step, setError, setErrorField]
   );
-
   useEffect(
     function () {
       if (step !== '6') return;
@@ -150,6 +147,7 @@ function SignUp() {
     [step, inputPassword, inputPasswordRepeat, setError, setErrorField]
   );
 
+  //! Custom Hooks
   useKey('enter', handleContinue);
 
   //! Handlers
@@ -205,7 +203,6 @@ function SignUp() {
         break;
     }
   }
-
   function handlePrevious() {
     switch (step) {
       case '2':
