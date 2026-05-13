@@ -8,7 +8,10 @@
       "roomName": "100",
       "timeLines": [
         null,
-        null,
+        [
+          5,
+          "canceled"
+        ],
         [
           2,
           "waiting"
@@ -33,9 +36,15 @@
         null,
         null,
         null,
+        [
+          5,
+          "canceled"
+        ],
         null,
-        null,
-        null,
+        [
+          5,
+          "waiting"
+        ],
         null,
         null,
         null,
@@ -51,7 +60,10 @@
         null,
         null,
         null,
-        null,
+        [
+          5,
+          "waiting"
+        ],
         null,
         null,
         null,
@@ -84,7 +96,10 @@
         null,
         null,
         null,
-        null,
+        [
+          5,
+          "waiting"
+        ],
         null,
         null,
         null,
@@ -353,8 +368,44 @@
       "level": "مبتدی",
       "explanation": "",
       "email": "amirali@gmail.com",
-      "signupStatus": "waiting",
-      "reservedRooms": [],
+      "signupStatus": "confirmed",
+      "reservedRooms": [
+        {
+          "id": 1,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۴",
+          "timePart": 1,
+          "status": "canceled"
+        },
+        {
+          "id": 2,
+          "roomName": "101",
+          "date": "۱۴۰۵۰۲۲۴",
+          "timePart": 5,
+          "status": "waiting"
+        },
+        {
+          "id": 3,
+          "roomName": "102",
+          "date": "۱۴۰۵۰۲۲۴",
+          "timePart": 4,
+          "status": "waiting"
+        },
+        {
+          "id": 4,
+          "roomName": "101",
+          "date": "۱۴۰۵۰۲۲۴",
+          "timePart": 3,
+          "status": "canceled"
+        },
+        {
+          "id": 5,
+          "roomName": "104",
+          "date": "۱۴۰۵۰۲۲۴",
+          "timePart": 3,
+          "status": "waiting"
+        }
+      ],
       "creditBalance": 720000,
       "maxReserveCount": 3,
       "id": 5
