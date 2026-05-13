@@ -13,12 +13,12 @@ export async function refreshTableData() {
     .split('-')
     .join('');
 
-  if (date[0].reserveDate === tommarrow) return;
+  if (date.reserveDate === tommarrow) return;
   const newDate = {
     reserveDate: tommarrow,
   };
   try {
-    const res = await fetch(`${API_URL}/date/0`, {
+    const res = await fetch(`${API_URL}/date`, {
       method: 'PATCH',
       body: JSON.stringify(newDate),
       headers: {
@@ -46,5 +46,28 @@ export async function refreshTableData() {
     } catch {
       throw Error('Failed Reset Rooms');
     }
+  }
+}
+
+export async function refreshOTP() {
+  const digit1 = Math.floor(Math.random() * 10);
+  const digit2 = Math.floor(Math.random() * 10);
+  const digit3 = Math.floor(Math.random() * 10);
+  const digit4 = Math.floor(Math.random() * 10);
+  const generatedRandomCode = `${digit1}${digit2}${digit3}${digit4}`;
+  const updatedCode = {
+    code: generatedRandomCode,
+  };
+  try {
+    const res = await fetch(`${API_URL}/otp`, {
+      method: 'PATCH',
+      body: JSON.stringify(updatedCode),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!res.ok) throw Error('Fetch Error: code85');
+  } catch {
+    throw Error('Failed updating OTP code');
   }
 }

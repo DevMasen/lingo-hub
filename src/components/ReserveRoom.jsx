@@ -17,11 +17,11 @@ function ReserveRoom() {
 
   //! Derived States
   const formatDate =
-    date[0].reserveDate.slice(0, 4) +
+    date.reserveDate.slice(0, 4) +
     '/' +
-    date[0].reserveDate.slice(4, 6) +
+    date.reserveDate.slice(4, 6) +
     '/' +
-    date[0].reserveDate.slice(6, 8);
+    date.reserveDate.slice(6, 8);
 
   //!JSX
   return (
@@ -53,7 +53,7 @@ function ReserveRoom() {
                   <ReserveTableData
                     key={i}
                     timePartIndex={i}
-                    reserveDate={date[0].reserveDate}
+                    reserveDate={date.reserveDate}
                     timePartStatus={timePartStatus}
                     roomData={room}
                     userId={user.id}

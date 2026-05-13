@@ -1,9 +1,15 @@
+import { useEffect, useRef, useState } from 'react';
+import { Form, redirect, useActionData } from 'react-router';
+//////////////////////////////////////////
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
 /////////////////////////////////////////////////
 import HomeButton from '../components/HomeButton';
+import Error from '../components/Error';
 //////////////////////////////////////////////////
 import { useAuth } from '../context/AuthContext';
+import { refreshOTP } from '../services/apiRefresh';
+import { getOTP } from '../services/apiOTP';
 ////////////////////////////////////////////////
 //! Global Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
@@ -11,12 +17,48 @@ const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function LoginByOTP() {
+  //! React Router
+  const errors = useActionData();
+
+  //! Local States and Refs
+  const recoveryCode1Ref = useRef(null);
+  const recoveryCode2Ref = useRef(null);
+  const recoveryCode3Ref = useRef(null);
+  const recoveryCode4Ref = useRef(null);
+  const enterButtonRef = useRef(null);
+
+  //! Controlled Elements
+  const [input1, setInput1] = useState('');
+  const [input2, setInput2] = useState('');
+  const [input3, setInput3] = useState('');
+  const [input4, setInput4] = useState('');
+
   //! Context Data
-  const { activeTab } = useAuth();
+  const { activeTab, login } = useAuth();
+
+  //! Effects
+  useEffect(function () {
+    recoveryCode1Ref.current.focus();
+  }, []);
+  useEffect(
+    function () {
+      if (input1.length === 1) recoveryCode2Ref.current.focus();
+      if (input2.length === 1) recoveryCode3Ref.current.focus();
+      if (input3.length === 1) recoveryCode4Ref.current.focus();
+      if (input4.length === 1) enterButtonRef.current.focus();
+    },
+    [input1.length, input2.length, input3.length, input4.length]
+  );
+
+  //! Handlers
+  function handleSubmit() {
+    if (errors?.wrongCode) return;
+    login();
+  }
 
   //! JSX
   return (
-    <div className="flex flex-col items-center gap-4">
+    <Form method="PATCH" onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
       <div>
         {activeTab === 'mobile' ? (
           <h3> کد پیامک شده به شماره تلفن خود را وارد کنید </h3>
@@ -27,42 +69,54 @@ function LoginByOTP() {
       <div className="flex w-60 gap-3 text-lg font-semibold" dir="ltr">
         <div className={inputContainerStyles}>
           <input
+            value={input1}
+            onChange={(e) => setInput1(e.target.value)}
             type="text"
             name="recoveryCode1"
             maxLength="1"
             required
             aria-required="true"
             className={`${inputStyles} text-center`}
+            ref={recoveryCode1Ref}
           />
         </div>
         <div className={inputContainerStyles}>
           <input
+            value={input2}
+            onChange={(e) => setInput2(e.target.value)}
             type="text"
             name="recoveryCode2"
             maxLength="1"
             required
             aria-required="true"
             className={`${inputStyles} text-center`}
+            ref={recoveryCode2Ref}
           />
         </div>
         <div className={inputContainerStyles}>
           <input
+            value={input3}
+            onChange={(e) => setInput3(e.target.value)}
             type="text"
             name="recoveryCode3"
             maxLength="1"
             required
             aria-required="true"
             className={`${inputStyles} text-center`}
+            ref={recoveryCode3Ref}
           />
         </div>
         <div className={inputContainerStyles}>
           <input
+            value={input4}
+            onChange={(e) => setInput4(e.target.value)}
             type="text"
             name="recoveryCode4"
             maxLength="1"
             required
             aria-required="true"
             className={`${inputStyles} text-center`}
+            ref={recoveryCode4Ref}
           />
         </div>
       </div>
@@ -70,14 +124,42 @@ function LoginByOTP() {
         <HomeButton to={-1} extraClasses={'py-2 rounded-md flex-grow'}>
           <HiOutlineArrowRight />
         </HomeButton>
-        {/* TODO COMPLETE OTP AUTHENTICATION */}
-        <HomeButton extraClasses={'px-5 py-2 rounded-md flex-grow'}>
+        <HomeButton
+          type="submit"
+          ref={enterButtonRef}
+          extraClasses={'px-5 py-2 rounded-md flex-grow'}
+        >
           <span className="text-lg font-medium"> ورود</span>
           <AiOutlineEnter className="text-2xl text-slate-300" />
         </HomeButton>
       </div>
-    </div>
+      {errors?.wrongCode && <Error error={errors.wrongCode} />}
+    </Form>
   );
+}
+
+export async function loader({ params }) {
+  await refreshOTP();
+}
+
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const inputRecoveryCode =
+    data.recoveryCode1 + data.recoveryCode2 + data.recoveryCode3 + data.recoveryCode4;
+
+  const otpCorrectCode = await getOTP();
+
+  const errors = {};
+  if (otpCorrectCode.code !== inputRecoveryCode) {
+    errors.wrongCode = 'کد وارد شده صحیح نمیباشد';
+  }
+
+  if (Object.keys(errors).length > 0) return errors;
+
+  if (otpCorrectCode.code === inputRecoveryCode) return redirect(`/app/${params.userId}`);
+
+  return null;
 }
 
 export default LoginByOTP;

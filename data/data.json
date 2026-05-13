@@ -1,35 +1,26 @@
 {
-  "date": [
-    {
-      "id": 0,
-      "reserveDate": "۱۴۰۵۰۲۲۳"
-    }
-  ],
+  "date": {
+    "reserveDate": "۱۴۰۵۰۲۲۴"
+  },
   "rooms": [
     {
       "id": 0,
       "roomName": "100",
       "timeLines": [
-        [
-          4,
-          "reserved"
-        ],
         null,
         null,
-        null,
-        [
-          4,
-          "waiting"
-        ],
         [
           2,
-          "canceled"
+          "waiting"
         ],
         null,
         [
-          4,
-          "canceled"
+          2,
+          "waiting"
         ],
+        null,
+        null,
+        null,
         null,
         null
       ],
@@ -40,10 +31,7 @@
       "roomName": "101",
       "timeLines": [
         null,
-        [
-          2,
-          "reserved"
-        ],
+        null,
         null,
         null,
         null,
@@ -59,24 +47,12 @@
       "id": 2,
       "roomName": "102",
       "timeLines": [
-        [
-          3,
-          "reserved"
-        ],
-        [
-          3,
-          "reserved"
-        ],
-        [
-          3,
-          "reserved"
-        ],
         null,
         null,
-        [
-          4,
-          "reserved"
-        ],
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -88,27 +64,15 @@
       "id": 3,
       "roomName": "103",
       "timeLines": [
-        [
-          1,
-          "reserved"
-        ],
-        [
-          1,
-          "waiting"
-        ],
-        [
-          1,
-          "reserved"
-        ],
         null,
         null,
         null,
         null,
         null,
-        [
-          2,
-          "reserved"
-        ],
+        null,
+        null,
+        null,
+        null,
         null
       ],
       "reservePricePerHalfHour": 80000
@@ -119,10 +83,7 @@
       "timeLines": [
         null,
         null,
-        [
-          2,
-          "reserved"
-        ],
+        null,
         null,
         null,
         null,
@@ -264,6 +225,20 @@
           "date": "۱۴۰۵۰۲۲۳",
           "timePart": 8,
           "status": "reserved"
+        },
+        {
+          "id": 5,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۴",
+          "timePart": 2,
+          "status": "waiting"
+        },
+        {
+          "id": 6,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۴",
+          "timePart": 4,
+          "status": "waiting"
         }
       ],
       "creditBalance": 0,
@@ -406,5 +381,8 @@
       "property": "45256585",
       "id": 5
     }
-  ]
+  ],
+  "otp": {
+    "code": "3299"
+  }
 }

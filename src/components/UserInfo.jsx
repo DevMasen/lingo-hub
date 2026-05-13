@@ -35,7 +35,7 @@ function UserInfo() {
       ? user.maxReserveCount
       : user.maxReserveCount -
         user.reservedRooms
-          .filter((res) => res.date === date[0].reserveDate)
+          .filter((res) => res.date === date.reserveDate)
           .reduce((acc, reserve) => {
             if (reserve.status !== 'canceled') return acc + 1;
             return acc;
@@ -51,7 +51,7 @@ function UserInfo() {
   useEffect(
     function () {
       const currentFocusReserve = user.reservedRooms
-        .filter((record) => record.date === date[0].reserveDate)
+        .filter((record) => record.date === date.reserveDate)
         .find(
           (reserve) =>
             reserve.roomName === query.get('roomName') &&
@@ -66,6 +66,7 @@ function UserInfo() {
     },
     [query, user.reservedRooms, date]
   );
+  //TODO implement this effect with useRef
   useEffect(
     function () {
       if (focusReserveId === null) return;
@@ -154,7 +155,7 @@ function UserInfo() {
           <h3 className="text-lg"> اتاق های رزرو شده :</h3>
           {user.reservedRooms.length > 0 ? (
             user.reservedRooms
-              .filter((rec) => rec.date === date[0].reserveDate)
+              .filter((rec) => rec.date === date.reserveDate)
               .map((record, i) => (
                 <li className="flex gap-3" key={record.id}>
                   <ReserveRecord
@@ -211,7 +212,7 @@ function UserInfo() {
             </p>
           )}
           {user.reservedRooms.length > 0 &&
-            !user.reservedRooms.some((record) => record.date === date[0].reserveDate) && (
+            !user.reservedRooms.some((record) => record.date === date.reserveDate) && (
               <p className="flex items-center justify-center gap-2 rounded-xl bg-slate-800 py-8 text-xl text-slate-400">
                 <span> رزروی برای فردا وجود ندارد </span>
                 <PiEmpty />

@@ -19,7 +19,10 @@ import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import LoginOptions, { loader as loginOptionsLoader } from './pages/LoginOptions';
 import LoginUser, { action as loginUserAction } from './pages/LoginUser';
-import LoginByOTP from './pages/LoginByOTP';
+import LoginByOTP, {
+  action as loginByOTPAction,
+  loader as loginByOTPLoader,
+} from './pages/LoginByOTP';
 import SignUp, { action as createUserAction, loader as usersLoader } from './pages/SignUp';
 import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
@@ -51,7 +54,13 @@ const router = createBrowserRouter([
         action: loginUserAction,
         errorElement: <ErrorPage />,
       },
-      { path: ':userId/otp', element: <LoginByOTP /> },
+      {
+        path: ':userId/otp',
+        element: <LoginByOTP />,
+        action: loginByOTPAction,
+        loader: loginByOTPLoader,
+        errorElement: <ErrorPage />,
+      },
     ],
   },
   {
