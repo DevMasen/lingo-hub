@@ -1,6 +1,6 @@
 {
   "date": {
-    "reserveDate": "۱۴۰۵۰۲۲۴"
+    "reserveDate": "۱۴۰۵۰۲۲۵"
   },
   "rooms": [
     {
@@ -9,17 +9,20 @@
       "timeLines": [
         null,
         [
-          5,
+          1,
           "canceled"
         ],
         [
-          2,
-          "waiting"
+          1,
+          "canceled"
         ],
-        null,
         [
-          2,
-          "waiting"
+          1,
+          "reserved"
+        ],
+        [
+          1,
+          "canceled"
         ],
         null,
         null,
@@ -36,17 +39,14 @@
         null,
         null,
         null,
+        null,
+        null,
+        null,
+        null,
         [
-          5,
+          1,
           "canceled"
         ],
-        null,
-        [
-          5,
-          "waiting"
-        ],
-        null,
-        null,
         null,
         null
       ],
@@ -60,10 +60,7 @@
         null,
         null,
         null,
-        [
-          5,
-          "waiting"
-        ],
+        null,
         null,
         null,
         null,
@@ -96,10 +93,7 @@
         null,
         null,
         null,
-        [
-          5,
-          "waiting"
-        ],
+        null,
         null,
         null,
         null,
@@ -197,9 +191,51 @@
           "date": "۱۴۰۵۰۲۲۳",
           "timePart": 2,
           "status": "reserved"
+        },
+        {
+          "id": 12,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۵",
+          "timePart": 1,
+          "status": "canceled"
+        },
+        {
+          "id": 13,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۵",
+          "timePart": 2,
+          "status": "canceled"
+        },
+        {
+          "id": 14,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۵",
+          "timePart": 3,
+          "status": "reserved"
+        },
+        {
+          "id": 15,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۵",
+          "timePart": 1,
+          "status": "canceled"
+        },
+        {
+          "id": 16,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۲۲۵",
+          "timePart": 4,
+          "status": "canceled"
+        },
+        {
+          "id": 17,
+          "roomName": "101",
+          "date": "۱۴۰۵۰۲۲۵",
+          "timePart": 7,
+          "status": "canceled"
         }
       ],
-      "creditBalance": 240000,
+      "creditBalance": 0,
       "maxReserveCount": 3,
       "id": 1
     },
