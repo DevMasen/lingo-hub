@@ -3,7 +3,7 @@ import './index.css';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 //////////////////////////////////
 import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
-import Dashboard from './components/Dashboard';
+import Dashboard, { loader as NewsLoader } from './components/Dashboard';
 import Setting from './components/Setting';
 import UserInfo, {
   loader as userLoader,
@@ -83,6 +83,8 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <Dashboard />,
+        loader: NewsLoader,
+        // errorElement: <ErrorPage />,
       },
       {
         path: 'reserve',

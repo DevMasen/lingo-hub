@@ -4,7 +4,6 @@ import SearchBar from '../components/SearchBar';
 import HeaderOverlay from '../components/HeaderOverlay';
 import LeftHeader from '../components/LeftHeader';
 /////////////////////////////////////////////////
-//TODO Break into smaller Components
 function Header() {
   //! Local States
   const [isNotifOpen, setIsNotifOpen] = useState(false);
@@ -21,7 +20,6 @@ function Header() {
   //! JSX
   return (
     <header className="flex items-center justify-between border-b border-slate-500 px-8 py-4">
-      {/* overlay */}
       {(isNotifOpen || isProfileOpen) && (
         <HeaderOverlay onNotifOpen={handleNotifOpen} onProfileOpen={handleProfileOpen} />
       )}

@@ -8,22 +8,10 @@
       "roomName": "100",
       "timeLines": [
         null,
-        [
-          1,
-          "canceled"
-        ],
-        [
-          1,
-          "canceled"
-        ],
-        [
-          1,
-          "reserved"
-        ],
-        [
-          1,
-          "canceled"
-        ],
+        [1, "canceled"],
+        [1, "canceled"],
+        [1, "reserved"],
+        [1, "canceled"],
         null,
         null,
         null,
@@ -35,72 +23,25 @@
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        [
-          1,
-          "canceled"
-        ],
-        null,
-        null
-      ],
+      "timeLines": [null, null, null, null, null, null, null, [1, "canceled"], null, null],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 2,
       "roomName": "102",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 3,
       "roomName": "103",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
+      "timeLines": [null, null, null, null, null, null, null, null, null, null],
       "reservePricePerHalfHour": 80000
     }
   ],
@@ -471,5 +412,21 @@
   ],
   "otp": {
     "code": "3299"
-  }
+  },
+  "news": [
+    {
+      "id": 1,
+      "label": "رزرو اتاق",
+      "body": "امکان رزرو اتاق در لینگو هاب فعال شد",
+      "date": "۱۴۰۵۰۲۲۰",
+      "time": "۹:۴۵"
+    },
+    {
+      "id": 2,
+      "label": "اخبار",
+      "body": "اکنون میتوانید اخبار مربوط به لینگو هاب را از این بخش مشاهده کنید",
+      "date": "۱۴۰۵۰۲۲۴",
+      "time": "۶:۵۰"
+    }
+  ]
 }
