@@ -1,6 +1,6 @@
 {
   "date": {
-    "reserveDate": "۱۴۰۵۰۲۲۵"
+    "reserveDate": "۱۴۰۵۰۲۲۸"
   },
   "rooms": [
     {
@@ -8,10 +8,10 @@
       "roomName": "100",
       "timeLines": [
         null,
-        [1, "canceled"],
-        [1, "canceled"],
-        [1, "reserved"],
-        [1, "canceled"],
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -23,25 +23,69 @@
     {
       "id": 1,
       "roomName": "101",
-      "timeLines": [null, null, null, null, null, null, null, [1, "canceled"], null, null],
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 2,
       "roomName": "102",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 3,
       "roomName": "103",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     },
     {
       "id": 4,
       "roomName": "104",
-      "timeLines": [null, null, null, null, null, null, null, null, null, null],
+      "timeLines": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "reservePricePerHalfHour": 80000
     }
   ],

@@ -2,13 +2,15 @@ import { HiOutlineUserCircle } from 'react-icons/hi';
 import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
 //////////////////////////////////////////
-import { useExit } from '../context/ExitContex';
-/////////////////////////////////////////////////
 import LinkItem from './LinkItem';
+/////////////////////////////////////////////////
+import { useHeader } from '../context/HeaderContext';
+import { useExit } from '../context/ExitContex';
 //////////////////////////////////
-function ProfileBox({ fetcher, onProfileOpen }) {
+function ProfileBox({ fetcher }) {
   //! Context Data
   const { toggleExitWindow } = useExit();
+  const { toggleProfile } = useHeader();
 
   //!JSX
   return (
@@ -19,13 +21,13 @@ function ProfileBox({ fetcher, onProfileOpen }) {
       </div>
       <ul className="mt-3 space-y-3 text-start">
         <li>
-          <LinkItem to={'setting'} onClick={onProfileOpen}>
+          <LinkItem to={'setting'} onClick={toggleProfile}>
             <HiOutlineUserCircle className="h-[1.25rem] w-[1.25rem] text-slate-500" />
             <span> پروفایل </span>
           </LinkItem>
         </li>
         <li>
-          <LinkItem to={'setting/password'} onClick={onProfileOpen}>
+          <LinkItem to={'setting/password'} onClick={toggleProfile}>
             <CgPassword className="h-[1.25rem] w-[1.25rem] text-slate-500" />
             <span> تغییر رمز عبور </span>
           </LinkItem>
@@ -35,7 +37,7 @@ function ProfileBox({ fetcher, onProfileOpen }) {
             extraClasses={'text-red-600'}
             onClick={() => {
               toggleExitWindow();
-              onProfileOpen();
+              toggleProfile();
             }}
           >
             <BiExit className="h-[1.25rem] w-[1.25rem]" />

@@ -37,9 +37,9 @@ function ExitProvider({ children }) {
 }
 
 function useExit() {
-  const contex = useContext(ExitContext);
-  if (contex === undefined) throw new Error('ExitContex used outside of ExitProvider!');
-  return contex;
+  const context = useContext(ExitContext);
+  if (context === undefined) throw new Error('ExitContext used outside of ExitProvider!');
+  return context;
 }
 
 export { ExitProvider, useExit };

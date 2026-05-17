@@ -9,6 +9,7 @@ import { ExitProvider } from './context/ExitContex.jsx';
 import { SidebarProvider } from './context/SidebarContext.jsx';
 import { SignupProvider } from './context/SignupContext.jsx';
 import { PayProvider } from './context/PayContext.jsx';
+import { HeaderProvider } from './context/HeaderContext.jsx';
 /////////////////////////////////////////////////////////////
 import App from './App.jsx';
 ////////////////////////////
@@ -20,7 +21,9 @@ createRoot(document.getElementById('root')).render(
           <SidebarProvider>
             <ConfirmReserveProvider>
               <PayProvider>
-                <App />
+                <HeaderProvider>
+                  <App />
+                </HeaderProvider>
               </PayProvider>
             </ConfirmReserveProvider>
           </SidebarProvider>

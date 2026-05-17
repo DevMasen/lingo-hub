@@ -5,7 +5,7 @@ import WalletBalance from './WalletBalance';
 import UserNotifications from './UserNotifications';
 import UserProfile from './UserProfile';
 ///////////////////////////////////////////////
-function LeftHeader({ isNotifOpen, isProfileOpen, onNotifOpen, onProfileOpen }) {
+function LeftHeader() {
   //! React Router
   const fetcher = useFetcher();
 
@@ -21,7 +21,7 @@ function LeftHeader({ isNotifOpen, isProfileOpen, onNotifOpen, onProfileOpen }) 
   return (
     <section className="flex items-center gap-2">
       <WalletBalance fetcher={fetcher} />
-      <UserNotifications isNotifOpen={isNotifOpen} onNotifOpen={onNotifOpen} />
+      <UserNotifications />
       <UserProfile fetcher={fetcher} />
     </section>
   );
