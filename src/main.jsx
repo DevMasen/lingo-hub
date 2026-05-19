@@ -12,6 +12,7 @@ import { PayProvider } from './context/PayContext.jsx';
 import { HeaderProvider } from './context/HeaderContext.jsx';
 /////////////////////////////////////////////////////////////
 import App from './App.jsx';
+import { WalletProvider } from './context/WalletContext.jsx';
 ////////////////////////////
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -22,7 +23,9 @@ createRoot(document.getElementById('root')).render(
             <ConfirmReserveProvider>
               <PayProvider>
                 <HeaderProvider>
-                  <App />
+                  <WalletProvider>
+                    <App />
+                  </WalletProvider>
                 </HeaderProvider>
               </PayProvider>
             </ConfirmReserveProvider>

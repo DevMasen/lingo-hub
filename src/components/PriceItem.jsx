@@ -1,15 +1,21 @@
-function PriceItem({ price, activePrice, onActivePrice }) {
+import { useWallet } from '../context/WalletContext';
+/////////////////////////////////////////////////////
+function PriceItem({ price }) {
+  //! Context Data
+  const { currentPrice, setCurrentPrice } = useWallet();
+
+  //! JSX
   return (
     <li
       className="flex cursor-pointer items-center justify-between rounded-md border border-indigo-500 px-3 py-4"
-      onClick={() => onActivePrice(price)}
+      onClick={() => setCurrentPrice(price)}
     >
       <div>
         <span>{new Intl.NumberFormat('fa-IR').format(price)}</span>
         <span> تومان </span>
       </div>
       <div
-        className={`flex h-5 w-5 items-center justify-center rounded-full border-indigo-500 p-[2px] transition-all duration-200 ${activePrice === price ? 'border-4' : 'border'}`}
+        className={`flex h-5 w-5 items-center justify-center rounded-full border-indigo-500 p-[2px] transition-all duration-200 ${currentPrice === price ? 'border-4' : 'border'}`}
       ></div>
     </li>
   );

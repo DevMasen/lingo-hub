@@ -1,19 +1,14 @@
-import { useState } from 'react';
 import PriceItem from './PriceItem';
+////////////////////////////////////
+//! Global const var
 const prices = [100000, 500000, 1000000, 2000000, 3000000, 5000000];
-function WalletBody() {
-  const [activePrice, setActivePrice] = useState(0);
 
-  function handleActivePrice(price) {
-    setActivePrice(price);
-  }
+function WalletBody() {
+  //! JSX
   return (
     <section>
       <p className="mx-5 my-3 flex items-center gap-3 rounded-xl border border-indigo-500 px-4 py-2 shadow-md shadow-slate-900">
-        <span className="rounded-lg bg-indigo-600 px-3 py-1 text-center text-indigo-100">
-          {' '}
-          توجه{' '}
-        </span>
+        <span className="rounded-lg bg-indigo-600 px-3 py-1 text-center text-indigo-100">توجه</span>
         <span className="text-slate-300">
           محدوده مجاز افزایش وجه حداقل <span>X</span> تومان و حداکثر <span>Y</span> تومان است.
         </span>
@@ -23,9 +18,22 @@ function WalletBody() {
         <p className="text-slate-400">مبلغ مورد نظر را انتخاب یا به صورت دستی وارد نمایید.</p>
         <ul className="mt-5 grid grid-cols-3 gap-4">
           {prices.map((price) => (
-            <PriceItem price={price} activePrice={activePrice} onActivePrice={handleActivePrice} />
+            <PriceItem price={price} />
           ))}
         </ul>
+      </div>
+      <div>
+        <h3> مبلغ دلخواه </h3>
+        <div>
+          <input type="text" placeholder="مبلغ دلخواه واریزی را وارد نمایید" />
+          <span> تومان </span>
+        </div>
+        <span> دویست هزار </span>
+        <span> تومان </span>
+      </div>
+      <div>
+        <h3> شیوه پرداخت و انتخاب درگاه </h3>
+        <ul>خالی</ul>
       </div>
     </section>
   );
