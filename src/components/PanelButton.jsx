@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
 ////////////////////////////////////
-
 function PanelButton({
   children,
   to = '',
@@ -15,7 +14,7 @@ function PanelButton({
         type={type}
         onClick={onClick}
         disabled={disabled}
-        className={`${extraClasses} flex cursor-pointer items-center justify-center rounded-xl bg-indigo-700/90 text-lg font-medium transition-all duration-300 hover:bg-indigo-500 disabled:cursor-not-allowed disabled:hover:bg-indigo-700/90`}
+        className={`${extraClasses} flex cursor-pointer items-center justify-center rounded-xl bg-indigo-700/90 text-lg font-medium transition-all duration-200 hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-indigo-700/90`}
       >
         {children}
       </button>

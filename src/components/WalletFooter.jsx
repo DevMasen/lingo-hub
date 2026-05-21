@@ -1,7 +1,8 @@
 import num2persian from 'num2persian';
+//////////////////////////////////////
 import PanelButton from '../components/PanelButton';
+////////////////////////////////////////////////////
 import { useWallet } from '../context/WalletContext';
-
 ////////////////////////////////////////////////////
 function WalletFooter() {
   //! Context Data
@@ -9,13 +10,19 @@ function WalletFooter() {
 
   //! JSX
   return (
-    <section className="border-t border-slate-300">
+    <section className="flex items-center justify-between border-t-2 border-slate-700 px-5 py-6">
       <div>
         <span> مبلغ پرداختی شما : </span>{' '}
         <span> {new Intl.NumberFormat('fa-IR').format(currentPrice)} تومان </span>{' '}
         <span>( {num2persian(currentPrice)} تومان )</span>
       </div>
-      <PanelButton> پرداخت هزینه</PanelButton>
+      <PanelButton
+        disabled={currentPrice < 100000 || currentPrice > 10000000}
+        extraClasses="px-3 py-2"
+      >
+        {' '}
+        پرداخت هزینه
+      </PanelButton>
     </section>
   );
 }

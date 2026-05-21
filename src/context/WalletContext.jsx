@@ -1,5 +1,5 @@
-import { createContext, useContext, useReducer } from 'react';
-
+import { createContext, useCallback, useContext, useReducer } from 'react';
+////////////////////////////////////////////////////////////////////////////
 const WalletContext = createContext();
 
 const initialState = {
@@ -18,9 +18,9 @@ function reducer(state, action) {
 function WalletProvider({ children }) {
   const [{ currentPrice }, dispatch] = useReducer(reducer, initialState);
 
-  function setCurrentPrice(price) {
+  const setCurrentPrice = useCallback(function setCurrentPrice(price) {
     dispatch({ type: 'wallet/setCurrentPrice', payload: price });
-  }
+  }, []);
 
   return (
     <WalletContext.Provider value={{ currentPrice, setCurrentPrice }}>

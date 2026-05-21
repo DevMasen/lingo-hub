@@ -7,7 +7,7 @@ function PriceItem({ price }) {
   //! JSX
   return (
     <li
-      className="flex cursor-pointer items-center justify-between rounded-md border border-indigo-500 px-3 py-4"
+      className="flex cursor-pointer items-center justify-between rounded-xl border border-indigo-500 px-3 py-4"
       onClick={() => setCurrentPrice(price)}
     >
       <div>
