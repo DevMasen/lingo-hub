@@ -9,6 +9,7 @@ import UserInfo, {
   loader as userLoader,
   action as CancelReserveAction,
 } from './components/UserInfo';
+import { action as changeNameAction } from './components/UserInfoHeader';
 import PasswordChange from './components/PasswordChange';
 import Support from './components/Support';
 import { action as confirmReserveAction } from './components/ConfirmReserveModal';
@@ -84,7 +85,7 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <Dashboard />,
         loader: NewsLoader,
-        // errorElement: <ErrorPage />,
+        errorElement: <ErrorPage />,
       },
       {
         path: 'reserve',
@@ -112,6 +113,13 @@ const router = createBrowserRouter([
             element: <PayModal />,
             action: payAction,
             errorElement: <ErrorPage />,
+          },
+          {
+            path: 'user/changename',
+            element: <UserInfo />,
+            loader: userLoader,
+            action: changeNameAction,
+            // errorElement: <ErrorPage />,
           },
           { path: 'password', element: <PasswordChange /> },
         ],

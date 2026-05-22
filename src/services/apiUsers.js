@@ -1,5 +1,20 @@
 const API_URL = 'http://localhost:8000';
 
+async function updateUser(userId, updatedUser, errorMessage = '') {
+  try {
+    const res = await fetch(`${API_URL}/users/${userId}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(updatedUser),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!res.ok) throw Error();
+  } catch {
+    throw Error(errorMessage);
+  }
+}
+
 export async function getUsers() {
   try {
     const res = await fetch(`${API_URL}/users`);
@@ -40,30 +55,14 @@ export async function getUser(id) {
   }
 }
 
-export async function updateUserReserveHistory(id, updatedUser) {
-  try {
-    const res = await fetch(`${API_URL}/users/${id}/`, {
-      method: 'PATCH',
-      body: JSON.stringify(updatedUser),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!res.ok) throw Error();
-  } catch {
-    throw Error('Failed creating your order');
-  }
+export async function updateUserReserveHistory(id, newHistory) {
+  updateUser(id, newHistory, 'Failed updating user history!');
 }
 
 export async function updateBalace(id, newBalance) {
-  try {
-    const res = await fetch(`${API_URL}/users/${id}`, {
-      method: 'PATCH',
-      body: JSON.stringify(newBalance),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    if (!res.ok) throw Error();
-  } catch {
-    throw Error('Failed updating Balace');
-  }
+  updateUser(id, newBalance, 'Failed updating user balance!');
+}
+
+export async function updateName(id, newNames) {
+  updateUser(id, newNames, 'Failed updating user names!');
 }
