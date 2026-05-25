@@ -27,13 +27,13 @@ function NavList() {
           <HiOutlineBookOpen />
           {isSidebarOpen && <span> رزرو اتاق </span>}
         </NavItem>
-      </section>
-
-      <section className="space-y-3 px-3">
         <NavItem extraClasses="nav-link" tooltipContent={'افزایش وجه'} to={'wallet'}>
           <BiWallet />
           {isSidebarOpen && <span> افزایش وجه </span>}
         </NavItem>
+      </section>
+
+      <section className="space-y-3 px-3">
         <NavItem extraClasses="nav-link" tooltipContent={'تنظیمات'} to={'setting'}>
           <AiOutlineSetting />
           {isSidebarOpen && <span> تنظیمات </span>}

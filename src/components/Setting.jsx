@@ -23,7 +23,7 @@ function Setting() {
   //! JSX
   return (
     <div className="grid grid-cols-1 grid-rows-[auto_1fr]">
-      <nav className="flex items-center justify-between border-b border-slate-500 bg-slate-800 px-4 py-5">
+      <nav className="flex items-center justify-between border-b border-slate-500 bg-gray-900 px-4 py-5">
         <ul className="relative flex gap-4 font-semibold text-slate-300">
           <div
             className={`absolute right-0 h-10 w-28 rounded-lg border-b-2 border-indigo-500 bg-indigo-400/5 transition-all duration-300 ${activeTab === 0 && 'mr-0'} ${activeTab === 1 && 'mr-[8rem]'} ${activeTab === 2 && 'mr-[16rem]'}`}
