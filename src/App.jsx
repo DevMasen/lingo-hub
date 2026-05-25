@@ -7,7 +7,7 @@ import Dashboard, { loader as NewsLoader } from './components/Dashboard';
 import Setting from './components/Setting';
 import UserInfo, {
   loader as userLoader,
-  action as CancelReserveAction,
+  action as cancelReserveAction,
 } from './components/UserInfo';
 import { action as changeNameAction } from './components/UserInfoHeader';
 import PasswordChange from './components/PasswordChange';
@@ -105,7 +105,7 @@ const router = createBrowserRouter([
             path: 'user',
             element: <UserInfo />,
             loader: userLoader,
-            action: CancelReserveAction,
+            action: cancelReserveAction,
             errorElement: <ErrorPage />,
           },
           {
@@ -119,7 +119,7 @@ const router = createBrowserRouter([
             element: <UserInfo />,
             loader: userLoader,
             action: changeNameAction,
-            // errorElement: <ErrorPage />,
+            errorElement: <ErrorPage />,
           },
           { path: 'password', element: <PasswordChange /> },
         ],

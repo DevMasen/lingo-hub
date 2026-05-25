@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Form, Link, useNavigate, useResolvedPath } from 'react-router';
+import { Link, useFetcher, useNavigate, useResolvedPath } from 'react-router';
 /////////////////////////////////
-import { BiPencil, BiUserCircle } from 'react-icons/bi';
+import { BiPencil, BiRefresh, BiUserCircle } from 'react-icons/bi';
 ////////////////////////////////////////////////////////
 import PanelButton from '../components/PanelButton';
 ////////////////////////////////////////////////////
@@ -9,6 +9,7 @@ import { updateName } from '../services/apiUsers';
 ///////////////////////////////////////////////////
 function UserInfoHeader({ user }) {
   //! React Router
+  const fetcher = useFetcher();
   const { pathname } = useResolvedPath();
   const navigate = useNavigate();
 
@@ -21,15 +22,15 @@ function UserInfoHeader({ user }) {
 
   //! JSX
   return (
-    <Form
+    <fetcher.Form
       method="PATCH"
       onSubmit={() => {
         setIsEditMode(false);
         setFirstnameInput('');
         setLastnameInput('');
-        navigate(-1);
+        navigate(`/app/${user.id}/setting/user`);
       }}
-      className="flex items-center gap-5 rounded-2xl bg-[linear-gradient(45deg,var(--color-indigo-900),var(--color-slate-800))] px-5 py-2"
+      className="flex items-center justify-between gap-5 rounded-2xl bg-[linear-gradient(45deg,var(--color-indigo-900),var(--color-slate-800))] px-5 py-2"
     >
       <div className="flex items-center gap-5">
         <div className="h-fit w-fit rounded-full bg-slate-800">
@@ -83,17 +84,25 @@ function UserInfoHeader({ user }) {
             </span>
           </div>
         )}
+        {!isEditMode && (
+          <Link
+            to={`/app/${user.id}/setting/user/changename`}
+            onClick={() => setIsEditMode(true)}
+            className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700"
+          >
+            <BiPencil className="h-6 w-6" />
+          </Link>
+        )}
       </div>
       {!isEditMode && (
         <Link
-          to={`/app/${user.id}/setting/user/changename`}
-          onClick={() => setIsEditMode(true)}
+          to={`/app/${user.id}/setting/user`}
           className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-slate-800 hover:text-indigo-700"
         >
-          <BiPencil className="h-6 w-6" />
+          <BiRefresh className="h-6 w-6" />
         </Link>
       )}
-    </Form>
+    </fetcher.Form>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+////////////////////////////////////////////////////
 import UserParameter from './UserParameter';
 //////////////////////////////////
 function UserParameterList({ user, date, query }) {
@@ -38,8 +39,8 @@ function UserParameterList({ user, date, query }) {
   const names = [
     { name: 'شماره تلفن', value: user.phoneNumber },
     { name: 'ایمیل', value: user.email },
-    { name: 'زبان تدریس', value: user.language, valueType: 'language' },
-    { name: 'سطح تدریس', value: user.level, valueType: 'level' },
+    { name: 'زبان تدریس', value: user.language },
+    { name: 'سطح تدریس', value: user.level },
     { name: 'وضعیت ثبت نام', value: user.signupStatus, valueType: 'status' },
     { name: 'تعداد رزرو باقی مانده', value: reserveRemainCount, valueType: 'reserveCounter' },
   ];
@@ -71,9 +72,6 @@ function UserParameterList({ user, date, query }) {
           statusValue={statusValue}
           reserveRemainRef={reserveRemainRef}
           reserveRemainCountBGColor={reserveRemainCountBG}
-          isValueEditable={
-            userProperty?.valueType === 'language' || userProperty.valueType === 'level'
-          }
         />
       ))}
     </ul>
