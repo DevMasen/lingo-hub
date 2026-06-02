@@ -1,6 +1,6 @@
 {
   "date": {
-    "reserveDate": "۱۴۰۵۰۳۰۵"
+    "reserveDate": "۱۴۰۵۰۳۱۱"
   },
   "rooms": [
     {
@@ -10,15 +10,15 @@
         null,
         [
           1,
-          "canceled"
+          "reserved"
         ],
+        null,
+        null,
+        null,
         [
           1,
           "canceled"
         ],
-        null,
-        null,
-        null,
         null,
         null,
         null,
@@ -350,9 +350,51 @@
           "date": "۱۴۰۵۰۳۰۵",
           "timePart": 1,
           "status": "canceled"
+        },
+        {
+          "id": 36,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۳۰۵",
+          "timePart": 1,
+          "status": "canceled"
+        },
+        {
+          "id": 37,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۳۰۵",
+          "timePart": 5,
+          "status": "reserved"
+        },
+        {
+          "id": 38,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۳۰۵",
+          "timePart": 4,
+          "status": "waiting"
+        },
+        {
+          "id": 39,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۳۰۵",
+          "timePart": 3,
+          "status": "waiting"
+        },
+        {
+          "id": 40,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۳۱۱",
+          "timePart": 1,
+          "status": "reserved"
+        },
+        {
+          "id": 41,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۳۱۱",
+          "timePart": 5,
+          "status": "canceled"
         }
       ],
-      "creditBalance": 0,
+      "creditBalance": 4520000,
       "maxReserveCount": 3,
       "id": 1
     },
