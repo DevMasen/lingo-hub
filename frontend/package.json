@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server --watch data/data.json --port 8000 --delay 500"
+    "server": "json-server --watch data/data.json --port 8000"
   },
   "dependencies": {
     "@fontsource/vazir": "^4.5.4",
