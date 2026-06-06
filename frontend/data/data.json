@@ -1,6 +1,6 @@
 {
   "date": {
-    "reserveDate": "۱۴۰۵۰۳۱۱"
+    "reserveDate": "۱۴۰۵۰۳۱۷"
   },
   "rooms": [
     {
@@ -8,17 +8,11 @@
       "roomName": "100",
       "timeLines": [
         null,
-        [
-          1,
-          "reserved"
-        ],
         null,
         null,
         null,
-        [
-          1,
-          "canceled"
-        ],
+        null,
+        null,
         null,
         null,
         null,
