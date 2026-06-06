@@ -1,5 +1,4 @@
 import ReserveRecord from './ReserveRecord';
-////////////////////////////////////////////
 
 function ReserveHistory({ className, userReservedRooms }) {
   return (

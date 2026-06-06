@@ -1,12 +1,13 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL;
 export async function getRooms() {
-  const res = await fetch(`${API_URL}/rooms`);
-
-  // fetch won't throw error on 400 errors (e.g. when URL is wrong), so we need to do it manually. This will then go into the catch block, where the message is set
-  if (!res.ok) throw Error('Fetch Error: code06');
-
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(`${API_URL}/rooms`);
+    if (!res.ok) throw new Error('Failed to fetch rooms!');
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err.message);
+  }
 }
 
 export async function updateTimeLines(roomId, updatedRoom) {
@@ -18,8 +19,8 @@ export async function updateTimeLines(roomId, updatedRoom) {
         'Content-Type': 'application/json',
       },
     });
-    if (!res.ok) throw Error();
-  } catch {
-    throw Error('Failed updating room');
+    if (!res.ok) throw new Error('Failed to update rooms!');
+  } catch (err) {
+    console.error(err.message);
   }
 }

@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useFetcher, useLoaderData, useParams } from 'react-router';
-//////////////////////////////////////////
+
 import DashboardHeader from './DashboardHeader';
 import Introduction from './Introduction';
 import ReserveHistory from './ReserveHistory';
 import News from './News';
-////////////////////////////////////////////
+
 import { getNews } from '../services/apiNews';
-//////////////////////////////////////////////
+
 //! Global Styles
 const sectionPartsStyles =
   'bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-indigo-900))] rounded-lg border border-slate-500 p-3';

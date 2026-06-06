@@ -1,5 +1,5 @@
 import NewsItem from './NewsItem';
-//////////////////////////////////
+
 function News({ className, news }) {
   return (
     <div className={className}>

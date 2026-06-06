@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-////////////////////////////////////
+
 function HeaderButton({ children, onClick, to, tooltipId, tooltipContent }) {
   if (to)
     return (

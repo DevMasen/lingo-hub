@@ -1,9 +1,9 @@
 import num2persian from 'num2persian';
-//////////////////////////////////////
+
 import PanelButton from '../components/PanelButton';
-////////////////////////////////////////////////////
+
 import { useWallet } from '../context/WalletContext';
-////////////////////////////////////////////////////
+
 function WalletFooter() {
   //! Context Data
   const { currentPrice } = useWallet();

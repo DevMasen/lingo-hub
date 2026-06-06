@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
-//////////////////////////////////////////////////////////////
+
 const ConfirmReserve = createContext();
 const initialState = {
   isConfirmOpen: false,

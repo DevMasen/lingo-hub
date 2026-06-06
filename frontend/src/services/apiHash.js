@@ -1,13 +1,13 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function hash(id) {
   try {
     const res = await fetch(`${API_URL}/hash/${id}`);
-    if (!res.ok) throw Error('Fetch Error: code07');
+    if (!res.ok) throw new Error('Failed to fetch hash!');
     const data = await res.json();
     return data;
-  } catch {
-    throw Error('Failed Hash Data');
+  } catch (err) {
+    console.error(err.message);
   }
 }
 
@@ -20,10 +20,10 @@ export async function createHash(hashData) {
         'Content-Type': 'application/json',
       },
     });
-    if (!res.ok) throw Error('Fetch Error: code08');
+    if (!res.ok) throw new Error('Failed to create hash!');
     const data = await res.json();
     return data;
-  } catch {
-    throw Error('Failed creating hash');
+  } catch (err) {
+    console.error(err.message);
   }
 }

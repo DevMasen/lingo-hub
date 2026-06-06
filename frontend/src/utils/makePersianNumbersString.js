@@ -1,5 +1,5 @@
 import mapToPersian from './mapToPersian';
-//////////////////////////////////////////
+
 export default function makePersianNumberString(inputString = '') {
   const charArray = inputString.split('');
   const result = charArray

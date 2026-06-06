@@ -1,11 +1,11 @@
 import { Tooltip } from 'react-tooltip';
-////////////////////////////////////////
+
 import { HiOutlineBell } from 'react-icons/hi';
-///////////////////////////////////////////////
+
 import HeaderButton from './HeaderButton';
-//////////////////////////////////////////
+
 import { useHeader } from '../context/HeaderContext';
-//////////////////////////////////////////////
+
 function UserNotifications() {
   //! Context Data
   const { isNotificationOpen, toggleNotification } = useHeader();

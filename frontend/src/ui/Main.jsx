@@ -1,5 +1,4 @@
 import HomeButton from '../components/HomeButton';
-//////////////////////////////////////////////////
 
 function Main() {
   return (

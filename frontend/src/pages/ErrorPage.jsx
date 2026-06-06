@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
-////////////////////////////////////
+
 import { BiHome } from 'react-icons/bi';
-///////////////////////////////////
+
 function ErrorPage() {
   return (
     <div className="fixed left-0 top-0 z-50 flex h-dvh w-full flex-col items-center justify-center gap-3 bg-slate-600 text-3xl font-semibold text-red-500">

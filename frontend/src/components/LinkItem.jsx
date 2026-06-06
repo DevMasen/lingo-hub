@@ -1,5 +1,4 @@
 import { Link } from 'react-router';
-/////////////////////////////////////
 
 function LinkItem({ children, to, onClick, extraClasses }) {
   return (

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-///////////////////////////////////////////
+
 import num2persian, { fa2en, moneyFormat } from 'num2persian';
 import { BsCheckCircleFill } from 'react-icons/bs';
-///////////////////////////////////////////////////////////////
+
 import PriceItem from './PriceItem';
-////////////////////////////////////
+
 import { useWallet } from '../context/WalletContext';
-////////////////////////////////////////////////////
+
 import makeNumericInput from '../utils/makeNumericInput';
-/////////////////////////////////////////////////////////
+
 //! Global const var
 const prices = [100000, 500000, 1000000, 2000000, 3000000, 5000000];
 

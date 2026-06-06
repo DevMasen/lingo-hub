@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
-////////////////////////////////////
+
 import { BsLayoutSidebarInsetReverse } from 'react-icons/bs';
-/////////////////////////////////////////////////////////////
+
 import { useSidebar } from '../context/SidebarContext';
-///////////////////////////////////////////////////////
+
 function SidebarHeader() {
   //! Context Data
   const { isSidebarOpen, toggleSidebar } = useSidebar();

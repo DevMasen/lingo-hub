@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
-/////////////////////////////////////////
+
 import PanelButton from './PanelButton';
-////////////////////////////////////////
+
 function DashboardHeader() {
   //! React Router
   const params = useParams();

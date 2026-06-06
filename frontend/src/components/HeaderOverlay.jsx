@@ -1,5 +1,5 @@
 import { useHeader } from '../context/HeaderContext';
-////////////////////////////////////////////////////
+
 function HeaderOverlay() {
   //! Context Data
   const { isNotificationOpen, toggleNotification, isProfileOpen, toggleProfile } = useHeader();

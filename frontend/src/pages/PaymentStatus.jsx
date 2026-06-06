@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useFetcher, useNavigate, useParams, useSearchParams } from 'react-router';
-////////////////////////////////////////////////////////////////////
+
 import { usePay } from '../context/PayContext';
-///////////////////////////////////////////////
 
 function PaymentStatus() {
   //! React Router

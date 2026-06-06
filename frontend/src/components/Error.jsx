@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
-////////////////////////////////////
+
 import { useAuth } from '../context/AuthContext';
 import { useSignup } from '../context/SignupContext';
-/////////////////////////////////////////////////////
+
 function Error({ error = '', toPath = '' }) {
   //! Context Data
   const { setError } = useAuth();

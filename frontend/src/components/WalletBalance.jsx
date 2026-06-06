@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-/////////////////////////////////
+
 import { Tooltip } from 'react-tooltip';
-/////////////////////////////////////////
+
 import { BiWallet } from 'react-icons/bi';
 import { GrAddCircle } from 'react-icons/gr';
-///////////////////////////////////////////////
+
 import { usePay } from '../context/PayContext';
-//////////////////////////////////////////////
+
 import HeaderButton from './HeaderButton';
-//////////////////////////////////////////
+
 function WalletBalance({ fetcher }) {
   //! Context Data
   const { userBalance, setUserBalance } = usePay();

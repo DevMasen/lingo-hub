@@ -1,12 +1,12 @@
 import { Tooltip } from 'react-tooltip';
-////////////////////////////////////////
+
 import { HiOutlineUser } from 'react-icons/hi';
-///////////////////////////////////////////////
+
 import HeaderButton from './HeaderButton';
 import ProfileBox from './ProfileBox';
-//////////////////////////////////////
+
 import { useHeader } from '../context/HeaderContext';
-/////////////////////////////////////////////////////
+
 function UserProfile({ fetcher }) {
   //! Context Data
   const { isProfileOpen, toggleProfile } = useHeader();

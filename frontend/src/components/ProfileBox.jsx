@@ -1,12 +1,12 @@
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
-//////////////////////////////////////////
+
 import LinkItem from './LinkItem';
-/////////////////////////////////////////////////
+
 import { useHeader } from '../context/HeaderContext';
-import { useExit } from '../context/ExitContex';
-//////////////////////////////////
+import { useExit } from '../context/ExitContext';
+
 function ProfileBox({ fetcher }) {
   //! Context Data
   const { toggleExitWindow } = useExit();

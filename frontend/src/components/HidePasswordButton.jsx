@@ -1,5 +1,4 @@
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
-////////////////////////////////////////////////////////
 
 function HidePasswordButton({ isPassHidden, onPassHidden }) {
   return (

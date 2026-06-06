@@ -1,12 +1,12 @@
 import { redirect, useFetcher, useSearchParams } from 'react-router';
-/////////////////////////////////////////////////////////////////////
+
 import { usePay } from '../context/PayContext';
-///////////////////////////////////////////////
-import { getUser, updateBalace, updateUserReserveHistory } from '../services/apiUsers';
+
+import { getUser, updateBalance, updateUserReserveHistory } from '../services/apiUsers';
 import { getRooms, updateTimeLines } from '../services/apiRooms';
-//////////////////////////////
+
 import Modal from '../ui/Modal';
-////////////////////////////////
+
 function PayModal() {
   //! React Router
   const fetcher = useFetcher();
@@ -47,7 +47,7 @@ export async function action({ request, params }) {
   const user = await getUser(params.userId);
   const rooms = await getRooms();
   const userBalance = user.creditBalance;
-  const newBalace = {
+  const newBalance = {
     creditBalance: userBalance - +data.cost,
   };
   const updatedUser = {
@@ -66,7 +66,7 @@ export async function action({ request, params }) {
   };
 
   if (userBalance >= +data.cost) {
-    await updateBalace(params.userId, newBalace);
+    await updateBalance(params.userId, newBalance);
     await updateUserReserveHistory(params.userId, updatedUser);
     await updateTimeLines(roomId, updatedRoom);
   }

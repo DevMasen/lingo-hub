@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useResolvedPath, Link, Outlet } from 'react-router';
-////////////////////////////////////////////////////////////
+
 function Setting() {
   //! React Router
   const { pathname } = useResolvedPath();

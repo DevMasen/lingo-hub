@@ -1,7 +1,7 @@
 import './index.css';
-//////////////////////
+
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
-//////////////////////////////////
+
 import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
 import Dashboard, { loader as NewsLoader } from './components/Dashboard';
 import Setting from './components/Setting';
@@ -15,7 +15,7 @@ import Support from './components/Support';
 import { action as confirmReserveAction } from './components/ConfirmReserveModal';
 import Wallet from './components/Wallet';
 import PayModal, { action as payAction } from './components/PayModal';
-///////////////////////////////////////////
+
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import LoginOptions, { loader as loginOptionsLoader } from './pages/LoginOptions';
@@ -29,10 +29,10 @@ import AboutUs from './pages/AboutUs';
 import ErrorPage from './pages/ErrorPage';
 import PageNotFound from './pages/PageNotFound';
 import PaymentStatus from './pages/PaymentStatus';
-////////////////////////////////////////////////
+
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
-//////////////////////////////////////
+
 const router = createBrowserRouter([
   {
     path: '/',

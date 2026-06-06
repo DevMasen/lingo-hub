@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
-//////////////////////////////////////////////////////////////
+
 const PayContext = createContext();
 const initialState = {
   isPayOpen: false,

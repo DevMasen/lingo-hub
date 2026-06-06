@@ -1,6 +1,5 @@
 import SidebarHeader from '../components/SidebarHeader';
 import MainNav from './MainNav';
-////////////////////////////////
 
 function Sidebar() {
   return (

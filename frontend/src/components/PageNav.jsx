@@ -1,8 +1,7 @@
 import { Link } from 'react-router';
-////////////////////////////////////
+
 import Logo from './Logo';
 import HomeButton from './HomeButton';
-//////////////////////////////////////
 
 function PageNav() {
   return (

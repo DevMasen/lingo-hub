@@ -1,8 +1,8 @@
 import ReservePrice from './ReservePrice';
 import PanelButton from './PanelButton';
-///////////////////////////////////////////////
+
 import { usePay } from '../context/PayContext';
-///////////////////////////////////////////////
+
 function ControlWaitingReserve({ record, fetcher }) {
   //! Context Data
   const { togglePayWindow } = usePay();

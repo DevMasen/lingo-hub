@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
-////////////////////////////////////////////////////////////////////////////
+
 const WalletContext = createContext();
 
 const initialState = {

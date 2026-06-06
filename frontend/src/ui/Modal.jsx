@@ -1,9 +1,9 @@
 import { Link, useNavigate, useParams } from 'react-router';
-////////////////////////////////////
-import { useExit } from '../context/ExitContex';
+
+import { useExit } from '../context/ExitContext';
 import { useConfirmReserve } from '../context/ConfirmReserveContext';
 import { usePay } from '../context/PayContext';
-///////////////////////////////////////////////
+
 function Modal({
   name = '',
   isOpen = false,

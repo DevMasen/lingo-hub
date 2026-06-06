@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useFetcher, useNavigate, useResolvedPath } from 'react-router';
-/////////////////////////////////
+
 import { BiPencil, BiRefresh, BiUserCircle } from 'react-icons/bi';
-////////////////////////////////////////////////////////
+
 import PanelButton from '../components/PanelButton';
-////////////////////////////////////////////////////
+
 import { updateName } from '../services/apiUsers';
-///////////////////////////////////////////////////
+
 function UserInfoHeader({ user }) {
   //! React Router
   const fetcher = useFetcher();

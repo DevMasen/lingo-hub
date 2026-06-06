@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
-//////////////////////////////////////////////////////////
+
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { BsListCheck } from 'react-icons/bs';
-////////////////////////////////////////////////
+
 import HomeButton from '../components/HomeButton';
 import LoginTabs from '../components/LoginTabs';
 import Error from '../components/Error';
-///////////////////////////////////////////////
+
 import { useAuth } from '../context/AuthContext';
 import { useSignup } from '../context/SignupContext';
-///////////////////////////////////////////////////
+
 import { useKey } from '../hooks/useKey';
-/////////////////////////////////////////
+
 import { getUsers } from '../services/apiUsers';
-////////////////////////////////////////////////////
+
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
-///////////////////////////////////////////////////
+
 //! Global Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
@@ -57,13 +57,13 @@ function LoginOptions() {
   //! Handlers
   function handleContinue() {
     switch (activeTab) {
-      case 'mobile':
+      case 'mobile': {
         if (phoneNumberInput.length < 10) {
           setError('شماره موبایل باید ۱۰ رقمی باشد.');
           setPath('');
           break;
         }
-        if (phoneNumberInput.at(0) !== '۹') {
+        if (phoneNumberInput.at(0) !== '9') {
           setError('شماره موبایل نامعتبر است.');
           setPath('');
           break;
@@ -78,7 +78,8 @@ function LoginOptions() {
         setError('');
         setPath('');
         break;
-      case 'email':
+      }
+      case 'email': {
         if (!emailInput) {
           setError('لطفا ایمیل خود را وارد کنید.');
           setPath('');
@@ -99,6 +100,7 @@ function LoginOptions() {
         setError('');
         setPath('');
         break;
+      }
       default:
         return;
     }

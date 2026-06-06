@@ -1,5 +1,5 @@
 import { useWallet } from '../context/WalletContext';
-/////////////////////////////////////////////////////
+
 function PriceItem({ price }) {
   //! Context Data
   const { currentPrice, setCurrentPrice } = useWallet();

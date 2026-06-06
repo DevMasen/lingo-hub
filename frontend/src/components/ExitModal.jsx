@@ -1,10 +1,10 @@
 import { useParams } from 'react-router';
-////////////////////////////////////
-import { useExit } from '../context/ExitContex';
+
+import { useExit } from '../context/ExitContext';
 import { useAuth } from '../context/AuthContext';
-/////////////////////////////////////////////////
+
 import Modal from '../ui/Modal';
-////////////////////////////////
+
 function ExitModal() {
   //! React Router
   const params = useParams();

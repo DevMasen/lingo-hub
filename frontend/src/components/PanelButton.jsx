@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-////////////////////////////////////
+
 function PanelButton({
   children,
   to = '',

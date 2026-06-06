@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-///////////////////////////////////
+
 import makePersianNumberString from '../utils/makePersianNumbersString';
 import mapToPersianMonth from '../utils/mapToPersianMonth';
 import mapTime from '../utils/mapTime';
-///////////////////////////////////////
+
 function ReserveRecord({
   focusReserveId = null,
   number = 0,

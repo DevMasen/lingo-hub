@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'react-router';
-/////////////////////////////////////
+
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
-////////////////////////////////////////////////////////
+
 import PanelButton from './PanelButton';
 import Error from './Error';
 import Success from './Success';
-////////////////////////////////
+
 //! Global Styles
 const inputContainerStyles =
   'flex items-center rounded-lg border px-3 py-2 transition-all duration-300 focus-within:border-indigo-700';

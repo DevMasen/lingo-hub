@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useFetcher } from 'react-router';
-///////////////////////////////////////////
+
 import ReserveRecord from './ReserveRecord';
 import ControlWaitingReserve from './ControlWaitingReserve';
 import ReserveNotFound from './ReserveNotFound';
-/////////////////////////////////////////
+
 function UserReserveList({ user, date, query }) {
   //! React Router
   const fetcher = useFetcher();

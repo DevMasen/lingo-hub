@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router';
-////////////////////////////////////////////
+
 import { CgEnter } from 'react-icons/cg';
-/////////////////////////////////////////////////
+
 import CloseFormButton from '../components/CloseFormButton';
-////////////////////////////////////////////////////////////
+
 function Login() {
   return (
     <div className="background flex h-dvh items-center justify-center">

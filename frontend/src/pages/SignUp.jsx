@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
 import { Form, redirect, useActionData, useLoaderData, useNavigation } from 'react-router';
-/////////////////////////////////////////////////////////////
+
 import { HiOutlineArrowRight, HiOutlineArrowLeft, HiOutlineClipboardList } from 'react-icons/hi';
 import { HiCheckBadge } from 'react-icons/hi2';
 import { CgEnter } from 'react-icons/cg';
-//////////////////////////////////////////
+
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import CloseFormButton from '../components/CloseFormButton';
 import HomeButton from '../components/HomeButton';
 import HidePasswordButton from '../components/HidePasswordButton';
-//////////////////////////////////////////////////////////////////
+
 import { useSignup } from '../context/SignupContext';
-/////////////////////////////////////////////////////
+
 import { useKey } from '../hooks/useKey';
-////////////////////////////////////////
+
 import { createUser, getUsers } from '../services/apiUsers';
 import { createHash } from '../services/apiHash';
-//////////////////////////////////////////////////
+
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
-///////////////////////////////////////////////////
+
 //! Global Styles
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
 const inputStyles =

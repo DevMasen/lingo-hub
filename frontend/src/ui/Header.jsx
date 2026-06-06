@@ -1,9 +1,9 @@
 import SearchBar from '../components/SearchBar';
 import HeaderOverlay from '../components/HeaderOverlay';
 import LeftHeader from '../components/LeftHeader';
-/////////////////////////////////////////////////
+
 import { useHeader } from '../context/HeaderContext';
-/////////////////////////////////////////////////
+
 function Header() {
   //! Context Data
   const { isNotificationOpen, isProfileOpen } = useHeader();

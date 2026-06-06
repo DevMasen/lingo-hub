@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-////////////////////////////////////////////////////
+
 import UserParameter from './UserParameter';
-//////////////////////////////////
+
 function UserParameterList({ user, date, query }) {
   //! Local States
   const [reserveRemainCountBG, setReserveRemainCountBg] = useState('bg-slate-800');

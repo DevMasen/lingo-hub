@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { Form, redirect, useActionData } from 'react-router';
-//////////////////////////////////////////
+
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
-/////////////////////////////////////////////////
+
 import HomeButton from '../components/HomeButton';
 import Error from '../components/Error';
-//////////////////////////////////////////////////
+
 import { useAuth } from '../context/AuthContext';
 import { refreshOTP } from '../services/apiRefresh';
 import { getOTP } from '../services/apiOTP';
-////////////////////////////////////////////////
+
 //! Global Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =

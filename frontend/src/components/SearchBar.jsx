@@ -1,7 +1,7 @@
 import { useState } from 'react';
-///////////////////////////////////
+
 import { HiOutlineSearch } from 'react-icons/hi';
-/////////////////////////////////////////////////
+
 function SearchBar() {
   //! Local States
   const [searchQuery, setSearchQuery] = useState('');

@@ -1,5 +1,4 @@
 import { useAuth } from '../context/AuthContext';
-/////////////////////////////////////////////////
 
 function LoginTabs() {
   //! Context Data

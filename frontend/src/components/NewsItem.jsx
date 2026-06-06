@@ -1,5 +1,5 @@
 import mapToPersianMonth from '../utils/mapToPersianMonth';
-///////////////////////////////////////////////////////////
+
 function NewsItem({ newsItem }) {
   return (
     <li className="flex flex-col gap-2 rounded-lg bg-slate-700 bg-opacity-70 p-3">

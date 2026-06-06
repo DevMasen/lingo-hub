@@ -2,13 +2,13 @@ import { HiOutlineBookOpen } from 'react-icons/hi';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { BiExit, BiWallet } from 'react-icons/bi';
-////////////////////////////////////////
+
 import NavItem from './NavItem';
 import ExitModal from './ExitModal';
-////////////////////////////////////////
+
 import { useSidebar } from '../context/SidebarContext';
-import { useExit } from '../context/ExitContex';
-////////////////////////////////////////////////
+import { useExit } from '../context/ExitContext';
+
 function NavList() {
   //! Context Data
   const { isSidebarOpen } = useSidebar();

@@ -1,5 +1,4 @@
 import PageNav from '../components/PageNav';
-////////////////////////////////////////////
 
 function AboutUs() {
   return (

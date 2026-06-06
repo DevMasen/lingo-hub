@@ -1,21 +1,21 @@
 import persianDate from 'persian-date/dist/persian-date';
-/////////////////////////////////////////////////////////
+
 import { getDate } from './apiDate';
-////////////////////////////////////
-const API_URL = 'http://localhost:8000';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function refreshTableData() {
   const date = await getDate();
-  const tommarrow = new persianDate(new Date().getTime() + 86400000)
+  const tomorrow = new persianDate(new Date().getTime() + 86400000)
     .format()
     .split(' ')
     .at(0)
     .split('-')
     .join('');
 
-  if (date.reserveDate === tommarrow) return;
+  if (date.reserveDate === tomorrow) return;
   const newDate = {
-    reserveDate: tommarrow,
+    reserveDate: tomorrow,
   };
   try {
     const res = await fetch(`${API_URL}/date`, {
@@ -26,9 +26,9 @@ export async function refreshTableData() {
       },
     });
 
-    if (!res.ok) throw Error('Fetch Error: code04');
-  } catch {
-    throw Error('Failed Updating Date');
+    if (!res.ok) throw new Error('Failed to update date!');
+  } catch (err) {
+    console.error(err.message);
   }
   const initialRoomState = {
     timeLines: Array.from({ length: 10 }, () => null),
@@ -42,9 +42,9 @@ export async function refreshTableData() {
           'Content-Type': 'application/json',
         },
       });
-      if (!res.ok) throw Error('Fetch Error: code05');
-    } catch {
-      throw Error('Failed Reset Rooms');
+      if (!res.ok) throw new Error('Failed to update rooms!');
+    } catch (err) {
+      console.error(err.message);
     }
   }
 }
@@ -66,8 +66,8 @@ export async function refreshOTP() {
         'Content-Type': 'application/json',
       },
     });
-    if (!res.ok) throw Error('Fetch Error: code85');
-  } catch {
-    throw Error('Failed updating OTP code');
+    if (!res.ok) throw new Error('Failed to update OTP code!');
+  } catch (err) {
+    console.error(err.message);
   }
 }
