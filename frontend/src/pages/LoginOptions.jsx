@@ -63,7 +63,7 @@ function LoginOptions() {
           setPath('');
           break;
         }
-        if (phoneNumberInput.at(0) !== '9') {
+        if (phoneNumberInput.at(0) !== '۹') {
           setError('شماره موبایل نامعتبر است.');
           setPath('');
           break;
