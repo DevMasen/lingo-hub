@@ -4,9 +4,9 @@ import { useLoaderData, useNavigate } from 'react-router';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { BsListCheck } from 'react-icons/bs';
 
-import HomeButton from '../components/HomeButton';
+import HomeButton from '../ui/HomeButton';
 import LoginTabs from '../components/LoginTabs';
-import Error from '../components/Error';
+import Error from '../ui/Error';
 
 import { useAuth } from '../context/AuthContext';
 import { useSignup } from '../context/SignupContext';
@@ -25,7 +25,10 @@ const inputStyles =
 
 function LoginOptions() {
   //! React Router
+
+  //TODO : replace with react query
   const users = useLoaderData();
+
   const navigate = useNavigate();
 
   //! Context Data
@@ -171,6 +174,7 @@ function LoginOptions() {
   );
 }
 
+//TODO : replace with react query
 export async function loader() {
   const users = await getUsers();
   return users;

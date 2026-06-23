@@ -1,4 +1,4 @@
-import SidebarHeader from '../components/SidebarHeader';
+import SidebarHeader from '../../ui/SidebarHeader';
 import MainNav from './MainNav';
 
 function Sidebar() {

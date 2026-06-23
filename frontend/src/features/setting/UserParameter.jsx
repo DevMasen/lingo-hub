@@ -1,4 +1,4 @@
-import mapToPersian from '../utils/mapToPersian';
+import mapToPersian from '../../utils/mapToPersian';
 
 function UserParameter({
   name = '',

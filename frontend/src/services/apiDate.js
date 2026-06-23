@@ -2,7 +2,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 export async function getDate() {
   try {
     const res = await fetch(`${API_URL}/date`);
-    // fetch won't throw error on 400 errors (e.g. when URL is wrong), so we need to do it manually. This will then go into the catch block, where the message is set
     if (!res.ok) throw new Error('Failed to fetch date!');
     const data = await res.json();
     return data;

@@ -3,10 +3,10 @@ import { useFetcher, useLoaderData, useParams } from 'react-router';
 
 import DashboardHeader from './DashboardHeader';
 import Introduction from './Introduction';
-import ReserveHistory from './ReserveHistory';
+import ReserveHistory from '../reserve/ReserveHistory';
 import News from './News';
 
-import { getNews } from '../services/apiNews';
+import { getNews } from '../../services/apiNews';
 
 //! Global Styles
 const sectionPartsStyles =

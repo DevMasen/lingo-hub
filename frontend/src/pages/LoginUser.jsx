@@ -4,9 +4,9 @@ import { Form, Link, redirect, useActionData } from 'react-router';
 import { AiOutlineEnter } from 'react-icons/ai';
 import { BsArrowRight } from 'react-icons/bs';
 
-import HidePasswordButton from '../components/HidePasswordButton';
-import HomeButton from '../components/HomeButton';
-import Error from '../components/Error';
+import HidePasswordButton from '../ui/HidePasswordButton';
+import HomeButton from '../ui/HomeButton';
+import Error from '../ui/Error';
 
 import { useAuth } from '../context/AuthContext';
 

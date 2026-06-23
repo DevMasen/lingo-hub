@@ -1,6 +1,6 @@
-import SearchBar from '../components/SearchBar';
-import HeaderOverlay from '../components/HeaderOverlay';
-import LeftHeader from '../components/LeftHeader';
+import SearchBar from './SearchBar';
+import HeaderOverlay from './HeaderOverlay';
+import LeftHeader from './LeftHeader';
 
 import { useHeader } from '../context/HeaderContext';
 

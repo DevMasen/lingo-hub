@@ -16,13 +16,16 @@
         null,
         [
           1,
-          "canceled"
+          "reserved"
         ],
         [
           1,
           "canceled"
         ],
-        null,
+        [
+          1,
+          "waiting"
+        ],
         null,
         null,
         null
@@ -416,9 +419,23 @@
           "date": "۱۴۰۵۰۳۱۸",
           "timePart": 4,
           "status": "canceled"
+        },
+        {
+          "id": 45,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۳۱۸",
+          "timePart": 4,
+          "status": "reserved"
+        },
+        {
+          "id": 46,
+          "roomName": "100",
+          "date": "۱۴۰۵۰۳۱۸",
+          "timePart": 6,
+          "status": "waiting"
         }
       ],
-      "creditBalance": 4280000,
+      "creditBalance": 4040000,
       "maxReserveCount": 3,
       "id": 1
     },

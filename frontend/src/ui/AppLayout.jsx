@@ -2,7 +2,7 @@ import { Outlet } from 'react-router';
 
 import MainContent from './MainContent';
 import Header from './Header';
-import Sidebar from './Sidebar';
+import Sidebar from '../features/sidebar/Sidebar';
 import Footer from './Footer';
 
 import { useSidebar } from '../context/SidebarContext';

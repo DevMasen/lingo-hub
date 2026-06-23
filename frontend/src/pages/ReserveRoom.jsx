@@ -3,13 +3,13 @@ import { useLoaderData } from 'react-router';
 import ReserveTableData from './ReserveTableDate';
 import ConfirmReserveModal from './ConfirmReserveModal';
 
-import { refreshTableData } from '../services/apiRefresh';
-import { getRooms } from '../services/apiRooms';
-import { getDate } from '../services/apiDate';
-import { getUser } from '../services/apiUsers';
+import { refreshTableData } from '../../services/apiRefresh';
+import { getRooms } from '../../services/apiRooms';
+import { getDate } from '../../services/apiDate';
+import { getUser } from '../../services/apiUsers';
 
-import makePersianNumberString from '../utils/makePersianNumbersString';
-import mapTime from '../utils/mapTime';
+import makePersianNumberString from '../../utils/makePersianNumbersString';
+import mapTime from '../../utils/mapTime';
 
 function ReserveRoom() {
   //! React Router

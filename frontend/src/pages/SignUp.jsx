@@ -5,11 +5,11 @@ import { HiOutlineArrowRight, HiOutlineArrowLeft, HiOutlineClipboardList } from 
 import { HiCheckBadge } from 'react-icons/hi2';
 import { CgEnter } from 'react-icons/cg';
 
-import Loader from '../components/Loader';
-import Error from '../components/Error';
-import CloseFormButton from '../components/CloseFormButton';
-import HomeButton from '../components/HomeButton';
-import HidePasswordButton from '../components/HidePasswordButton';
+import Loader from '../ui/Loader';
+import Error from '../ui/Error';
+import CloseFormButton from '../ui/CloseFormButton';
+import HomeButton from '../ui/HomeButton';
+import HidePasswordButton from '../ui/HidePasswordButton';
 
 import { useSignup } from '../context/SignupContext';
 

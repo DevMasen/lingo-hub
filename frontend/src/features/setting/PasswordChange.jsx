@@ -5,7 +5,7 @@ import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 
 import PanelButton from './PanelButton';
 import Error from './Error';
-import Success from './Success';
+import Success from '../ui/Success';
 
 //! Global Styles
 const inputContainerStyles =

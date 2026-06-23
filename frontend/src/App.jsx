@@ -2,18 +2,18 @@ import './index.css';
 
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
-import ReserveRoom, { loader as reserveRoomLoader } from './components/ReserveRoom';
-import Dashboard, { loader as NewsLoader } from './components/Dashboard';
-import Setting from './components/Setting';
+import ReserveRoom, { loader as reserveRoomLoader } from './features/reserve/ReserveRoom';
+import Dashboard, { loader as NewsLoader } from './features/dashboard/Dashboard';
+import Setting from './pages/Setting';
 import UserInfo, {
   loader as userLoader,
   action as cancelReserveAction,
-} from './components/UserInfo';
+} from './features/user/UserInfo';
 import { action as changeNameAction } from './components/UserInfoHeader';
 import PasswordChange from './components/PasswordChange';
-import Support from './components/Support';
-import { action as confirmReserveAction } from './components/ConfirmReserveModal';
-import Wallet from './components/Wallet';
+import Support from './pages/Support';
+import { action as confirmReserveAction } from './features/reserve/ConfirmReserveModal';
+import Wallet from './features/wallet/Wallet';
 import PayModal, { action as payAction } from './components/PayModal';
 
 import HomePage from './pages/HomePage';

@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { useExit } from '../context/ExitContext';
 import { useAuth } from '../context/AuthContext';
 
-import Modal from '../ui/Modal';
+import Modal from './Modal';
 
 function ExitModal() {
   //! React Router

@@ -2,7 +2,7 @@ import { Outlet } from 'react-router';
 
 import { CgEnter } from 'react-icons/cg';
 
-import CloseFormButton from '../components/CloseFormButton';
+import CloseFormButton from '../ui/CloseFormButton';
 
 function Login() {
   return (

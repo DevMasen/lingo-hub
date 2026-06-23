@@ -1,14 +1,14 @@
 import { redirect, useFetcher, useSearchParams } from 'react-router';
 
-import { useConfirmReserve } from '../context/ConfirmReserveContext';
+import { useConfirmReserve } from '../../context/ConfirmReserveContext';
 
-import { getRooms, updateTimeLines } from '../services/apiRooms';
-import { getUser, updateUserReserveHistory } from '../services/apiUsers';
+import { getRooms, updateTimeLines } from '../../services/apiRooms';
+import { getUser, updateUserReserveHistory } from '../../services/apiUsers';
 
-import Modal from '../ui/Modal';
+import Modal from '../../ui/Modal';
 
-import makePersianNumberString from '../utils/makePersianNumbersString';
-import mapTime from '../utils/mapTime';
+import makePersianNumberString from '../../utils/makePersianNumbersString';
+import mapTime from '../../utils/mapTime';
 
 function ConfirmReserveModal({ date }) {
   //! React Router
