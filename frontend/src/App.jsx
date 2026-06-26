@@ -6,9 +6,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import HomePage from './pages/HomePage';
 import AboutUs from './pages/AboutUs';
 import Login from './pages/Login';
-import LoginOptions from './pages/LoginOptions';
-import LoginUser from './pages/LoginUser';
-import LoginByOTP from './pages/LoginByOTP';
 import SignUp from './pages/SignUp';
 import PageNotFound from './pages/PageNotFound';
 
@@ -19,6 +16,9 @@ import Wallet from './pages/Wallet';
 import Setting from './pages/Setting';
 import Support from './pages/Support';
 
+import LoginOptions from './features/authentication/LoginOptions';
+import LoginUser from './features/authentication/LoginUser';
+import LoginByOTP from './features/authentication/LoginByOTP';
 import UserInfo from './features/setting/UserInfo';
 import PaymentStatus from './features/setting/PaymentStatus';
 import PayModal from './features/setting/PayModal';

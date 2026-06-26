@@ -38,38 +38,4 @@ function PayModal() {
   );
 }
 
-// export async function action({ request, params }) {
-//   const formData = await request.formData();
-//   const data = Object.fromEntries(formData);
-//   const user = await getUser(params.userId);
-//   const rooms = await getRooms();
-//   const userBalance = user.creditBalance;
-//   const newBalance = {
-//     creditBalance: userBalance - +data.cost,
-//   };
-//   const updatedUser = {
-//     reservedRooms: Array.from({ length: user.reservedRooms.length }, (_, k) =>
-//       k + 1 === +data.recordId
-//         ? { ...user.reservedRooms[k], status: 'reserved' }
-//         : user.reservedRooms[k]
-//     ),
-//   };
-//   const currentRoomTimeLines = rooms.find((room) => room.roomName === data.roomName)?.timeLines;
-//   const roomId = rooms.find((room) => room.roomName === data.roomName)?.id;
-//   const updatedRoom = {
-//     timeLines: Array.from({ length: currentRoomTimeLines.length }, (_, k) =>
-//       k === +data.timePartIndex ? [+params.userId, 'reserved'] : currentRoomTimeLines[k]
-//     ),
-//   };
-
-//   if (userBalance >= +data.cost) {
-//     await updateBalance(params.userId, newBalance);
-//     await updateUserReserveHistory(params.userId, updatedUser);
-//     await updateTimeLines(roomId, updatedRoom);
-//   }
-
-//   const status = userBalance - +data.cost >= 0 ? 'success' : 'failed';
-//   return redirect(`/app/${params.userId}/status?status=${status}`);
-// }
-
 export default PayModal;

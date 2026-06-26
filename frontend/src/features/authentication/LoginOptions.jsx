@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router';
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { BsListCheck } from 'react-icons/bs';
 
-import HomeButton from '../ui/HomeButton';
-import LoginTabs from '../features/authentication/LoginTabs';
-import Error from '../ui/Error';
+import HomeButton from '../../ui/HomeButton';
+import LoginTabs from './LoginTabs';
+import Error from '../../ui/Error';
 
-import { useAuth } from '../context/AuthContext';
-import { useSignup } from '../context/SignupContext';
+import { useAuth } from '../../context/AuthContext';
+import { useSignup } from '../../context/SignupContext';
 
-import { useKey } from '../hooks/useKey';
+import { useKey } from '../../hooks/useKey';
 
-import makeNumericInput from '../utils/makeNumericInput';
-import validateEmail from '../utils/validateEmail';
+import makeNumericInput from '../../utils/makeNumericInput';
+import validateEmail from '../../utils/validateEmail';
 //---
 
 //! Global Styles

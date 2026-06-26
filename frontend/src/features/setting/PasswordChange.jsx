@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Form } from 'react-router';
 
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 
@@ -72,7 +71,7 @@ function PasswordChange() {
   //TODO add action to this form
   return (
     <div className="border-b border-slate-500 p-3">
-      <Form
+      <form
         method="PATCH"
         className="flex h-full flex-col items-start gap-4 rounded-xl bg-[linear-gradient(45deg,var(--color-indigo-900),var(--color-slate-800))] p-5"
       >
@@ -158,7 +157,7 @@ function PasswordChange() {
         )}
         {error.length > 0 && <Error error={error} />}
         {successMessage.length > 0 && <Success message={successMessage} />}
-      </Form>
+      </form>
     </div>
   );
 }

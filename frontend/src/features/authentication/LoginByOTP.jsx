@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
 
-import HomeButton from '../ui/HomeButton';
-import Error from '../ui/Error';
+import HomeButton from '../../ui/HomeButton';
+import Error from '../../ui/Error';
 
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 //---
 
 //! Global Styles

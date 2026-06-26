@@ -55,48 +55,4 @@ function ConfirmReserveModal({ date }) {
   );
 }
 
-// export async function action({ request, params }) {
-//   const formData = await request.formData();
-//   const data = Object.fromEntries(formData);
-//   const rooms = await getRooms();
-//   const user = await getUser(params.userId);
-
-//   const currentRoomTimeLines = rooms.find((room) => room.roomName === data.roomName)?.timeLines;
-//   const currentRoomId = rooms.find((room) => room.roomName === data.roomName)?.id;
-//   const updatedRoom = {
-//     timeLines: Array.from({ length: 10 }, (_, i) =>
-//       i === +data.timePartIndex ? [+params.userId, 'waiting'] : currentRoomTimeLines.at(i)
-//     ),
-//   };
-//   const reserveRemainCount =
-//     user.reservedRooms.length === 0
-//       ? user.maxReserveCount
-//       : user.maxReserveCount -
-//         user.reservedRooms
-//           .filter((res) => res.date === data.date.split('/').join(''))
-//           .reduce((acc, reserve) => {
-//             if (reserve.status !== 'canceled') return acc + 1;
-//             return acc;
-//           }, 0);
-
-//   if (reserveRemainCount === 0)
-//     return redirect(`/app/${params.userId}/setting/user?reserveCountLimit=true`);
-
-//   await updateTimeLines(currentRoomId, updatedRoom);
-
-//   const newReserve = {
-//     id: user.reservedRooms.length + 1,
-//     roomName: data.roomName,
-//     date: data.date.split('/').join(''),
-//     timePart: +data.timePartIndex,
-//     status: 'waiting',
-//   };
-//   const updatedUser = {
-//     reservedRooms: [...user.reservedRooms, newReserve],
-//   };
-//   await updateUserReserveHistory(params.userId, updatedUser);
-
-//   return null;
-// }
-
 export default ConfirmReserveModal;

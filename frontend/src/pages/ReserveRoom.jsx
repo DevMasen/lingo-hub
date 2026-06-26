@@ -1,11 +1,6 @@
 import ReserveTableData from '../features/reserve/ReserveTableData';
 import ConfirmReserveModal from '../features/reserve/ConfirmReserveModal';
 
-import { refreshTableData } from '../services/apiRefresh';
-import { getRooms } from '../services/apiRooms';
-import { getDate } from '../services/apiDate';
-import { getUser } from '../services/apiUsers';
-
 import makePersianNumberString from '../utils/makePersianNumbersString';
 import mapTime from '../utils/mapTime';
 //---
@@ -172,15 +167,6 @@ function ReserveRoom() {
       )}
     </div>
   );
-}
-
-//TODO : replace with react query
-export async function loader({ params }) {
-  await refreshTableData();
-  const date = await getDate();
-  const rooms = await getRooms();
-  const user = await getUser(params.userId);
-  return { date, rooms, user };
 }
 
 export default ReserveRoom;

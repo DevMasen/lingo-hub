@@ -105,11 +105,4 @@ function UserInfoHeader({ user }) {
   );
 }
 
-// export async function action({ request, params }) {
-//   const formData = await request.formData();
-//   const data = Object.fromEntries(formData);
-//   await updateName(params.userId, data);
-//   return null;
-// }
-
 export default UserInfoHeader;
