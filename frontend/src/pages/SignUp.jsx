@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Form, redirect, useActionData, useLoaderData, useNavigation } from 'react-router';
 
 import { HiOutlineArrowRight, HiOutlineArrowLeft, HiOutlineClipboardList } from 'react-icons/hi';
 import { HiCheckBadge } from 'react-icons/hi2';
@@ -15,11 +14,9 @@ import { useSignup } from '../context/SignupContext';
 
 import { useKey } from '../hooks/useKey';
 
-import { createUser, getUsers } from '../services/apiUsers';
-import { createHash } from '../services/apiHash';
-
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
+//---
 
 //! Global Styles
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
@@ -28,13 +25,11 @@ const inputStyles =
 const inputErrorStyles = 'border-2 border-red-600 text-red-600';
 
 function SignUp() {
-  //! React Router
-  const users = useLoaderData();
-  const errors = useActionData();
-  const navigation = useNavigation();
-
-  //! Derived States
-  const isSubmitting = navigation.state === 'submitting';
+  //TODO : replace with real data
+  //! Fake Data
+  const users = [];
+  const errors = {};
+  const isSubmitting = false;
 
   //! Context Data
   const {
@@ -232,7 +227,7 @@ function SignUp() {
       {isSubmitting && <Loader />}
       <CloseFormButton />
 
-      <Form
+      <form
         method="POST"
         className="text-md w-[500px] space-y-3 overflow-auto scroll-smooth rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200"
       >
@@ -461,47 +456,9 @@ function SignUp() {
         )}
         {error.length > 0 && <Error error={error} />}
         {errors?.emptyFields && <Error error={errors?.emptyFields} />}
-      </Form>
+      </form>
     </div>
   );
-}
-
-export async function loader() {
-  const users = await getUsers();
-  return users;
-}
-
-export async function action({ request }) {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-
-  const errors = {};
-  if (data.password.length === 0) {
-    errors.emptyFields = 'لطفا مشخصات را تا انتها تکمیل کنید';
-  }
-
-  if (Object.keys(errors).length > 0) {
-    console.log(errors);
-    return errors;
-  }
-
-  const user = {
-    firstName: data.firstName,
-    lastName: data.lastName,
-    phoneNumber: data.phoneNumber,
-    language: data.language,
-    level: data.level,
-    explanation: data.explanation,
-    email: data.email,
-    signupStatus: 'waiting',
-    reservedRooms: [],
-    creditBalance: 0,
-    maxReserveCount: 3,
-  };
-  const hashData = { property: data.password };
-  await createUser(user);
-  await createHash(hashData);
-  return redirect('/login');
 }
 
 export default SignUp;

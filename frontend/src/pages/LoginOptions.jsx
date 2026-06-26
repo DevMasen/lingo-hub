@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { HiOutlineArrowLeft } from 'react-icons/hi';
 import { BsListCheck } from 'react-icons/bs';
 
 import HomeButton from '../ui/HomeButton';
-import LoginTabs from '../components/LoginTabs';
+import LoginTabs from '../features/authentication/LoginTabs';
 import Error from '../ui/Error';
 
 import { useAuth } from '../context/AuthContext';
@@ -13,10 +13,9 @@ import { useSignup } from '../context/SignupContext';
 
 import { useKey } from '../hooks/useKey';
 
-import { getUsers } from '../services/apiUsers';
-
 import makeNumericInput from '../utils/makeNumericInput';
 import validateEmail from '../utils/validateEmail';
+//---
 
 //! Global Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
@@ -26,8 +25,9 @@ const inputStyles =
 function LoginOptions() {
   //! React Router
 
-  //TODO : replace with react query
-  const users = useLoaderData();
+  //TODO : replace with real data
+  //! Fake Data
+  const users = [];
 
   const navigate = useNavigate();
 
@@ -172,12 +172,6 @@ function LoginOptions() {
       {error.length > 0 && <Error error={error} toPath={path} />}
     </>
   );
-}
-
-//TODO : replace with react query
-export async function loader() {
-  const users = await getUsers();
-  return users;
 }
 
 export default LoginOptions;

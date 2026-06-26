@@ -1,4 +1,5 @@
-import mapToPersianMonth from '../utils/mapToPersianMonth';
+import mapToPersianMonth from '../../utils/mapToPersianMonth';
+//---
 
 function NewsItem({ newsItem }) {
   return (

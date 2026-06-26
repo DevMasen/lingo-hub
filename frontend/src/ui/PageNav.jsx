@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 
 import Logo from './Logo';
 import HomeButton from './HomeButton';
+//---
 
 function PageNav() {
   return (
@@ -9,10 +10,10 @@ function PageNav() {
       <Logo />
       <ul className="flex items-center gap-6 font-medium">
         <li>
-          <Link to="/">خانه</Link>
+          <Link to="/home">خانه</Link>
         </li>
         <li>
-          <Link to="/aboutus">درباره ما</Link>
+          <Link to="/about-us">درباره ما</Link>
         </li>
         <li>
           <HomeButton to={'/login'} extraClasses={'px-3 py-2 rounded-lg'}>

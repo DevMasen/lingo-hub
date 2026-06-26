@@ -3,9 +3,10 @@ import { Form } from 'react-router';
 
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 
-import PanelButton from './PanelButton';
-import Error from './Error';
-import Success from '../ui/Success';
+import PanelButton from '../../ui/PanelButton';
+import Error from '../../ui/Error';
+import Success from '../../ui/Success';
+//---
 
 //! Global Styles
 const inputContainerStyles =

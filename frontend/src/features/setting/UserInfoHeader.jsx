@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { Link, useFetcher, useNavigate, useResolvedPath } from 'react-router';
+import { Link, useNavigate, useResolvedPath } from 'react-router';
 
 import { BiPencil, BiRefresh, BiUserCircle } from 'react-icons/bi';
 
-import PanelButton from '../components/PanelButton';
+import PanelButton from '../../ui/PanelButton';
 
-import { updateName } from '../services/apiUsers';
+//---
 
 function UserInfoHeader({ user }) {
   //! React Router
-  const fetcher = useFetcher();
   const { pathname } = useResolvedPath();
   const navigate = useNavigate();
 
@@ -22,7 +21,7 @@ function UserInfoHeader({ user }) {
 
   //! JSX
   return (
-    <fetcher.Form
+    <form
       method="PATCH"
       onSubmit={() => {
         setIsEditMode(false);
@@ -102,15 +101,15 @@ function UserInfoHeader({ user }) {
           <BiRefresh className="h-6 w-6" />
         </Link>
       )}
-    </fetcher.Form>
+    </form>
   );
 }
 
-export async function action({ request, params }) {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  await updateName(params.userId, data);
-  return null;
-}
+// export async function action({ request, params }) {
+//   const formData = await request.formData();
+//   const data = Object.fromEntries(formData);
+//   await updateName(params.userId, data);
+//   return null;
+// }
 
 export default UserInfoHeader;

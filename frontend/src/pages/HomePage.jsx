@@ -1,6 +1,6 @@
-import PageNav from '../components/PageNav';
-
+import PageNav from '../ui/PageNav';
 import Main from '../ui/Main';
+//---
 
 function HomePage() {
   return (

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router';
 
-import PanelButton from '../ui/PanelButton';
+import PanelButton from '../../ui/PanelButton';
+//---
 
 function DashboardHeader() {
   //! React Router

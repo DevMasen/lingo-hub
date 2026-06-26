@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useFetcher, useNavigate, useParams, useSearchParams } from 'react-router';
-
-import { usePay } from '../context/PayContext';
+import { useNavigate, useParams, useSearchParams } from 'react-router';
+//---
 
 function PaymentStatus() {
   //! React Router
-  const fetcher = useFetcher();
   const params = useParams();
   const [query] = useSearchParams();
   const navigate = useNavigate();
 
   //! Context Data
-  const { setUserBalance } = usePay();
+  // const { setUserBalance } = usePay();
 
   //! Local States
   const [isOpen, setIsOpen] = useState(true);
@@ -26,13 +24,6 @@ function PaymentStatus() {
   const maxMiliSecondsWait = 5000;
 
   //! Effects
-  useEffect(
-    function () {
-      if (!fetcher.data && fetcher.state === 'idle')
-        fetcher.load(`/app/${params.userId}/setting/user`);
-    },
-    [fetcher, params.userId]
-  );
   useEffect(
     function () {
       setTimeout(() => {
@@ -55,12 +46,8 @@ function PaymentStatus() {
     },
     [milliseconds]
   );
-  useEffect(
-    function () {
-      if (status === 'success') setUserBalance(fetcher.data?.user.creditBalance);
-    },
-    [status, setUserBalance, fetcher.data?.user.creditBalance]
-  );
+
+  //TODO : update user balance after success status
 
   //! JSX
   return (

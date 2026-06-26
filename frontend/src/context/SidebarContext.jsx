@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
+//---
 
 const SidebarContext = createContext();
 const initialState = {

@@ -1,4 +1,5 @@
-import NewsItem from './NewsItem';
+import NewsItem from '../dashboard/NewsItem';
+//---
 
 function News({ className, news }) {
   return (

@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { useFetcher } from 'react-router';
 
-import ReserveRecord from './ReserveRecord';
-import ControlWaitingReserve from './ControlWaitingReserve';
-import ReserveNotFound from './ReserveNotFound';
+import ReserveRecord from '../../features/reserve/ReserveRecord';
+import ControlWaitingReserve from '../../features/setting/ControlWaitingReserve';
+import ReserveNotFound from '../reserve/ReserveNotFound';
+//---
 
 function UserReserveList({ user, date, query }) {
-  //! React Router
-  const fetcher = useFetcher();
-
   //! Local States
   const [focusReserveId, setFocusReserveId] = useState(null);
 
@@ -16,12 +13,7 @@ function UserReserveList({ user, date, query }) {
   const reserveListRef = useRef(null);
 
   //! Effects
-  useEffect(
-    function () {
-      if (!fetcher.data && fetcher.state === 'idle') fetcher.load(`/app/${user.id}/reserve`);
-    },
-    [fetcher, user.id]
-  );
+
   useEffect(
     function () {
       const currentFocusReserve = user.reservedRooms
@@ -67,9 +59,7 @@ function UserReserveList({ user, date, query }) {
                 status={record.status}
                 extraClasses="w-[525px]"
               />
-              {record.status === 'waiting' && (
-                <ControlWaitingReserve record={record} fetcher={fetcher} />
-              )}
+              {record.status === 'waiting' && <ControlWaitingReserve record={record} />}
             </li>
           ))
       ) : (

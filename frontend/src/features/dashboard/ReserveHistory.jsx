@@ -1,4 +1,5 @@
-import ReserveRecord from './ReserveRecord';
+import ReserveRecord from '../reserve/ReserveRecord';
+//---
 
 function ReserveHistory({ className, userReservedRooms }) {
   return (

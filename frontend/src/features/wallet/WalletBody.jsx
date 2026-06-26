@@ -5,9 +5,10 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 
 import PriceItem from './PriceItem';
 
-import { useWallet } from '../context/WalletContext';
+import { useWallet } from '../../context/WalletContext';
 
-import makeNumericInput from '../utils/makeNumericInput';
+import makeNumericInput from '../../utils/makeNumericInput';
+//---
 
 //! Global const var
 const prices = [100000, 500000, 1000000, 2000000, 3000000, 5000000];
@@ -42,8 +43,8 @@ function WalletBody() {
         <h2 className="text-lg font-semibold text-slate-300"> ثبت وجه درخواستی </h2>
         <p className="text-slate-400">مبلغ مورد نظر را انتخاب یا به صورت دستی وارد نمایید.</p>
         <ul className="mt-3 grid grid-cols-3 gap-4">
-          {prices.map((price) => (
-            <PriceItem price={price} />
+          {prices.map((price, i) => (
+            <PriceItem price={price} key={i} />
           ))}
         </ul>
       </div>

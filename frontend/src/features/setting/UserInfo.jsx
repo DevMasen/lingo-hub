@@ -1,17 +1,76 @@
-import { useLoaderData, useSearchParams } from 'react-router';
-
-import { getUser, updateUserReserveHistory } from '../../services/apiUsers';
-import { getDate } from '../../services/apiDate';
-import { getRooms, updateTimeLines } from '../../services/apiRooms';
+import { useSearchParams } from 'react-router';
 
 import UserInfoHeader from './UserInfoHeader';
 import UserParameterList from './UserParameterList';
 import UserReserveList from './UserReserveList';
+//---
 
 function UserInfo() {
   //! React Router
   const [query] = useSearchParams();
-  const { user, date } = useLoaderData();
+
+  //TODO : replace with real data
+  //! Fake Data
+  const user = {
+    firstName: 'علی',
+    lastName: 'سیدی',
+    phoneNumber: '۹۱۶۲۰۸۶۶۱۴',
+    language: 'انگلیسی',
+    level: 'مبتدی',
+    explanation: '',
+    email: 'ali@gmail.com',
+    signupStatus: 'confirmed',
+    reservedRooms: [
+      {
+        id: 1,
+        roomName: '104',
+        date: '۱۴۰۵۰۲۲۳',
+        timePart: 2,
+        status: 'reserved',
+      },
+      {
+        id: 2,
+        roomName: '100',
+        date: '۱۴۰۵۰۲۲۳',
+        timePart: 5,
+        status: 'canceled',
+      },
+      {
+        id: 3,
+        roomName: '101',
+        date: '۱۴۰۵۰۲۲۳',
+        timePart: 1,
+        status: 'reserved',
+      },
+      {
+        id: 4,
+        roomName: '103',
+        date: '۱۴۰۵۰۲۲۳',
+        timePart: 8,
+        status: 'reserved',
+      },
+      {
+        id: 5,
+        roomName: '100',
+        date: '۱۴۰۵۰۲۲۴',
+        timePart: 2,
+        status: 'waiting',
+      },
+      {
+        id: 6,
+        roomName: '100',
+        date: '۱۴۰۵۰۲۲۴',
+        timePart: 4,
+        status: 'waiting',
+      },
+    ],
+    creditBalance: 0,
+    maxReserveCount: 3,
+    id: 2,
+  };
+  const date = {
+    reserveDate: '۱۴۰۵۰۳۱۸',
+  };
 
   //! JSX
   return (
@@ -23,42 +82,6 @@ function UserInfo() {
       </section>
     </div>
   );
-}
-
-export async function loader({ params }) {
-  const user = await getUser(params.userId);
-  const date = await getDate();
-  return { user, date };
-}
-
-export async function action({ request, params }) {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  const rooms = await getRooms();
-  const user = await getUser(params.userId);
-
-  const currentRoomTimeLines = rooms.find((room) => room.roomName === data.roomName)?.timeLines;
-  const roomId = rooms.find((room) => room.roomName === data.roomName)?.id;
-
-  const updatedRoom = {
-    timeLines: Array.from({ length: currentRoomTimeLines.length }, (_, k) =>
-      k === +data.timePartIndex ? [+params.userId, 'canceled'] : currentRoomTimeLines[k]
-    ),
-  };
-
-  await updateTimeLines(roomId, updatedRoom);
-
-  const updatedUser = {
-    reservedRooms: Array.from({ length: user.reservedRooms.length }, (_, k) =>
-      k + 1 === +data.recordId
-        ? { ...user.reservedRooms[k], status: 'canceled' }
-        : user.reservedRooms[k]
-    ),
-  };
-
-  await updateUserReserveHistory(params.userId, updatedUser);
-
-  return null;
 }
 
 export default UserInfo;

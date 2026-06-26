@@ -1,8 +1,9 @@
+import { useHeader } from '../../context/HeaderContext';
+
 import SearchBar from './SearchBar';
 import HeaderOverlay from './HeaderOverlay';
 import LeftHeader from './LeftHeader';
-
-import { useHeader } from '../context/HeaderContext';
+//---
 
 function Header() {
   //! Context Data

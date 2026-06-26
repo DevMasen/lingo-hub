@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
+//---
 
 const ExitContext = createContext();
 const initialState = {

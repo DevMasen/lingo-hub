@@ -1,19 +1,121 @@
-import { useLoaderData } from 'react-router';
+import ReserveTableData from '../features/reserve/ReserveTableData';
+import ConfirmReserveModal from '../features/reserve/ConfirmReserveModal';
 
-import ReserveTableData from './ReserveTableDate';
-import ConfirmReserveModal from './ConfirmReserveModal';
+import { refreshTableData } from '../services/apiRefresh';
+import { getRooms } from '../services/apiRooms';
+import { getDate } from '../services/apiDate';
+import { getUser } from '../services/apiUsers';
 
-import { refreshTableData } from '../../services/apiRefresh';
-import { getRooms } from '../../services/apiRooms';
-import { getDate } from '../../services/apiDate';
-import { getUser } from '../../services/apiUsers';
-
-import makePersianNumberString from '../../utils/makePersianNumbersString';
-import mapTime from '../../utils/mapTime';
+import makePersianNumberString from '../utils/makePersianNumbersString';
+import mapTime from '../utils/mapTime';
+//---
 
 function ReserveRoom() {
-  //! React Router
-  const { date, rooms, user } = useLoaderData();
+  //TODO : replace with real data
+  //! Fake Data
+  const date = {
+    reserveDate: '۱۴۰۵۰۳۱۸',
+  };
+  const rooms = [
+    {
+      id: 0,
+      roomName: '100',
+      timeLines: [
+        null,
+        null,
+        [1, 'reserved'],
+        null,
+        [1, 'reserved'],
+        [1, 'canceled'],
+        [1, 'waiting'],
+        null,
+        null,
+        null,
+      ],
+      reservePricePerHalfHour: 80000,
+    },
+    {
+      id: 1,
+      roomName: '101',
+      timeLines: [null, null, null, null, null, null, null, null, null, null],
+      reservePricePerHalfHour: 80000,
+    },
+    {
+      id: 2,
+      roomName: '102',
+      timeLines: [null, null, null, null, null, null, null, null, null, null],
+      reservePricePerHalfHour: 80000,
+    },
+    {
+      id: 3,
+      roomName: '103',
+      timeLines: [null, null, null, null, null, null, null, null, null, null],
+      reservePricePerHalfHour: 80000,
+    },
+    {
+      id: 4,
+      roomName: '104',
+      timeLines: [null, null, null, null, null, null, null, null, null, null],
+      reservePricePerHalfHour: 80000,
+    },
+  ];
+  const user = {
+    firstName: 'علی',
+    lastName: 'سیدی',
+    phoneNumber: '۹۱۶۲۰۸۶۶۱۴',
+    language: 'انگلیسی',
+    level: 'مبتدی',
+    explanation: '',
+    email: 'ali@gmail.com',
+    signupStatus: 'confirmed',
+    reservedRooms: [
+      {
+        id: 1,
+        roomName: '104',
+        date: '۱۴۰۵۰۲۲۳',
+        timePart: 2,
+        status: 'reserved',
+      },
+      {
+        id: 2,
+        roomName: '100',
+        date: '۱۴۰۵۰۲۲۳',
+        timePart: 5,
+        status: 'canceled',
+      },
+      {
+        id: 3,
+        roomName: '101',
+        date: '۱۴۰۵۰۲۲۳',
+        timePart: 1,
+        status: 'reserved',
+      },
+      {
+        id: 4,
+        roomName: '103',
+        date: '۱۴۰۵۰۲۲۳',
+        timePart: 8,
+        status: 'reserved',
+      },
+      {
+        id: 5,
+        roomName: '100',
+        date: '۱۴۰۵۰۲۲۴',
+        timePart: 2,
+        status: 'waiting',
+      },
+      {
+        id: 6,
+        roomName: '100',
+        date: '۱۴۰۵۰۲۲۴',
+        timePart: 4,
+        status: 'waiting',
+      },
+    ],
+    creditBalance: 0,
+    maxReserveCount: 3,
+    id: 2,
+  };
 
   //! Derived States
   const formatDate =
@@ -72,6 +174,7 @@ function ReserveRoom() {
   );
 }
 
+//TODO : replace with react query
 export async function loader({ params }) {
   await refreshTableData();
   const date = await getDate();

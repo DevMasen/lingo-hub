@@ -1,6 +1,7 @@
-import WalletBody from './WalletBody';
-import WalletFooter from './WalletFooter';
-import WalletHeader from './WalletHeader';
+import WalletBody from '../features/wallet/WalletBody';
+import WalletFooter from '../features/wallet/WalletFooter';
+import WalletHeader from '../features/wallet/WalletHeader';
+//---
 
 function Wallet() {
   return (

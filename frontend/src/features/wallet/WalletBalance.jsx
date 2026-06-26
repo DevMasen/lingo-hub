@@ -1,32 +1,22 @@
-import { useEffect } from 'react';
-
 import { Tooltip } from 'react-tooltip';
 
 import { BiWallet } from 'react-icons/bi';
 import { GrAddCircle } from 'react-icons/gr';
 
-import { usePay } from '../context/PayContext';
+import HeaderButton from '../header/HeaderButton';
+//---
 
-import HeaderButton from './HeaderButton';
-
-function WalletBalance({ fetcher }) {
+function WalletBalance() {
   //! Context Data
-  const { userBalance, setUserBalance } = usePay();
-
-  //! Effects
-  useEffect(
-    function () {
-      setUserBalance(+fetcher.data?.user.creditBalance);
-    },
-    [fetcher.data?.user.creditBalance, setUserBalance]
-  );
+  // const { userBalance } = usePay();
 
   //!JSX
   return (
     <div className="ml-3 flex items-center gap-2 rounded-lg border border-slate-500 p-2">
       <BiWallet className="h-6 w-6 text-slate-200" />
       <div>
-        <span> {new Intl.NumberFormat('fa-IR').format(userBalance)} </span>
+        {/* <span> {new Intl.NumberFormat('fa-IR').format(userBalance)} </span> */}
+        <span> {'<User Balance>'} </span>
         <span> تومان </span>
       </div>
       <HeaderButton to={'wallet'} tooltipId={'increase-balance'} tooltipContent={'افزایش وجه'}>

@@ -2,12 +2,13 @@ import { Tooltip } from 'react-tooltip';
 
 import { HiOutlineUser } from 'react-icons/hi';
 
+import { useHeader } from '../../context/HeaderContext';
+
 import HeaderButton from './HeaderButton';
 import ProfileBox from './ProfileBox';
+//---
 
-import { useHeader } from '../context/HeaderContext';
-
-function UserProfile({ fetcher }) {
+function UserProfile() {
   //! Context Data
   const { isProfileOpen, toggleProfile } = useHeader();
 
@@ -21,7 +22,7 @@ function UserProfile({ fetcher }) {
       <div
         className={`absolute left-0 top-9 z-40 w-64 rounded-lg border-slate-500 bg-gray-900 transition-all duration-100 ${isProfileOpen ? 'h-auto border p-3' : 'h-0 border-0 p-0'}`}
       >
-        {isProfileOpen && <ProfileBox fetcher={fetcher} />}
+        {isProfileOpen && <ProfileBox />}
       </div>
     </div>
   );

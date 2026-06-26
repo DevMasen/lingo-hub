@@ -6,8 +6,9 @@ import LinkItem from '../../ui/LinkItem';
 
 import { useHeader } from '../../context/HeaderContext';
 import { useExit } from '../../context/ExitContext';
+//---
 
-function ProfileBox({ fetcher }) {
+function ProfileBox() {
   //! Context Data
   const { toggleExitWindow } = useExit();
   const { toggleProfile } = useHeader();
@@ -16,8 +17,8 @@ function ProfileBox({ fetcher }) {
   return (
     <>
       <div className="space-y-2 border-b border-slate-500 pb-3 text-start">
-        <p> {fetcher.data?.user.firstName} </p>
-        <p className="text-slate-400"> {fetcher.data?.user.email} </p>
+        <p> {'<User First Name>'} </p>
+        <p className="text-slate-400"> {'<User Email>'} </p>
       </div>
       <ul className="mt-3 space-y-3 text-start">
         <li>

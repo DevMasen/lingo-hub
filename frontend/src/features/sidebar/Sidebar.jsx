@@ -1,5 +1,6 @@
-import SidebarHeader from '../../ui/SidebarHeader';
+import SidebarHeader from './SidebarHeader';
 import MainNav from './MainNav';
+//---
 
 function Sidebar() {
   return (

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router';
 
-import { useConfirmReserve } from '../context/ConfirmReserveContext';
+import { useConfirmReserve } from '../../context/ConfirmReserveContext';
+//---
 
 //! Global Styles
 const publicStyles = 'rounded-xl border-b border-slate-800 transition-all duration-200';

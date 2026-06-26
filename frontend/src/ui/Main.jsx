@@ -1,4 +1,5 @@
 import HomeButton from './HomeButton';
+//---
 
 function Main() {
   return (
@@ -13,7 +14,7 @@ function Main() {
         </p>
       </section>
       <div className="mt-8">
-        <HomeButton to={'login'} extraClasses={'px-5 py-3 text-lg rounded-lg'}>
+        <HomeButton to={'/login'} extraClasses={'px-5 py-3 text-lg rounded-lg'}>
           شروع همکاری
         </HomeButton>
       </div>

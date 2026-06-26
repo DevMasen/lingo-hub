@@ -1,28 +1,34 @@
-import ReservePrice from './ReservePrice';
-import PanelButton from './PanelButton';
+import ReservePrice from '../reserve/ReservePrice';
+import PanelButton from '../../ui/PanelButton';
 
 import { usePay } from '../../context/PayContext';
+//---
 
-function ControlWaitingReserve({ record, fetcher }) {
+function ControlWaitingReserve({ record }) {
   //! Context Data
   const { togglePayWindow } = usePay();
+
+  //! fake Data
+  const roomsData = [];
+  const paymentCost =
+    roomsData.find((room) => {
+      return room.roomName === record.roomName;
+    })?.reservePricePerHalfHour * 3 || 0;
 
   //! JSX
   return (
     <>
-      <ReservePrice fetcher={fetcher} record={record} />
+      <ReservePrice record={record} />
       <PanelButton
-        to={`pay?cost=${
-          fetcher.data?.rooms.find((room) => room.roomName === record.roomName)
-            .reservePricePerHalfHour * 3
-        }&recordId=${record.id}&roomName=${record.roomName}&timePartIndex=${record.timePart}`}
+        to={`pay?cost=${paymentCost}&recordId=${record.id}&roomName=${record.roomName}&timePartIndex=${record.timePart}`}
         onClick={togglePayWindow}
         extraClasses="text-sm px-5"
       >
         پرداخت
       </PanelButton>
 
-      <fetcher.Form method="PATCH">
+      {/* TODO : make a real form with react hook form */}
+      <form method="PATCH">
         <PanelButton
           type="submit"
           extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5 w-full h-full"
@@ -32,7 +38,7 @@ function ControlWaitingReserve({ record, fetcher }) {
         <input type="hidden" name="recordId" value={record.id} />
         <input type="hidden" name="roomName" value={record.roomName} />
         <input type="hidden" name="timePartIndex" value={record.timePart} />
-      </fetcher.Form>
+      </form>
     </>
   );
 }

@@ -1,8 +1,9 @@
 import num2persian from 'num2persian';
 
-import PanelButton from '../components/PanelButton';
+import PanelButton from '../../ui/PanelButton';
 
-import { useWallet } from '../context/WalletContext';
+import { useWallet } from '../../context/WalletContext';
+//---
 
 function WalletFooter() {
   //! Context Data

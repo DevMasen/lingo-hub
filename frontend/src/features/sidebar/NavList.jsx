@@ -3,11 +3,12 @@ import { AiOutlineDashboard } from 'react-icons/ai';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { BiExit, BiWallet } from 'react-icons/bi';
 
-import NavItem from '../../ui/NavItem';
+import NavItem from './NavItem';
 import ExitModal from '../../ui/ExitModal';
 
 import { useSidebar } from '../../context/SidebarContext';
 import { useExit } from '../../context/ExitContext';
+//---
 
 function NavList() {
   //! Context Data

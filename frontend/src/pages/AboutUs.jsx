@@ -1,4 +1,5 @@
-import PageNav from '../components/PageNav';
+import PageNav from '../ui/PageNav';
+//---
 
 function AboutUs() {
   return (

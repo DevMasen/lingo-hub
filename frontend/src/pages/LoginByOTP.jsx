@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { Form, redirect, useActionData } from 'react-router';
 
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
@@ -8,8 +7,7 @@ import HomeButton from '../ui/HomeButton';
 import Error from '../ui/Error';
 
 import { useAuth } from '../context/AuthContext';
-import { refreshOTP } from '../services/apiRefresh';
-import { getOTP } from '../services/apiOTP';
+//---
 
 //! Global Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
@@ -17,8 +15,9 @@ const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function LoginByOTP() {
-  //! React Router
-  const errors = useActionData();
+  //TODO : replace with real data
+  //! Fake Data
+  const errors = {};
 
   //! Local States and Refs
   const recoveryCode1Ref = useRef(null);
@@ -58,7 +57,7 @@ function LoginByOTP() {
 
   //! JSX
   return (
-    <Form method="PATCH" onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
+    <form method="PATCH" onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
       <div>
         {activeTab === 'mobile' ? (
           <h3> کد پیامک شده به شماره تلفن خود را وارد کنید </h3>
@@ -134,32 +133,8 @@ function LoginByOTP() {
         </HomeButton>
       </div>
       {errors?.wrongCode && <Error error={errors.wrongCode} />}
-    </Form>
+    </form>
   );
-}
-
-export async function loader({ params }) {
-  await refreshOTP();
-}
-
-export async function action({ request, params }) {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  const inputRecoveryCode =
-    data.recoveryCode1 + data.recoveryCode2 + data.recoveryCode3 + data.recoveryCode4;
-
-  const otpCorrectCode = await getOTP();
-
-  const errors = {};
-  if (otpCorrectCode.code !== inputRecoveryCode) {
-    errors.wrongCode = 'کد وارد شده صحیح نمیباشد';
-  }
-
-  if (Object.keys(errors).length > 0) return errors;
-
-  if (otpCorrectCode.code === inputRecoveryCode) return redirect(`/app/${params.userId}`);
-
-  return null;
 }
 
 export default LoginByOTP;

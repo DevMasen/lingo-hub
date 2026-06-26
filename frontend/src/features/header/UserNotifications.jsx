@@ -2,9 +2,11 @@ import { Tooltip } from 'react-tooltip';
 
 import { HiOutlineBell } from 'react-icons/hi';
 
+import { useHeader } from '../../context/HeaderContext';
+
 import HeaderButton from './HeaderButton';
 
-import { useHeader } from '../context/HeaderContext';
+//---
 
 function UserNotifications() {
   //! Context Data
