@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fontsource/vazir": "^4.5.4",
+    "@supabase/supabase-js": "^2.108.2",
     "json-server": "^0.17.4",
     "num2persian": "^4.3.0",
     "react": "^19.2.0",
