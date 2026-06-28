@@ -26,7 +26,7 @@
 // import { ApiError } from '../errors/ApiError';
 
 //! Supabase Client
-import { supabase } from '../client';
+import { supabase } from '../supabase';
 import { fromSupabaseError } from '../errors/ApiError';
 
 //! mapper
