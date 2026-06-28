@@ -2,7 +2,7 @@ import { NavLink } from 'react-router';
 
 import { Tooltip } from 'react-tooltip';
 
-import { useSidebar } from '../../context/SidebarContext';
+import { useSidebar } from './SidebarContext';
 //---
 
 function NavItem({

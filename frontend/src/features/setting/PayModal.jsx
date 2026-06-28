@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 
-import { usePay } from '../../context/PayContext';
+import { usePay } from './PayContext';
 
 import Modal from '../../ui/Modal';
 //---

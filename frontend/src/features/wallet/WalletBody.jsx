@@ -5,7 +5,7 @@ import { BsCheckCircleFill } from 'react-icons/bs';
 
 import PriceItem from './PriceItem';
 
-import { useWallet } from '../../context/WalletContext';
+import { useWallet } from './WalletContext';
 
 import makeNumericInput from '../../utils/makeNumericInput';
 //---

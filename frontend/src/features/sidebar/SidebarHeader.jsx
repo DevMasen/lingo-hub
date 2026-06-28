@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 import { BsLayoutSidebarInsetReverse } from 'react-icons/bs';
 
-import { useSidebar } from '../../context/SidebarContext';
+import { useSidebar } from './SidebarContext';
 //---
 
 function SidebarHeader() {

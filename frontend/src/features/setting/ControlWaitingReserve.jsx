@@ -1,7 +1,7 @@
 import ReservePrice from '../reserve/ReservePrice';
 import PanelButton from '../../ui/PanelButton';
 
-import { usePay } from '../../context/PayContext';
+import { usePay } from './PayContext';
 //---
 
 function ControlWaitingReserve({ record }) {

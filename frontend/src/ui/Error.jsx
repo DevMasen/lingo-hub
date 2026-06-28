@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import { useSignup } from '../context/SignupContext';
+import { useSignup } from '../features/authentication/SignupContext';
 //---
 
 function Error({ error = '', toPath = '' }) {

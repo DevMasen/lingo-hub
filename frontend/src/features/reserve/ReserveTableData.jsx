@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 
-import { useConfirmReserve } from '../../context/ConfirmReserveContext';
+import { useConfirmReserve } from './ConfirmReserveContext';
 //---
 
 //! Global Styles

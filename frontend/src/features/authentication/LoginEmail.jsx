@@ -6,7 +6,7 @@ import { BsListCheck } from 'react-icons/bs';
 import HomeButton from '../../ui/HomeButton';
 import Error from '../../ui/Error';
 
-import { useSignup } from '../../context/SignupContext';
+import { useSignup } from './SignupContext';
 
 import { useKey } from '../../hooks/useKey';
 

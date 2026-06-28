@@ -4,7 +4,7 @@ import { BiExit } from 'react-icons/bi';
 
 import LinkItem from '../../ui/LinkItem';
 
-import { useHeader } from '../../context/HeaderContext';
+import { useHeader } from './HeaderContext';
 import { useExit } from '../../context/ExitContext';
 //---
 

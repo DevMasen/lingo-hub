@@ -1,4 +1,4 @@
-import { useHeader } from '../../context/HeaderContext';
+import { useHeader } from './HeaderContext';
 
 import SearchBar from './SearchBar';
 import HeaderOverlay from './HeaderOverlay';

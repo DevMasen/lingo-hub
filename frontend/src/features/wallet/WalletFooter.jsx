@@ -2,7 +2,7 @@ import num2persian from 'num2persian';
 
 import PanelButton from '../../ui/PanelButton';
 
-import { useWallet } from '../../context/WalletContext';
+import { useWallet } from './WalletContext';
 //---
 
 function WalletFooter() {

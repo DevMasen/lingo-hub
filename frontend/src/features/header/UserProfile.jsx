@@ -2,7 +2,7 @@ import { Tooltip } from 'react-tooltip';
 
 import { HiOutlineUser } from 'react-icons/hi';
 
-import { useHeader } from '../../context/HeaderContext';
+import { useHeader } from './HeaderContext';
 
 import HeaderButton from './HeaderButton';
 import ProfileBox from './ProfileBox';

@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router';
 
+import { useSidebar } from '../features/sidebar/SidebarContext';
+
 import MainContent from './MainContent';
 import Header from '../features/header/Header';
 import Sidebar from '../features/sidebar/Sidebar';
 import Footer from './Footer';
-
-import { useSidebar } from '../context/SidebarContext';
 //---
 
 function AppLayout() {

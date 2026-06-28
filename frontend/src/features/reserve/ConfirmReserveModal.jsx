@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 
-import { useConfirmReserve } from '../../context/ConfirmReserveContext';
+import { useConfirmReserve } from './ConfirmReserveContext';
 
 import Modal from '../../ui/Modal';
 

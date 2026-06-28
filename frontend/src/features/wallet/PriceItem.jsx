@@ -1,4 +1,4 @@
-import { useWallet } from '../../context/WalletContext';
+import { useWallet } from './WalletContext';
 //---
 
 function PriceItem({ price }) {

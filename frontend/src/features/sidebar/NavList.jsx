@@ -6,7 +6,7 @@ import { BiExit, BiWallet } from 'react-icons/bi';
 import NavItem from './NavItem';
 import ExitModal from '../../ui/ExitModal';
 
-import { useSidebar } from '../../context/SidebarContext';
+import { useSidebar } from './SidebarContext';
 import { useExit } from '../../context/ExitContext';
 //---
 

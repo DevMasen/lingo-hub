@@ -8,7 +8,6 @@ import HeaderButton from '../header/HeaderButton';
 
 function WalletBalance() {
   //! Context Data
-  // const { userBalance } = usePay();
 
   //!JSX
   return (
