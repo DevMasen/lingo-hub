@@ -17,6 +17,7 @@ const inputStyles =
 function LoginByOTP() {
   //TODO : replace with real data
   //! Fake Data
+  //? handle errors with react-hook-form
   const errors = {};
 
   //! Local States and Refs
