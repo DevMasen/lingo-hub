@@ -16,9 +16,9 @@ import Wallet from './pages/Wallet';
 import Setting from './pages/Setting';
 import Support from './pages/Support';
 
-import LoginOptions from './features/authentication/LoginOptions';
-import LoginUser from './features/authentication/LoginUser';
-import LoginByOTP from './features/authentication/LoginByOTP';
+import LoginEmail from './features/authentication/LoginEmail';
+import LoginPassword from './features/authentication/LoginPassword';
+import LoginVerifyOTP from './features/authentication/LoginVerifyOTP';
 import UserInfo from './features/setting/UserInfo';
 import PaymentStatus from './features/setting/PaymentStatus';
 import PayModal from './features/setting/PayModal';
@@ -54,10 +54,10 @@ function App() {
         </Route>
         <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<Login />}>
-          <Route index element={<Navigate to="options" />} />
-          <Route path="options" element={<LoginOptions />} />
-          <Route path="user" element={<LoginUser />} />
-          <Route path="otp" element={<LoginByOTP />} />
+          <Route index element={<Navigate to="email" />} />
+          <Route path="email" element={<LoginEmail />} />
+          <Route path="password" element={<LoginPassword />} />
+          <Route path="otp" element={<LoginVerifyOTP />} />
         </Route>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/about-us" element={<AboutUs />} />

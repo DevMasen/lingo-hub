@@ -1,12 +1,10 @@
 import { Link } from 'react-router';
 
-import { useAuth } from '../context/AuthContext';
 import { useSignup } from '../context/SignupContext';
 //---
 
 function Error({ error = '', toPath = '' }) {
   //! Context Data
-  const { setError } = useAuth();
   const { setStep } = useSignup();
 
   //! JSX
@@ -19,7 +17,6 @@ function Error({ error = '', toPath = '' }) {
           <Link
             to={toPath}
             onClick={() => {
-              setError('');
               setStep('1');
             }}
             className="border-indigo-400 font-semibold text-indigo-300 transition-colors duration-300 hover:border-b hover:text-indigo-400"

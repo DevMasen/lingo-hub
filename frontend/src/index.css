@@ -45,13 +45,6 @@
     background-size: cover;
     background-position-y: top;
   }
-  .active-tab {
-    /* text-slate-300 */
-    border-bottom: 2px solid oklch(0.869 0.022 252.894);
-    color: oklch(0.869 0.022 252.894);
-    font-weight: 600;
-    padding-bottom: 2px;
-  }
 
   .nav-link {
     &:hover,

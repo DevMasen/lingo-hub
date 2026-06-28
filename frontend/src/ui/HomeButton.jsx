@@ -1,7 +1,4 @@
 import { Link } from 'react-router';
-
-import { useAuth } from '../context/AuthContext';
-import { useSignup } from '../context/SignupContext';
 //---
 
 function HomeButton({
@@ -13,10 +10,6 @@ function HomeButton({
   disabled,
   ref,
 }) {
-  //! Context Data
-  const { error: loginError } = useAuth();
-  const { error: signupError } = useSignup();
-
   //! JSX
   if (type === 'submit')
     return (
@@ -25,7 +18,7 @@ function HomeButton({
         onClick={onClick}
         ref={ref}
         className={`flex items-center justify-center gap-2 border-2 border-slate-800 bg-slate-900/80 text-slate-200 shadow-md shadow-slate-700 transition-all duration-200 hover:bg-slate-800 disabled:cursor-not-allowed ${extraClasses}`}
-        disabled={loginError.length > 0 || signupError.length > 0 || disabled}
+        disabled={disabled}
       >
         {children}
       </button>
@@ -37,7 +30,7 @@ function HomeButton({
       to={to}
       ref={ref}
       className={`flex items-center justify-center gap-2 border-2 border-slate-800 bg-slate-900/80 text-slate-200 shadow-md shadow-slate-700 transition-all duration-200 hover:bg-slate-800 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:ring-offset-1 disabled:cursor-not-allowed ${extraClasses}`}
-      disabled={loginError.length > 0 || signupError.length > 0}
+      disabled={disabled}
     >
       {children}
     </Link>

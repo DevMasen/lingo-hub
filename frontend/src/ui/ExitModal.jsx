@@ -1,7 +1,6 @@
 import { useParams } from 'react-router';
 
 import { useExit } from '../context/ExitContext';
-import { useAuth } from '../context/AuthContext';
 
 import Modal from './Modal';
 //---
@@ -12,7 +11,6 @@ function ExitModal() {
 
   //! Context Data
   const { isExitOpen, toggleExitWindow } = useExit();
-  const { logout } = useAuth();
 
   //! JSX
   return (
@@ -23,7 +21,7 @@ function ExitModal() {
       onClick={{
         confirm: () => {
           toggleExitWindow();
-          logout();
+          // logout();
         },
         cancel: toggleExitWindow,
       }}

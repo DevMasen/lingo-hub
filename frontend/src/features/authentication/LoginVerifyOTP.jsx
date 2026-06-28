@@ -5,8 +5,6 @@ import { AiOutlineEnter } from 'react-icons/ai';
 
 import HomeButton from '../../ui/HomeButton';
 import Error from '../../ui/Error';
-
-import { useAuth } from '../../context/AuthContext';
 //---
 
 //! Global Styles
@@ -14,10 +12,8 @@ const inputContainerStyles = 'flex items-center justify-between w-full rounded-m
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
-function LoginByOTP() {
-  //TODO : replace with real data
-  //! Fake Data
-  //? handle errors with react-hook-form
+function LoginVerifyOTP() {
+  //? handle errors with react-hook-form and auth.service.js
   const errors = {};
 
   //! Local States and Refs
@@ -32,9 +28,6 @@ function LoginByOTP() {
   const [input2, setInput2] = useState('');
   const [input3, setInput3] = useState('');
   const [input4, setInput4] = useState('');
-
-  //! Context Data
-  const { activeTab, login } = useAuth();
 
   //! Effects
   useEffect(function () {
@@ -53,18 +46,15 @@ function LoginByOTP() {
   //! Handlers
   function handleSubmit() {
     if (errors?.wrongCode) return;
-    login();
+    //TODO : handle login with auth.service.js
+    // login();
   }
 
   //! JSX
   return (
     <form method="PATCH" onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
       <div>
-        {activeTab === 'mobile' ? (
-          <h3> کد پیامک شده به شماره تلفن خود را وارد کنید </h3>
-        ) : (
-          <h3> کد ارسال شده به ایمیل خود را وارد کنید </h3>
-        )}
+        <h3> کد ارسال شده به ایمیل خود را وارد کنید </h3>
       </div>
       <div className="flex w-60 gap-3 text-lg font-semibold" dir="ltr">
         <div className={inputContainerStyles}>
@@ -138,4 +128,4 @@ function LoginByOTP() {
   );
 }
 
-export default LoginByOTP;
+export default LoginVerifyOTP;

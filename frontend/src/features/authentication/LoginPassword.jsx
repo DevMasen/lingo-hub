@@ -7,9 +7,6 @@ import { BsArrowRight } from 'react-icons/bs';
 import HidePasswordButton from '../../ui/HidePasswordButton';
 import HomeButton from '../../ui/HomeButton';
 import Error from '../../ui/Error';
-
-import { useAuth } from '../../context/AuthContext';
-
 //---
 
 //! Global Styles
@@ -17,21 +14,22 @@ const inputContainerStyles = 'flex items-center justify-between w-full rounded-m
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
-function LoginUser() {
+function LoginPassword() {
   //! React Router
   //TODO : replace with react query
   const errors = {};
 
-  //! Context Data
-  const { isPassHidden, togglePassHidden, login } = useAuth();
-
   //! Controlled Elements
   const [passwordInput, setPasswordInput] = useState('');
+
+  //! Local States
+  const [isPassHidden, setIsPassHidden] = useState(true);
 
   //! Handlers
   function handleSubmit() {
     if (errors?.wrongPassword) return;
-    login();
+    //TODO : handle login with auth.service.js
+    // login();
   }
 
   //! JSX
@@ -49,7 +47,10 @@ function LoginUser() {
           aria-required="true"
           className={`${inputStyles} ${errors && 'border-2 border-red-600'}`}
         />
-        <HidePasswordButton isPassHidden={isPassHidden} onPassHidden={togglePassHidden} />
+        <HidePasswordButton
+          isPassHidden={isPassHidden}
+          onPassHidden={() => setIsPassHidden((isHidden) => !isHidden)}
+        />
       </div>
       <div className="flex gap-3">
         <HomeButton extraClasses={'py-2 rounded-md flex-grow'} to={'/login/options'}>
@@ -77,4 +78,4 @@ function LoginUser() {
   );
 }
 
-export default LoginUser;
+export default LoginPassword;
