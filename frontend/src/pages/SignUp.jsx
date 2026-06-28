@@ -28,22 +28,13 @@ function SignUp() {
   //TODO : replace with real data
   //! Fake Data
   const users = [];
+
+  // handle validations with react-hook-form
   const errors = {};
-  const isSubmitting = false;
+  const isLoading = false;
 
   //! Context Data
-  const {
-    step,
-    error,
-    errorField,
-    setStep,
-    setError,
-    setErrorField,
-    isPassHidden,
-    isPassRepHidden,
-    toggleHidePass,
-    toggleHidePassRep,
-  } = useSignup();
+  const { step, setStep } = useSignup();
 
   //!Controlled Elements
   const [inputFirstName, setInputFirstName] = useState('');
@@ -56,6 +47,10 @@ function SignUp() {
   const [inputPassword, setInputPassword] = useState('');
   const [inputPasswordRepeat, setInputPasswordRepeat] = useState('');
 
+  //! Local States
+  const [isPassHidden, setIsPassHidden] = useState(true);
+  const [isPassRepHidden, setIsPassRepHidden] = useState(true);
+
   //! Effects
   useEffect(
     function () {
@@ -63,84 +58,8 @@ function SignUp() {
     },
     [inputPhoneNumber]
   );
-  useEffect(
-    function () {
-      if (inputEmail.length === 0) {
-        setError('');
-        setErrorField('');
-        return;
-      }
-      const isEmailValid = validateEmail(inputEmail);
-      if (!isEmailValid) {
-        setError('ایمیل معتبر نیست');
-        setErrorField('7');
-        return;
-      }
-      setError('');
-      setErrorField('');
-    },
-    [inputEmail, setError, setErrorField]
-  );
-  useEffect(
-    function () {
-      switch (step) {
-        case '1':
-          if (inputFirstName.length > 0) {
-            setError('');
-            setErrorField('');
-            break;
-          }
-          break;
-        case '2':
-          if (inputLastName.length > 0) {
-            setError('');
-            setErrorField('');
-            break;
-          }
-          break;
-        case '3':
-          if (inputPhoneNumber.length > 0) {
-            setError('');
-            setErrorField('');
-            break;
-          }
-          break;
-        default:
-          break;
-      }
-    },
-    [step, inputFirstName, inputLastName, inputPhoneNumber, setError, setErrorField]
-  );
-  useEffect(
-    function () {
-      setError('');
-      setErrorField('');
-    },
-    [step, setError, setErrorField]
-  );
-  useEffect(
-    function () {
-      if (step !== '6') return;
-      if (inputPassword.length === 0) {
-        setError('');
-        setErrorField('');
-        return;
-      }
-      if (inputPassword.length < 8) {
-        setError('رمز عبور باید حداقل ۸ کاراکتر باشد');
-        setErrorField('8');
-        return;
-      }
-      if (inputPassword !== inputPasswordRepeat) {
-        setError('رمز عبور با تکرار آن یکسان نیست');
-        setErrorField('9');
-        return;
-      }
-      setError('');
-      setErrorField('');
-    },
-    [step, inputPassword, inputPasswordRepeat, setError, setErrorField]
-  );
+
+  //TODO : implement validations with react hook-form
 
   //! Custom Hooks
   useKey('enter', handleContinue);
@@ -150,29 +69,21 @@ function SignUp() {
     switch (step) {
       case '1':
         if (!inputFirstName) {
-          setError('لطفا نام خود را وارد کنید');
-          setErrorField('1');
           break;
         }
         setStep('2');
         break;
       case '2':
         if (!inputLastName) {
-          setError('لطفا نام خانوادگی خود را وارد کنید');
-          setErrorField('2');
           break;
         }
         setStep('3');
         break;
       case '3':
         if (inputPhoneNumber.length < 10) {
-          setError('شماره موبایل باید 10 رقمی باشد');
-          setErrorField('3');
           break;
         }
         if (users.some((user) => user.phoneNumber === inputPhoneNumber)) {
-          setError('کاربر با این شماره موبایل قبلا ثبت نام کرده است.');
-          setErrorField('3');
           break;
         }
         setStep('4');
@@ -182,16 +93,9 @@ function SignUp() {
         break;
       case '5':
         if (!inputEmail) {
-          setError('لطفا ایمیل خود را وارد کنید');
-          setErrorField('7');
           break;
         }
-        if (error) break;
-        if (users.some((user) => user.email === inputEmail)) {
-          setError(' کاربر با این ایمیل قبلا ثبت نام کرده است.');
-          setErrorField('7');
-          break;
-        }
+        if (Object.keys(errors).length) break;
         setStep('6');
         break;
       default:
@@ -224,7 +128,7 @@ function SignUp() {
   //! JSX
   return (
     <div className="background flex h-dvh items-center justify-center">
-      {isSubmitting && <Loader />}
+      {isLoading && <Loader />}
       <CloseFormButton />
 
       <form
@@ -237,7 +141,7 @@ function SignUp() {
         </legend>
         {step === '1' && (
           <>
-            <div className={`${inputContainerStyles} ${errorField === '1' && 'bg-red-100'}`}>
+            <div className={`${inputContainerStyles} ${errors?.firstName && 'bg-red-100'}`}>
               <input
                 type="text"
                 value={inputFirstName}
@@ -246,7 +150,7 @@ function SignUp() {
                 required
                 aria-required="true"
                 maxLength="30"
-                className={`${inputStyles} ${errorField === '1' && inputErrorStyles}`}
+                className={`${inputStyles} ${errors?.firstName && inputErrorStyles}`}
               />
             </div>
             <div className="flex gap-3">
@@ -259,11 +163,12 @@ function SignUp() {
                 <HiOutlineArrowLeft />
               </HomeButton>
             </div>
+            {errors?.firstName && <Error error={errors?.firstName.message} />}
           </>
         )}
         {step === '2' && (
           <>
-            <div className={`${inputContainerStyles} ${errorField === '2' && 'bg-red-100'}`}>
+            <div className={`${inputContainerStyles} ${errors?.lastName && 'bg-red-100'}`}>
               <input
                 type="text"
                 value={inputLastName}
@@ -272,7 +177,7 @@ function SignUp() {
                 required
                 aria-required="true"
                 maxLength="30"
-                className={`${inputStyles} ${errorField === '2' && inputErrorStyles}`}
+                className={`${inputStyles} ${errors?.lastName && inputErrorStyles}`}
               />
             </div>
             <div className="flex gap-3">
@@ -283,11 +188,12 @@ function SignUp() {
                 <HiOutlineArrowLeft />
               </HomeButton>
             </div>
+            {errors?.lastName && <Error error={errors?.lastName.message} />}
           </>
         )}
         {step === '3' && (
           <>
-            <div className={`${inputContainerStyles} ${errorField === '3' && 'bg-red-100'}`}>
+            <div className={`${inputContainerStyles} ${errors?.phoneNumber && 'bg-red-100'}`}>
               <input
                 type="text"
                 value={inputPhoneNumber}
@@ -296,7 +202,7 @@ function SignUp() {
                 required
                 aria-required="true"
                 maxLength="10"
-                className={`${inputStyles} ${errorField === '3' && inputErrorStyles}`}
+                className={`${inputStyles} ${errors?.phoneNumber && inputErrorStyles}`}
               />
               <span className="w-18 flex items-center justify-center gap-2 px-6 text-slate-800">
                 <span className="flex gap-1">
@@ -314,17 +220,17 @@ function SignUp() {
                 <HiOutlineArrowLeft />
               </HomeButton>
             </div>
+            {errors?.phoneNumber && <Error error={errors?.phoneNumber.message} />}
           </>
         )}
 
         {step === '4' && (
           <>
             <div className={`${inputContainerStyles} flex px-3 py-2`}>
-              <label className="flex w-36 items-center font-semibold" htmlFor="lang">
+              <label className="flex w-36 items-center font-semibold" htmlFor="language">
                 زبان تدریس :
               </label>
               <select
-                id="lang"
                 value={inputLanguage}
                 onChange={(e) => setInputLanguage(e.target.value)}
                 required
@@ -342,7 +248,6 @@ function SignUp() {
                 سطح تدریس:
               </label>
               <select
-                id="level"
                 value={inputLevel}
                 onChange={(e) => setInputLevel(e.target.value)}
                 required
@@ -380,7 +285,7 @@ function SignUp() {
 
         {step === '5' && (
           <>
-            <div className={`${inputContainerStyles} ${errorField === '7' && 'bg-red-100'}`}>
+            <div className={`${inputContainerStyles} ${errors?.email && 'bg-red-100'}`}>
               <input
                 type="email"
                 value={inputEmail}
@@ -389,7 +294,7 @@ function SignUp() {
                 required
                 aria-required="true"
                 maxLength="40"
-                className={`${inputStyles} ${errorField === '7' && inputErrorStyles}`}
+                className={`${inputStyles} ${errors?.email && inputErrorStyles}`}
               />
             </div>
             <div className="flex gap-3">
@@ -400,19 +305,22 @@ function SignUp() {
                 <HiOutlineArrowLeft />
               </HomeButton>
             </div>
+            {errors?.email && <Error error={errors?.email.message} />}
           </>
         )}
         {step === '6' && (
+          //TODO : do registration inputs from here
           <>
-            <input type="hidden" name="firstName" value={inputFirstName} />
-            <input type="hidden" name="lastName" value={inputLastName} />
-            <input type="hidden" name="phoneNumber" value={inputPhoneNumber} />
-            <input type="hidden" name="language" value={inputLanguage} />
-            <input type="hidden" name="level" value={inputLevel} />
-            <input type="hidden" name="explanation" value={inputExplanation} />
-            <input type="hidden" name="email" value={inputEmail} />
-            <div className={`${inputContainerStyles} ${errorField === '8' && 'bg-red-100'}`}>
+            <input id="firstName" type="hidden" name="firstName" value={inputFirstName} />
+            <input id="lastName" type="hidden" name="lastName" value={inputLastName} />
+            <input id="phoneNumber" type="hidden" name="phoneNumber" value={inputPhoneNumber} />
+            <input id="language" type="hidden" name="language" value={inputLanguage} />
+            <input id="level" type="hidden" name="level" value={inputLevel} />
+            <input id="explanation" type="hidden" name="explanation" value={inputExplanation} />
+            <input id="email" type="hidden" name="email" value={inputEmail} />
+            <div className={`${inputContainerStyles} ${errors?.password && 'bg-red-100'}`}>
               <input
+                id="password"
                 type={isPassHidden ? 'password' : 'text'}
                 name="password"
                 value={inputPassword}
@@ -421,12 +329,16 @@ function SignUp() {
                 required
                 aria-required="true"
                 maxLength="16"
-                className={`${inputStyles} ${errorField === '8' && inputErrorStyles}`}
+                className={`${inputStyles} ${errors?.password && inputErrorStyles}`}
               />
-              <HidePasswordButton isPassHidden={isPassHidden} onPassHidden={toggleHidePass} />
+              <HidePasswordButton
+                isPassHidden={isPassHidden}
+                onPassHidden={() => setIsPassHidden((hidden) => !hidden)}
+              />
             </div>
-            <div className={`${inputContainerStyles} ${errorField === '9' && 'bg-red-100'}`}>
+            <div className={`${inputContainerStyles} ${errors?.passwordRepeat && 'bg-red-100'}`}>
               <input
+                id="passwordRepeat"
                 type={isPassRepHidden ? 'password' : 'text'}
                 name="password"
                 value={inputPasswordRepeat}
@@ -435,9 +347,12 @@ function SignUp() {
                 required
                 aria-required="true"
                 maxLength="16"
-                className={`${inputStyles} ${errorField === '9' && inputErrorStyles}`}
+                className={`${inputStyles} ${errors?.passwordRepeat && inputErrorStyles}`}
               />
-              <HidePasswordButton isPassHidden={isPassRepHidden} onPassHidden={toggleHidePassRep} />
+              <HidePasswordButton
+                isPassHidden={isPassRepHidden}
+                onPassHidden={() => setIsPassRepHidden((hidden) => !hidden)}
+              />
             </div>
             <div className="flex gap-3">
               <HomeButton extraClasses={'py-2 rounded-md flex-grow'} onClick={handlePrevious}>
@@ -452,10 +367,10 @@ function SignUp() {
                 <HiCheckBadge className="text-xl" />
               </HomeButton>
             </div>
+            {errors?.password && <Error error={errors?.password.message} />}
+            {errors?.passwordRepeat && <Error error={errors?.passwordRepeat.message} />}
           </>
         )}
-        {error.length > 0 && <Error error={error} />}
-        {errors?.emptyFields && <Error error={errors?.emptyFields} />}
       </form>
     </div>
   );

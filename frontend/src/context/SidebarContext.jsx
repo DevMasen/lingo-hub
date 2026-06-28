@@ -1,28 +1,13 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useState } from 'react';
 //---
 
 const SidebarContext = createContext();
-const initialState = {
-  isSidebarOpen: true,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'sidebar/toggleSidebar':
-      return {
-        ...state,
-        isSidebarOpen: !state.isSidebarOpen,
-      };
-    default:
-      throw new Error('Unknown Action!');
-  }
-}
 
 function SidebarProvider({ children }) {
-  const [{ isSidebarOpen }, dispatch] = useReducer(reducer, initialState);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   function toggleSidebar() {
-    dispatch({ type: 'sidebar/toggleSidebar' });
+    setIsSidebarOpen((open) => !open);
   }
 
   return (

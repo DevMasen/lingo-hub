@@ -8,9 +8,6 @@ function PaymentStatus() {
   const [query] = useSearchParams();
   const navigate = useNavigate();
 
-  //! Context Data
-  // const { setUserBalance } = usePay();
-
   //! Local States
   const [isOpen, setIsOpen] = useState(true);
   const [milliseconds, setmilliseconds] = useState(0);

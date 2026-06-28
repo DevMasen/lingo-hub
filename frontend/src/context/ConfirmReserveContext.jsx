@@ -1,36 +1,17 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useState } from 'react';
 //---
 
 const ConfirmReserve = createContext();
-const initialState = {
-  isConfirmOpen: false,
-};
-function reducer(state, action) {
-  switch (action.type) {
-    case 'confirm/toggleConfirmWindow':
-      return {
-        ...state,
-        isConfirmOpen: !state.isConfirmOpen,
-      };
-    case 'confirm/hideConfirmWindow':
-      return {
-        ...state,
-        isConfirmOpen: false,
-      };
-    default:
-      throw new Error('Action Unknown!');
-  }
-}
 
 function ConfirmReserveProvider({ children }) {
-  const [{ isConfirmOpen }, dispatch] = useReducer(reducer, initialState);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   function toggleConfirmWindow() {
-    dispatch({ type: 'confirm/toggleConfirmWindow' });
+    setIsConfirmOpen((open) => !open);
   }
 
   function hideConfirmWindow() {
-    dispatch({ type: 'confirm/hideConfirmWindow' });
+    setIsConfirmOpen(false);
   }
 
   return (
@@ -41,10 +22,10 @@ function ConfirmReserveProvider({ children }) {
 }
 
 function useConfirmReserve() {
-  const contex = useContext(ConfirmReserve);
-  if (contex === undefined)
+  const context = useContext(ConfirmReserve);
+  if (context === undefined)
     throw new Error('ConfirmReserveContext used outside of ConfirmReserveProvider!');
-  return contex;
+  return context;
 }
 
 export { ConfirmReserveProvider, useConfirmReserve };

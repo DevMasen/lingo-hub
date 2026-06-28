@@ -1,39 +1,18 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useState } from 'react';
 //---
 
 const HeaderContext = createContext();
 
-const initialState = {
-  isNotificationOpen: false,
-  isProfileOpen: false,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'header/toggleNotification':
-      return {
-        ...state,
-        isNotificationOpen: !state.isNotificationOpen,
-      };
-    case 'header/toggleProfile':
-      return {
-        ...state,
-        isProfileOpen: !state.isProfileOpen,
-      };
-    default:
-      throw new Error('Unknown Action!');
-  }
-}
-
 function HeaderProvider({ children }) {
-  const [{ isNotificationOpen, isProfileOpen }, dispatch] = useReducer(reducer, initialState);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
   function toggleNotification() {
-    dispatch({ type: 'header/toggleNotification' });
+    setIsNotificationOpen((open) => !open);
   }
 
   function toggleProfile() {
-    dispatch({ type: 'header/toggleProfile' });
+    setIsProfileOpen((open) => !open);
   }
 
   return (
