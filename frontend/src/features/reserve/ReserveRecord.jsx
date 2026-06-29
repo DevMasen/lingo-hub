@@ -16,7 +16,7 @@ function ReserveRecord({
   extraClasses = '',
 }) {
   //! Local States
-  const [recordBGColor, setRecordBGColor] = useState('bg-slate-700');
+  const [recordBGColor, setRecordBGColor] = useState('bg-[var(--color-slate-700)]');
 
   //! Derived States
   const { startTime, stopTime } = mapTime(timePart);
@@ -25,9 +25,9 @@ function ReserveRecord({
   useEffect(
     function () {
       if (focusReserveId === null || focusReserveId !== roomId) return;
-      setRecordBGColor('bg-slate-500');
+      setRecordBGColor('bg-[var(--color-slate-500)]');
       setTimeout(function () {
-        setRecordBGColor('bg-slate-700');
+        setRecordBGColor('bg-[var(--color-slate-700)]');
       }, 700);
     },
     [focusReserveId, roomId]

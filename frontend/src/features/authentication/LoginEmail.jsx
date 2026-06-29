@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-
-import { HiOutlineArrowLeft } from 'react-icons/hi';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { BsListCheck } from 'react-icons/bs';
 
 import HomeButton from '../../ui/HomeButton';
@@ -10,56 +9,87 @@ import { useSignup } from './SignupContext';
 
 import { useKey } from '../../hooks/useKey';
 
-import makeNumericInput from '../../utils/makeNumericInput';
+import HidePasswordButton from '../../ui/HidePasswordButton';
+import { Link } from 'react-router';
+import { AiOutlineEnter } from 'react-icons/ai';
+import toast from 'react-hot-toast';
 //---
 
 //! Global Styles
-const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
+const inputContainerStyles =
+  'flex items-center justify-between w-full rounded-md bg-[var(--color-slate-300)]';
 const inputStyles =
-  'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
+  'w-full rounded-md bg-inherit p-3 text-[var(--color-slate-800)] focus:bg-[var(--color-slate-50)] focus:outline-none focus:ring focus:ring-[var(--color-slate-700)] focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function LoginEmail() {
   //TODO : replace with real data
 
   //? Handle errors with react-hook-form
-  const error = [];
+  //! React Hook Form
+  const { register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
 
   //! Context Data
   const { setStep } = useSignup();
-
-  //! Controlled Elements
-  const [phoneNumberInput, setPhoneNumberInput] = useState('');
-  const [emailInput, setEmailInput] = useState('');
-
-  //! Effects
-  useEffect(
-    function () {
-      setPhoneNumberInput((cur) => makeNumericInput(cur));
-    },
-    [phoneNumberInput]
-  );
 
   //! Handlers
   function handleContinue() {
     //TODO : implement this feature later
   }
+  function onSuccess({ email, password }) {
+    toast.success('ورود با موفقیت انجام شد');
+  }
+
+  function onError(errors) {
+    console.error(errors);
+  }
 
   //! Custom Hooks
   useKey('enter', handleContinue);
 
+  //! Local States
+  const [isPassHidden, setIsPassHidden] = useState(true);
+
   //! JSX
   return (
-    <>
+    <form onSubmit={handleSubmit(onSuccess, onError)} className="flex flex-col gap-3">
       <div className={inputContainerStyles}>
         <input
+          id="email"
           type="email"
           name="email"
-          value={emailInput}
-          onChange={(e) => setEmailInput(e.target.value)}
           placeholder="آدرس ایمیل"
-          required
           aria-required="true"
-          className={`${inputStyles} ${error.length && 'border-2 border-red-600'}`}
+          className={`${inputStyles} ${errors?.email && 'border-2 border-[var(--color-red-600)]'}`}
+          {...register('email', {
+            required: 'لطفا ایمیل خود را وارد کنید',
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: 'ایمیل معتبر نیست',
+            },
+          })}
+        />
+      </div>
+      <div className={inputContainerStyles}>
+        <input
+          id="password"
+          type={isPassHidden ? 'password' : 'text'}
+          name="password"
+          placeholder="رمز عبور"
+          maxLength="16"
+          aria-required="true"
+          className={`${inputStyles} ${errors?.password && 'border-2 border-[var(--color-red-600)]'}`}
+          {...register('password', {
+            required: 'لطفا رمز عبور خود را وارد کنید',
+            minLength: {
+              value: 6,
+              message: 'رمز عبور باید حداقل ۶ کاراکتر باشد',
+            },
+          })}
+        />
+        <HidePasswordButton
+          isPassHidden={isPassHidden}
+          onPassHidden={() => setIsPassHidden((isHidden) => !isHidden)}
         />
       </div>
 
@@ -72,15 +102,28 @@ function LoginEmail() {
           extraClasses={'py-2 rounded-md grow'}
         >
           <span className="text-lg font-medium">ثبت‌نام</span>{' '}
-          <BsListCheck className="text-xl text-slate-300" />
+          <BsListCheck className="text-xl text-[var(--color-slate-300)]" />
         </HomeButton>
-        <HomeButton extraClasses={'py-2 px-12 rounded-md grow'} onClick={handleContinue}>
-          <span className="text-lg font-medium">ادامه</span>
-          <HiOutlineArrowLeft />
+        <HomeButton
+          type="submit"
+          disabled={Object.keys(errors).length}
+          extraClasses={'px-5 py-2 rounded-md flex-grow'}
+        >
+          <span className="text-lg font-medium">ورود</span>
+          <AiOutlineEnter className="text-2xl text-[var(--color-slate-300)]" />
         </HomeButton>
       </div>
-      {error.length > 0 && <Error error={error} />}
-    </>
+      <div className="flex h-6 justify-between px-5 font-medium text-[var(--color-indigo-400)]">
+        <Link
+          to={'/login/otp'}
+          className="transition-colors duration-200 hover:border-b hover:border-[var(--color-indigo-300)] hover:text-[var(--color-indigo-300)]"
+        >
+          فراموشی رمز عبور
+        </Link>
+      </div>
+      {errors?.email && <Error error={errors.email.message} />}
+      {errors?.password && <Error error={errors.password.message} />}
+    </form>
   );
 }
 

@@ -6,7 +6,7 @@ function LinkItem({ children, to, onClick, extraClasses }) {
     <Link
       to={to}
       onClick={onClick}
-      className={`flex items-center gap-2 rounded-lg p-3 transition-all duration-300 hover:bg-slate-800 ${extraClasses}`}
+      className={`flex items-center gap-2 rounded-lg p-3 transition-all duration-300 hover:bg-[var(--color-slate-800)] ${extraClasses}`}
     >
       {children}
     </Link>

@@ -3,8 +3,45 @@
 @tailwind utilities;
 
 :root {
-  --color-slate-800: oklch(0.279 0.041 260.031);
-  --color-indigo-900: oklch(0.208 0.042 265.755);
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+
+  --color-gray-400: #9ca3af;
+  --color-gray-900: #111827;
+
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+
+  --color-yellow-100: #fef9c3;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-800: #166534;
+
+  --color-indigo-100: #e0e7ff;
+  --color-indigo-200: #c7d2fe;
+  --color-indigo-300: #a5b4fc;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-700: #4338ca;
+  --color-indigo-900: #312e81;
+  --color-indigo-950: #312e81;
 }
 
 @layer base {
@@ -14,12 +51,12 @@
     appearance: none;
   }
   progress[value]::-webkit-progress-bar {
-    background-color: #eee;
+    background-color: var(--color-slate-200);
     border-radius: 2px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
   }
   progress[value]::-webkit-progress-value {
-    background-color: #444;
+    background-color: var(--color-slate-800);
 
     border-radius: 2px;
     background-size:
@@ -51,10 +88,8 @@
     &:active,
     &.active:link,
     &.active:visited {
-      /* bg-slate-200 */
-      color: oklch(0.929 0.013 255.508);
-      /* bg-slate-800 */
-      background-color: oklch(0.279 0.041 260.031);
+      color: var(--color-slate-200);
+      background-color: var(--color-slate-800);
       /* rounded-xl */
       border-radius: 0.75rem;
     }
@@ -62,8 +97,7 @@
     & svg {
       width: 1.5rem;
       height: 1.5rem;
-      /* text-slate-500 */
-      color: oklch(0.554 0.046 257.417);
+      color: var(--color-slate-500);
       transition: all 0.3s;
     }
 
@@ -71,8 +105,7 @@
     &:active svg,
     &.active:link svg,
     &.active:visited svg {
-      /* text-indigo-700 */
-      color: oklch(0.457 0.24 277.023);
+      color: var(--color-indigo-700);
     }
   }
 
@@ -80,21 +113,20 @@
     & svg {
       width: 1.5rem;
       height: 1.5rem;
-      /* text-slate-500 */
-      color: oklch(0.554 0.046 257.417);
+      color: var(--color-slate-500);
       transition: all 0.3s;
     }
 
     &:hover svg {
       /* text-red-600 */
-      color: oklch(0.577 0.245 27.325);
+      color: var(--color-red-600);
     }
   }
 
   .loader {
     width: 60px;
     aspect-ratio: 0.65;
-    --c: no-repeat linear-gradient(theme(colors.slate.800) 0 0);
+    --c: no-repeat linear-gradient(var(--color-slate-800) 0 0);
     background:
       var(--c) 0% 50%,
       var(--c) 50% 50%,

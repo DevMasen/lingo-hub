@@ -16,26 +16,26 @@ function ProfileBox() {
   //!JSX
   return (
     <>
-      <div className="space-y-2 border-b border-slate-500 pb-3 text-start">
+      <div className="space-y-2 border-b border-[var(--color-slate-500)] pb-3 text-start">
         <p> {'<User First Name>'} </p>
-        <p className="text-slate-400"> {'<User Email>'} </p>
+        <p className="text-[var(--color-slate-400)]"> {'<User Email>'} </p>
       </div>
       <ul className="mt-3 space-y-3 text-start">
         <li>
-          <LinkItem to={'setting'} onClick={toggleProfile}>
-            <HiOutlineUserCircle className="h-[1.25rem] w-[1.25rem] text-slate-500" />
+          <LinkItem to={'/setting'} onClick={toggleProfile}>
+            <HiOutlineUserCircle className="h-[1.25rem] w-[1.25rem] text-[var(--color-slate-500)]" />
             <span> پروفایل </span>
           </LinkItem>
         </li>
         <li>
-          <LinkItem to={'setting/password'} onClick={toggleProfile}>
-            <CgPassword className="h-[1.25rem] w-[1.25rem] text-slate-500" />
+          <LinkItem to={'/setting/change-password'} onClick={toggleProfile}>
+            <CgPassword className="h-[1.25rem] w-[1.25rem] text-[var(--color-slate-500)]" />
             <span> تغییر رمز عبور </span>
           </LinkItem>
         </li>
         <li>
           <LinkItem
-            extraClasses={'text-red-600'}
+            extraClasses={'text-[var(--color-red-600)]'}
             onClick={() => {
               toggleExitWindow();
               toggleProfile();

@@ -31,7 +31,7 @@ function ControlWaitingReserve({ record }) {
       <form method="PATCH">
         <PanelButton
           type="submit"
-          extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5 w-full h-full"
+          extraClasses="text-sm bg-[var(--color-red-800)] border-red-300 hover:bg-[var(--color-red-700)] px-5 w-full h-full"
         >
           لغو
         </PanelButton>

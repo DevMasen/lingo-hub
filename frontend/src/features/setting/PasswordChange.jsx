@@ -9,9 +9,10 @@ import Success from '../../ui/Success';
 
 //! Global Styles
 const inputContainerStyles =
-  'flex items-center rounded-lg border px-3 py-2 transition-all duration-300 focus-within:border-indigo-700';
+  'flex items-center rounded-lg border px-3 py-2 transition-all duration-300 focus-within:border-[var(--color-indigo-700)]';
 const inputStyles = 'bg-inherit outline-none w-80';
-const hideButtonStyles = 'text-slate-500 transition-colors duration-300 hover:text-indigo-700';
+const hideButtonStyles =
+  'text-[var(--color-slate-500)] transition-colors duration-300 hover:text-[var(--color-indigo-700)]';
 
 function PasswordChange() {
   //! Local States
@@ -70,14 +71,14 @@ function PasswordChange() {
   //! JSX
   //TODO add action to this form
   return (
-    <div className="border-b border-slate-500 p-3">
+    <div className="border-b border-[var(--color-slate-500)] p-3">
       <form
         method="PATCH"
-        className="flex h-full flex-col items-start gap-4 rounded-xl bg-[linear-gradient(45deg,var(--color-indigo-900),var(--color-slate-800))] p-5"
+        className="flex h-full flex-col items-start gap-4 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-gray-900))] p-5"
       >
         <div
           className={
-            `${errorField === '1' ? 'border-red-700 focus-within:border-red-700' : 'border-slate-500'} ` +
+            `${errorField === '1' ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ` +
             inputContainerStyles
           }
         >
@@ -102,7 +103,7 @@ function PasswordChange() {
         </div>
         <div
           className={
-            `${errorField === '2' ? 'border-red-700 focus-within:border-red-700' : 'border-slate-500'} ` +
+            `${errorField === '2' ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ` +
             inputContainerStyles
           }
         >
@@ -127,7 +128,7 @@ function PasswordChange() {
         </div>
         <div
           className={
-            `${errorField === '3' ? 'border-red-700 focus-within:border-red-700' : 'border-slate-500'} ` +
+            `${errorField === '3' ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ` +
             inputContainerStyles
           }
         >

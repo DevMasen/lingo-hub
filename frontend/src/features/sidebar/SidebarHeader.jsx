@@ -12,7 +12,7 @@ function SidebarHeader() {
   //! JSX
   return (
     <div
-      className={`flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b-[1px] border-slate-500 px-3 py-1`}
+      className={`flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b-[1px] border-[var(--color-slate-500)] px-3 py-1`}
     >
       {isSidebarOpen && (
         <Link to="dashboard" className="flex items-center gap-3">
@@ -21,7 +21,7 @@ function SidebarHeader() {
         </Link>
       )}
       <button className="sidebar-btn" onClick={toggleSidebar}>
-        <BsLayoutSidebarInsetReverse className="h-[20px] w-[20px] text-slate-500 transition-all duration-300 hover:text-indigo-700" />
+        <BsLayoutSidebarInsetReverse className="h-[20px] w-[20px] text-[var(--color-slate-500)] transition-all duration-300 hover:text-[var(--color-indigo-700)]" />
       </button>
     </div>
   );

@@ -4,7 +4,8 @@ import { useConfirmReserve } from './ConfirmReserveContext';
 //---
 
 //! Global Styles
-const publicStyles = 'rounded-xl border-b border-slate-800 transition-all duration-200';
+const publicStyles =
+  'rounded-xl border-b border-[var(--color-slate-800)] transition-all duration-200';
 
 function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate, userId }) {
   //! React Router
@@ -16,7 +17,7 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
   //! Handlers
   function handleClickReserved() {
     const query = `?roomName=${roomData.roomName}&timePart=${timePartIndex}&status=${timePartStatus?.at(1)}`;
-    navigate(`/app/${userId}/setting/user${query}`);
+    navigate(`/setting/user${query}`);
   }
 
   //! JSX
@@ -25,12 +26,11 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
       <td
         onClick={() => {
           toggleConfirmWindow();
-          navigate(
-            `/app/${userId}/reserve?roomName=${roomData.roomName}&timePart=${timePartIndex}`
-          );
+          navigate(`/reserve?roomName=${roomData.roomName}&timePart=${timePartIndex}`);
         }}
         className={
-          publicStyles + ' cursor-pointer text-transparent hover:bg-indigo-700 hover:text-slate-200'
+          publicStyles +
+          ' cursor-pointer text-transparent hover:bg-[var(--color-indigo-700)] hover:text-[var(--color-slate-200)]'
         }
       >
         <span>رزرو</span>
@@ -40,7 +40,10 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
     return (
       <td
         onClick={handleClickReserved}
-        className={publicStyles + ' cursor-pointer bg-green-600 text-green-100 hover:bg-green-500'}
+        className={
+          publicStyles +
+          ' cursor-pointer bg-[var(--color-green-600)] text-[var(--color-green-100)] hover:bg-[var(--color-green-500)]'
+        }
       >
         <span> رزرو شد ✅</span>
       </td>
@@ -50,7 +53,8 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
       <td
         onClick={handleClickReserved}
         className={
-          publicStyles + ' cursor-pointer bg-yellow-600 text-yellow-100 hover:bg-yellow-500'
+          publicStyles +
+          ' cursor-pointer bg-[var(--color-yellow-600)] text-[var(--color-yellow-100)] hover:bg-[var(--color-yellow-500)]'
         }
       >
         <span> در انتظار پرداخت⏳ </span>
@@ -58,12 +62,21 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
     );
   if (timePartStatus === 'untouchable')
     return (
-      <td className={publicStyles + ' cursor-not-allowed bg-gray-900 text-gray-400'}>
+      <td
+        className={
+          publicStyles +
+          ' cursor-not-allowed bg-[var(--color-gray-900)] text-[var(--color-gray-400)]'
+        }
+      >
         <span> خارج از سرویس </span>
       </td>
     );
   return (
-    <td className={publicStyles + ' cursor-not-allowed bg-red-600 text-red-100'}>
+    <td
+      className={
+        publicStyles + ' cursor-not-allowed bg-[var(--color-red-600)] text-[var(--color-red-100)]'
+      }
+    >
       <span> رزرو شده </span>
     </td>
   );

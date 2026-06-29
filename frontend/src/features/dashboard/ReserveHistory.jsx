@@ -4,7 +4,7 @@ import ReserveRecord from '../reserve/ReserveRecord';
 function ReserveHistory({ className, userReservedRooms }) {
   return (
     <div className={className}>
-      <h3 className="flex border-b border-slate-500 pb-3 text-lg font-semibold text-slate-400">
+      <h3 className="flex border-b border-[var(--color-slate-500)] pb-3 text-lg font-semibold text-[var(--color-slate-400)]">
         تاریخچه رزرو ها
       </h3>
       {userReservedRooms?.length > 0 ? (
@@ -22,7 +22,7 @@ function ReserveHistory({ className, userReservedRooms }) {
           ))}
         </ul>
       ) : (
-        <p className="flex items-center justify-center p-2 text-xl text-slate-500">
+        <p className="flex items-center justify-center p-2 text-xl text-[var(--color-slate-500)]">
           تاریخچه ای وجود ندارد
         </p>
       )}

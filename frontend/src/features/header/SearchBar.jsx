@@ -9,9 +9,9 @@ function SearchBar() {
 
   //! JSX
   return (
-    <div className="relative flex gap-2 rounded-lg border border-slate-500 px-3 py-2 transition-all duration-300 focus-within:border-indigo-700">
+    <div className="relative flex gap-2 rounded-lg border border-[var(--color-slate-500)] px-3 py-2 transition-all duration-300 focus-within:border-[var(--color-indigo-700)]">
       <label htmlFor="search-bar" className="cursor-pointer">
-        <HiOutlineSearch className="h-6 w-6 text-slate-500 transition-colors duration-300 hover:text-slate-300" />
+        <HiOutlineSearch className="h-6 w-6 text-[var(--color-slate-500)] transition-colors duration-300 hover:text-[var(--color-slate-300)]" />
       </label>
       <input
         type="text"
@@ -26,9 +26,11 @@ function SearchBar() {
         className="bg-inherit outline-none"
       />
       <div
-        className={`absolute right-0 top-12 z-20 flex items-center justify-center rounded-lg border border-slate-500 bg-gray-900 transition-all duration-75 ${searchQuery ? 'h-64 w-96 border' : 'h-0 w-0 border-0'}`}
+        className={`absolute right-0 top-12 z-20 flex items-center justify-center rounded-lg border border-[var(--color-slate-500)] bg-[var(--color-gray-900)] transition-all duration-75 ${searchQuery ? 'h-64 w-96 border' : 'h-0 w-0 border-0'}`}
       >
-        {searchQuery && <p className="text-xl text-slate-400"> نتیجه ای یافت نشد! </p>}
+        {searchQuery && (
+          <p className="text-xl text-[var(--color-slate-400)]"> نتیجه ای یافت نشد! </p>
+        )}
       </div>
     </div>
   );

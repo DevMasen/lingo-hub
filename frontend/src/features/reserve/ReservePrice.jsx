@@ -4,7 +4,7 @@ function ReservePrice({ record }) {
 
   //! JSX
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl bg-slate-700 px-3 text-sm">
+    <div className="flex flex-col items-center justify-center rounded-xl bg-[var(--color-slate-700)] px-3 text-sm">
       <span>
         {new Intl.NumberFormat('fa-IR').format(
           roomsData.find((room) => {

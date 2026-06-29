@@ -19,7 +19,7 @@ function NavItem({
   return (
     <li>
       <NavLink
-        className={`flex items-center gap-3 p-2 font-semibold text-slate-300 transition-all duration-300 ${extraClasses}`}
+        className={`flex items-center gap-3 p-2 font-semibold text-[var(--color-slate-300)] transition-all duration-300 ${extraClasses}`}
         onClick={onClick}
         to={to}
         data-tooltip-id="navitem-tooltip"

@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 //---
 
 function PaymentStatus() {
-  //! React Router
-  const params = useParams();
   const [query] = useSearchParams();
   const navigate = useNavigate();
 
@@ -25,10 +23,10 @@ function PaymentStatus() {
     function () {
       setTimeout(() => {
         setIsOpen(false);
-        navigate(`/app/${params.userId}/setting/user`);
+        navigate(`/setting/user`);
       }, maxMiliSecondsWait + 2000);
     },
-    [navigate, params.userId]
+    [navigate]
   );
   useEffect(
     function () {
@@ -51,12 +49,12 @@ function PaymentStatus() {
     <div
       onClick={() => {
         setIsOpen(false);
-        navigate(`/app/${params.userId}/setting/user`);
+        navigate('/setting/user');
       }}
       className={`fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-800/20 backdrop-blur-sm transition-all duration-100 ${!isOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
     >
       <div
-        className={`w-[45 0px] relative h-40 flex-col items-center justify-center space-y-3 rounded-lg bg-opacity-65 px-12 py-8 ${(status === null || status === 'failed') && 'bg-red-700'} ${status === 'success' && 'bg-green-500'} ${!isOpen ? 'hidden' : 'flex'}`}
+        className={`w-[45 0px] relative h-40 flex-col items-center justify-center space-y-3 rounded-lg bg-opacity-65 px-12 py-8 ${(status === null || status === 'failed') && 'bg-[var(--color-red-700)]'} ${status === 'success' && 'bg-[var(--color-green-500)]'} ${!isOpen ? 'hidden' : 'flex'}`}
       >
         <progress
           max={maxMiliSecondsWait}
@@ -64,7 +62,7 @@ function PaymentStatus() {
           className="absolute right-0 top-0 h-1 w-full"
         />
         <h2
-          className={`text-center text-2xl font-semibold ${(status === null || status === 'failed') && 'text-red-200'} ${status === 'success' && 'text-green-200'}`}
+          className={`text-center text-2xl font-semibold ${(status === null || status === 'failed') && 'text-[var(--color-red-200)]'} ${status === 'success' && 'text-[var(--color-green-200)]'}`}
         >
           {message ?? 'خطای نا شناخته'}
         </h2>

@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
-import { HiOutlineArrowLeft, HiOutlineArrowRight, HiOutlineClipboardList } from 'react-icons/hi';
+import {
+  HiCheckCircle,
+  HiOutlineArrowLeft,
+  HiOutlineArrowRight,
+  HiOutlineClipboardList,
+} from 'react-icons/hi';
 import { CgEnter } from 'react-icons/cg';
-import { HiCheckBadge } from 'react-icons/hi';
 
 import { useSignup } from './SignupContext';
 import { useKey } from '../../hooks/useKey';
@@ -15,10 +19,11 @@ import validateEmail from '../../utils/validateEmail';
 //---
 
 //! Global Styles
-const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
+const inputContainerStyles =
+  'rounded-md bg-[var(--color-slate-300)] text-[var(--color-slate-800)] flex';
 const inputStyles =
-  'w-full rounded-md bg-inherit px-3 py-3 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
-const inputErrorStyles = 'border-2 border-red-600 text-red-600';
+  'w-full rounded-md bg-inherit px-3 py-3 focus:bg-[var(color-slate-50)] focus:outline-none focus:ring focus:ring-[var(--color-slate-700)] focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
+const inputErrorStyles = 'border-2 border-[var(--color-red-600)] text-[var(--color-red-600)]';
 
 function SignupForm() {
   //TODO : replace with real data
@@ -123,7 +128,7 @@ function SignupForm() {
   return (
     <form
       method="POST"
-      className="text-md w-[500px] space-y-3 overflow-auto scroll-smooth rounded-lg bg-slate-600 bg-opacity-65 px-12 py-8 text-slate-200"
+      className="text-md w-[500px] space-y-3 overflow-auto scroll-smooth rounded-lg bg-slate-600/65 px-12 py-8 text-[var(--color-slate-200)]"
     >
       <legend className="flex items-center gap-2 text-2xl font-bold">
         <span> ثبت‌نام کاربر </span>
@@ -131,7 +136,9 @@ function SignupForm() {
       </legend>
       {step === '1' && (
         <>
-          <div className={`${inputContainerStyles} ${errors?.firstName && 'bg-red-100'}`}>
+          <div
+            className={`${inputContainerStyles} ${errors?.firstName && 'bg-[var(--color-red-100)]'}`}
+          >
             <input
               type="text"
               value={inputFirstName}
@@ -158,7 +165,9 @@ function SignupForm() {
       )}
       {step === '2' && (
         <>
-          <div className={`${inputContainerStyles} ${errors?.lastName && 'bg-red-100'}`}>
+          <div
+            className={`${inputContainerStyles} ${errors?.lastName && 'bg-[var(--color-red-100)]'}`}
+          >
             <input
               type="text"
               value={inputLastName}
@@ -183,7 +192,9 @@ function SignupForm() {
       )}
       {step === '3' && (
         <>
-          <div className={`${inputContainerStyles} ${errors?.phoneNumber && 'bg-red-100'}`}>
+          <div
+            className={`${inputContainerStyles} ${errors?.phoneNumber && 'bg-[var(--color-red-100)]'}`}
+          >
             <input
               type="text"
               value={inputPhoneNumber}
@@ -194,7 +205,7 @@ function SignupForm() {
               maxLength="10"
               className={`${inputStyles} ${errors?.phoneNumber && inputErrorStyles}`}
             />
-            <span className="w-18 flex items-center justify-center gap-2 px-6 text-slate-800">
+            <span className="w-18 flex items-center justify-center gap-2 px-6 text-[var(--color-slate-800)]">
               <span className="flex gap-1">
                 <span>۹۸</span>
                 <span>+</span>
@@ -275,7 +286,9 @@ function SignupForm() {
 
       {step === '5' && (
         <>
-          <div className={`${inputContainerStyles} ${errors?.email && 'bg-red-100'}`}>
+          <div
+            className={`${inputContainerStyles} ${errors?.email && 'bg-[var(--color-red-100)]'}`}
+          >
             <input
               type="email"
               value={inputEmail}
@@ -308,7 +321,9 @@ function SignupForm() {
           <input id="level" type="hidden" name="level" value={inputLevel} />
           <input id="explanation" type="hidden" name="explanation" value={inputExplanation} />
           <input id="email" type="hidden" name="email" value={inputEmail} />
-          <div className={`${inputContainerStyles} ${errors?.password && 'bg-red-100'}`}>
+          <div
+            className={`${inputContainerStyles} ${errors?.password && 'bg-[var(--color-red-100)]'}`}
+          >
             <input
               id="password"
               type={isPassHidden ? 'password' : 'text'}
@@ -326,7 +341,9 @@ function SignupForm() {
               onPassHidden={() => setIsPassHidden((hidden) => !hidden)}
             />
           </div>
-          <div className={`${inputContainerStyles} ${errors?.passwordRepeat && 'bg-red-100'}`}>
+          <div
+            className={`${inputContainerStyles} ${errors?.passwordRepeat && 'bg-[var(--color-red-100)]'}`}
+          >
             <input
               id="passwordRepeat"
               type={isPassRepHidden ? 'password' : 'text'}
@@ -354,7 +371,7 @@ function SignupForm() {
               disabled={inputPassword.length === 0 || inputPasswordRepeat.length === 0}
             >
               <span className="text-lg font-medium">ثبت‌نام</span>
-              <HiCheckBadge className="text-xl" />
+              <HiCheckCircle className="text-xl" />
             </HomeButton>
           </div>
           {errors?.password && <Error error={errors?.password.message} />}
