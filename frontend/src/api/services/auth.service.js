@@ -45,6 +45,7 @@ import { createProfile } from './profiles.service';
 /**
  * @typedef {Object} Session
  * @property {string} userId
+ * @property {string} role
  * @property {string} [email]
  * @property {string} [phone]
  * @property {string} accessToken
@@ -57,6 +58,7 @@ function toSession(supabaseSession, supabaseUser) {
 
   return {
     userId: supabaseUser.id,
+    role: supabaseUser.role,
     email: supabaseUser.email ?? undefined,
     phone: supabaseUser.phone ?? undefined,
     accessToken: supabaseSession.access_token,

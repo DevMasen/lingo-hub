@@ -33,7 +33,7 @@ export function fromSupabaseError(error) {
 
   // Supabase/Postgres unique constraint violation
   if (error.code === '23505') {
-    return new ApiError('This record already exists.', {
+    return new ApiError('این گزارش از قبل وجود دارد.', {
       code: 'DUPLICATE',
       cause: error,
     });
@@ -41,7 +41,7 @@ export function fromSupabaseError(error) {
 
   // Supabase/Postgres foreign key violation
   if (error.code === '23503') {
-    return new ApiError('Related record not found.', {
+    return new ApiError('گزارش مورد نظر پیدا نشد.', {
       code: 'INVALID_REFERENCE',
       cause: error,
     });
@@ -49,14 +49,14 @@ export function fromSupabaseError(error) {
 
   // Auth errors from supabase.auth.*
   if (error.message?.toLowerCase().includes('invalid login credentials')) {
-    return new ApiError('Incorrect email or password.', {
+    return new ApiError('ایمیل یا رمز عبور نا معتبر است.', {
       code: 'UNAUTHORIZED',
       status: 401,
       cause: error,
     });
   }
 
-  return new ApiError(error.message || 'Something went wrong.', {
+  return new ApiError(error.message || 'مشکلی به وجود آمده است!', {
     code: 'UNKNOWN',
     cause: error,
   });
