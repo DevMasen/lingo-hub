@@ -20,7 +20,7 @@ function UserNotifications() {
         tooltipId="notification-tooltip"
         tooltipContent="اعلانات"
       >
-        <HiOutlineBell className="h-8 w-8 rounded-xl p-1 text-[var(--color-slate-200)] transition-all duration-300 hover:bg-[var(--color-slate-800)] hover:text-[var(--color-indigo-700)]" />
+        <HiOutlineBell className="h-8 w-8 rounded-xl p-1 text-[var(--color-slate-200)] transition-all duration-300 hover:bg-[var(--color-slate-700)] hover:text-[var(--color-indigo-700)]" />
       </HeaderButton>
       <Tooltip id="notification-tooltip" />
       <div

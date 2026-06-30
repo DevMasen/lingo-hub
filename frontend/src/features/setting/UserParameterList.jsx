@@ -5,7 +5,7 @@ import UserParameter from './UserParameter';
 
 function UserParameterList({ user, date, query }) {
   //! Local States
-  const [reserveRemainCountBG, setReserveRemainCountBg] = useState('bg-[var(--color-slate-800)]');
+  const [reserveRemainCountBG, setReserveRemainCountBg] = useState('bg-[var(--color-slate-700)]');
 
   //! Local Elements Ref
   const reserveRemainRef = useRef(null);
@@ -52,9 +52,9 @@ function UserParameterList({ user, date, query }) {
       if (query.get('reserveCountLimit') === null) return;
       const scrollPosition = reserveRemainRef.current.getBoundingClientRect().top;
       window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-      setReserveRemainCountBg('bg-[var(--color-slate-700)]');
+      setReserveRemainCountBg('bg-[var(--color-slate-600)]');
       setTimeout(function () {
-        setReserveRemainCountBg('bg-[var(--color-slate-800)]');
+        setReserveRemainCountBg('bg-[var(--color-slate-700)]');
       }, 1000);
     },
     [query]

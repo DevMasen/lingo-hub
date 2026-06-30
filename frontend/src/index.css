@@ -3,26 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --color-slate-50: #f8fafc;
-  --color-slate-100: #f1f5f9;
-  --color-slate-200: #e2e8f0;
-  --color-slate-300: #cbd5e1;
-  --color-slate-400: #94a3b8;
-  --color-slate-500: #64748b;
-  --color-slate-600: #475569;
-  --color-slate-700: #334155;
-  --color-slate-800: #1e293b;
-  --color-slate-900: #0f172a;
-
-  --color-gray-400: #9ca3af;
-  --color-gray-900: #111827;
-
-  --color-red-100: #fee2e2;
-  --color-red-200: #fecaca;
-  --color-red-600: #dc2626;
-  --color-red-700: #b91c1c;
-  --color-red-800: #991b1b;
-
+  /* Constant */
   --color-yellow-100: #fef9c3;
   --color-yellow-500: #eab308;
   --color-yellow-600: #ca8a04;
@@ -42,6 +23,61 @@
   --color-indigo-700: #4338ca;
   --color-indigo-900: #312e81;
   --color-indigo-950: #312e81;
+
+  &,
+  &.dark-mode {
+    --color-slate-50: #f8fafc;
+    --color-slate-100: #f1f5f9;
+    --color-slate-200: #e2e8f0;
+    --color-slate-300: #cbd5e1;
+    --color-slate-400: #94a3b8;
+    --color-slate-500: #64748b;
+    --color-slate-600: #475569;
+    --color-slate-700: #334155;
+    --color-slate-800: #1e293b;
+    --color-slate-900: #0f172a;
+
+    --color-gray-400: #9ca3af;
+    --color-gray-900: #111827;
+
+    --color-red-100: #fee2e2;
+    --color-red-200: #fecaca;
+    --color-red-600: #dc2626;
+    --color-red-700: #b91c1c;
+    --color-red-800: #991b1b;
+
+    --shadow-color: #1e293b;
+
+    --image-grayscale: 10%;
+    --image-opacity: 90%;
+  }
+
+  &.light-mode {
+    --color-slate-50: #0f172a;
+    --color-slate-100: #1e293b;
+    --color-slate-200: #334155;
+    --color-slate-300: #475569;
+    --color-slate-400: #64748b;
+    --color-slate-500: #94a3b8;
+    --color-slate-600: #cbd5e1;
+    --color-slate-700: #e2e8f0;
+    --color-slate-800: #f1f5f9;
+    --color-slate-900: #f8fafc;
+
+    --color-gray-400: #6b7280;
+    --color-gray-900: #f3f4f6;
+
+    --color-red-100: #fff1f2;
+    --color-red-200: #fecdd3;
+    --color-red-600: #e11d48;
+    --color-red-700: #be123c;
+    --color-red-800: #9f1239;
+
+    --shadow-color: #94a3b8;
+
+    --image-grayscale: 0;
+    --image-opacity: 100%;
+  }
 }
 
 @layer base {
@@ -91,7 +127,7 @@
     &.active:link,
     &.active:visited {
       color: var(--color-slate-200);
-      background-color: var(--color-slate-800);
+      background-color: var(--color-slate-700);
       /* rounded-xl */
       border-radius: 0.75rem;
     }

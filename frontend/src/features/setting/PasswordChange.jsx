@@ -74,7 +74,7 @@ function PasswordChange() {
     <div className="border-b border-[var(--color-slate-500)] p-3">
       <form
         method="PATCH"
-        className="flex h-full flex-col items-start gap-4 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-gray-900))] p-5"
+        className="flex h-full flex-col items-start gap-4 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] p-5"
       >
         <div
           className={

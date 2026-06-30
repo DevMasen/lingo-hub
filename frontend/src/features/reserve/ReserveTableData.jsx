@@ -5,7 +5,7 @@ import { useConfirmReserve } from './ConfirmReserveContext';
 
 //! Global Styles
 const publicStyles =
-  'rounded-xl border-b border-[var(--color-slate-800)] transition-all duration-200';
+  'text-slate-200 rounded-xl border-b border-[var(--color-slate-800)] transition-all duration-200';
 
 function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate, userId }) {
   //! React Router
@@ -30,7 +30,7 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
         }}
         className={
           publicStyles +
-          ' cursor-pointer text-transparent hover:bg-[var(--color-indigo-700)] hover:text-[var(--color-slate-200)]'
+          ' cursor-pointer text-transparent hover:bg-[var(--color-indigo-700)] hover:text-slate-200'
         }
       >
         <span>رزرو</span>

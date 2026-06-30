@@ -16,7 +16,7 @@ function UserProfile() {
   return (
     <div className="relative flex items-center">
       <HeaderButton onClick={toggleProfile} tooltipId="setting-tooltip" tooltipContent="تنظیمات">
-        <HiOutlineUser className="h-8 w-8 rounded-xl p-1 text-[var(--color-slate-200)] transition-all duration-300 hover:bg-[var(--color-slate-800)] hover:text-[var(--color-indigo-700)]" />
+        <HiOutlineUser className="h-8 w-8 rounded-xl p-1 text-[var(--color-slate-200)] transition-all duration-300 hover:bg-[var(--color-slate-700)] hover:text-[var(--color-indigo-700)]" />
       </HeaderButton>
       <Tooltip id="setting-tooltip" />
       <div

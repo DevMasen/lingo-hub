@@ -29,7 +29,7 @@ function UserInfoHeader({ user }) {
         setLastnameInput('');
         navigate('/setting/user');
       }}
-      className="flex items-center justify-between gap-5 rounded-2xl bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-gray-900))] px-5 py-2"
+      className="flex items-center justify-between gap-5 rounded-2xl bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] px-5 py-2"
     >
       <div className="flex items-center gap-5">
         <div className="h-fit w-fit rounded-full bg-[var(--color-slate-800)]">

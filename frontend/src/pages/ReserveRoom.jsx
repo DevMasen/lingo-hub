@@ -132,7 +132,7 @@ function ReserveRoom() {
         <span className="rounded-lg bg-[var(--color-slate-800)] px-3 py-1">{formatDate}</span>
       </div>
       {rooms.length > 0 && user.signupStatus === 'confirmed' ? (
-        <table className="mt-6 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-gray-900))] text-center">
+        <table className="mt-6 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] text-center shadow-lg shadow-[var(--shadow-color)]">
           <thead>
             <tr>
               <th className="w-24 rounded-ss-xl bg-[var(--color-slate-800)] py-4"> نام اتاق </th>

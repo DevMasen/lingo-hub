@@ -76,7 +76,7 @@ function UserInfo() {
   return (
     <div className="space-y-5 border-b border-[var(--color-slate-500)] p-3">
       <UserInfoHeader user={user} />
-      <section className="space-y-7 rounded-2xl bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-gray-900))] px-5 py-2">
+      <section className="space-y-7 rounded-2xl bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] px-5 py-2">
         <UserParameterList user={user} date={date} query={query} />
         <UserReserveList user={user} date={date} query={query} />
       </section>

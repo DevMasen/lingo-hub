@@ -206,7 +206,7 @@ function SignupForm() {
               <img
                 src="https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/iran-flag.svg.webp"
                 alt="!fg"
-                className="w-5 rounded-sm"
+                className="w-5 rounded-sm opacity-[var(--image-opacity)] grayscale-[var(--image-grayscale)]"
               />
             </span>
           </div>

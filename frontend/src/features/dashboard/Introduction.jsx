@@ -3,7 +3,7 @@ function Introduction({ className, userFirstName = '' }) {
     <div className={className}>
       <img
         src="https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/icon.png"
-        className="w-48 rounded-xl"
+        className="w-48 rounded-xl opacity-[var(--image-opacity)] shadow-lg shadow-[var(--shadow-color)] grayscale-[var(--image-grayscale)]"
         alt="logo"
       />
       <div className="space-y-6">
