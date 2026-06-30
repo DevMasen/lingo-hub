@@ -1,4 +1,4 @@
-import { useWallet } from '../../context/WalletContext';
+import { useWallet } from './WalletContext';
 //---
 
 function PriceItem({ price }) {
@@ -8,7 +8,7 @@ function PriceItem({ price }) {
   //! JSX
   return (
     <li
-      className="flex cursor-pointer items-center justify-between rounded-xl border border-indigo-500 px-3 py-4"
+      className="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-indigo-500)] px-3 py-4"
       onClick={() => setCurrentPrice(price)}
     >
       <div>
@@ -16,7 +16,7 @@ function PriceItem({ price }) {
         <span> تومان </span>
       </div>
       <div
-        className={`flex h-5 w-5 items-center justify-center rounded-full border-indigo-500 p-[2px] transition-all duration-200 ${currentPrice === price ? 'border-4' : 'border'}`}
+        className={`flex h-5 w-5 items-center justify-center rounded-full border-[var(--color-indigo-500)] p-[2px] transition-all duration-200 ${currentPrice === price ? 'border-4' : 'border'}`}
       ></div>
     </li>
   );

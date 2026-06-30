@@ -1,24 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+
+import { useSession } from '../features/authentication/useSession';
 
 import FullPage from './FullPage';
 import Spinner from './Spinner';
+//---
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
-  const [isAuthenticated] = useState(false);
-  const [isLoading] = useState(false);
+  const { isAuthenticated, isLoadingSession } = useSession();
 
   useEffect(
     function () {
-      if (!isLoading && !isAuthenticated) {
-        navigate('/home');
+      if (!isLoadingSession && !isAuthenticated) {
+        navigate('/login');
       }
     },
-    [isAuthenticated, isLoading, navigate]
+    [isAuthenticated, isLoadingSession, navigate]
   );
 
-  if (isLoading)
+  if (isLoadingSession)
     return (
       <FullPage>
         <Spinner />

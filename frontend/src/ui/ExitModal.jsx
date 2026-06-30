@@ -1,18 +1,22 @@
-import { useParams } from 'react-router';
-
 import { useExit } from '../context/ExitContext';
-import { useAuth } from '../context/AuthContext';
+import { useLogout } from '../features/authentication/useLogout';
 
 import Modal from './Modal';
+import Spinner from './Spinner';
+import FullPage from './FullPage';
 //---
 
 function ExitModal() {
-  //! React Router
-  const params = useParams();
-
   //! Context Data
   const { isExitOpen, toggleExitWindow } = useExit();
-  const { logout } = useAuth();
+  const { logout, isLoggingOut } = useLogout();
+
+  if (isLoggingOut)
+    return (
+      <FullPage>
+        <Spinner />
+      </FullPage>
+    );
 
   //! JSX
   return (
@@ -27,7 +31,7 @@ function ExitModal() {
         },
         cancel: toggleExitWindow,
       }}
-      path={{ confirm: '/', cancel: `/app/${params.userId}` }}
+      path={{ confirm: '/home', cancel: '/dashboard' }}
       text={{ confirm: 'آره خارج شو!', cancel: 'نه می‌مونم.' }}
     />
   );

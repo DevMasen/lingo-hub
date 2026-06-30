@@ -19,7 +19,7 @@ function UserParameter({
       )}
       <span> : </span>
       <span
-        className={`rounded-xl px-4 py-2 ${valueType === 'default' && 'bg-slate-800'} ${valueType === 'status' && statusBGColor} ${valueType === 'reserveCounter' && `transition-colors duration-200 ${reserveRemainCountBGColor}`}`}
+        className={`rounded-xl px-4 py-2 ${valueType === 'default' && 'bg-[var(--color-slate-800)]'} ${valueType === 'status' && statusBGColor} ${valueType === 'reserveCounter' && `transition-colors duration-200 ${reserveRemainCountBGColor}`}`}
       >
         {valueType === 'status' && statusValue}
         {valueType === 'reserveCounter' && mapToPersian(String(value))}

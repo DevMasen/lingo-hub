@@ -1,7 +1,7 @@
 import ReservePrice from '../reserve/ReservePrice';
 import PanelButton from '../../ui/PanelButton';
 
-import { usePay } from '../../context/PayContext';
+import { usePay } from './PayContext';
 //---
 
 function ControlWaitingReserve({ record }) {
@@ -31,7 +31,7 @@ function ControlWaitingReserve({ record }) {
       <form method="PATCH">
         <PanelButton
           type="submit"
-          extraClasses="text-sm bg-red-800 border-red-300 hover:bg-red-700 px-5 w-full h-full"
+          extraClasses="text-sm bg-[var(--color-red-800)] border-red-300 hover:bg-[var(--color-red-700)] px-5 w-full h-full"
         >
           لغو
         </PanelButton>

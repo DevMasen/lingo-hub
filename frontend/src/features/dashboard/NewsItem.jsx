@@ -3,10 +3,10 @@ import mapToPersianMonth from '../../utils/mapToPersianMonth';
 
 function NewsItem({ newsItem }) {
   return (
-    <li className="flex flex-col gap-2 rounded-lg bg-slate-700 bg-opacity-70 p-3">
+    <li className="flex flex-col gap-2 rounded-lg bg-slate-700/70 p-3">
       <h4 className="font-semibold">{newsItem.label}</h4>
-      <p className="pr-2 text-slate-300">{newsItem.body}</p>
-      <div className="flex justify-between border-t border-indigo-200 pt-2 text-sm text-indigo-200">
+      <p className="pr-2 text-[var(--color-slate-300)]">{newsItem.body}</p>
+      <div className="flex justify-between border-t border-[var(--color-indigo-200)] pt-2 text-sm text-[var(--color-indigo-200)]">
         <div>
           <span>{newsItem.time}</span>
         </div>

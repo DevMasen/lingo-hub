@@ -1,33 +1,17 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useState } from 'react';
 //---
 
 const ExitContext = createContext();
-const initialState = {
-  isExitOpen: false,
-};
-function reducer(state, action) {
-  switch (action.type) {
-    case 'exit/toggleExitWindow':
-      return {
-        ...state,
-        isExitOpen: !state.isExitOpen,
-      };
-    case 'exit/hideExitWindow':
-      return { ...state, isExitOpen: false };
-    default:
-      throw new Error('Action Unknown!');
-  }
-}
 
 function ExitProvider({ children }) {
-  const [{ isExitOpen }, dispatch] = useReducer(reducer, initialState);
+  const [isExitOpen, setIsExitOpen] = useState(false);
 
   function toggleExitWindow() {
-    dispatch({ type: 'exit/toggleExitWindow' });
+    setIsExitOpen((open) => !open);
   }
 
   function hideExitWindow() {
-    dispatch({ type: 'exit/hideExitWindow' });
+    setIsExitOpen(false);
   }
 
   return (

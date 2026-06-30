@@ -6,7 +6,7 @@ import { BiExit, BiWallet } from 'react-icons/bi';
 import NavItem from './NavItem';
 import ExitModal from '../../ui/ExitModal';
 
-import { useSidebar } from '../../context/SidebarContext';
+import { useSidebar } from './SidebarContext';
 import { useExit } from '../../context/ExitContext';
 //---
 
@@ -40,7 +40,7 @@ function NavList() {
           {isSidebarOpen && <span> تنظیمات </span>}
         </NavItem>
         <NavItem
-          extraClasses="exit hover:text-slate-200 hover:bg-slate-800 hover:rounded-xl"
+          extraClasses="exit hover:text-[var(--color-slate-200)] hover:bg-[var(--color-slate-800)] hover:rounded-xl"
           tooltipContent={'خروج'}
           to="dashboard"
           onClick={toggleExitWindow}

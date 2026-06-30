@@ -122,19 +122,22 @@ function ReserveRoom() {
 
   //!JSX
   return (
-    <div className="border-b border-slate-500 p-3">
+    <div className="border-b border-[var(--color-slate-500)] p-3">
       <ConfirmReserveModal date={formatDate} />
       <div className="text-xl">
-        <span className="font-semibold text-slate-300"> رزرو اتاق برای تاریخ : </span>{' '}
-        <span className="rounded-lg bg-slate-800 px-3 py-1">{formatDate}</span>
+        <span className="font-semibold text-[var(--color-slate-300)]">
+          {' '}
+          رزرو اتاق برای تاریخ :{' '}
+        </span>{' '}
+        <span className="rounded-lg bg-[var(--color-slate-800)] px-3 py-1">{formatDate}</span>
       </div>
       {rooms.length > 0 && user.signupStatus === 'confirmed' ? (
-        <table className="mt-6 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-indigo-900))] text-center">
+        <table className="mt-6 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-800),var(--color-gray-900))] text-center">
           <thead>
             <tr>
-              <th className="w-24 rounded-ss-xl bg-slate-800 py-4"> نام اتاق </th>
+              <th className="w-24 rounded-ss-xl bg-[var(--color-slate-800)] py-4"> نام اتاق </th>
               {Array.from({ length: 10 }, (_, i) => (
-                <th key={i} className="w-24 border-b border-slate-700">
+                <th key={i} className="w-24 border-b border-[var(--color-slate-700)]">
                   {makePersianNumberString(mapTime(i).startTime)}
                   <span> تا </span>
                   {makePersianNumberString(mapTime(i).stopTime)}
@@ -145,7 +148,7 @@ function ReserveRoom() {
           <tbody>
             {rooms.map((room) => (
               <tr key={room.id}>
-                <th className="bg-slate-800 py-5">{room.roomName}</th>
+                <th className="bg-[var(--color-slate-800)] py-5">{room.roomName}</th>
                 {room.timeLines.map((timePartStatus, i) => (
                   <ReserveTableData
                     key={i}
@@ -161,7 +164,7 @@ function ReserveRoom() {
           </tbody>
         </table>
       ) : (
-        <p className="flex h-full items-center justify-center text-xl font-semibold text-slate-300">
+        <p className="flex h-full items-center justify-center text-xl font-semibold text-[var(--color-slate-300)]">
           <span> امکان رزرو وجود ندارد⛔ </span>
         </p>
       )}

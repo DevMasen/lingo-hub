@@ -1,6 +1,9 @@
 import './index.css';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
+import { Toaster } from 'react-hot-toast';
 
 // Not Protected
 import HomePage from './pages/HomePage';
@@ -16,9 +19,8 @@ import Wallet from './pages/Wallet';
 import Setting from './pages/Setting';
 import Support from './pages/Support';
 
-import LoginOptions from './features/authentication/LoginOptions';
-import LoginUser from './features/authentication/LoginUser';
-import LoginByOTP from './features/authentication/LoginByOTP';
+import LoginEmail from './features/authentication/LoginEmail';
+import LoginVerifyOTP from './features/authentication/LoginVerifyOTP';
 import UserInfo from './features/setting/UserInfo';
 import PaymentStatus from './features/setting/PaymentStatus';
 import PayModal from './features/setting/PayModal';
@@ -27,43 +29,64 @@ import PasswordChange from './features/setting/PasswordChange';
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Navigate to="dashboard" replace />} />
-        <Route
-          element={
-            <ProtectedRoute>
-              <AppLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="reserve" element={<ReserveRoom />} />
-          <Route path="wallet" element={<Wallet />} />
-          <Route path="setting" element={<Setting />}>
-            <Route index element={<Navigate to="user" replace />} />
-            <Route path="user" element={<UserInfo />} />
-            <Route path="user/change-name" element={<UserInfo />} />
-            <Route path="user/pay" element={<PayModal />} />
-            <Route path="change-password" element={<PasswordChange />} />
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="reserve" element={<ReserveRoom />} />
+            <Route path="wallet" element={<Wallet />} />
+            <Route path="setting" element={<Setting />}>
+              <Route index element={<Navigate to="user" replace />} />
+              <Route path="user" element={<UserInfo />} />
+              <Route path="user/change-name" element={<UserInfo />} />
+              <Route path="user/pay" element={<PayModal />} />
+              <Route path="change-password" element={<PasswordChange />} />
+            </Route>
+            <Route path="status" element={<PaymentStatus />} />
+            <Route path="support" element={<Support />} />
           </Route>
-          <Route path="status" element={<PaymentStatus />} />
-          <Route path="support" element={<Support />} />
-        </Route>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/login" element={<Login />}>
-          <Route index element={<Navigate to="options" />} />
-          <Route path="options" element={<LoginOptions />} />
-          <Route path="user" element={<LoginUser />} />
-          <Route path="otp" element={<LoginByOTP />} />
-        </Route>
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/login" element={<Login />}>
+            <Route index element={<Navigate to="email" />} />
+            <Route path="email" element={<LoginEmail />} />
+            <Route path="otp" element={<LoginVerifyOTP />} />
+          </Route>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <ReactQueryDevtools initialOpen={false} />
+        <Toaster
+          position="top-center"
+          reverseOrder={true}
+          gutter={12}
+          containerStyle={{ margin: '8px' }}
+          toastOptions={{
+            style: {
+              fontSize: '16px',
+              maxWidth: '500px',
+              padding: '16px 24px',
+              backgroundColor: 'var(--color-slate-600)',
+              color: 'var(--color-slate-200)',
+            },
+            success: { duration: 3000 },
+            error: { duration: 5000 },
+          }}
+        />
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

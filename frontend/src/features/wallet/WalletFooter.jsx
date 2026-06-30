@@ -2,7 +2,7 @@ import num2persian from 'num2persian';
 
 import PanelButton from '../../ui/PanelButton';
 
-import { useWallet } from '../../context/WalletContext';
+import { useWallet } from './WalletContext';
 //---
 
 function WalletFooter() {
@@ -11,7 +11,7 @@ function WalletFooter() {
 
   //! JSX
   return (
-    <section className="flex items-center justify-between border-t-2 border-slate-700 px-5 py-6">
+    <section className="flex items-center justify-between border-t-2 border-[var(--color-slate-700)] px-5 py-6">
       <div>
         <span> مبلغ پرداختی شما : </span>{' '}
         <span> {new Intl.NumberFormat('fa-IR').format(currentPrice)} تومان </span>{' '}

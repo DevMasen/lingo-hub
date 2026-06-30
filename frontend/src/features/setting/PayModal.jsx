@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 
-import { usePay } from '../../context/PayContext';
+import { usePay } from './PayContext';
 
 import Modal from '../../ui/Modal';
 //---
@@ -24,10 +24,17 @@ function PayModal() {
         )} تومان`}
         onClick={{ cancel: togglePayWindow }}
         text={{ confirm: 'پرداخت آنلاین', cancel: 'پرداخت با کیف پول' }}
-        backgroundColor={{ confirm: 'bg-green-600', cancel: 'bg-slate-800' }}
-        hoverColor={{ confirm: 'hover:bg-green-500', cancel: 'hover:bg-slate-900' }}
+        backgroundColor={{
+          confirm: 'bg-[var(--color-green-600)]',
+          cancel: 'bg-[var(--color-slate-800)]',
+        }}
+        hoverColor={{
+          confirm: 'hover:bg-[var(--color-green-500)]',
+          cancel: 'hover:bg-[var(--color-slate-900)]',
+        }}
         disabledStyles={{
-          confirm: 'disabled:bg-green-500 disabled:hover:bg-green-500 disabled:opacity-70',
+          confirm:
+            'disabled:bg-[var(--color-green-500)] disabled:hover:bg-[var(--color-green-500)] disabled:opacity-70',
         }}
       />
       <input type="hidden" name="cost" value={query.get('cost')} />
