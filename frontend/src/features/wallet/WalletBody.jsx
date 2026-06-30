@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import num2persian, { fa2en, moneyFormat } from 'num2persian';
-import { BsCheckCircleFill } from 'react-icons/bs';
+import { BsBank, BsCheckCircleFill } from 'react-icons/bs';
 
 import PriceItem from './PriceItem';
 
@@ -80,7 +80,7 @@ function WalletBody() {
                 <BsCheckCircleFill className="text-[var(--color-indigo-500)]" />
               </div>
               <div className="flex flex-col items-center justify-center gap-3">
-                <img src="/bank-iconbase.svg" className="w-12" alt="bank-icon" />
+                <BsBank className="h-12 w-12" />
                 <p className="text-xs"> پرداخت آنلاین کارت های عضو شتاب</p>
               </div>
             </button>

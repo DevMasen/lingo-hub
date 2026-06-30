@@ -71,14 +71,16 @@
   .background {
     height: 100dvh;
     background-image:
-      linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url('/home-bg.jpg');
+      linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)),
+      url('https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/home-bg.png');
     background-size: cover;
     background-position-y: bottom;
   }
   .background-aboutus {
     height: 100dvh;
     background-image:
-      linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url('/aboutus-bg.jpeg');
+      linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)),
+      url('https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/aboutus-bg.png');
     background-size: cover;
     background-position-y: top;
   }

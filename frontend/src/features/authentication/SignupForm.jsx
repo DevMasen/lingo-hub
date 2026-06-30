@@ -210,7 +210,11 @@ function SignupForm() {
                 <span>۹۸</span>
                 <span>+</span>
               </span>
-              <img src="/flag.webp" alt="!fg" className="w-5 rounded-sm" />
+              <img
+                src="https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/iran-flag.svg.webp"
+                alt="!fg"
+                className="w-5 rounded-sm"
+              />
             </span>
           </div>
           <div className="flex gap-3">
