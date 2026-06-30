@@ -8,10 +8,9 @@ import Error from '../../ui/Error';
 //---
 
 //! Global Styles
-const inputContainerStyles =
-  'flex items-center justify-between w-full rounded-md bg-[var(--color-slate-300)]';
+const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
-  'w-full rounded-md bg-inherit p-3 text-[var(--color-slate-800)] focus:bg-[var(color-slate-50)] focus:outline-none focus:ring focus:ring-[var(--color-slate-700)] focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
+  'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function LoginVerifyOTP() {
   //? handle errors with react-hook-form and auth.service.js
@@ -121,7 +120,7 @@ function LoginVerifyOTP() {
           extraClasses={'px-5 py-2 rounded-md flex-grow'}
         >
           <span className="text-lg font-medium"> ورود</span>
-          <AiOutlineEnter className="text-2xl text-[var(--color-slate-300)]" />
+          <AiOutlineEnter className="text-2xl text-slate-300" />
         </HomeButton>
       </div>
       {errors?.wrongCode && <Error error={errors.wrongCode} />}

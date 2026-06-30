@@ -9,7 +9,7 @@ function Error({ error = '', toPath = '' }) {
 
   //! JSX
   return (
-    <div className="flex flex-col items-center justify-center rounded-md bg-[var(--color-red-800)] p-3 text-[var(--color-red-100)]">
+    <div className="flex flex-col items-center justify-center rounded-md bg-red-800 p-3 text-red-100">
       <span>خطا : {error}</span>
       {toPath.length > 0 && (
         <span className="flex gap-1">
@@ -19,7 +19,7 @@ function Error({ error = '', toPath = '' }) {
             onClick={() => {
               setStep('1');
             }}
-            className="border-[var(--color-indigo-400)] font-semibold text-[var(--color-indigo-300)] transition-colors duration-300 hover:border-b hover:text-[var(--color-indigo-400)]"
+            className="border-indigo-400 font-semibold text-indigo-300 transition-colors duration-300 hover:border-b hover:text-indigo-400"
           >
             ثبت‌نام کنید
           </Link>

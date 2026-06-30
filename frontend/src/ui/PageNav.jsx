@@ -6,7 +6,7 @@ import HomeButton from './HomeButton';
 
 function PageNav() {
   return (
-    <nav className="m-3 flex items-center justify-between rounded-lg bg-slate-600/65 px-5 py-3 text-[var(--color-slate-200)]">
+    <nav className="m-3 flex items-center justify-between rounded-lg bg-slate-600/65 px-5 py-3 text-slate-200">
       <Logo />
       <ul className="flex items-center gap-6 font-medium">
         <li>

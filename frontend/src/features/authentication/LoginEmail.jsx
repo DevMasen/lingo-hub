@@ -15,10 +15,9 @@ import SpinnerMini from '../../ui/SpinnerMini';
 //---
 
 //! Global Styles
-const inputContainerStyles =
-  'flex items-center justify-between w-full rounded-md bg-[var(--color-slate-300)]';
+const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
-  'w-full rounded-md bg-inherit p-3 text-[var(--color-slate-800)] focus:bg-[var(--color-slate-100)] focus:outline-none focus:ring focus:ring-[var(--color-slate-700)] focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
+  'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-100 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function LoginEmail() {
   //! Custom Hooks
@@ -56,7 +55,7 @@ function LoginEmail() {
           placeholder="آدرس ایمیل"
           aria-required="true"
           autoComplete="true"
-          className={`${inputStyles} ${errors?.email && 'border-2 border-[var(--color-red-600)]'}`}
+          className={`${inputStyles} ${errors?.email && 'border-2 border-red-600'}`}
           {...register('email', {
             required: 'لطفا ایمیل خود را وارد کنید',
             pattern: {
@@ -75,7 +74,7 @@ function LoginEmail() {
           placeholder="رمز عبور"
           maxLength="16"
           aria-required="true"
-          className={`${inputStyles} ${errors?.password && 'border-2 border-[var(--color-red-600)]'}`}
+          className={`${inputStyles} ${errors?.password && 'border-2 border-red-600'}`}
           {...register('password', {
             required: 'لطفا رمز عبور خود را وارد کنید',
             minLength: {
@@ -101,7 +100,7 @@ function LoginEmail() {
           disabled={isLoggingIn}
         >
           <span className="text-lg font-medium">ثبت‌نام</span>{' '}
-          <BsListCheck className="text-xl text-[var(--color-slate-300)]" />
+          <BsListCheck className="text-xl text-slate-300" />
         </HomeButton>
         <HomeButton
           type="submit"
@@ -113,15 +112,15 @@ function LoginEmail() {
           ) : (
             <>
               <span className="text-lg font-medium">ورود</span>
-              <AiOutlineEnter className="text-2xl text-[var(--color-slate-300)]" />
+              <AiOutlineEnter className="text-2xl text-slate-300" />
             </>
           )}
         </HomeButton>
       </div>
-      <div className="flex h-6 justify-between px-5 font-medium text-[var(--color-indigo-400)]">
+      <div className="flex h-6 justify-between px-5 font-medium text-indigo-400">
         <Link
           to={isLoggingIn ? '' : '/login/otp'}
-          className={`transition-colors duration-200 hover:border-b hover:border-[var(--color-indigo-300)] hover:text-[var(--color-indigo-300)] ${isLoggingIn && 'cursor-not-allowed'}`}
+          className={`transition-colors duration-200 hover:text-indigo-300 ${isLoggingIn && 'cursor-not-allowed'}`}
         >
           فراموشی رمز عبور
         </Link>
