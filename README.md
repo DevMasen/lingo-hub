@@ -1,6 +1,6 @@
 <h1 align="center"> Lingo Hub Academy 🎓</h1>
 <p align="center">
-<img align="center" width="720px" src="./frontend/public/banner.png" alt="Banner Image">
+<img align="center" width="720px" src="https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/banner.png" alt="Banner Image">
 </p>
 
 # وب اپلیکیشن آکادمی زبان لینگوهاب
