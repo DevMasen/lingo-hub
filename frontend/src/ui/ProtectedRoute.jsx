@@ -14,7 +14,7 @@ function ProtectedRoute({ children }) {
   useEffect(
     function () {
       if (!isLoadingSession && !isAuthenticated) {
-        navigate('/login');
+        navigate('/home');
       }
     },
     [isAuthenticated, isLoadingSession, navigate]
