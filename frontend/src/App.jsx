@@ -1,33 +1,36 @@
 import './index.css';
 
+import { lazy, Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { Toaster } from 'react-hot-toast';
 
-// Not Protected
-import HomePage from './pages/HomePage';
-import AboutUs from './pages/AboutUs';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import PageNotFound from './pages/PageNotFound';
-
-// Protected
-import Dashboard from './pages/Dashboard';
-import ReserveRoom from './pages/ReserveRoom';
-import Wallet from './pages/Wallet';
-import Setting from './pages/Setting';
-import Support from './pages/Support';
-
-import LoginEmail from './features/authentication/LoginEmail';
-import LoginVerifyOTP from './features/authentication/LoginVerifyOTP';
-import UserInfo from './features/setting/UserInfo';
-import PaymentStatus from './features/setting/PaymentStatus';
-import PayModal from './features/setting/PayModal';
-import PasswordChange from './features/setting/PasswordChange';
-
+import Loader from './ui/Loader';
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
+import FullPage from './ui/FullPage';
+
+// Not Protected
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const Login = lazy(() => import('./pages/Login'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const PageNotFound = lazy(() => import('./pages/PageNotFound'));
+
+// Protected
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const ReserveRoom = lazy(() => import('./pages/ReserveRoom'));
+const Wallet = lazy(() => import('./pages/Wallet'));
+const Setting = lazy(() => import('./pages/Setting'));
+const Support = lazy(() => import('./pages/Support'));
+
+const LoginEmail = lazy(() => import('./features/authentication/LoginEmail'));
+const LoginVerifyOTP = lazy(() => import('./features/authentication/LoginVerifyOTP'));
+const UserInfo = lazy(() => import('./features/setting/UserInfo'));
+const PaymentStatus = lazy(() => import('./features/setting/PaymentStatus'));
+const PayModal = lazy(() => import('./features/setting/PayModal'));
+const PasswordChange = lazy(() => import('./features/setting/PasswordChange'));
 
 const queryClient = new QueryClient();
 
@@ -35,38 +38,46 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Routes>
-          <Route index element={<Navigate to="dashboard" replace />} />
-          <Route
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="reserve" element={<ReserveRoom />} />
-            <Route path="wallet" element={<Wallet />} />
-            <Route path="setting" element={<Setting />}>
-              <Route index element={<Navigate to="user" replace />} />
-              <Route path="user" element={<UserInfo />} />
-              <Route path="user/change-name" element={<UserInfo />} />
-              <Route path="user/pay" element={<PayModal />} />
-              <Route path="change-password" element={<PasswordChange />} />
+        <Suspense
+          fallback={
+            <FullPage>
+              <Loader />
+            </FullPage>
+          }
+        >
+          <Routes>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="reserve" element={<ReserveRoom />} />
+              <Route path="wallet" element={<Wallet />} />
+              <Route path="setting" element={<Setting />}>
+                <Route index element={<Navigate to="user" replace />} />
+                <Route path="user" element={<UserInfo />} />
+                <Route path="user/change-name" element={<UserInfo />} />
+                <Route path="user/pay" element={<PayModal />} />
+                <Route path="change-password" element={<PasswordChange />} />
+              </Route>
+              <Route path="status" element={<PaymentStatus />} />
+              <Route path="support" element={<Support />} />
             </Route>
-            <Route path="status" element={<PaymentStatus />} />
-            <Route path="support" element={<Support />} />
-          </Route>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/login" element={<Login />}>
-            <Route index element={<Navigate to="email" />} />
-            <Route path="email" element={<LoginEmail />} />
-            <Route path="otp" element={<LoginVerifyOTP />} />
-          </Route>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/login" element={<Login />}>
+              <Route index element={<Navigate to="email" />} />
+              <Route path="email" element={<LoginEmail />} />
+              <Route path="otp" element={<LoginVerifyOTP />} />
+            </Route>
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </Suspense>
         <ReactQueryDevtools initialOpen={false} />
         <Toaster
           position="top-center"
