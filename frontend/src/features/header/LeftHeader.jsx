@@ -1,7 +1,7 @@
 import WalletBalance from '../wallet/WalletBalance';
 import UserNotifications from '../header/UserNotifications';
 import UserProfile from '../header/UserProfile';
-import ToggleDarkMode from './TggleDarkMode';
+import ToggleDarkMode from './ToggleDarkMode';
 //---
 
 function LeftHeader() {
