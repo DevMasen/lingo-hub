@@ -39,7 +39,7 @@
 //   - changePassword                 (account settings, logged IN)
 
 import { supabase } from '../supabase';
-import { ApiError, fromSupabaseError } from '../errors/ApiError';
+import { ApiError, fromSupabaseError } from '../errors/apiError';
 import { createProfile } from './profiles.service';
 
 /**
