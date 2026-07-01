@@ -24,7 +24,7 @@
 // `profiles` table.
 
 import { supabase } from '../supabase';
-import { fromSupabaseError } from '../errors/ApiError';
+import { fromSupabaseError } from '../errors/apiError';
 import { toProfile, toProfileRow, toProfileUpdateRow } from '../mappers/profile.mapper';
 
 /**

@@ -27,7 +27,7 @@
 
 //! Supabase Client
 import { supabase } from '../supabase';
-import { fromSupabaseError } from '../errors/ApiError';
+import { fromSupabaseError } from '../errors/apiError';
 
 //! mapper
 import { toReservation, toReservations, toReservationRow } from '../mappers/reservation.mapper';

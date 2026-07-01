@@ -21,7 +21,7 @@
 // That caching decision belongs in the Redux layer, not here.
 
 import { supabase } from '../supabase';
-import { fromSupabaseError } from '../errors/ApiError';
+import { fromSupabaseError } from '../errors/apiError';
 import { toRoom, toRooms, toRoomRow } from '../mappers/room.mapper';
 
 /**

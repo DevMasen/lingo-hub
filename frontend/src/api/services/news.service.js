@@ -22,7 +22,7 @@
 // Django permission check after migration.
 
 import { supabase } from '../supabase';
-import { fromSupabaseError } from '../errors/ApiError';
+import { fromSupabaseError } from '../errors/apiError';
 import { toNewsItem, toNewsItems, toNewsRow } from '../mappers/news.mapper';
 
 /**
