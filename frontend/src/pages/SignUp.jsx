@@ -18,7 +18,7 @@ function SignUp() {
         'https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/home-bg.png?width=20&quality=20'
       }
     >
-      <div className="background flex h-dvh items-center justify-center">
+      <div className="flex h-dvh items-center justify-center px-5">
         {isLoading && <Loader />}
         <CloseFormButton />
         <SignupForm />

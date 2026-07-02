@@ -148,12 +148,12 @@ function SignupForm() {
             />
           </div>
           <div className="flex gap-3">
-            <HomeButton to={'/login'} extraClasses={'py-2 rounded-md grow'}>
-              <span className="text-lg font-medium"> ورود </span>
+            <HomeButton to={'/login'} extraClasses={'py-2 px-2 rounded-md grow'}>
+              <span className="text-sm font-medium sm:text-lg"> ورود </span>
               <CgEnter />
             </HomeButton>
             <HomeButton extraClasses={'py-2 px-12 rounded-md grow'} onClick={handleContinue}>
-              <span className="text-lg font-medium">ادامه</span>
+              <span className="text-sm font-medium sm:text-lg">ادامه</span>
               <HiOutlineArrowLeft />
             </HomeButton>
           </div>
@@ -361,7 +361,7 @@ function SignupForm() {
               extraClasses={'py-2 rounded-md flex-grow'}
               disabled={inputPassword.length === 0 || inputPasswordRepeat.length === 0}
             >
-              <span className="text-lg font-medium">ثبت‌نام</span>
+              <span className="text-sm font-medium sm:text-lg">ثبت‌نام</span>
               <HiCheckCircle className="text-xl" />
             </HomeButton>
           </div>

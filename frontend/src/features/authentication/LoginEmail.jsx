@@ -17,7 +17,7 @@ import SpinnerMini from '../../ui/SpinnerMini';
 //! Global Styles
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
-  'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-100 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
+  'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-100 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300 text-sm sm:text-base';
 
 function LoginEmail() {
   //! Custom Hooks
@@ -99,7 +99,7 @@ function LoginEmail() {
           extraClasses={`py-2 rounded-md grow ${isLoggingIn && 'cursor-not-allowed'}`}
           disabled={isLoggingIn}
         >
-          <span className="text-lg font-medium">ثبت‌نام</span>{' '}
+          <span className="text-sm font-medium sm:text-lg">ثبت‌نام</span>{' '}
           <BsListCheck className="text-xl text-slate-300" />
         </HomeButton>
         <HomeButton
@@ -111,7 +111,7 @@ function LoginEmail() {
             <SpinnerMini />
           ) : (
             <>
-              <span className="text-lg font-medium">ورود</span>
+              <span className="text-sm font-medium sm:text-lg">ورود</span>
               <AiOutlineEnter className="text-2xl text-slate-300" />
             </>
           )}
@@ -120,7 +120,7 @@ function LoginEmail() {
       <div className="flex h-6 justify-between px-5 font-medium text-indigo-400">
         <Link
           to={isLoggingIn ? '' : '/login/otp'}
-          className={`transition-colors duration-200 hover:text-indigo-300 ${isLoggingIn && 'cursor-not-allowed'}`}
+          className={`text-sm transition-colors duration-200 hover:text-indigo-300 sm:text-lg ${isLoggingIn && 'cursor-not-allowed'}`}
         >
           فراموشی رمز عبور
         </Link>

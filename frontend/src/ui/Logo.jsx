@@ -15,14 +15,9 @@ function Logo() {
             'https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/icon2.png?width=20&quality=20'
           }
           alt={'logo'}
-          className="w-16 rounded-lg"
+          className="w-14 rounded-lg sm:w-16"
         />
 
-        {/* <img
-          src="https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/icon2.png"
-          alt="!Logo"
-          className="w-16 rounded-lg"
-        /> */}
         <h1 className="text-xl font-semibold"> لینگوهاب </h1>
       </NavLink>
     </div>

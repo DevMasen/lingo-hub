@@ -16,7 +16,7 @@ function Login() {
         'https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/home-bg.png?width=20&quality=20'
       }
     >
-      <div className="background flex h-dvh items-center justify-center">
+      <div className="flex h-dvh items-center justify-center px-5">
         <CloseFormButton />
         <section className="text-md w-[500px] space-y-3 rounded-lg bg-slate-600/65 px-12 py-8 text-slate-200">
           <legend className="flex items-end gap-2 text-2xl font-bold">
