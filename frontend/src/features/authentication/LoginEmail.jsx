@@ -5,7 +5,6 @@ import { BsListCheck } from 'react-icons/bs';
 import { AiOutlineEnter } from 'react-icons/ai';
 
 import { useKey } from '../../hooks/useKey';
-import { useSignup } from './SignupContext';
 import { useLogin } from './useLogin';
 
 import HomeButton from '../../ui/HomeButton';
@@ -28,9 +27,6 @@ function LoginEmail() {
 
   //! React Query
   const { login, isLoggingIn } = useLogin();
-
-  //! Context Data
-  const { setStep } = useSignup();
 
   //! React Hook Form
   const { register, handleSubmit, formState } = useForm();
@@ -93,9 +89,6 @@ function LoginEmail() {
       <div className="flex gap-3">
         <HomeButton
           to={isLoggingIn ? '' : '/signup'}
-          onClick={() => {
-            setStep('1');
-          }}
           extraClasses={`py-2 rounded-md grow ${isLoggingIn && 'cursor-not-allowed'}`}
           disabled={isLoggingIn}
         >

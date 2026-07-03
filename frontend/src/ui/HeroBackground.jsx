@@ -4,8 +4,6 @@ import { useImageLoaded } from '../hooks/useImageLoaded';
 function HeroBackground({ src, placeholderSrc, children }) {
   const loaded = useImageLoaded(src);
 
-  console.log(loaded);
-
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }} className="h-dvh">
       <div

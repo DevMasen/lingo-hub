@@ -10,7 +10,6 @@ import { ConfirmReserveProvider } from './features/reserve/ConfirmReserveContext
 import { HeaderProvider } from './features/header/HeaderContext.jsx';
 import { PayProvider } from './features/setting/PayContext.jsx';
 import { SidebarProvider } from './features/sidebar/SidebarContext.jsx';
-import { SignupProvider } from './features/authentication/SignupContext.jsx';
 import { WalletProvider } from './features/wallet/WalletContext.jsx';
 
 import App from './App.jsx';
@@ -19,21 +18,19 @@ import App from './App.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <DarkModeProvider>
-      <SignupProvider>
-        <ExitProvider>
-          <SidebarProvider>
-            <ConfirmReserveProvider>
-              <PayProvider>
-                <HeaderProvider>
-                  <WalletProvider>
-                    <App />
-                  </WalletProvider>
-                </HeaderProvider>
-              </PayProvider>
-            </ConfirmReserveProvider>
-          </SidebarProvider>
-        </ExitProvider>
-      </SignupProvider>
+      <ExitProvider>
+        <SidebarProvider>
+          <ConfirmReserveProvider>
+            <PayProvider>
+              <HeaderProvider>
+                <WalletProvider>
+                  <App />
+                </WalletProvider>
+              </HeaderProvider>
+            </PayProvider>
+          </ConfirmReserveProvider>
+        </SidebarProvider>
+      </ExitProvider>
     </DarkModeProvider>
   </StrictMode>
 );
