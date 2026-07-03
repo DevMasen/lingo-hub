@@ -11,9 +11,7 @@ function SignUp() {
   //! JSX
   return (
     <HeroBackground
-      src={
-        'https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/home-bg.png?width=1600&quality=80'
-      }
+      src={'/home-bg.png'}
       placeholderSrc={
         'https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/home-bg.png?width=20&quality=20'
       }
