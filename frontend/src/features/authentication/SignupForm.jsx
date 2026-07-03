@@ -3,10 +3,14 @@ import { useForm } from 'react-hook-form';
 import { HiCheckCircle, HiOutlineClipboardList } from 'react-icons/hi';
 import { CgEnter } from 'react-icons/cg';
 
+import { useSignup } from './useSignup';
+
 import HomeButton from '../../ui/HomeButton';
 import Error from '../../ui/Error';
 import HidePasswordButton from '../../ui/HidePasswordButton';
-import { useSignup } from './useSignup';
+import SpinnerMini from '../../ui/SpinnerMini';
+
+import toEnglishDigits from '../../utils/toEnglishDigits';
 //---
 
 //! Global Styles
@@ -21,6 +25,7 @@ function SignupForm() {
   const [isPassRepHidden, setIsPassRepHidden] = useState(true);
 
   const { signup, isSigningUp } = useSignup();
+  //TODO : disable buttons and inputs while signing up
 
   //! React Hook Form
   const {
@@ -42,9 +47,31 @@ function SignupForm() {
     },
   });
 
-  //TODO: create email confirmation template before signing up
-  function onSuccess(formData) {
-    console.log(formData);
+  function onSuccess({
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    language,
+    level,
+    explanation,
+    password,
+  }) {
+    if (!email || !password) return;
+    const newProfile = {
+      firstName,
+      lastName,
+      phoneNumber: toEnglishDigits(phoneNumber),
+      language,
+      level,
+      explanation,
+      signupStatus: 'pending',
+      creditBalance: 0,
+      maxReserveCount: 3,
+    };
+    console.log(email, password, newProfile);
+    signup({ email, password, newProfile });
+    //FIX: fix that mother fucker
   }
 
   function onError(errors) {
@@ -232,9 +259,13 @@ function SignupForm() {
           <CgEnter />
         </HomeButton>
 
-        <HomeButton type={'submit'} extraClasses={'py-2 rounded-md flex-grow'}>
+        <HomeButton
+          disabled={isSigningUp}
+          type={'submit'}
+          extraClasses={'py-2 rounded-md flex-grow'}
+        >
           <span className="text-sm font-medium sm:text-lg">ثبت‌نام</span>
-          <HiCheckCircle className="text-xl" />
+          {isSigningUp ? <SpinnerMini /> : <HiCheckCircle className="text-xl" />}
         </HomeButton>
       </div>
     </form>
