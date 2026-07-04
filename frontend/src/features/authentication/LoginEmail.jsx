@@ -68,7 +68,6 @@ function LoginEmail() {
           type={isPassHidden ? 'password' : 'text'}
           name="password"
           placeholder="رمز عبور"
-          maxLength="16"
           aria-required="true"
           className={`${inputStyles} ${errors?.password && 'border-2 border-red-600'}`}
           {...register('password', {

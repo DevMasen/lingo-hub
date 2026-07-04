@@ -69,7 +69,6 @@ function SignupForm() {
       creditBalance: 0,
       maxReserveCount: 3,
     };
-    console.log(email, password, newProfile);
     signup({ email, password, profile: newProfile });
   }
 
