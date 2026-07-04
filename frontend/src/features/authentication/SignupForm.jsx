@@ -70,8 +70,7 @@ function SignupForm() {
       maxReserveCount: 3,
     };
     console.log(email, password, newProfile);
-    signup({ email, password, newProfile });
-    //FIX: fix that mother fucker
+    signup({ email, password, profile: newProfile });
   }
 
   function onError(errors) {
