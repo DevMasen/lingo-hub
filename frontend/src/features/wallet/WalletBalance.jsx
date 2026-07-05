@@ -9,13 +9,14 @@ import HeaderButton from '../header/HeaderButton';
 function WalletBalance() {
   //! Context Data
 
+  const userBalance = '500000';
+
   //!JSX
   return (
-    <div className="ml-3 flex items-center gap-2 rounded-lg border border-[var(--color-slate-500)] p-2">
+    <div className="ml-3 hidden items-center gap-2 rounded-lg border border-[var(--color-slate-500)] p-2 md:flex">
       <BiWallet className="h-6 w-6 text-[var(--color-slate-200)]" />
-      <div>
-        {/* <span> {new Intl.NumberFormat('fa-IR').format(userBalance)} </span> */}
-        <span> {'<User Balance>'} </span>
+      <div className="whitespace-nowrap">
+        <span> {new Intl.NumberFormat('fa-IR').format(userBalance)} </span>
         <span> تومان </span>
       </div>
       <HeaderButton to={'wallet'} tooltipId={'increase-balance'} tooltipContent={'افزایش وجه'}>

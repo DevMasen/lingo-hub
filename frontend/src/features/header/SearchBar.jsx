@@ -23,10 +23,10 @@ function SearchBar() {
         required
         aria-required="true"
         maxLength="20"
-        className="bg-inherit outline-none"
+        className="w-full bg-inherit outline-none"
       />
       <div
-        className={`absolute right-0 top-12 z-20 flex items-center justify-center rounded-lg border border-[var(--color-slate-500)] bg-[var(--color-gray-900)] transition-all duration-75 ${searchQuery ? 'h-64 w-96 border' : 'h-0 w-0 border-0'}`}
+        className={`absolute right-0 top-12 z-20 flex items-center justify-center rounded-lg border border-[var(--color-slate-500)] bg-gray-900/95 transition-all duration-75 ${searchQuery ? 'h-48 w-80 border sm:h-64 sm:w-96' : 'h-0 w-0 border-0'}`}
       >
         {searchQuery && (
           <p className="text-xl text-[var(--color-slate-400)]"> نتیجه ای یافت نشد! </p>

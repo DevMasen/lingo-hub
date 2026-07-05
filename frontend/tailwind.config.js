@@ -6,6 +6,7 @@ const config = {
       fontFamily: {
         sans: ['Vazir', 'sans-serif'],
       },
+      transitionProperty: { height: 'height', width: 'width' },
     },
   },
   plugins: [],

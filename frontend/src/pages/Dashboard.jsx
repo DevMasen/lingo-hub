@@ -13,15 +13,16 @@ function Dashboard() {
   //! Fake Data
   const news = [];
   const userReservedRooms = [];
+  const userFirstName = 'محمدحسین';
 
   //! JSX
   return (
     <div className="grid grid-cols-1 grid-rows-[auto_1fr]">
       <DashboardHeader />
-      <section className="grid grid-cols-[2fr_1fr] grid-rows-[auto_1fr] gap-4 p-4">
+      <section className="grid grid-cols-1 grid-rows-[auto_1fr] gap-4 p-4 lg:grid-cols-[2fr_1fr]">
         <Introduction
-          className={`${sectionPartsStyles} col-span-2 flex items-center gap-6 pl-9`}
-          userFirstName={'<User FirstName>'}
+          className={`${sectionPartsStyles} flex flex-col items-center gap-6 md:flex-row md:pl-9 lg:col-span-2`}
+          userFirstName={userFirstName}
         />
         <div>
           <ReserveHistory
