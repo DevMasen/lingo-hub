@@ -17,7 +17,10 @@ export function useLogout() {
       navigate('/home');
     },
     onError: (error) => {
-      toast.error(error.message);
+      const message =
+        error?.message ??
+        ((typeof error === 'string' ? error : JSON.stringify(error)) || 'خطایی رخ داد');
+      toast.error(message);
       navigate('/dashboard');
     },
   });

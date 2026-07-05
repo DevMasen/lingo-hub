@@ -16,7 +16,10 @@ export function useSession() {
 
   if (error) {
     console.error(error);
-    toast.error(error.message);
+    const message =
+      error?.message ??
+      ((typeof error === 'string' ? error : JSON.stringify(error)) || 'خطایی رخ داد');
+    toast.error(message);
   }
 
   return { session, isLoadingSession, isAuthenticated: session?.role === 'authenticated' };

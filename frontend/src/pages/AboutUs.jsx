@@ -6,9 +6,7 @@ function AboutUs() {
   return (
     <div className="overflow-y-hidden">
       <HeroBackground
-        src={
-          'https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/aboutus-bg.png?width=1600&quality=80'
-        }
+        src={'/aboutus-bg.png'}
         placeholderSrc={
           'https://ewwmegszjxnicvnvzyhb.supabase.co/storage/v1/object/public/images/aboutus-bg.png?width=20&quality=20'
         }

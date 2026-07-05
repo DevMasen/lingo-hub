@@ -49,7 +49,7 @@ export function fromSupabaseError(error) {
 
   // Auth errors from supabase.auth.*
   if (error.message?.toLowerCase().includes('invalid login credentials')) {
-    return new ApiError('ایمیل یا رمز عبور نا معتبر است.', {
+    return new ApiError('ایمیل یا رمز عبور نامعتبر است.', {
       code: 'UNAUTHORIZED',
       status: 401,
       cause: error,

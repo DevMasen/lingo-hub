@@ -4,15 +4,13 @@ import { useImageLoaded } from '../hooks/useImageLoaded';
 function HeroBackground({ src, placeholderSrc, children }) {
   const loaded = useImageLoaded(src);
 
-  console.log(loaded);
-
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }} className="h-dvh">
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: `url(${placeholderSrc})`,
+          backgroundImage: `linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url(${placeholderSrc})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           filter: 'blur(20px)',
@@ -25,9 +23,10 @@ function HeroBackground({ src, placeholderSrc, children }) {
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage: loaded ? `url(${src})` : 'none',
+          backgroundImage: loaded
+            ? `linear-gradient(rgba(36, 42, 46, 0.8), rgba(36, 42, 46, 0.8)), url(${src})`
+            : 'none',
           backgroundSize: 'cover',
-          filter: 'blur(3px) brightness(0.8)',
           backgroundPosition: 'center',
           opacity: loaded ? 1 : 0,
           transition: 'opacity 0.4s ease-out',
