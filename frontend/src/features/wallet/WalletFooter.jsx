@@ -11,7 +11,7 @@ function WalletFooter() {
 
   //! JSX
   return (
-    <section className="flex items-center justify-between border-t-2 border-[var(--color-slate-700)] px-5 py-6">
+    <section className="flex items-center justify-between gap-3 border-t-2 border-[var(--color-slate-700)] px-5 py-6">
       <div>
         <span> مبلغ پرداختی شما : </span>{' '}
         <span> {new Intl.NumberFormat('fa-IR').format(currentPrice)} تومان </span>{' '}
@@ -19,7 +19,7 @@ function WalletFooter() {
       </div>
       <PanelButton
         disabled={currentPrice < 100000 || currentPrice > 10000000}
-        extraClasses="px-3 py-2"
+        extraClasses="px-3 py-2 whitespace-nowrap"
       >
         {' '}
         پرداخت هزینه

@@ -7,17 +7,11 @@ import { useHeader } from './HeaderContext';
 import Modal from '../../ui/Modal';
 import ConfirmExit from '../../ui/ConfirmExit';
 import LinkItem from '../../ui/LinkItem';
-import { useLogout } from '../authentication/useLogout';
-import { useNavigate } from 'react-router';
 //---
 
 function ProfileBox() {
-  const navigate = useNavigate();
-
   //! Context Data
   const { toggleProfile } = useHeader();
-
-  const { logout, isLoggingOut } = useLogout();
 
   //!JSX
   return (
@@ -48,13 +42,7 @@ function ProfileBox() {
               </LinkItem>
             </Modal.Open>
             <Modal.Window name="exit">
-              <ConfirmExit
-                disabled={isLoggingOut}
-                onConfirmExit={() => {
-                  toggleProfile();
-                  logout({ onSettled: navigate('/home') });
-                }}
-              />
+              <ConfirmExit />
             </Modal.Window>
           </Modal>
         </li>

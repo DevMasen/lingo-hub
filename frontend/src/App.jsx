@@ -6,10 +6,10 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { Toaster } from 'react-hot-toast';
 
-import Loader from './ui/Loader';
 import AppLayout from './ui/AppLayout';
 import ProtectedRoute from './ui/ProtectedRoute';
 import FullPage from './ui/FullPage';
+import Spinner from './ui/Spinner';
 
 // Not Protected
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -41,7 +41,7 @@ function App() {
         <Suspense
           fallback={
             <FullPage>
-              <Loader />
+              <Spinner />
             </FullPage>
           }
         >

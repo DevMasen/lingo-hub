@@ -1,4 +1,3 @@
-import { Tooltip } from 'react-tooltip';
 import { useDarkMode } from '../../context/DarkModeContext';
 import HeaderButton from './HeaderButton';
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi';
@@ -11,18 +10,13 @@ function ToggleDarkMode() {
 
   return (
     <div className="relative flex items-center">
-      <HeaderButton
-        onClick={toggleDarkMode}
-        tooltipId="toggle-dark-mode"
-        tooltipContent="حالت تیره/روشن"
-      >
+      <HeaderButton onClick={toggleDarkMode}>
         {isDarkMode ? (
           <HiOutlineSun className={iconStyles} />
         ) : (
           <HiOutlineMoon className={iconStyles} />
         )}
       </HeaderButton>
-      <Tooltip id="toggle-dark-mode" />
     </div>
   );
 }

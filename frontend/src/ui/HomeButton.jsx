@@ -11,6 +11,8 @@ function HomeButton({
   ref,
 }) {
   const hasBackground = extraClasses?.includes('bg-');
+  const hasHoverTranslate = extraClasses?.includes('hover:translate-');
+  const hasShadow = extraClasses?.includes('shadow-');
 
   //! JSX
   if (type === 'submit')
@@ -19,7 +21,7 @@ function HomeButton({
         type="submit"
         onClick={onClick}
         ref={ref}
-        className={`${extraClasses} ${!hasBackground && 'bg-slate-900/80'} flex items-center justify-center gap-2 text-slate-200 shadow-md shadow-gray-900 transition-all duration-200 hover:translate-y-[-0.25rem] hover:shadow-lg hover:shadow-gray-900 disabled:cursor-not-allowed`}
+        className={`${extraClasses} ${!hasBackground && 'bg-slate-900/80'} ${!hasHoverTranslate && 'hover:translate-y-[-0.25rem]'} ${!hasShadow && 'shadow-md shadow-gray-900 hover:shadow-lg hover:shadow-gray-900'} flex items-center justify-center gap-2 text-slate-200 transition-all duration-200 disabled:cursor-not-allowed`}
         disabled={disabled}
       >
         {children}
@@ -31,7 +33,7 @@ function HomeButton({
       onClick={onClick}
       to={to}
       ref={ref}
-      className={`${extraClasses} ${!hasBackground && 'bg-slate-900/80'} flex items-center justify-center gap-2 text-slate-200 shadow-md shadow-gray-900 transition-all duration-200 hover:translate-y-[-0.25rem] hover:shadow-lg hover:shadow-gray-900`}
+      className={`${extraClasses} ${!hasBackground && 'bg-slate-900/80'} ${!hasHoverTranslate && 'hover:translate-y-[-0.25rem]'} ${!hasShadow && 'shadow-md shadow-gray-900 hover:shadow-lg hover:shadow-gray-900'} flex items-center justify-center gap-2 text-slate-200 transition-all duration-200`}
     >
       {children}
     </Link>

@@ -43,7 +43,7 @@ function LoginEmail() {
   //! JSX
   return (
     <form onSubmit={handleSubmit(onSuccess, onError)} className="flex flex-col gap-3">
-      <div className={`${inputContainerStyles} ${isLoggingIn && 'opacity-55'}`}>
+      <div className={`${inputContainerStyles} ${isLoggingIn && 'opacity-50'}`}>
         <input
           id="email"
           type="email"
@@ -62,7 +62,7 @@ function LoginEmail() {
           disabled={isLoggingIn}
         />
       </div>
-      <div className={`${inputContainerStyles} ${isLoggingIn && 'opacity-55'}`}>
+      <div className={`${inputContainerStyles} ${isLoggingIn && 'opacity-50'}`}>
         <input
           id="password"
           type={isPassHidden ? 'password' : 'text'}
@@ -88,8 +88,7 @@ function LoginEmail() {
       <div className="flex gap-3">
         <HomeButton
           to={isLoggingIn ? '' : '/signup'}
-          extraClasses={`py-2 rounded-md grow ${isLoggingIn && 'cursor-not-allowed'}`}
-          disabled={isLoggingIn}
+          extraClasses={`py-2 rounded-md grow ${isLoggingIn && 'cursor-not-allowed hover:translate-y-0 shadow-0 opacity-70'}`}
         >
           <span className="text-sm font-medium sm:text-lg">ثبت‌نام</span>{' '}
           <BsListCheck className="text-xl text-slate-300" />
@@ -97,7 +96,7 @@ function LoginEmail() {
         <HomeButton
           type="submit"
           disabled={Object.keys(errors).length || isLoggingIn}
-          extraClasses={'px-5 py-2 rounded-md flex-grow'}
+          extraClasses={`px-5 py-2 rounded-md flex-grow ${isLoggingIn && 'hover:translate-y-0 shadow-0'}`}
         >
           {isLoggingIn ? (
             <SpinnerMini />

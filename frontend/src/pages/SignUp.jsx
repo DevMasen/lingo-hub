@@ -1,13 +1,9 @@
 import SignupForm from '../features/authentication/SignupForm';
-
-import Loader from '../ui/Loader';
 import CloseFormButton from '../ui/CloseFormButton';
 import HeroBackground from '../ui/HeroBackground';
 //---
 
 function SignUp() {
-  const isLoading = false;
-
   //! JSX
   return (
     <HeroBackground
@@ -17,7 +13,6 @@ function SignUp() {
       }
     >
       <div className="flex h-dvh items-center justify-center px-5">
-        {isLoading && <Loader />}
         <CloseFormButton />
         <SignupForm />
       </div>

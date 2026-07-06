@@ -1,8 +1,9 @@
-import { cloneElement, createContext, useContext, useEffect, useState } from 'react';
+import { cloneElement, createContext, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { HiXMark } from 'react-icons/hi2';
 
 import { useOutsideClick } from '../hooks/useOutsideClick';
+import { useLockScroll } from '../hooks/useLockScroll';
 //---
 
 const ModalContext = createContext();
@@ -13,13 +14,9 @@ function Modal({ children }) {
   const close = () => setOpenName('');
   const open = setOpenName;
 
-  useEffect(
-    function () {
-      if (openName.length > 0) document.body.classList.add('overflow-hidden');
-      else document.body.classList.remove('overflow-hidden');
-    },
-    [openName]
-  );
+  const isModalOpen = openName.length > 0;
+
+  useLockScroll(isModalOpen);
 
   return (
     <ModalContext.Provider value={{ openName, open, close }}>{children}</ModalContext.Provider>

@@ -46,7 +46,7 @@ function WalletBody() {
         <p className="text-[var(--color-slate-400)]">
           مبلغ مورد نظر را انتخاب یا به صورت دستی وارد نمایید.
         </p>
-        <ul className="mt-3 grid grid-cols-3 gap-4">
+        <ul className="mt-3 grid grid-cols-2 gap-4 sm:grid-cols-3">
           {prices.map((price, i) => (
             <PriceItem price={price} key={i} />
           ))}
@@ -59,7 +59,7 @@ function WalletBody() {
             value={desiredPriceInput}
             onChange={(e) => setDesiredPriceInput(e.target.value)}
             type="text"
-            className="w-72 bg-transparent outline-none"
+            className="w-56 bg-transparent outline-none sm:w-72"
             placeholder="مبلغ دلخواه واریزی را وارد نمایید"
           />
           <span className="border-r-2 border-[var(--color-slate-500)] pr-3"> تومان </span>

@@ -25,7 +25,6 @@ function SignupForm() {
   const [isPassRepHidden, setIsPassRepHidden] = useState(true);
 
   const { signup, isSigningUp } = useSignup();
-  //TODO : disable buttons and inputs while signing up
 
   //! React Hook Form
   const {
@@ -86,39 +85,48 @@ function SignupForm() {
         <HiOutlineClipboardList className="text-3xl" />
       </legend>
 
-      <div className={`${inputContainerStyles} ${errors?.firstName && 'bg-red-100'}`}>
+      <div
+        className={`${inputContainerStyles} ${errors?.firstName && 'bg-red-100'} ${isSigningUp && 'opacity-50'}`}
+      >
         <input
           id="firstName"
           type="text"
           placeholder=" نام "
           aria-required="true"
           maxLength={30}
+          disabled={isSigningUp}
           className={`${inputStyles} ${errors?.firstName && inputErrorStyles}`}
           {...register('firstName', { required: 'نام خود را وارد کنید' })}
         />
       </div>
       {errors?.firstName && <Error error={errors?.firstName.message} />}
 
-      <div className={`${inputContainerStyles} ${errors?.lastName && 'bg-red-100'}`}>
+      <div
+        className={`${inputContainerStyles} ${errors?.lastName && 'bg-red-100'} ${isSigningUp && 'opacity-50'}`}
+      >
         <input
           id="lastName"
           type="text"
           placeholder=" نام خانوادگی "
           aria-required="true"
           maxLength={30}
+          disabled={isSigningUp}
           className={`${inputStyles} ${errors?.lastName && inputErrorStyles}`}
           {...register('lastName', { required: 'نام خانوادگی خود را وارد کنید' })}
         />
       </div>
       {errors?.lastName && <Error error={errors?.lastName.message} />}
 
-      <div className={`${inputContainerStyles} ${errors?.phoneNumber && 'bg-red-100'}`}>
+      <div
+        className={`${inputContainerStyles} ${errors?.phoneNumber && 'bg-red-100'} ${isSigningUp && 'opacity-50'}`}
+      >
         <input
           id="phoneNumber"
           type="text"
           placeholder=" شماره موبایل "
           aria-required="true"
           maxLength="10"
+          disabled={isSigningUp}
           className={`${inputStyles} ${errors?.phoneNumber && inputErrorStyles}`}
           {...register('phoneNumber', {
             required: 'شماره تماس خود را وارد کنید',
@@ -142,13 +150,16 @@ function SignupForm() {
       </div>
       {errors?.phoneNumber && <Error error={errors?.phoneNumber.message} />}
 
-      <div className={`${inputContainerStyles} ${errors?.email && 'bg-red-100'}`}>
+      <div
+        className={`${inputContainerStyles} ${errors?.email && 'bg-red-100'} ${isSigningUp && 'opacity-50'}`}
+      >
         <input
           id="email"
           type="email"
           placeholder=" آدرس ایمیل "
           aria-required="true"
           maxLength="40"
+          disabled={isSigningUp}
           className={`${inputStyles} ${errors?.email && inputErrorStyles}`}
           {...register('email', {
             required: 'آدرس ایمیل خود را وارد کنید',
@@ -161,7 +172,7 @@ function SignupForm() {
       </div>
       {errors?.email && <Error error={errors?.email.message} />}
 
-      <div className={`${inputContainerStyles} flex px-3 py-2`}>
+      <div className={`${inputContainerStyles} flex px-3 py-2 ${isSigningUp && 'opacity-50'}`}>
         <label className="flex w-36 items-center font-semibold" htmlFor="language">
           زبان تدریس :
         </label>
@@ -169,6 +180,7 @@ function SignupForm() {
           id="language"
           aria-required="true"
           className={`${inputStyles}`}
+          disabled={isSigningUp}
           {...register('language')}
         >
           <option value="انگلیسی"> انگلیسی </option>
@@ -177,11 +189,17 @@ function SignupForm() {
           <option value="چینی"> چینی </option>
         </select>
       </div>
-      <div className={`${inputContainerStyles} flex px-3 py-2`}>
+      <div className={`${inputContainerStyles} flex px-3 py-2 ${isSigningUp && 'opacity-50'}`}>
         <label className="flex w-36 items-center font-semibold" htmlFor="level">
           سطح تدریس:
         </label>
-        <select id="level" aria-required="true" className={`${inputStyles}`} {...register('level')}>
+        <select
+          id="level"
+          aria-required="true"
+          disabled={isSigningUp}
+          className={`${inputStyles}`}
+          {...register('level')}
+        >
           <option value="مبتدی"> مبتدی </option>
           <option value="متوسط"> متوسط </option>
           <option value="پیشرفته"> پیشرفته </option>
@@ -189,18 +207,21 @@ function SignupForm() {
         </select>
       </div>
 
-      <div className={`${inputContainerStyles}`}>
+      <div className={`${inputContainerStyles} ${isSigningUp && 'opacity-50'}`}>
         <textarea
           id="explanation"
           placeholder=" توضیحات تکمیلی ..."
           aria-required="true"
           maxLength="100"
+          disabled={isSigningUp}
           className={`${inputStyles}`}
           {...register('explanation')}
         />
       </div>
 
-      <div className={`${inputContainerStyles} ${errors?.password && 'bg-red-100'}`}>
+      <div
+        className={`${inputContainerStyles} ${errors?.password && 'bg-red-100'} ${isSigningUp && 'opacity-50'}`}
+      >
         <input
           id="password"
           type={isPassHidden ? 'password' : 'text'}
@@ -208,6 +229,7 @@ function SignupForm() {
           placeholder=" رمز عبور "
           aria-required="true"
           maxLength="30"
+          disabled={isSigningUp}
           className={`${inputStyles} ${errors?.password && inputErrorStyles}`}
           {...register('password', {
             required: 'رمز عبور خود را وارد کنید',
@@ -229,7 +251,9 @@ function SignupForm() {
       </div>
       {errors?.password && <Error error={errors?.password.message} />}
 
-      <div className={`${inputContainerStyles} ${errors?.passwordRepeat && 'bg-red-100'}`}>
+      <div
+        className={`${inputContainerStyles} ${errors?.passwordRepeat && 'bg-red-100'} ${isSigningUp && 'opacity-50'}`}
+      >
         <input
           id="passwordRepeat"
           type={isPassRepHidden ? 'password' : 'text'}
@@ -237,6 +261,7 @@ function SignupForm() {
           placeholder=" تکرار رمز عبور "
           aria-required="true"
           maxLength="30"
+          disabled={isSigningUp}
           className={`${inputStyles} ${errors?.passwordRepeat && inputErrorStyles}`}
           {...register('passwordRepeat', {
             required: 'تکرار رمز عبور خود را وارد کنید',
@@ -252,7 +277,11 @@ function SignupForm() {
       {errors?.passwordRepeat && <Error error={errors?.passwordRepeat.message} />}
 
       <div className="flex gap-3">
-        <HomeButton to={'/login'} extraClasses={'py-2 px-2 rounded-md grow'}>
+        <HomeButton
+          // className={'translate-y'}
+          to={isSigningUp ? '' : '/login'}
+          extraClasses={`py-2 px-2 rounded-md grow ${isSigningUp && 'cursor-not-allowed hover:translate-y-0 opacity-70 shadow-0'}`}
+        >
           <span className="text-sm font-medium sm:text-lg"> ورود </span>
           <CgEnter />
         </HomeButton>
@@ -260,7 +289,7 @@ function SignupForm() {
         <HomeButton
           disabled={isSigningUp}
           type={'submit'}
-          extraClasses={'py-2 rounded-md flex-grow'}
+          extraClasses={`py-2 rounded-md flex-grow ${isSigningUp && 'hover:translate-y-0 shadow-0'}`}
         >
           <span className="text-sm font-medium sm:text-lg">ثبت‌نام</span>
           {isSigningUp ? <SpinnerMini /> : <HiCheckCircle className="text-xl" />}

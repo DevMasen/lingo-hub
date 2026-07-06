@@ -1,5 +1,3 @@
-import { Tooltip } from 'react-tooltip';
-
 import { BiWallet } from 'react-icons/bi';
 import { GrAddCircle } from 'react-icons/gr';
 
@@ -19,10 +17,9 @@ function WalletBalance() {
         <span> {new Intl.NumberFormat('fa-IR').format(userBalance)} </span>
         <span> تومان </span>
       </div>
-      <HeaderButton to={'wallet'} tooltipId={'increase-balance'} tooltipContent={'افزایش وجه'}>
+      <HeaderButton to={'wallet'}>
         <GrAddCircle className="h-[1.75rem] w-[1.75rem] p-1 text-[var(--color-slate-200)] transition-all duration-200 hover:text-[var(--color-indigo-700)]" />
       </HeaderButton>
-      <Tooltip id="increase-balance" />
     </div>
   );
 }
