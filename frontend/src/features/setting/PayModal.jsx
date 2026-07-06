@@ -1,8 +1,7 @@
 import { useSearchParams } from 'react-router';
 
-import { usePay } from './PayContext';
+// import { usePay } from './PayContext';
 
-import Modal from '../../ui/Modal';
 //---
 
 function PayModal() {
@@ -10,33 +9,11 @@ function PayModal() {
   const [query] = useSearchParams();
 
   //! Context Data
-  const { isPayOpen, togglePayWindow } = usePay();
+  // const { isPayOpen, togglePayWindow } = usePay();
 
   //! JSX
   return (
     <form method="PATCH">
-      <Modal
-        name="payModal"
-        type="form"
-        isOpen={isPayOpen}
-        message={`هزینه رزرو اتاق برای ۹۰ دقیقه : ${new Intl.NumberFormat('fa-IR').format(
-          query.get('cost')
-        )} تومان`}
-        onClick={{ cancel: togglePayWindow }}
-        text={{ confirm: 'پرداخت آنلاین', cancel: 'پرداخت با کیف پول' }}
-        backgroundColor={{
-          confirm: 'bg-[var(--color-green-600)]',
-          cancel: 'bg-[var(--color-slate-800)]',
-        }}
-        hoverColor={{
-          confirm: 'hover:bg-[var(--color-green-500)]',
-          cancel: 'hover:bg-[var(--color-slate-900)]',
-        }}
-        disabledStyles={{
-          confirm:
-            'disabled:bg-[var(--color-green-500)] disabled:hover:bg-[var(--color-green-500)] disabled:opacity-70',
-        }}
-      />
       <input type="hidden" name="cost" value={query.get('cost')} />
       <input type="hidden" name="recordId" value={query.get('recordId')} />
       <input type="hidden" name="roomName" value={query.get('roomName')} />

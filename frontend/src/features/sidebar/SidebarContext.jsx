@@ -1,10 +1,13 @@
 import { createContext, useContext, useState } from 'react';
+import { useLockScroll } from '../../hooks/useLockScroll';
 //---
 
 const SidebarContext = createContext();
 
 function SidebarProvider({ children }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useLockScroll(isSidebarOpen);
 
   function toggleSidebar() {
     setIsSidebarOpen((open) => !open);

@@ -1,88 +1,70 @@
-import { Link, useNavigate } from 'react-router';
+import { cloneElement, createContext, useContext, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { HiXMark } from 'react-icons/hi2';
 
-import { useExit } from '../context/ExitContext';
-import { useConfirmReserve } from '../features/reserve/ConfirmReserveContext';
-import { usePay } from '../features/setting/PayContext';
+import { useOutsideClick } from '../hooks/useOutsideClick';
+import { useLockScroll } from '../hooks/useLockScroll';
 //---
 
-function Modal({
-  name = '',
-  isOpen = false,
-  message = '',
-  onClick = { confirm: () => {}, cancel: () => {} },
-  path = { confirm: '', cancel: '' },
-  text = { confirm: '', cancel: '' },
-  type = 'default',
-  backgroundColor = { confirm: 'bg-[var(--color-red-700)]', cancel: 'bg-[var(--color-slate-800)]' },
-  hoverColor = {
-    confirm: 'hover:bg-[var(--color-red-600)]',
-    cancel: 'hover:bg-[var(--color-slate-900)]',
-  },
-  disabledStyles = { confirm: '', cancel: '' },
-}) {
-  //! React Router
-  const navigate = useNavigate();
+const ModalContext = createContext();
 
-  //! Context Data
-  const { hideExitWindow } = useExit();
-  const { hideConfirmWindow } = useConfirmReserve();
-  const { hidePayWindow } = usePay();
+function Modal({ children }) {
+  const [openName, setOpenName] = useState('');
 
-  //! JSX
+  const close = () => setOpenName('');
+  const open = setOpenName;
+
+  const isModalOpen = openName.length > 0;
+
+  useLockScroll(isModalOpen);
+
   return (
-    <div
-      onClick={(e) => {
-        if (!e.target.classList.contains('overlay')) return;
-        hideExitWindow();
-        hideConfirmWindow();
-        hidePayWindow();
-        if (name === 'payModal') navigate('/setting/user');
-      }}
-      className={`overlay fixed right-0 top-0 z-50 flex items-center justify-center bg-slate-800/20 backdrop-blur-sm transition-all duration-100 ${!isOpen ? 'h-0 w-0' : 'h-dvh w-full'}`}
-    >
-      <div
-        className={`z-[60] w-[400px] flex-col items-center space-y-3 rounded-lg bg-slate-600/65 px-12 py-8 ${!isOpen ? 'hidden' : 'flex'}`}
-      >
-        <h2 className="text-center text-2xl font-semibold">{message}</h2>
-        {type === 'default' && (
-          <Link
-            to={path.confirm}
-            onClick={onClick.confirm}
-            className={`w-full rounded-lg ${backgroundColor.confirm} p-3 text-center text-lg font-medium text-[var(--color-slate-100)] transition-all duration-300 ${hoverColor.confirm}`}
-          >
-            {text.confirm}
-          </Link>
-        )}
-        {type === 'form' && (
-          <button
-            disabled={name === 'payModal'}
-            type="submit"
-            onClick={onClick.confirm}
-            className={`w-full rounded-lg ${backgroundColor.confirm} p-3 text-center text-lg font-medium text-[var(--color-slate-100)] transition-all duration-300 disabled:cursor-not-allowed ${disabledStyles.confirm} ${hoverColor.confirm}`}
-          >
-            {text.confirm}
-          </button>
-        )}
-        {name === 'payModal' ? (
-          <button
-            type="submit"
-            onClick={onClick.cancel}
-            className={`w-full rounded-lg ${backgroundColor.cancel} p-3 text-center text-lg font-medium text-[var(--color-slate-100)] transition-all duration-300 ${disabledStyles.cancel} ${hoverColor.cancel}`}
-          >
-            {text.cancel}
-          </button>
-        ) : (
-          <Link
-            to={path.cancel}
-            onClick={onClick.cancel}
-            className={`w-full rounded-lg ${backgroundColor.cancel} p-3 text-center text-lg font-medium text-[var(--color-slate-100)] transition-all duration-300 ${disabledStyles.cancel} ${hoverColor.cancel}`}
-          >
-            {text.cancel}
-          </Link>
-        )}
-      </div>
-    </div>
+    <ModalContext.Provider value={{ openName, open, close }}>{children}</ModalContext.Provider>
   );
 }
+
+function Open({ children, opens: openModalName }) {
+  const { open } = useContext(ModalContext);
+
+  const handleOpen = (event) => {
+    event?.preventDefault?.();
+    event?.stopPropagation?.();
+    open(openModalName);
+  };
+
+  return cloneElement(children, {
+    onOpenModal: handleOpen,
+    onCloseModal: handleOpen,
+  });
+}
+
+function Window({ children, name }) {
+  const { openName, close } = useContext(ModalContext);
+
+  const ref = useOutsideClick(close);
+
+  if (openName !== name) return null;
+
+  return createPortal(
+    <div className="fixed left-0 top-0 z-[1000] h-dvh w-full bg-slate-900/65 backdrop-blur-sm transition-all duration-500">
+      <div
+        className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded-lg bg-[var(--color-slate-700)] px-[3.2rem] py-[3rem] shadow-md shadow-[var(--color-slate-700)] transition-all duration-500"
+        ref={ref}
+      >
+        <button
+          className="absolute right-[1.4rem] top-[0.5rem] translate-x-[0.8rem] rounded-md border-0 bg-none text-[var(--color-red-600)] transition-all duration-200 hover:bg-[var(--color-slate-600)]"
+          onClick={close}
+        >
+          <HiXMark className="h-[2rem] w-[2rem]" />
+        </button>
+        <div>{cloneElement(children, { onCloseModal: close })}</div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+Modal.Open = Open;
+Modal.Window = Window;
 
 export default Modal;

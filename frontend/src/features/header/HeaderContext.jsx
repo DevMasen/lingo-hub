@@ -17,7 +17,12 @@ function HeaderProvider({ children }) {
 
   return (
     <HeaderContext.Provider
-      value={{ isNotificationOpen, isProfileOpen, toggleNotification, toggleProfile }}
+      value={{
+        isNotificationOpen,
+        isProfileOpen,
+        toggleNotification,
+        toggleProfile,
+      }}
     >
       {children}
     </HeaderContext.Provider>

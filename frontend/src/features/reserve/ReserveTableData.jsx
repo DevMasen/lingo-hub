@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router';
 
-import { useConfirmReserve } from './ConfirmReserveContext';
 //---
 
 //! Global Styles
@@ -10,9 +9,6 @@ const publicStyles =
 function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate, userId }) {
   //! React Router
   const navigate = useNavigate();
-
-  //! Context Data
-  const { toggleConfirmWindow } = useConfirmReserve();
 
   //! Handlers
   function handleClickReserved() {
@@ -25,7 +21,7 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
     return (
       <td
         onClick={() => {
-          toggleConfirmWindow();
+          // toggleConfirmWindow();
           navigate(`/reserve?roomName=${roomData.roomName}&timePart=${timePartIndex}`);
         }}
         className={

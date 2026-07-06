@@ -2,15 +2,15 @@ import { HiOutlineUserCircle } from 'react-icons/hi';
 import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
 
-import LinkItem from '../../ui/LinkItem';
-
 import { useHeader } from './HeaderContext';
-import { useExit } from '../../context/ExitContext';
+
+import Modal from '../../ui/Modal';
+import ConfirmExit from '../../ui/ConfirmExit';
+import LinkItem from '../../ui/LinkItem';
 //---
 
 function ProfileBox() {
   //! Context Data
-  const { toggleExitWindow } = useExit();
   const { toggleProfile } = useHeader();
 
   //!JSX
@@ -34,16 +34,17 @@ function ProfileBox() {
           </LinkItem>
         </li>
         <li>
-          <LinkItem
-            extraClasses={'text-[var(--color-red-600)]'}
-            onClick={() => {
-              toggleExitWindow();
-              toggleProfile();
-            }}
-          >
-            <BiExit className="h-[1.25rem] w-[1.25rem]" />
-            <span> خروج </span>
-          </LinkItem>
+          <Modal>
+            <Modal.Open opens="exit">
+              <LinkItem extraClasses={'text-[var(--color-red-600)]'}>
+                <BiExit className="h-[1.25rem] w-[1.25rem]" />
+                <span> خروج </span>
+              </LinkItem>
+            </Modal.Open>
+            <Modal.Window name="exit">
+              <ConfirmExit />
+            </Modal.Window>
+          </Modal>
         </li>
       </ul>
     </>
