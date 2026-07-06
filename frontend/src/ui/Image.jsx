@@ -5,7 +5,10 @@ function Image({ src, placeholderSrc, alt, ...props }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }} className={props.className}>
+    <div
+      style={{ position: 'relative', overflow: 'hidden', zIndex: '40' }}
+      className={props.className}
+    >
       <img
         src={placeholderSrc}
         alt=""

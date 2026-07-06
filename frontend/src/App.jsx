@@ -78,7 +78,7 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
-        {/* <ReactQueryDevtools initialOpen={false} /> */}
+        <ReactQueryDevtools initialOpen={false} />
         <Toaster
           position="top-center"
           reverseOrder={true}

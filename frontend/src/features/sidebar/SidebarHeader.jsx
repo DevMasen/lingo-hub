@@ -36,7 +36,7 @@ function SidebarHeader() {
         <BsLayoutSidebarInsetReverse className="h-[20px] w-[20px] text-[var(--color-slate-500)] transition-all duration-300 hover:text-[var(--color-indigo-700)]" />
       </button>
       <button
-        className="flex items-center justify-center text-center text-2xl text-[var(--color-red-700)] transition-transform duration-200 hover:translate-y-[-2px] sm:hidden"
+        className="flex items-center justify-center rounded-md p-1 text-center text-2xl text-[var(--color-red-700)] transition-all duration-200 hover:translate-y-[-2px] hover:bg-[var(--color-slate-700)] sm:hidden"
         onClick={toggleSidebar}
       >
         <CgClose />

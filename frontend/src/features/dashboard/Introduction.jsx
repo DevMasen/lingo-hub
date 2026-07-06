@@ -13,7 +13,7 @@ function Introduction({ className, userFirstName = '' }) {
         className="w-[70%] rounded-xl opacity-[var(--image-opacity)] shadow-lg shadow-[var(--shadow-color)] grayscale-[var(--image-grayscale)] md:w-64"
       />
       <div className="space-y-4">
-        <h2 className="text-xl">
+        <h2 className="text-xl md:text-2xl lg:text-3xl">
           <span>{userFirstName}</span> به آکادمی زبان لینگوهاب خوش اومدی
         </h2>
         <p className="text-lg font-semibold text-[var(--color-slate-400)]">

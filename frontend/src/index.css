@@ -112,7 +112,7 @@
     &.active:link,
     &.active:visited {
       color: var(--color-slate-200);
-      background-color: var(--color-slate-700);
+      background-color: var(--color-slate-800);
       /* rounded-xl */
       border-radius: 0.75rem;
     }

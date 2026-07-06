@@ -2,16 +2,22 @@ import { HiOutlineUserCircle } from 'react-icons/hi';
 import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
 
-import LinkItem from '../../ui/LinkItem';
-
 import { useHeader } from './HeaderContext';
-import { useExit } from '../../context/ExitContext';
+
+import Modal from '../../ui/Modal';
+import ConfirmExit from '../../ui/ConfirmExit';
+import LinkItem from '../../ui/LinkItem';
+import { useLogout } from '../authentication/useLogout';
+import { useNavigate } from 'react-router';
 //---
 
 function ProfileBox() {
+  const navigate = useNavigate();
+
   //! Context Data
-  const { toggleExitWindow } = useExit();
   const { toggleProfile } = useHeader();
+
+  const { logout, isLoggingOut } = useLogout();
 
   //!JSX
   return (
@@ -34,16 +40,23 @@ function ProfileBox() {
           </LinkItem>
         </li>
         <li>
-          <LinkItem
-            extraClasses={'text-[var(--color-red-600)]'}
-            onClick={() => {
-              toggleExitWindow();
-              toggleProfile();
-            }}
-          >
-            <BiExit className="h-[1.25rem] w-[1.25rem]" />
-            <span> خروج </span>
-          </LinkItem>
+          <Modal>
+            <Modal.Open opens="exit">
+              <LinkItem extraClasses={'text-[var(--color-red-600)]'}>
+                <BiExit className="h-[1.25rem] w-[1.25rem]" />
+                <span> خروج </span>
+              </LinkItem>
+            </Modal.Open>
+            <Modal.Window name="exit">
+              <ConfirmExit
+                disabled={isLoggingOut}
+                onConfirmExit={() => {
+                  toggleProfile();
+                  logout({ onSettled: navigate('/home') });
+                }}
+              />
+            </Modal.Window>
+          </Modal>
         </li>
       </ul>
     </>
