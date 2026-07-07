@@ -1,5 +1,4 @@
 import { useRooms } from '../features/reserve/useRooms';
-import { useSession } from '../features/authentication/useSession';
 import { useProfile } from '../features/setting/useProfile';
 
 import ReserveTableData from '../features/reserve/ReserveTableData';
@@ -14,9 +13,8 @@ import mapTime from '../utils/mapTime';
 const timeParts = Array.from({ length: 10 }, (_, i) => i);
 
 function ReserveRoom() {
-  const { rooms, isLoadingRooms, error: roomsError } = useRooms();
-  const { userId, isLoadingSession, error: sessionError } = useSession();
-  const { profile, isLoadingProfile, error: profileError } = useProfile(userId);
+  const { rooms, isLoading: isLoadingRooms, error: roomsError } = useRooms();
+  const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();
 
   //! Fake Data
   const date = {};
@@ -29,22 +27,13 @@ function ReserveRoom() {
     '/' +
     (date?.reserveDate?.slice(6, 8) ?? '۰۱');
 
-  if (roomsError)
+  if (roomsError || profileError)
     return (
       <div className="flex items-center justify-center">
-        <Error extraClasses="w-[60%] h-[40%] " error={roomsError.message} />
-      </div>
-    );
-  if (sessionError)
-    return (
-      <div className="flex items-center justify-center">
-        <Error extraClasses="w-[60%] h-[40%] " error={sessionError.message} />
-      </div>
-    );
-  if (profileError)
-    return (
-      <div className="flex items-center justify-center">
-        <Error extraClasses="w-[60%] h-[40%] " error={profileError.message} />
+        <Error
+          extraClasses="w-[60%] h-[40%] "
+          error={(roomsError?.message || profileError?.message) ?? ''}
+        />
       </div>
     );
 
@@ -55,7 +44,7 @@ function ReserveRoom() {
         <span className="font-semibold text-[var(--color-slate-300)]">رزرو اتاق برای تاریخ :</span>
         <span className="rounded-lg bg-[var(--color-slate-800)] px-3 py-1">{formatDate}</span>
       </div>
-      {isLoadingRooms || isLoadingProfile || isLoadingSession ? (
+      {isLoadingRooms || isLoadingProfile ? (
         <div className="flex h-full items-center justify-center">
           <Spinner />
         </div>
@@ -89,7 +78,6 @@ function ReserveRoom() {
                     reserveDate={date.reserveDate}
                     timePartStatus={null}
                     roomData={room}
-                    userId={userId}
                   />
                 ))}
               </tr>

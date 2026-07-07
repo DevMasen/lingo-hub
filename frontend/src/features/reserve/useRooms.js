@@ -1,24 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
+import { useError } from '../../hooks/useError';
+
 import { getAllRooms } from '../../api/services/rooms.service';
-import toast from 'react-hot-toast';
 //---
 export function useRooms() {
   const {
     data: rooms,
-    isLoading: isLoadingRooms,
+    isLoading,
     error,
   } = useQuery({
     queryKey: ['rooms'],
     queryFn: getAllRooms,
   });
 
-  if (error) {
-    console.error(error);
-    const message =
-      error?.message ??
-      ((typeof error === 'string' ? error : JSON.stringify(error)) || 'خطایی رخ داد');
-    toast.error(message);
-  }
+  useError(error);
 
-  return { rooms, isLoadingRooms, error };
+  return { rooms, isLoading, error };
 }

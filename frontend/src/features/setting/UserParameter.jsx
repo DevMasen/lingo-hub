@@ -1,32 +1,47 @@
-import mapToPersian from '../../utils/mapToPersian';
+import { createContext, useContext, useState } from 'react';
+import { BiSolidPencil } from 'react-icons/bi';
+
+import SettingButton from '../../ui/SettingButton';
 //---
 
-function UserParameter({
-  name = '',
-  value = '',
-  valueType = '',
-  statusBGColor = '',
-  statusValue = '',
-  reserveRemainRef = null,
-  reserveRemainCountBGColor = '',
-}) {
+export const UserParameterContext = createContext();
+
+function UserParameter({ children }) {
+  const [valueBgColor, setValueBgColor] = useState('bg-[var(--color-slate-700)]');
+
   return (
-    <li>
-      {valueType === 'reserveCounter' ? (
-        <span ref={reserveRemainRef}>{name}</span>
-      ) : (
-        <span>{name}</span>
-      )}
-      <span> : </span>
-      <span
-        className={`rounded-xl px-4 py-2 ${valueType === 'default' && 'bg-[var(--color-slate-700)]'} ${valueType === 'status' && statusBGColor} ${valueType === 'reserveCounter' && `transition-colors duration-200 ${reserveRemainCountBGColor}`}`}
-      >
-        {valueType === 'status' && statusValue}
-        {valueType === 'reserveCounter' && mapToPersian(String(value))}
-        {valueType === 'default' && value}
-      </span>
-    </li>
+    <UserParameterContext.Provider value={{ valueBgColor, setValueBgColor }}>
+      {children}
+    </UserParameterContext.Provider>
   );
 }
+
+function Label({ children }) {
+  return <div>{children}</div>;
+}
+
+function Value({ children, bgColor = 'bg-[var(--color-slate-700)]', hasShimmerEffect = false }) {
+  const { valueBgColor } = useContext(UserParameterContext);
+
+  return (
+    <span
+      className={`rounded-xl px-4 py-2 transition-colors duration-200 ${hasShimmerEffect ? valueBgColor : bgColor}`}
+    >
+      {children}
+    </span>
+  );
+}
+
+function UpdateButton({ onClick }) {
+  return (
+    <SettingButton onClick={onClick}>
+      <BiSolidPencil className="h-4 w-4" />
+    </SettingButton>
+  );
+}
+
+UserParameter.Label = Label;
+UserParameter.Value = Value;
+UserParameter.UpdateButton = UpdateButton;
 
 export default UserParameter;

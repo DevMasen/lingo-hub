@@ -1,34 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router';
 import { en2fa } from 'num2persian';
 
-import UserParameter from './UserParameter';
+import { useSession } from '../authentication/useSession';
 import { useProfile } from './useProfile';
+
+import UserParameter, { UserParameterContext } from './UserParameter';
+
 import Skeleton from '../../ui/Skeleton';
 import Error from '../../ui/Error';
-import { useSession } from '../authentication/useSession';
 //---
 
-function UserParameterList({ userId, date, query }) {
-  //! React Query
-  const { email, isLoadingSession, error: sessionError } = useSession();
-  const { profile, isLoadingProfile, error: profileError } = useProfile(userId);
+const listItemStyles = 'flex items-center gap-3';
+const skeletonStyles = 'h-10 w-40';
 
-  //! Local States
-  const [reserveRemainCountBG, setReserveRemainCountBg] = useState('bg-[var(--color-slate-700)]');
+function UserParameterList() {
+  const [query] = useSearchParams();
+  const { setValueBgColor } = useContext(UserParameterContext);
+
+  //! React Query
+  const { email } = useSession();
+  const { profile, isLoading, error } = useProfile();
 
   //! Local Elements Ref
   const reserveRemainRef = useRef(null);
 
-  //TODO : change strategy on this
-  const reservedRooms = [];
-
   //! Derived States
   const reserveRemainCount =
-    reservedRooms.length === 0
+    [].length === 0
       ? profile?.maxReserveCount
       : profile?.maxReserveCount -
-        reservedRooms
-          .filter((res) => res.date === date.reserveDate)
+        []
+          // filter by [userId, date]
           .reduce((acc, reserve) => {
             if (reserve.status !== 'canceled') return acc + 1;
             return acc;
@@ -49,14 +52,6 @@ function UserParameterList({ userId, date, query }) {
         : profile?.signupStatus === 'rejected'
           ? 'مسدود شده'
           : '';
-  const names = [
-    { name: 'شماره تلفن', value: '۰' + en2fa(profile?.phoneNumber) },
-    { name: 'ایمیل', value: email },
-    { name: 'زبان تدریس', value: profile?.language },
-    { name: 'سطح تدریس', value: profile?.level },
-    { name: 'وضعیت ثبت نام', value: profile?.signupStatus, valueType: 'status' },
-    { name: 'تعداد رزرو باقی مانده', value: reserveRemainCount, valueType: 'reserveCounter' },
-  ];
 
   //! Effects
   useEffect(
@@ -64,41 +59,82 @@ function UserParameterList({ userId, date, query }) {
       if (query.get('reserveCountLimit') === null) return;
       const scrollPosition = reserveRemainRef.current.getBoundingClientRect().top;
       window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-      setReserveRemainCountBg('bg-[var(--color-slate-600)]');
+      setValueBgColor('bg-[var(--color-slate-600)]');
       setTimeout(function () {
-        setReserveRemainCountBg('bg-[var(--color-slate-700)]');
+        setValueBgColor('bg-[var(--color-slate-700)]');
       }, 1000);
     },
-    [query]
+    [query, setValueBgColor]
   );
 
-  if (sessionError || profileError)
+  if (error)
     return (
       <div className="flex items-center justify-center">
-        {sessionError && <Error extraClasses="w-full" error={sessionError.message} />}
-        {profileError && <Error extraClasses="w-full" error={profileError.message} />}
+        <Error extraClasses="w-full" error={error.message} />
       </div>
     );
 
   //! JSX
   return (
     <ul className="mt-5 space-y-7 text-lg">
-      {names.map((userProperty, i) => {
-        if (isLoadingProfile || isLoadingSession) return <Skeleton className="h-12 w-[20%]" />;
-
-        return (
-          <UserParameter
-            key={i}
-            name={userProperty.name}
-            value={userProperty.value}
-            valueType={userProperty?.valueType ?? 'default'}
-            statusBGColor={statusBGColor}
-            statusValue={statusValue}
-            reserveRemainRef={reserveRemainRef}
-            reserveRemainCountBGColor={reserveRemainCountBG}
-          />
-        );
-      })}
+      <li className={listItemStyles}>
+        <UserParameter.Label> شماره تلفن : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value> {'۰' + en2fa(profile?.phoneNumber)} </UserParameter.Value>
+        )}
+      </li>
+      <li className={listItemStyles}>
+        <UserParameter.Label> ایمیل : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value> {email} </UserParameter.Value>
+        )}
+      </li>
+      <li className={listItemStyles}>
+        <UserParameter.Label> زبان تدریس : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <>
+            <UserParameter.Value> {profile?.language} </UserParameter.Value>
+            <UserParameter.UpdateButton />
+          </>
+        )}
+        {/* TODO: implement onClick */}
+      </li>
+      <li className={listItemStyles}>
+        <UserParameter.Label> سطح تدریس : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <>
+            <UserParameter.Value> {profile?.level} </UserParameter.Value>
+            <UserParameter.UpdateButton />
+          </>
+        )}
+        {/* TODO: implement onClick */}
+      </li>
+      <li className={listItemStyles}>
+        <UserParameter.Label> وضعیت ثبت نام : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value bgColor={statusBGColor}> {statusValue} </UserParameter.Value>
+        )}
+      </li>
+      <li className={listItemStyles}>
+        <UserParameter.Label> تعداد رزرو باقی مانده : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value hasShimmerEffect={true}>
+            {en2fa(reserveRemainCount)}
+          </UserParameter.Value>
+        )}
+      </li>
     </ul>
   );
 }

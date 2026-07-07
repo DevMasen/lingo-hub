@@ -1,4 +1,3 @@
-import { useSession } from '../features/authentication/useSession';
 import { useProfile } from '../features/setting/useProfile';
 
 import DashboardHeader from '../features/dashboard/DashboardHeader';
@@ -15,9 +14,7 @@ const sectionPartsStyles =
   'bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] rounded-lg border border-[var(--color-slate-500)] p-3';
 
 function Dashboard() {
-  //! React Query
-  const { userId, isLoadingSession, error: sessionError } = useSession();
-  const { profile, isLoadingProfile, error: profileError } = useProfile(userId);
+  const { profile, isLoading, error } = useProfile();
 
   //TODO : replace with real data
   //! Fake Data
@@ -29,14 +26,14 @@ function Dashboard() {
     <div className="grid grid-cols-1 grid-rows-[auto_1fr]">
       <DashboardHeader />
       <section className="grid grid-cols-1 grid-rows-[auto_1fr] gap-4 p-4 lg:grid-cols-[2fr_1fr]">
-        {isLoadingProfile || isLoadingSession ? (
+        {isLoading ? (
           <Skeleton
             className={`${sectionPartsStyles} flex h-48 flex-col items-center gap-6 md:flex-row md:pl-9 lg:col-span-2`}
           />
-        ) : sessionError || profileError ? (
+        ) : error ? (
           <Error
             extraClasses={`${sectionPartsStyles} flex h-48 flex-col items-center gap-6 md:flex-row md:pl-9 lg:col-span-2`}
-            error={sessionError?.message || profileError?.message}
+            error={error?.message || error?.message}
           />
         ) : (
           <Introduction

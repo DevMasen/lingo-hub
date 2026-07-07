@@ -1,38 +1,31 @@
 import { useEffect, useRef, useState } from 'react';
 
 import ReserveRecord from '../../features/reserve/ReserveRecord';
-import ControlWaitingReserve from '../../features/setting/ControlWaitingReserve';
 import ReserveNotFound from '../reserve/ReserveNotFound';
+import { useSearchParams } from 'react-router';
 //---
 
-function UserReserveList({ date, query }) {
+function UserReserveList() {
+  const [query] = useSearchParams();
+
   //! Local States
   const [focusReserveId, setFocusReserveId] = useState(null);
 
   //! Local Element Refs
   const reserveListRef = useRef(null);
 
-  //TODO: change strategy
-  const reservedRooms = [];
-
   //! Effects
   useEffect(
     function () {
-      const currentFocusReserve = reservedRooms
-        .filter((record) => record.date === date.reserveDate)
-        .find(
-          (reserve) =>
-            reserve.roomName === query.get('roomName') &&
-            String(reserve.timePart) === query.get('timePart') &&
-            reserve.status === query.get('status')
-        );
+      // filter reservation in supabase with [userId, date, query]
+      const currentFocusReserve = undefined; //reservationId
       if (currentFocusReserve === undefined) {
         setFocusReserveId(null);
         return;
       }
-      setFocusReserveId(currentFocusReserve.id);
+      setFocusReserveId(currentFocusReserve);
     },
-    [query, reservedRooms, date]
+    [query]
   );
   useEffect(
     function () {
@@ -46,31 +39,27 @@ function UserReserveList({ date, query }) {
   return (
     <ul ref={reserveListRef} className="space-y-3">
       <h3 className="text-lg"> اتاق های رزرو شده :</h3>
-      {reservedRooms.length > 0 ? (
-        reservedRooms
-          .filter((rec) => rec.date === date.reserveDate)
-          .map((record, i) => (
-            <li className="flex gap-3" key={record.id}>
-              <ReserveRecord
-                focusReserveId={focusReserveId}
-                number={i + 1}
-                roomId={record.id}
-                roomName={record.roomName}
-                date={record.date}
-                timePart={record.timePart}
-                status={record.status}
-                extraClasses="w-[525px]"
-              />
-              {record.status === 'waiting' && <ControlWaitingReserve record={record} />}
-            </li>
-          ))
+      {[]?.length > 0 ? (
+        // filter in by [userId,date]
+        []?.map((reservation, i) => (
+          <li className="flex gap-3" key={reservation.id}>
+            <ReserveRecord
+              focusReserveId={focusReserveId}
+              number={i + 1}
+              reservationId={reservation.id}
+              roomId={reservation.roomId}
+              date={reservation.date}
+              timePart={reservation.timePart}
+              status={reservation.status}
+              extraClasses="w-[525px]"
+            />
+          </li>
+        ))
       ) : (
         <ReserveNotFound>رزروی وجود ندارد</ReserveNotFound>
       )}
-      {reservedRooms.length > 0 &&
-        !reservedRooms.some((record) => record.date === date.reserveDate) && (
-          <ReserveNotFound>رزروی برای فردا وجود ندارد</ReserveNotFound>
-        )}
+      {/* filter by  [userId,date] */}
+      {[].length > 0 && <ReserveNotFound>رزروی برای فردا وجود ندارد</ReserveNotFound>}
     </ul>
   );
 }

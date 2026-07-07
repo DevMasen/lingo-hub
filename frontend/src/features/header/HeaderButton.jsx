@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 function HeaderButton({ children, onClick, to }) {
   if (to)
     return (
-      <Link to={'wallet'} className="z-40">
+      <Link to={to} className="z-40">
         {children}
       </Link>
     );

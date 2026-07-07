@@ -1,27 +1,31 @@
 import { useQuery } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
+
+import { useSession } from '../authentication/useSession';
+import { useError } from '../../hooks/useError';
 
 import { getProfileById } from '../../api/services/profiles.service';
 //---
 
-export function useProfile(userId) {
+export function useProfile() {
+  const { userId, isLoading: isLoadingSession, error: sessionError } = useSession();
+
   const {
     data: profile,
     isLoading: isLoadingProfile,
-    error,
+    error: profileError,
   } = useQuery({
-    queryKey: ['profile'],
+    queryKey: ['profile', userId],
     queryFn: () => getProfileById(userId),
+    enabled: !!userId,
     retry: false,
   });
 
-  if (error) {
-    console.error(error);
-    const message =
-      error?.message ??
-      ((typeof error === 'string' ? error : JSON.stringify(error)) || 'خطایی رخ داد');
-    toast.error(message);
-  }
+  useError(sessionError);
+  useError(profileError);
 
-  return { profile, isLoadingProfile, error };
+  return {
+    profile,
+    isLoading: isLoadingSession || isLoadingProfile,
+    error: sessionError || profileError,
+  };
 }

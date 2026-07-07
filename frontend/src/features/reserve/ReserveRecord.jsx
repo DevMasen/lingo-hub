@@ -8,10 +8,10 @@ import mapTime from '../../utils/mapTime';
 function ReserveRecord({
   focusReserveId = null,
   number = 0,
-  roomId = 0,
-  roomName = '',
-  date = '',
-  timePart = 0,
+  reservationId = null,
+  roomId = null,
+  date = 'yyyy-MM-dd',
+  timePart = null,
   status = '', // reserved/canceled/waiting
   extraClasses = '',
 }) {
@@ -21,16 +21,18 @@ function ReserveRecord({
   //! Derived States
   const { startTime, stopTime } = mapTime(timePart);
 
+  const roomName = 'A';
+
   //! Effects
   useEffect(
     function () {
-      if (focusReserveId === null || focusReserveId !== roomId) return;
+      if (focusReserveId === null || focusReserveId !== reservationId) return;
       setRecordBGColor('bg-[var(--color-slate-500)]');
       setTimeout(function () {
         setRecordBGColor('bg-[var(--color-slate-700)]');
       }, 700);
     },
-    [focusReserveId, roomId]
+    [focusReserveId, reservationId]
   );
 
   //! JSX

@@ -1,30 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 
 import { getCurrentSession } from '../../api/services/auth.service';
+import { useError } from '../../hooks/useError';
 //---
 
 export function useSession() {
   const {
     data: session,
+    isLoading,
     error,
-    isLoading: isLoadingSession,
   } = useQuery({
     queryKey: ['session'],
     queryFn: getCurrentSession,
   });
 
-  if (error) {
-    console.error(error);
-    const message =
-      error?.message ??
-      ((typeof error === 'string' ? error : JSON.stringify(error)) || 'خطایی رخ داد');
-    toast.error(message);
-  }
+  useError(error);
 
   return {
     session,
-    isLoadingSession,
+    isLoading,
+    error,
     isAuthenticated: session?.role === 'authenticated',
     userId: session?.userId,
     email: session?.email,

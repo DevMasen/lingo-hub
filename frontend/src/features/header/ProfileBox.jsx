@@ -2,22 +2,23 @@ import { HiOutlineUserCircle } from 'react-icons/hi';
 import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
 
+import { useSession } from '../authentication/useSession';
+import { useProfile } from '../setting/useProfile';
+
 import { useHeader } from './HeaderContext';
 
 import Modal from '../../ui/Modal';
 import ConfirmExit from '../../ui/ConfirmExit';
 import LinkItem from '../../ui/LinkItem';
-import { useSession } from '../authentication/useSession';
 import Skeleton from '../../ui/Skeleton';
-import { useProfile } from '../setting/useProfile';
 //---
 
 function ProfileBox() {
   //! Context Data
   const { toggleProfile } = useHeader();
 
-  const { email, userId, isLoadingSession, error: sessionError } = useSession();
-  const { profile, isLoadingProfile, error: profileError } = useProfile(userId);
+  const { email, isLoading: isLoadingSession, error: sessionError } = useSession();
+  const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();
 
   //!JSX
   return (

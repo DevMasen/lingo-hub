@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { HiOutlineHome } from 'react-icons/hi';
 
 import { useSession } from '../features/authentication/useSession';
 
@@ -7,23 +8,22 @@ import FullPage from './FullPage';
 import Spinner from './Spinner';
 import Error from './Error';
 import HomeButton from './HomeButton';
-import { HiOutlineHome } from 'react-icons/hi';
 //---
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
-  const { isAuthenticated, isLoadingSession, error } = useSession();
+  const { isAuthenticated, isLoading, error } = useSession();
 
   useEffect(
     function () {
-      if (!isLoadingSession && !isAuthenticated) {
+      if (!isLoading && !isAuthenticated) {
         navigate('/home');
       }
     },
-    [isAuthenticated, isLoadingSession, navigate]
+    [isAuthenticated, isLoading, navigate]
   );
 
-  if (isLoadingSession)
+  if (isLoading)
     return (
       <FullPage>
         <Spinner />
