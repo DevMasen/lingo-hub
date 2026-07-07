@@ -1,15 +1,9 @@
 import { useSearchParams } from 'react-router';
-
-// import { usePay } from './PayContext';
-
 //---
 
 function PayModal() {
   //! React Router
   const [query] = useSearchParams();
-
-  //! Context Data
-  // const { isPayOpen, togglePayWindow } = usePay();
 
   //! JSX
   return (

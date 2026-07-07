@@ -5,18 +5,20 @@ import ControlWaitingReserve from '../../features/setting/ControlWaitingReserve'
 import ReserveNotFound from '../reserve/ReserveNotFound';
 //---
 
-function UserReserveList({ user, date, query }) {
+function UserReserveList({ date, query }) {
   //! Local States
   const [focusReserveId, setFocusReserveId] = useState(null);
 
   //! Local Element Refs
   const reserveListRef = useRef(null);
 
-  //! Effects
+  //TODO: change strategy
+  const reservedRooms = [];
 
+  //! Effects
   useEffect(
     function () {
-      const currentFocusReserve = user.reservedRooms
+      const currentFocusReserve = reservedRooms
         .filter((record) => record.date === date.reserveDate)
         .find(
           (reserve) =>
@@ -30,7 +32,7 @@ function UserReserveList({ user, date, query }) {
       }
       setFocusReserveId(currentFocusReserve.id);
     },
-    [query, user.reservedRooms, date]
+    [query, reservedRooms, date]
   );
   useEffect(
     function () {
@@ -44,8 +46,8 @@ function UserReserveList({ user, date, query }) {
   return (
     <ul ref={reserveListRef} className="space-y-3">
       <h3 className="text-lg"> اتاق های رزرو شده :</h3>
-      {user.reservedRooms.length > 0 ? (
-        user.reservedRooms
+      {reservedRooms.length > 0 ? (
+        reservedRooms
           .filter((rec) => rec.date === date.reserveDate)
           .map((record, i) => (
             <li className="flex gap-3" key={record.id}>
@@ -65,8 +67,8 @@ function UserReserveList({ user, date, query }) {
       ) : (
         <ReserveNotFound>رزروی وجود ندارد</ReserveNotFound>
       )}
-      {user.reservedRooms.length > 0 &&
-        !user.reservedRooms.some((record) => record.date === date.reserveDate) && (
+      {reservedRooms.length > 0 &&
+        !reservedRooms.some((record) => record.date === date.reserveDate) && (
           <ReserveNotFound>رزروی برای فردا وجود ندارد</ReserveNotFound>
         )}
     </ul>

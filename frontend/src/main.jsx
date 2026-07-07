@@ -6,7 +6,6 @@ import { createRoot } from 'react-dom/client';
 import { DarkModeProvider } from './context/DarkModeContext.jsx';
 
 import { HeaderProvider } from './features/header/HeaderContext.jsx';
-import { PayProvider } from './features/setting/PayContext.jsx';
 import { SidebarProvider } from './features/sidebar/SidebarContext.jsx';
 import { WalletProvider } from './features/wallet/WalletContext.jsx';
 
@@ -17,13 +16,11 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <DarkModeProvider>
       <SidebarProvider>
-        <PayProvider>
-          <HeaderProvider>
-            <WalletProvider>
-              <App />
-            </WalletProvider>
-          </HeaderProvider>
-        </PayProvider>
+        <HeaderProvider>
+          <WalletProvider>
+            <App />
+          </WalletProvider>
+        </HeaderProvider>
       </SidebarProvider>
     </DarkModeProvider>
   </StrictMode>

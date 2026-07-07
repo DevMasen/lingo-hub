@@ -22,5 +22,11 @@ export function useSession() {
     toast.error(message);
   }
 
-  return { session, isLoadingSession, isAuthenticated: session?.role === 'authenticated' };
+  return {
+    session,
+    isLoadingSession,
+    isAuthenticated: session?.role === 'authenticated',
+    userId: session?.userId,
+    email: session?.email,
+  };
 }

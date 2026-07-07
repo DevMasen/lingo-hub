@@ -1,15 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAllRooms } from '../../api/services/rooms.service';
 import toast from 'react-hot-toast';
+
+import { getProfileById } from '../../api/services/profiles.service';
 //---
-export function useRooms() {
+
+export function useProfile(userId) {
   const {
-    data: rooms,
-    isLoading: isLoadingRooms,
+    data: profile,
+    isLoading: isLoadingProfile,
     error,
   } = useQuery({
-    queryKey: ['rooms'],
-    queryFn: getAllRooms,
+    queryKey: ['profile'],
+    queryFn: () => getProfileById(userId),
+    retry: false,
   });
 
   if (error) {
@@ -20,5 +23,5 @@ export function useRooms() {
     toast.error(message);
   }
 
-  return { rooms, isLoadingRooms, error };
+  return { profile, isLoadingProfile, error };
 }

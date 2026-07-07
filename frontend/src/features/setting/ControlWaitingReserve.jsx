@@ -1,13 +1,8 @@
 import ReservePrice from '../reserve/ReservePrice';
 import PanelButton from '../../ui/PanelButton';
-
-import { usePay } from './PayContext';
 //---
 
 function ControlWaitingReserve({ record }) {
-  //! Context Data
-  const { togglePayWindow } = usePay();
-
   //! fake Data
   const roomsData = [];
   const paymentCost =
@@ -21,7 +16,7 @@ function ControlWaitingReserve({ record }) {
       <ReservePrice record={record} />
       <PanelButton
         to={`pay?cost=${paymentCost}&recordId=${record.id}&roomName=${record.roomName}&timePartIndex=${record.timePart}`}
-        onClick={togglePayWindow}
+        // onClick={togglePayWindow}
         extraClasses="text-sm px-5"
       >
         پرداخت
