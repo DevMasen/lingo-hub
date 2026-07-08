@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { BiSolidPencil } from 'react-icons/bi';
 
-import SettingButton from '../../ui/SettingButton';
+import SettingButton from './SettingButton';
 //---
 
 export const UserParameterContext = createContext();

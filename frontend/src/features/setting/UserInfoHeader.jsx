@@ -2,10 +2,13 @@ import { BiSolidPencil, BiUserCircle } from 'react-icons/bi';
 
 import { useProfile } from '../setting/useProfile';
 
+import UpdateAvatarForm from './UpdateAvatarForm';
+import Avatar from './Avatar';
+import UserName from './UserName';
+import SettingButton from './SettingButton';
+
 import Skeleton from '../../ui/Skeleton';
-import SettingButton from '../../ui/SettingButton';
-import Avatar from '../../ui/Avatar';
-import UserName from '../../ui/UserName';
+import Modal from '../../ui/Modal';
 //---
 
 function UserInfoHeader() {
@@ -31,10 +34,16 @@ function UserInfoHeader() {
           </UserName>
         )}
       </div>
-      {/* TODO: implement onClick */}
-      <SettingButton>
-        <BiSolidPencil className="h-6 w-6" />
-      </SettingButton>
+      <Modal>
+        <Modal.Open opens={'update-avatar'}>
+          <SettingButton>
+            <BiSolidPencil className="h-6 w-6" />
+          </SettingButton>
+        </Modal.Open>
+        <Modal.Window name={'update-avatar'}>
+          <UpdateAvatarForm />
+        </Modal.Window>
+      </Modal>
     </div>
   );
 }

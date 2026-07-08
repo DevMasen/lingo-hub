@@ -4,7 +4,6 @@ import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 
 import PanelButton from '../../ui/PanelButton';
 import Error from '../../ui/Error';
-import Success from '../../ui/Success';
 //---
 
 //! Global Styles
@@ -18,7 +17,6 @@ function PasswordChange() {
   //! Local States
   const [error, setError] = useState('');
   const [errorField, setErrorField] = useState('');
-  const [successMessage] = useState('');
   const [isOldHidden, setIsOldHidden] = useState(true);
   const [isNewHidden, setIsNewHidden] = useState(true);
   const [isNewRepHidden, setIsNewRepHidden] = useState(true);
@@ -157,7 +155,6 @@ function PasswordChange() {
           </PanelButton>
         )}
         {error.length > 0 && <Error error={error} />}
-        {successMessage.length > 0 && <Success message={successMessage} />}
       </form>
     </div>
   );

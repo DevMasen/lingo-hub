@@ -19,6 +19,8 @@
  * @property {'confirmed'|'pending'|'rejected'} signupStatus
  * @property {number} creditBalance - in Tomans, never negative
  * @property {number} maxReserveCount
+ * @property {string} avatarUrl
+ * @property {string} resumeUrl
  */
 
 /**
@@ -38,6 +40,8 @@
  * @property {'confirmed'|'pending'|'rejected'} [signupStatus]
  * @property {number} [creditBalance]
  * @property {number} [maxReserveCount]
+ * @property {string} [avatarUrl]
+ * @property {string} [resumeUrl]
  */
 
 export {};

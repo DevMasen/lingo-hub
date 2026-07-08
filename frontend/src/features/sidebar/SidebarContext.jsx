@@ -7,7 +7,7 @@ const SidebarContext = createContext();
 function SidebarProvider({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  useLockScroll(isSidebarOpen);
+  useLockScroll(isSidebarOpen, 'sidebar');
 
   function toggleSidebar() {
     setIsSidebarOpen((open) => !open);

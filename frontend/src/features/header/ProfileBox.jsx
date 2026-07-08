@@ -11,7 +11,11 @@ import Modal from '../../ui/Modal';
 import ConfirmExit from '../../ui/ConfirmExit';
 import LinkItem from '../../ui/LinkItem';
 import Skeleton from '../../ui/Skeleton';
+import ExitButton from './ExitButton';
 //---
+
+const linkItemStyles =
+  'flex items-center gap-2 rounded-lg p-3 transition-all duration-300 hover:bg-[var(--color-slate-800)]';
 
 function ProfileBox() {
   //! Context Data
@@ -41,13 +45,17 @@ function ProfileBox() {
       )}
       <ul className="mt-3 space-y-3 text-start">
         <li>
-          <LinkItem to={'/setting'} onClick={toggleProfile}>
+          <LinkItem to={'/setting'} onClick={toggleProfile} className={linkItemStyles}>
             <HiOutlineUserCircle className="h-[1.25rem] w-[1.25rem] text-[var(--color-slate-500)]" />
             <span> پروفایل </span>
           </LinkItem>
         </li>
         <li>
-          <LinkItem to={'/setting/change-password'} onClick={toggleProfile}>
+          <LinkItem
+            to={'/setting/change-password'}
+            onClick={toggleProfile}
+            className={linkItemStyles}
+          >
             <CgPassword className="h-[1.25rem] w-[1.25rem] text-[var(--color-slate-500)]" />
             <span> تغییر رمز عبور </span>
           </LinkItem>
@@ -55,10 +63,10 @@ function ProfileBox() {
         <li>
           <Modal>
             <Modal.Open opens="exit">
-              <LinkItem extraClasses={'text-[var(--color-red-600)]'}>
+              <ExitButton className={`${linkItemStyles} w-full text-[var(--color-red-600)]`}>
                 <BiExit className="h-[1.25rem] w-[1.25rem]" />
                 <span> خروج </span>
-              </LinkItem>
+              </ExitButton>
             </Modal.Open>
             <Modal.Window name="exit">
               <ConfirmExit />

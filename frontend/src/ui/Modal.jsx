@@ -16,7 +16,7 @@ function Modal({ children }) {
 
   const isModalOpen = openName.length > 0;
 
-  useLockScroll(isModalOpen);
+  useLockScroll(isModalOpen, 'modal');
 
   return (
     <ModalContext.Provider value={{ openName, open, close }}>{children}</ModalContext.Provider>
@@ -26,15 +26,8 @@ function Modal({ children }) {
 function Open({ children, opens: openModalName }) {
   const { open } = useContext(ModalContext);
 
-  const handleOpen = (event) => {
-    event?.preventDefault?.();
-    event?.stopPropagation?.();
-    open(openModalName);
-  };
-
   return cloneElement(children, {
-    onOpenModal: handleOpen,
-    onCloseModal: handleOpen,
+    onOpenModal: () => open(openModalName),
   });
 }
 
