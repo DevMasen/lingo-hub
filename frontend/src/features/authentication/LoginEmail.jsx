@@ -29,8 +29,16 @@ function LoginEmail() {
   const { login, isLoggingIn } = useLogin();
 
   //! React Hook Form
-  const { register, handleSubmit, formState } = useForm();
-  const { errors } = formState;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   function onSuccess({ email, password }) {
     if (!email || !password) return;

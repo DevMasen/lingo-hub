@@ -3,7 +3,7 @@ function SettingButton({ children, onClick, onOpenModal }) {
     <button
       onClick={() => {
         onOpenModal?.();
-        onClick();
+        onClick?.();
       }}
       className="h-fit w-fit cursor-pointer rounded-lg p-2 transition-all duration-300 hover:bg-[var(--color-slate-800)] hover:text-[var(--color-indigo-700)]"
     >

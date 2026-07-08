@@ -28,7 +28,7 @@ function UserInfoHeader() {
               <Skeleton className="h-11 w-60" />
             ) : (
               <span>
-                {profile.firstName} {profile.lastName}
+                {profile?.firstName} {profile?.lastName}
               </span>
             )}
           </UserName>
