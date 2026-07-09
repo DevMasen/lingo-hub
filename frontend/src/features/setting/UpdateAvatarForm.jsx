@@ -1,21 +1,25 @@
 import { useForm } from 'react-hook-form';
 
 import { useProfile } from '../setting/useProfile';
+import { useUpdateProfile } from './useUpdateProfile';
 
 import FileUploader from '../../ui/FileUploader';
 import PanelButton from '../../ui/PanelButton';
 import Spinner from '../../ui/Spinner';
+import SpinnerMini from '../../ui/SpinnerMini';
 import Error from '../../ui/Error';
 //---
 
-const inputContainerStyles =
-  'flex items-center rounded-lg border px-3 py-2 border-[var(--color-slate-500)] transition-all duration-300 focus-within:border-[var(--color-indigo-700)]';
 const errorContainerStyles =
   'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]';
-const inputStyles = 'bg-inherit text-[var(--color-slate-200)] outline-none w-60 sm:w-80 md:w-96';
+const inputStyles =
+  'bg-inherit text-[var(--color-slate-200)] outline-none w-52 sm:w-80 md:w-96 disabled:cursor-not-allowed';
 
 function UpdateAvatarForm({ onCloseModal }) {
   const { profile, isLoading, error } = useProfile();
+  const { updateProfile, isUpdatingProfile } = useUpdateProfile();
+
+  const inputContainerStyles = `flex w-fit items-center rounded-lg border px-3 py-2 border-[var(--color-slate-500)] transition-all duration-300 focus-within:border-[var(--color-indigo-700)] ${isUpdatingProfile && 'opacity-50'}`;
 
   const {
     register,
@@ -30,7 +34,17 @@ function UpdateAvatarForm({ onCloseModal }) {
   });
 
   function onSuccess({ firstName, lastName, avatar }) {
-    console.log(firstName, lastName, avatar);
+    if (isLoading || error || !firstName || !lastName) return;
+    const newProfile = {
+      firstName,
+      lastName,
+    };
+    updateProfile({
+      userId: profile.id,
+      changes: newProfile,
+      avatarFile: avatar ? avatar[0] : null,
+      resumeFile: null,
+    });
   }
 
   function onError(errors) {
@@ -64,6 +78,7 @@ function UpdateAvatarForm({ onCloseModal }) {
             maxLength={30}
             className={inputStyles}
             defaultValue={profile?.firstName}
+            disabled={isUpdatingProfile}
             {...register('firstName', {
               required: 'نام جدید را وارد کنید',
             })}
@@ -79,23 +94,30 @@ function UpdateAvatarForm({ onCloseModal }) {
             maxLength={30}
             className={inputStyles}
             defaultValue={profile?.lastName}
+            disabled={isUpdatingProfile}
             {...register('lastName', {
               required: 'نام خانوادگی جدید را وارد کنید',
             })}
           />
         </div>
-        <FileUploader register={register} className={inputContainerStyles} label="انتخاب عکس" />
+        <FileUploader
+          register={register}
+          className={inputContainerStyles}
+          label="انتخاب عکس"
+          isUpdatingProfile={isUpdatingProfile}
+        />
       </div>
       <div className="flex gap-4">
-        <PanelButton type="submit" extraClasses="px-5 py-2">
-          تأیید
+        <PanelButton disabled={isUpdatingProfile} type="submit" extraClasses="px-5 py-2">
+          {isUpdatingProfile ? <SpinnerMini /> : <span>تأیید</span>}
         </PanelButton>
         <PanelButton
+          disabled={isUpdatingProfile}
           onClick={onCloseModal}
           type="button"
           extraClasses="px-5 py-2 bg-[var(--color-red-800)] hover:bg-[var(--color-red-700)]"
         >
-          لغو
+          <span>لغو</span>
         </PanelButton>
       </div>
     </form>

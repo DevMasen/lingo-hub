@@ -98,24 +98,16 @@ function UserParameterList() {
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
         ) : (
-          <>
-            <UserParameter.Value> {profile?.language} </UserParameter.Value>
-            <UserParameter.UpdateButton />
-          </>
+          <UserParameter.Value> {profile?.language} </UserParameter.Value>
         )}
-        {/* TODO: implement onClick */}
       </li>
       <li className={listItemStyles}>
         <UserParameter.Label> سطح تدریس : </UserParameter.Label>
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
         ) : (
-          <>
-            <UserParameter.Value> {profile?.level} </UserParameter.Value>
-            <UserParameter.UpdateButton />
-          </>
+          <UserParameter.Value> {profile?.level} </UserParameter.Value>
         )}
-        {/* TODO: implement onClick */}
       </li>
       <li className={listItemStyles}>
         <UserParameter.Label> وضعیت ثبت نام : </UserParameter.Label>

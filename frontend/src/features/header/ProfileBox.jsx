@@ -12,6 +12,7 @@ import ConfirmExit from '../../ui/ConfirmExit';
 import LinkItem from '../../ui/LinkItem';
 import Skeleton from '../../ui/Skeleton';
 import ExitButton from './ExitButton';
+import Image from '../../ui/Image';
 //---
 
 const linkItemStyles =
@@ -28,19 +29,35 @@ function ProfileBox() {
   return (
     <>
       {!sessionError && !profileError && (
-        <div className="space-y-2 border-b border-[var(--color-slate-500)] pb-3 text-start">
-          {isLoadingProfile ? (
-            <Skeleton className="h-7 w-full" />
-          ) : (
-            <p>
-              {profile.firstName} {profile.lastName}
-            </p>
-          )}
-          {isLoadingSession ? (
-            <Skeleton className="h-7 w-full" />
-          ) : (
-            <p className="text-[var(--color-slate-400)]"> {email} </p>
-          )}
+        <div className="flex items-center gap-3 border-b border-[var(--color-slate-500)] pb-3 text-start">
+          <div>
+            {isLoadingProfile ? (
+              <Skeleton className="h-12 w-12 rounded-3xl" />
+            ) : (
+              profile?.avatarUrl && (
+                <Image
+                  src={profile.avatarUrl}
+                  placeholderSrc={`${profile.avatarUrl}?width=24&quality=20`}
+                  alt={'پروفایل کاربر'}
+                  className="h-12 w-12 rounded-full"
+                />
+              )
+            )}
+          </div>
+          <div className="space-y-2">
+            {isLoadingProfile ? (
+              <Skeleton className="h-7 w-full" />
+            ) : (
+              <p>
+                {profile?.firstName} {profile?.lastName}
+              </p>
+            )}
+            {isLoadingSession ? (
+              <Skeleton className="h-7 w-full" />
+            ) : (
+              <p className="text-[var(--color-slate-400)]"> {email} </p>
+            )}
+          </div>
         </div>
       )}
       <ul className="mt-3 space-y-3 text-start">

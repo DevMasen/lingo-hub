@@ -25,7 +25,7 @@ function Value({ children, bgColor = 'bg-[var(--color-slate-700)]', hasShimmerEf
 
   return (
     <span
-      className={`rounded-xl px-4 py-2 transition-colors duration-200 ${hasShimmerEffect ? valueBgColor : bgColor}`}
+      className={`rounded-xl px-4 py-2 text-sm transition-colors duration-200 sm:text-base ${hasShimmerEffect ? valueBgColor : bgColor}`}
     >
       {children}
     </span>

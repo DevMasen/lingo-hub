@@ -17,11 +17,10 @@ export function useSession() {
   useError(error);
 
   return {
-    session,
     isLoading,
     error,
     isAuthenticated: session?.role === 'authenticated',
-    userId: session?.userId,
     email: session?.email,
+    userId: session?.userId,
   };
 }

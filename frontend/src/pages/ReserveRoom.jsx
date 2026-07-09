@@ -12,6 +12,7 @@ import mapTime from '../utils/mapTime';
 //!Const Variables
 const timeParts = Array.from({ length: 10 }, (_, i) => i);
 
+//TODO#3: Implement reservation action
 function ReserveRoom() {
   const { rooms, isLoading: isLoadingRooms, error: roomsError } = useRooms();
   const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();

@@ -55,6 +55,7 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="reserve" element={<ReserveRoom />} />
               <Route path="wallet" element={<Wallet />} />
+              {/* TODO #5: add new route: resume */}
               <Route path="setting" element={<Setting />}>
                 <Route index element={<Navigate to="user" replace />} />
                 <Route path="user" element={<UserInfo />} />
@@ -73,7 +74,7 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
-        {/* <ReactQueryDevtools initialOpen={false}  /> */}
+        <ReactQueryDevtools initialOpen={false} />
         <Toaster
           position="top-center"
           reverseOrder={true}

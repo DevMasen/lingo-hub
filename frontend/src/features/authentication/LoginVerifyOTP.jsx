@@ -46,7 +46,7 @@ function LoginVerifyOTP() {
   //! Handlers
   function handleSubmit() {
     if (errors?.wrongCode) return;
-    //TODO : handle login with auth.service.js
+    //TODO #6: handle login with auth.service.js
     // login();
   }
 

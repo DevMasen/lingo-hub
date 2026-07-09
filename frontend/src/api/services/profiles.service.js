@@ -71,21 +71,72 @@ export async function createProfile(profile) {
  *
  * @param {string} userId
  * @param {Partial<Omit<import('../types/profile.types').Profile, 'id'>>} changes
+ * @param {File | null} avatarFile - Optional file object for uploading a new avatar image
+ * @param {File | null} resumeFile - Optional file object for uploading a new resume file
  * @returns {Promise<import('../types/profile.types').Profile>}
  */
-export async function updateProfile(userId, changes) {
+export async function updateProfile(userId, changes, avatarFile, resumeFile) {
   const row = toProfileUpdateRow(changes);
 
-  const { data, error } = await supabase
+  //1. update other fields
+  const { data: data1, error: error1 } = await supabase
     .from('profiles')
     .update(row)
     .eq('id', userId)
     .select()
     .single();
 
-  if (error) throw fromSupabaseError(error);
+  if (error1) throw fromSupabaseError(error1);
 
-  return toProfile(data);
+  if (!avatarFile) return toProfile(data1);
+
+  // 2. upload avatar to supabase
+  const avatarFileName = `avatar-${data1.id}-${Math.floor(Math.random() * 100000)}`;
+
+  const { error: storageError1 } = await supabase.storage
+    .from('avatars')
+    .upload(avatarFileName, avatarFile);
+
+  if (storageError1) throw fromSupabaseError(storageError1);
+
+  // 3. update avatar url
+
+  const { data: data2, error: error2 } = await supabase
+    .from('profiles')
+    .update({
+      avatar_url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarFileName}`,
+    })
+    .eq('id', userId)
+    .select()
+    .single();
+
+  if (error2) throw fromSupabaseError(error2);
+
+  if (!resumeFile) return toProfileRow(data2);
+
+  // 4. upload resume to supabase
+  const resumeFileName = `resume-${data1.id}-${Math.floor(Math.random() * 100000)}`;
+
+  const { error: storageError2 } = await supabase.storage
+    .from('resumes')
+    .upload(resumeFileName, resumeFile);
+
+  if (storageError2) throw fromSupabaseError(storageError2);
+
+  // 5. update resume url
+
+  const { data: data3, error: error3 } = await supabase
+    .from('profiles')
+    .update({
+      resume_url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/resumes/${resumeFileName}`,
+    })
+    .eq('id', userId)
+    .select()
+    .single();
+
+  if (error3) throw fromSupabaseError(error3);
+
+  return toProfileRow(data3);
 }
 
 /**

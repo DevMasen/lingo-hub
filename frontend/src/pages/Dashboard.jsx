@@ -16,7 +16,7 @@ const sectionPartsStyles =
 function Dashboard() {
   const { profile, isLoading, error } = useProfile();
 
-  //TODO : replace with real data
+  //TODO #4: render reserve history and news with real data.
   //! Fake Data
   const news = [];
   const userReservedRooms = [];

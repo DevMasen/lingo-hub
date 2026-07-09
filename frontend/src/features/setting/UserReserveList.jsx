@@ -5,6 +5,7 @@ import ReserveNotFound from '../reserve/ReserveNotFound';
 import { useSearchParams } from 'react-router';
 //---
 
+//TODO#2: render reservations per user and ability to pay/cancel
 function UserReserveList() {
   const [query] = useSearchParams();
 

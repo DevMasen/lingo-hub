@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router';
-import { useHeader } from '../header/HeaderContext';
 //---
 
 function NavItem({ children, className, to = '', onClick = () => {} }) {

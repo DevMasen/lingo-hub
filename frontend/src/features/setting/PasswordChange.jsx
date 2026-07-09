@@ -9,10 +9,11 @@ import Error from '../../ui/Error';
 //! Global Styles
 const inputContainerStyles =
   'flex items-center rounded-lg border px-3 py-2 transition-all duration-300 focus-within:border-[var(--color-indigo-700)]';
-const inputStyles = 'bg-inherit outline-none w-80';
+const inputStyles = 'bg-inherit outline-none w-60 sm:w-80';
 const hideButtonStyles =
   'text-[var(--color-slate-500)] transition-colors duration-300 hover:text-[var(--color-indigo-700)]';
 
+//TODO#1: Implement this feature with react-hook-form
 function PasswordChange() {
   //! Local States
   const [error, setError] = useState('');
@@ -67,7 +68,6 @@ function PasswordChange() {
   );
 
   //! JSX
-  //TODO add action to this form
   return (
     <div className="border-b border-[var(--color-slate-500)] p-3">
       <form

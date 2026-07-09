@@ -16,7 +16,7 @@ function Setting() {
   useEffect(
     function () {
       if (path === 'user') setActiveTab(0);
-      if (path === 'password') setActiveTab(1);
+      if (path === 'change-password') setActiveTab(1);
     },
     [path]
   );
