@@ -312,12 +312,10 @@ export async function completePasswordReset(newPassword) {
  * @returns {Promise<Session>}
  */
 export async function changePassword({ newPassword, currentPassword }) {
-  const payload = { password: newPassword };
-  if (currentPassword !== undefined) {
-    payload.currentPassword = currentPassword;
-  }
-
-  const { data, error } = await supabase.auth.updateUser(payload);
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassword,
+    current_password: currentPassword,
+  });
 
   if (error) throw fromSupabaseError(error);
 

@@ -81,8 +81,8 @@ function LoginEmail() {
           {...register('password', {
             required: 'لطفا رمز عبور خود را وارد کنید',
             minLength: {
-              value: 6,
-              message: 'رمز عبور باید حداقل ۶ کاراکتر باشد',
+              value: 8,
+              message: 'رمز عبور باید حداقل ۸ کاراکتر باشد',
             },
           })}
           disabled={isLoggingIn}

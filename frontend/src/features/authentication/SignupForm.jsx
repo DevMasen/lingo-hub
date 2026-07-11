@@ -236,8 +236,8 @@ function SignupForm() {
           {...register('password', {
             required: 'رمز عبور خود را وارد کنید',
             minLength: {
-              value: 6,
-              message: 'رمزعبور باید حداقل ۶ کاراکتر باشد',
+              value: 8,
+              message: 'رمزعبور باید حداقل ۸ کاراکتر باشد',
             },
             pattern: {
               value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!.,])[A-Za-z\d@#$!.,]+$/,
