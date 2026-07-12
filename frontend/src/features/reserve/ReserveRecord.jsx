@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import makePersianNumberString from '../../utils/makePersianNumbersString';
 import mapToPersianMonth from '../../utils/mapToPersianMonth';
 import mapTime from '../../utils/mapTime';
+import { toPersianDate } from '../../utils/toPersianDate';
 //---
 
 function ReserveRecord({
@@ -10,7 +11,7 @@ function ReserveRecord({
   number = 0,
   reservationId = null,
   roomId = null,
-  date = 'yyyy-MM-dd',
+  date = null,
   timePart = null,
   status = '', // reserved/canceled/waiting
   extraClasses = '',
@@ -20,6 +21,8 @@ function ReserveRecord({
 
   //! Derived States
   const { startTime, stopTime } = mapTime(timePart);
+
+  const persianDate = date ? toPersianDate(date) : null;
 
   const roomName = 'A';
 
@@ -38,7 +41,7 @@ function ReserveRecord({
   //! JSX
   return (
     <div
-      className={`flex justify-between gap-4 rounded-xl ${recordBGColor} bg-opacity-70 p-3 transition-colors duration-300 ${extraClasses}`}
+      className={`flex justify-between gap-4 rounded-xl text-sm sm:text-base ${recordBGColor} bg-opacity-70 p-3 transition-colors duration-300 ${extraClasses}`}
     >
       <div className="flex gap-6">
         <span>
@@ -49,18 +52,20 @@ function ReserveRecord({
           <span>اتاق</span>
           <span>{roomName}</span>
         </span>
-        <span className="flex gap-1">
-          <span>{date.slice(6, 8)}</span>
-          <span>{mapToPersianMonth(date.slice(4, 6))}</span>
-          <span>{date.slice(0, 4)}</span>
-        </span>
+        {persianDate && (
+          <span className="flex gap-1">
+            <span>{persianDate.slice(8, 10)}</span>
+            <span>{mapToPersianMonth(persianDate.slice(5, 7))}</span>
+            <span>{persianDate.slice(0, 4)}</span>
+          </span>
+        )}
         <span className="flex gap-1">
           <span>{makePersianNumberString(startTime)}</span>
           <span>تا</span>
           <span>{makePersianNumberString(stopTime)}</span>
         </span>
       </div>
-      <span>
+      <span className="whitespace-nowrap">
         {status === 'waiting' && 'در انتظار پرداخت ⌛'}
         {status === 'reserved' && 'رزرو شد ✅'}
         {status === 'canceled' && 'لغو شد ❌'}

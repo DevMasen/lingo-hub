@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router';
+import { addDays } from 'date-fns';
 import { en2fa } from 'num2persian';
 
 import { useSession } from '../authentication/useSession';
@@ -9,10 +10,14 @@ import UserParameter, { UserParameterContext } from './UserParameter';
 
 import Skeleton from '../../ui/Skeleton';
 import Error from '../../ui/Error';
+import UserReserveList from './UserReserveList';
+import { toPersianDate } from '../../utils/toPersianDate';
 //---
 
-const listItemStyles = 'flex items-center gap-3';
+const listItemStyles = 'flex gap-3';
 const skeletonStyles = 'h-10 w-40';
+const tomorrow = addDays(new Date(), 1);
+const PersianTomorrow = toPersianDate(tomorrow);
 
 function UserParameterList() {
   const [query] = useSearchParams();
@@ -77,7 +82,7 @@ function UserParameterList() {
   //! JSX
   return (
     <ul className="mt-5 space-y-7 text-lg">
-      <li className={listItemStyles}>
+      <li className={`${listItemStyles} items-center`}>
         <UserParameter.Label> شماره تلفن : </UserParameter.Label>
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
@@ -85,7 +90,7 @@ function UserParameterList() {
           <UserParameter.Value> {'۰' + en2fa(profile?.phoneNumber)} </UserParameter.Value>
         )}
       </li>
-      <li className={listItemStyles}>
+      <li className={`${listItemStyles} items-center`}>
         <UserParameter.Label> ایمیل : </UserParameter.Label>
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
@@ -93,7 +98,7 @@ function UserParameterList() {
           <UserParameter.Value> {email} </UserParameter.Value>
         )}
       </li>
-      <li className={listItemStyles}>
+      <li className={`${listItemStyles} items-center`}>
         <UserParameter.Label> زبان تدریس : </UserParameter.Label>
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
@@ -101,7 +106,7 @@ function UserParameterList() {
           <UserParameter.Value> {profile?.language} </UserParameter.Value>
         )}
       </li>
-      <li className={listItemStyles}>
+      <li className={`${listItemStyles} items-center`}>
         <UserParameter.Label> سطح تدریس : </UserParameter.Label>
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
@@ -109,7 +114,7 @@ function UserParameterList() {
           <UserParameter.Value> {profile?.level} </UserParameter.Value>
         )}
       </li>
-      <li className={listItemStyles}>
+      <li className={`${listItemStyles} items-center`}>
         <UserParameter.Label> وضعیت ثبت نام : </UserParameter.Label>
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
@@ -117,7 +122,7 @@ function UserParameterList() {
           <UserParameter.Value bgColor={statusBGColor}> {statusValue} </UserParameter.Value>
         )}
       </li>
-      <li className={listItemStyles}>
+      <li className={`${listItemStyles} items-center`}>
         <UserParameter.Label> تعداد رزرو باقی مانده : </UserParameter.Label>
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
@@ -126,6 +131,12 @@ function UserParameterList() {
             {en2fa(reserveRemainCount)}
           </UserParameter.Value>
         )}
+      </li>
+      <li className={`${listItemStyles} flex-col`}>
+        <UserParameter.Label>
+          اتاق های رزرو شده برای فردا {`(${PersianTomorrow.replaceAll('-', '/')})`} :
+        </UserParameter.Label>
+        <UserReserveList />
       </li>
     </ul>
   );

@@ -1,7 +1,6 @@
 import UserInfoHeader from './UserInfoHeader';
 import UserParameter from './UserParameter';
 import UserParameterList from './UserParameterList';
-import UserReserveList from './UserReserveList';
 //---
 
 function UserInfo() {
@@ -13,7 +12,6 @@ function UserInfo() {
         <UserParameter>
           <UserParameterList />
         </UserParameter>
-        <UserReserveList />
       </section>
     </div>
   );
