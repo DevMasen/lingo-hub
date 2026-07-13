@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import { useError } from '../../hooks/useError';
+
 import { getAllRooms } from '../../api/services/rooms.service';
 //---
 export function useRooms() {
@@ -11,8 +13,7 @@ export function useRooms() {
     queryFn: getAllRooms,
   });
 
-  if (error) {
-    console.error(error);
-  }
+  useError(error);
+
   return { rooms, isLoading, error };
 }

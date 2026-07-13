@@ -46,7 +46,7 @@ function LoginVerifyOTP() {
   //! Handlers
   function handleSubmit() {
     if (errors?.wrongCode) return;
-    //TODO : handle login with auth.service.js
+    //TODO #6: handle login with auth.service.js
     // login();
   }
 
@@ -111,14 +111,10 @@ function LoginVerifyOTP() {
         </div>
       </div>
       <div className="flex w-full gap-2">
-        <HomeButton to={-1} extraClasses={'py-2 rounded-md flex-grow'}>
+        <HomeButton to={-1} className={'flex-grow rounded-md py-2'}>
           <HiOutlineArrowRight />
         </HomeButton>
-        <HomeButton
-          type="submit"
-          ref={enterButtonRef}
-          extraClasses={'px-5 py-2 rounded-md flex-grow'}
-        >
+        <HomeButton type="submit" ref={enterButtonRef} className={'flex-grow rounded-md px-5 py-2'}>
           <span className="text-lg font-medium"> ورود</span>
           <AiOutlineEnter className="text-2xl text-slate-300" />
         </HomeButton>

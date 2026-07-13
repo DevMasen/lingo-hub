@@ -1,50 +1,73 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router';
+import { addDays, endOfDay, isEqual } from 'date-fns';
+import { en2fa } from 'num2persian';
 
-import UserParameter from './UserParameter';
+import { useSession } from '../authentication/useSession';
+import { useProfile } from './useProfile';
+
+import UserParameter, { UserParameterContext } from './UserParameter';
+import UserReserveList from './UserReserveList';
+import Skeleton from '../../ui/Skeleton';
+import Error from '../../ui/Error';
+
+import { toPersianDate } from '../../utils/toPersianDate';
+import { useUserReservations } from './useUserReservations';
 //---
 
-function UserParameterList({ user, date, query }) {
-  //! Local States
-  const [reserveRemainCountBG, setReserveRemainCountBg] = useState('bg-[var(--color-slate-700)]');
+const listItemStyles = 'flex gap-3';
+const skeletonStyles = 'h-10 w-40';
+const tomorrow = addDays(new Date(), 1);
+const persianTomorrow = toPersianDate(tomorrow);
+
+function UserParameterList() {
+  const [query] = useSearchParams();
+  const { setValueBgColor } = useContext(UserParameterContext);
+
+  //! React Query
+  const { email } = useSession();
+  const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();
+  const {
+    userReservations,
+    isLoading: isLoadingUserReservations,
+    error: userReservationsError,
+  } = useUserReservations();
+
+  const isLoading = isLoadingProfile || isLoadingUserReservations;
+  const error = profileError || userReservationsError;
 
   //! Local Elements Ref
   const reserveRemainRef = useRef(null);
 
   //! Derived States
+  const userReservationCountForTomorrow = userReservations
+    ?.filter((reservation) =>
+      isEqual(endOfDay(new Date(reservation.reservationDate)), endOfDay(tomorrow))
+    )
+    ?.reduce(
+      (acc, reservation) =>
+        reservation.status === 'reserved' || reservation.status === 'waiting' ? acc + 1 : acc,
+      0
+    );
   const reserveRemainCount =
-    user.reservedRooms.length === 0
-      ? user.maxReserveCount
-      : user.maxReserveCount -
-        user.reservedRooms
-          .filter((res) => res.date === date.reserveDate)
-          .reduce((acc, reserve) => {
-            if (reserve.status !== 'canceled') return acc + 1;
-            return acc;
-          }, 0);
+    Number(profile?.maxReserveCount ?? 3) - userReservationCountForTomorrow;
+
   const statusBGColor =
-    user.signupStatus === 'waiting'
+    profile?.signupStatus === 'pending'
       ? 'bg-yellow-500/65'
-      : user.signupStatus === 'confirmed'
+      : profile?.signupStatus === 'confirmed'
         ? 'bg-green-500/65'
-        : user.signupStatus === 'rejected'
+        : profile?.signupStatus === 'rejected'
           ? 'bg-red-500/65'
           : '';
   const statusValue =
-    user.signupStatus === 'waiting'
+    profile?.signupStatus === 'pending'
       ? 'در حال بررسی...'
-      : user.signupStatus === 'confirmed'
+      : profile?.signupStatus === 'confirmed'
         ? 'تأیید شده'
-        : user.signupStatus === 'rejected'
+        : profile?.signupStatus === 'rejected'
           ? 'مسدود شده'
           : '';
-  const names = [
-    { name: 'شماره تلفن', value: user.phoneNumber },
-    { name: 'ایمیل', value: user.email },
-    { name: 'زبان تدریس', value: user.language },
-    { name: 'سطح تدریس', value: user.level },
-    { name: 'وضعیت ثبت نام', value: user.signupStatus, valueType: 'status' },
-    { name: 'تعداد رزرو باقی مانده', value: reserveRemainCount, valueType: 'reserveCounter' },
-  ];
 
   //! Effects
   useEffect(
@@ -52,29 +75,80 @@ function UserParameterList({ user, date, query }) {
       if (query.get('reserveCountLimit') === null) return;
       const scrollPosition = reserveRemainRef.current.getBoundingClientRect().top;
       window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-      setReserveRemainCountBg('bg-[var(--color-slate-600)]');
+      setValueBgColor('bg-[var(--color-slate-600)]');
       setTimeout(function () {
-        setReserveRemainCountBg('bg-[var(--color-slate-700)]');
+        setValueBgColor('bg-[var(--color-slate-700)]');
       }, 1000);
     },
-    [query]
+    [query, setValueBgColor]
   );
+
+  if (error)
+    return (
+      <div className="flex items-center justify-center">
+        <Error className="w-full" error={error.message} />
+      </div>
+    );
 
   //! JSX
   return (
     <ul className="mt-5 space-y-7 text-lg">
-      {names.map((userProperty, i) => (
-        <UserParameter
-          key={i}
-          name={userProperty.name}
-          value={userProperty.value}
-          valueType={userProperty?.valueType ?? 'default'}
-          statusBGColor={statusBGColor}
-          statusValue={statusValue}
-          reserveRemainRef={reserveRemainRef}
-          reserveRemainCountBGColor={reserveRemainCountBG}
-        />
-      ))}
+      <li className={`${listItemStyles} items-center`}>
+        <UserParameter.Label> شماره تلفن : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value> {'۰' + en2fa(profile?.phoneNumber)} </UserParameter.Value>
+        )}
+      </li>
+      <li className={`${listItemStyles} items-center`}>
+        <UserParameter.Label> ایمیل : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value> {email} </UserParameter.Value>
+        )}
+      </li>
+      <li className={`${listItemStyles} items-center`}>
+        <UserParameter.Label> زبان تدریس : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value> {profile?.language} </UserParameter.Value>
+        )}
+      </li>
+      <li className={`${listItemStyles} items-center`}>
+        <UserParameter.Label> سطح تدریس : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value> {profile?.level} </UserParameter.Value>
+        )}
+      </li>
+      <li className={`${listItemStyles} items-center`}>
+        <UserParameter.Label> وضعیت ثبت نام : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value bgColor={statusBGColor}> {statusValue} </UserParameter.Value>
+        )}
+      </li>
+      <li className={`${listItemStyles} items-center`}>
+        <UserParameter.Label> تعداد رزرو باقی مانده : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value hasShimmerEffect={true}>
+            {en2fa(reserveRemainCount)}
+          </UserParameter.Value>
+        )}
+      </li>
+      <li className={`${listItemStyles} flex-col`}>
+        <UserParameter.Label>
+          اتاق های رزرو شده برای فردا {`(${persianTomorrow.replaceAll('-', '/')})`} :
+        </UserParameter.Label>
+        <UserReserveList />
+      </li>
     </ul>
   );
 }

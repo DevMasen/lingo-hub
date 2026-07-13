@@ -9,7 +9,11 @@ import NavItem from './NavItem';
 
 import Modal from '../../ui/Modal';
 import ConfirmExit from '../../ui/ConfirmExit';
+import ExitNavItem from './ExitNavItem';
 //---
+
+const navItemStyles =
+  'flex items-center gap-3 p-2 font-semibold text-[var(--color-slate-300)] transition-all duration-300';
 
 function NavList() {
   //! Context Data
@@ -24,7 +28,7 @@ function NavList() {
     <ul className="my-3 flex w-full flex-col justify-between gap-3">
       <section className="space-y-3 px-3">
         <NavItem
-          extraClasses="nav-link"
+          className={`nav-link ${navItemStyles}`}
           to={'dashboard'}
           onClick={() => handleToggleSidebar(isSidebarOpen)}
         >
@@ -32,7 +36,7 @@ function NavList() {
           {isSidebarOpen && <span> داشبورد </span>}
         </NavItem>
         <NavItem
-          extraClasses="nav-link"
+          className={`nav-link ${navItemStyles}`}
           to={'reserve'}
           onClick={() => handleToggleSidebar(isSidebarOpen)}
         >
@@ -40,7 +44,7 @@ function NavList() {
           {isSidebarOpen && <span> رزرو اتاق </span>}
         </NavItem>
         <NavItem
-          extraClasses="nav-link"
+          className={`nav-link ${navItemStyles}`}
           to={'wallet'}
           onClick={() => handleToggleSidebar(isSidebarOpen)}
         >
@@ -51,7 +55,7 @@ function NavList() {
 
       <section className="space-y-3 px-3">
         <NavItem
-          extraClasses="nav-link"
+          className={`nav-link ${navItemStyles}`}
           to={'setting'}
           onClick={() => handleToggleSidebar(isSidebarOpen)}
         >
@@ -60,13 +64,12 @@ function NavList() {
         </NavItem>
         <Modal>
           <Modal.Open opens="exit">
-            <NavItem
-              extraClasses="exit hover:text-[var(--color-slate-200)] hover:bg-[var(--color-slate-800)] hover:rounded-xl"
-              to="dashboard"
+            <ExitNavItem
+              className={`exit ${navItemStyles} w-full hover:rounded-xl hover:bg-[var(--color-slate-800)] hover:text-[var(--color-slate-200)]`}
             >
               <BiExit />
               {isSidebarOpen && <span> خروج </span>}
-            </NavItem>
+            </ExitNavItem>
           </Modal.Open>
           <Modal.Window name="exit">
             <ConfirmExit />

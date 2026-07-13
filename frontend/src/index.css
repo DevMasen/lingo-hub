@@ -24,8 +24,6 @@
   --color-indigo-900: #312e81;
   --color-indigo-950: #312e81;
 
-  /* TODO: implement dark mode with tailwind css */
-
   &,
   &.dark-mode {
     --color-slate-50: #f8fafc;
@@ -148,5 +146,17 @@
 
   .body-scroll-lock {
     @apply overflow-hidden sm:overflow-auto;
+  }
+}
+
+@layer utilities {
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 1.6s ease-in-out infinite;
   }
 }

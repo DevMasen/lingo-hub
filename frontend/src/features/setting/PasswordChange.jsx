@@ -1,163 +1,167 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 
 import PanelButton from '../../ui/PanelButton';
 import Error from '../../ui/Error';
-import Success from '../../ui/Success';
+import { useChangePassword } from './useChangePassword';
 //---
 
 //! Global Styles
-const inputContainerStyles =
-  'flex items-center rounded-lg border px-3 py-2 transition-all duration-300 focus-within:border-[var(--color-indigo-700)]';
-const inputStyles = 'bg-inherit outline-none w-80';
+const rowStyles = 'flex flex-col gap-3 w-full md:flex-row md:items-center';
+const inputStyles = 'bg-inherit outline-none w-full disabled:cursor-not-allowed';
 const hideButtonStyles =
   'text-[var(--color-slate-500)] transition-colors duration-300 hover:text-[var(--color-indigo-700)]';
 
 function PasswordChange() {
+  //! React Query
+  const { changePassword, isChangingPassword } = useChangePassword();
+
+  const inputContainerStyles = `flex items-center rounded-lg border px-3 py-2 h-12 transition-all duration-300 md:min-w-80 focus-within:border-[var(--color-indigo-700)] ${isChangingPassword && 'opacity-50'}`;
+
   //! Local States
-  const [error, setError] = useState('');
-  const [errorField, setErrorField] = useState('');
-  const [successMessage] = useState('');
   const [isOldHidden, setIsOldHidden] = useState(true);
   const [isNewHidden, setIsNewHidden] = useState(true);
   const [isNewRepHidden, setIsNewRepHidden] = useState(true);
 
-  //! Controlled Elements
-  const [inputOldPass, setInputOldPass] = useState('');
-  const [inputNewPass, setInputNewPass] = useState('');
-  const [inputNewPassRep, setInputNewPassRep] = useState('');
-
-  //! Effect
-  useEffect(
-    function () {
-      if (!inputOldPass && !inputNewPass && !inputNewPassRep) {
-        setError('');
-        setErrorField('');
-
-        return;
-      }
-      if (inputNewPass && !inputOldPass) {
-        setError('رمز عبور قدیمی را وارد کنید.');
-        setErrorField('1');
-        return;
-      }
-      if (inputNewPassRep && !inputOldPass) {
-        setError('رمز عبور قدیمی را وارد کنید.');
-        setErrorField('1');
-        return;
-      }
-      if (inputNewPass.length < 8) {
-        setError('رمز عبور جدید باید حداقل ۸ کاراکتر باشد.');
-        setErrorField('2');
-        return;
-      }
-      if (inputOldPass === inputNewPass) {
-        setError('رمز قدیمی نباید با رمز جدید یکسان باشد.');
-        setErrorField('2');
-        return;
-      }
-      if (inputNewPass !== inputNewPassRep) {
-        setError('رمز جدید با تکرار آن یکسان نیست.');
-        setErrorField('3');
-        return;
-      }
-      setError('');
-      setErrorField('');
+  //! React Hook Form
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      oldPassword: '',
+      newPassword: '',
+      newPasswordRepeat: '',
     },
-    [inputOldPass, inputNewPass, inputNewPassRep]
-  );
+  });
 
+  function onSuccess({ oldPassword, newPassword }) {
+    if (!oldPassword || !newPassword) return;
+    changePassword({ newPassword: newPassword, currentPassword: oldPassword });
+  }
+
+  function onError(errors) {
+    console.error(errors);
+  }
   //! JSX
-  //TODO add action to this form
   return (
     <div className="border-b border-[var(--color-slate-500)] p-3">
       <form
         method="PATCH"
+        onSubmit={handleSubmit(onSuccess, onError)}
         className="flex h-full flex-col items-start gap-4 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] p-5"
       >
-        <div
-          className={
-            `${errorField === '1' ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ` +
-            inputContainerStyles
-          }
-        >
-          <input
-            name="oldPass"
-            value={inputOldPass}
-            onChange={(e) => setInputOldPass(e.target.value)}
-            type={isOldHidden ? 'password' : 'text'}
-            placeholder="رمز عبور قدیمی"
-            required
-            aria-required="true"
-            maxLength={16}
-            className={inputStyles}
-          />
-          <button
-            type="button"
-            className={hideButtonStyles}
-            onClick={() => setIsOldHidden((cur) => !cur)}
+        <div className={rowStyles}>
+          <div
+            className={`${errors?.oldPassword ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ${inputContainerStyles}`}
           >
-            {isOldHidden ? <RxEyeClosed /> : <RxEyeOpen />}
-          </button>
+            <input
+              name="oldPassword"
+              id="oldPassword"
+              type={isOldHidden ? 'password' : 'text'}
+              placeholder="رمز عبور قدیمی"
+              aria-required="true"
+              maxLength={30}
+              className={inputStyles}
+              disabled={isChangingPassword}
+              {...register('oldPassword', {
+                required: 'لطفا رمز عبور قبلی خود را وارد کنید',
+                minLength: {
+                  value: 8,
+                  message: 'رمز عبور قبلی باید حداقل ۸ کاراکتر باشد',
+                },
+              })}
+            />
+            <button
+              type="button"
+              className={hideButtonStyles}
+              disabled={isChangingPassword}
+              onClick={() => setIsOldHidden((cur) => !cur)}
+            >
+              {isOldHidden ? <RxEyeClosed /> : <RxEyeOpen />}
+            </button>
+          </div>
+          {errors?.oldPassword && <Error error={errors.oldPassword.message} />}
         </div>
-        <div
-          className={
-            `${errorField === '2' ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ` +
-            inputContainerStyles
-          }
-        >
-          <input
-            name="newPass"
-            value={inputNewPass}
-            onChange={(e) => setInputNewPass(e.target.value)}
-            type={isNewHidden ? 'password' : 'text'}
-            placeholder="رمز عبور جدید"
-            required
-            aria-required="true"
-            maxLength={16}
-            className={inputStyles}
-          />
-          <button
-            type="button"
-            className={hideButtonStyles}
-            onClick={() => setIsNewHidden((cur) => !cur)}
+        <div className={rowStyles}>
+          <div
+            className={
+              `${errors?.newPassword ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ` +
+              inputContainerStyles
+            }
           >
-            {isNewHidden ? <RxEyeClosed /> : <RxEyeOpen />}
-          </button>
+            <input
+              name="newPassword"
+              id="newPassword"
+              type={isNewHidden ? 'password' : 'text'}
+              placeholder="رمز عبور جدید"
+              aria-required="true"
+              maxLength={30}
+              className={inputStyles}
+              disabled={isChangingPassword}
+              {...register('newPassword', {
+                required: 'لطفا رمز عبور جدید خود را وارد کنید',
+                validate: (value) => {
+                  return value !== getValues().oldPassword || 'رمز عبور جدید با قبلی یکسان است';
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!.,])[A-Za-z\d@#$!.,]+$/,
+                  message:
+                    'رمز عبور جدید باید فقط شامل حروف انگلیسی، اعداد و یکی از کاراکترهای @، #، $، !، . یا ، باشد و حداقل شامل یک حرف بزرگ، یک حرف کوچک، یک عدد و یک کاراکتر ویژه باشد.',
+                },
+              })}
+            />
+            <button
+              type="button"
+              className={hideButtonStyles}
+              disabled={isChangingPassword}
+              onClick={() => setIsNewHidden((cur) => !cur)}
+            >
+              {isNewHidden ? <RxEyeClosed /> : <RxEyeOpen />}
+            </button>
+          </div>
+          {errors?.newPassword && <Error error={errors.newPassword.message} />}
         </div>
-        <div
-          className={
-            `${errorField === '3' ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ` +
-            inputContainerStyles
-          }
-        >
-          <input
-            name="newPassRep"
-            value={inputNewPassRep}
-            onChange={(e) => setInputNewPassRep(e.target.value)}
-            type={isNewRepHidden ? 'password' : 'text'}
-            placeholder="تکرار رمز عبور جدید"
-            required
-            aria-required="true"
-            maxLength={16}
-            className={inputStyles}
-          />
-          <button
-            type="button"
-            className={hideButtonStyles}
-            onClick={() => setIsNewRepHidden((cur) => !cur)}
+        <div className={rowStyles}>
+          <div
+            className={
+              `${errors?.newPasswordRepeat ? 'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]' : 'border-[var(--color-slate-500)]'} ` +
+              inputContainerStyles
+            }
           >
-            {isNewRepHidden ? <RxEyeClosed /> : <RxEyeOpen />}
-          </button>
+            <input
+              name="newPasswordRepeat"
+              id="newPasswordRepeat"
+              type={isNewRepHidden ? 'password' : 'text'}
+              placeholder="تکرار رمز عبور جدید"
+              aria-required="true"
+              maxLength={30}
+              className={inputStyles}
+              disabled={isChangingPassword}
+              {...register('newPasswordRepeat', {
+                required: 'لطفا تکرار رمز عبور را وارد کنید',
+                validate: (value) =>
+                  value === getValues().newPassword || 'رمز عبور با تکرار آن برابر نیست',
+              })}
+            />
+            <button
+              type="button"
+              className={hideButtonStyles}
+              disabled={isChangingPassword}
+              onClick={() => setIsNewRepHidden((cur) => !cur)}
+            >
+              {isNewRepHidden ? <RxEyeClosed /> : <RxEyeOpen />}
+            </button>
+          </div>
+          {errors?.newPasswordRepeat && <Error error={errors.newPasswordRepeat.message} />}
         </div>
-        {inputOldPass && inputNewPass && inputNewPassRep && (
-          <PanelButton extraClasses="px-4 py-3 text-sm" disabled={error.length > 0}>
-            تغییر رمز عبور
-          </PanelButton>
-        )}
-        {error.length > 0 && <Error error={error} />}
-        {successMessage.length > 0 && <Success message={successMessage} />}
+        <PanelButton disabled={isChangingPassword} type="submit" className="px-4 py-3 text-sm">
+          تغییر رمز عبور
+        </PanelButton>
       </form>
     </div>
   );

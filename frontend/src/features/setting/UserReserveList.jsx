@@ -1,11 +1,38 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router';
+import { format, addDays } from 'date-fns';
+
+import { useUserReservations } from './useUserReservations';
 
 import ReserveRecord from '../../features/reserve/ReserveRecord';
-import ControlWaitingReserve from '../../features/setting/ControlWaitingReserve';
 import ReserveNotFound from '../reserve/ReserveNotFound';
+import Skeleton from '../../ui/Skeleton';
+import Error from '../../ui/Error';
+import ReserveSubmit from './ReserveSubmit';
+import { useRooms } from '../reserve/useRooms';
 //---
 
-function UserReserveList({ user, date, query }) {
+function UserReserveList() {
+  //! React Query
+  const {
+    userReservations,
+    isLoading: isLoadingReservations,
+    error: reservationsError,
+  } = useUserReservations();
+  const { rooms, isLoading: isLoadingRooms, error: roomsError } = useRooms();
+
+  const isLoading = isLoadingReservations || isLoadingRooms;
+  const error = reservationsError || roomsError;
+
+  const tomorrow = addDays(new Date(), 1);
+  const tomorrowFormatted = format(tomorrow, 'yyyy-MM-dd');
+  const userTomorrowReservations = userReservations?.filter(
+    (reservation) => reservation.reservationDate === tomorrowFormatted
+  );
+
+  //! React Router
+  const [query] = useSearchParams();
+
   //! Local States
   const [focusReserveId, setFocusReserveId] = useState(null);
 
@@ -13,24 +40,11 @@ function UserReserveList({ user, date, query }) {
   const reserveListRef = useRef(null);
 
   //! Effects
-
   useEffect(
     function () {
-      const currentFocusReserve = user.reservedRooms
-        .filter((record) => record.date === date.reserveDate)
-        .find(
-          (reserve) =>
-            reserve.roomName === query.get('roomName') &&
-            String(reserve.timePart) === query.get('timePart') &&
-            reserve.status === query.get('status')
-        );
-      if (currentFocusReserve === undefined) {
-        setFocusReserveId(null);
-        return;
-      }
-      setFocusReserveId(currentFocusReserve.id);
+      setFocusReserveId(query.get('reservationId'));
     },
-    [query, user.reservedRooms, date]
+    [query]
   );
   useEffect(
     function () {
@@ -43,32 +57,30 @@ function UserReserveList({ user, date, query }) {
 
   return (
     <ul ref={reserveListRef} className="space-y-3">
-      <h3 className="text-lg"> اتاق های رزرو شده :</h3>
-      {user.reservedRooms.length > 0 ? (
-        user.reservedRooms
-          .filter((rec) => rec.date === date.reserveDate)
-          .map((record, i) => (
-            <li className="flex gap-3" key={record.id}>
-              <ReserveRecord
-                focusReserveId={focusReserveId}
-                number={i + 1}
-                roomId={record.id}
-                roomName={record.roomName}
-                date={record.date}
-                timePart={record.timePart}
-                status={record.status}
-                extraClasses="w-[525px]"
-              />
-              {record.status === 'waiting' && <ControlWaitingReserve record={record} />}
-            </li>
-          ))
+      {isLoading ? (
+        <Skeleton className="h-28 w-full rounded-xl" />
+      ) : error ? (
+        <Error error={error?.message} />
+      ) : userTomorrowReservations?.length === 0 ? (
+        <ReserveNotFound>رزروی برای فردا وجود ندارد</ReserveNotFound>
       ) : (
-        <ReserveNotFound>رزروی وجود ندارد</ReserveNotFound>
+        userTomorrowReservations?.map((reservation, i) => (
+          <li className="flex flex-col gap-3 md:flex-row" key={reservation.id}>
+            <ReserveRecord
+              focusReserveId={focusReserveId}
+              number={i + 1}
+              reservationId={reservation.id}
+              rooms={rooms}
+              roomId={reservation.roomId}
+              timePart={reservation.timePart}
+              status={reservation.status}
+            />
+            {reservation.status === 'waiting' && (
+              <ReserveSubmit reservation={reservation} rooms={rooms} roomId={reservation.roomId} />
+            )}
+          </li>
+        ))
       )}
-      {user.reservedRooms.length > 0 &&
-        !user.reservedRooms.some((record) => record.date === date.reserveDate) && (
-          <ReserveNotFound>رزروی برای فردا وجود ندارد</ReserveNotFound>
-        )}
     </ul>
   );
 }

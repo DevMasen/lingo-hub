@@ -16,7 +16,7 @@ function Modal({ children }) {
 
   const isModalOpen = openName.length > 0;
 
-  useLockScroll(isModalOpen);
+  useLockScroll(isModalOpen, 'modal');
 
   return (
     <ModalContext.Provider value={{ openName, open, close }}>{children}</ModalContext.Provider>
@@ -26,15 +26,8 @@ function Modal({ children }) {
 function Open({ children, opens: openModalName }) {
   const { open } = useContext(ModalContext);
 
-  const handleOpen = (event) => {
-    event?.preventDefault?.();
-    event?.stopPropagation?.();
-    open(openModalName);
-  };
-
   return cloneElement(children, {
-    onOpenModal: handleOpen,
-    onCloseModal: handleOpen,
+    onOpenModal: () => open(openModalName),
   });
 }
 
@@ -48,7 +41,7 @@ function Window({ children, name }) {
   return createPortal(
     <div className="fixed left-0 top-0 z-[1000] h-dvh w-full bg-slate-900/65 backdrop-blur-sm transition-all duration-500">
       <div
-        className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded-lg bg-[var(--color-slate-700)] px-[3.2rem] py-[3rem] shadow-md shadow-[var(--color-slate-700)] transition-all duration-500"
+        className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl bg-[var(--color-slate-800)] px-[3.2rem] py-[3rem] text-[var(--color-slate-900)] backdrop-blur-3xl transition-all duration-500"
         ref={ref}
       >
         <button

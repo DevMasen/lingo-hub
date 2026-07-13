@@ -105,3 +105,22 @@ export async function cancelReservation(reservationId) {
 
   return toReservation(data);
 }
+
+/**
+ * Submits a reservation by id (sets status to 'reserved').
+ *
+ * @param {number} reservationId
+ * @returns {Promise<import('../types/reservation.types').Reservation>}
+ */
+export async function submitReservation(reservationId) {
+  const { data, error } = await supabase
+    .from('reservations')
+    .update({ status: 'reserved' })
+    .eq('id', reservationId)
+    .select()
+    .single();
+
+  if (error) throw fromSupabaseError(error);
+
+  return toReservation(data);
+}

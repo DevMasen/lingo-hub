@@ -28,8 +28,6 @@ const Support = lazy(() => import('./pages/Support'));
 const LoginEmail = lazy(() => import('./features/authentication/LoginEmail'));
 const LoginVerifyOTP = lazy(() => import('./features/authentication/LoginVerifyOTP'));
 const UserInfo = lazy(() => import('./features/setting/UserInfo'));
-const PaymentStatus = lazy(() => import('./features/setting/PaymentStatus'));
-const PayModal = lazy(() => import('./features/setting/PayModal'));
 const PasswordChange = lazy(() => import('./features/setting/PasswordChange'));
 
 const queryClient = new QueryClient();
@@ -57,14 +55,12 @@ function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="reserve" element={<ReserveRoom />} />
               <Route path="wallet" element={<Wallet />} />
+              {/* TODO #5: add new route: resume */}
               <Route path="setting" element={<Setting />}>
                 <Route index element={<Navigate to="user" replace />} />
                 <Route path="user" element={<UserInfo />} />
-                <Route path="user/change-name" element={<UserInfo />} />
-                <Route path="user/pay" element={<PayModal />} />
                 <Route path="change-password" element={<PasswordChange />} />
               </Route>
-              <Route path="status" element={<PaymentStatus />} />
               <Route path="support" element={<Support />} />
             </Route>
             <Route path="/home" element={<HomePage />} />

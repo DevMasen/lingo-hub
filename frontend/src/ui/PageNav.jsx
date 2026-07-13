@@ -22,7 +22,7 @@ function PageNav() {
             <Link to="/about-us">درباره ما</Link>
           </li>
         </ul>
-        <HomeButton to={'/login'} extraClasses={'px-3 py-2 rounded-lg'}>
+        <HomeButton to={'/login'} className={'rounded-lg px-3 py-2'}>
           ورود / ثبت‌نام
         </HomeButton>
       </div>

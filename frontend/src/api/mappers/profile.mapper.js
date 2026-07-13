@@ -17,6 +17,8 @@ export function toProfile(row) {
     signupStatus: row.signup_status,
     creditBalance: row.credit_balance,
     maxReserveCount: row.max_reserve_count,
+    avatarUrl: row.avatar_url,
+    resumeUrl: row.resume_url,
   };
 }
 
@@ -42,6 +44,8 @@ export function toProfileRow(profile) {
     signup_status: profile.signupStatus,
     credit_balance: profile.creditBalance,
     max_reserve_count: profile.maxReserveCount,
+    avatar_url: profile.avatarUrl,
+    resume_url: profile.resumeUrl,
   };
 }
 
@@ -64,6 +68,8 @@ export function toProfileUpdateRow(partialProfile) {
   if (partialProfile.creditBalance !== undefined) row.credit_balance = partialProfile.creditBalance;
   if (partialProfile.maxReserveCount !== undefined)
     row.max_reserve_count = partialProfile.maxReserveCount;
+  if (partialProfile.avatarUrl !== undefined) row.avatar_url = partialProfile.avatarUrl;
+  if (partialProfile.resumeUrl !== undefined) row.resume_url = partialProfile.resumeUrl;
 
   return row;
 }

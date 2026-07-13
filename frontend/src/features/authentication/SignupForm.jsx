@@ -67,6 +67,8 @@ function SignupForm() {
       signupStatus: 'pending',
       creditBalance: 0,
       maxReserveCount: 3,
+      avatarUrl: '',
+      resumeUrl: '',
     };
     signup({ email, password, profile: newProfile });
   }
@@ -234,8 +236,8 @@ function SignupForm() {
           {...register('password', {
             required: 'رمز عبور خود را وارد کنید',
             minLength: {
-              value: 6,
-              message: 'رمزعبور باید حداقل ۶ کاراکتر باشد',
+              value: 8,
+              message: 'رمزعبور باید حداقل ۸ کاراکتر باشد',
             },
             pattern: {
               value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!.,])[A-Za-z\d@#$!.,]+$/,
@@ -280,7 +282,7 @@ function SignupForm() {
         <HomeButton
           // className={'translate-y'}
           to={isSigningUp ? '' : '/login'}
-          extraClasses={`py-2 px-2 rounded-md grow ${isSigningUp && 'cursor-not-allowed hover:translate-y-0 opacity-70 shadow-0'}`}
+          className={`grow rounded-md px-2 py-2 ${isSigningUp && 'shadow-0 cursor-not-allowed opacity-70 hover:translate-y-0'}`}
         >
           <span className="text-sm font-medium sm:text-lg"> ورود </span>
           <CgEnter />
@@ -289,7 +291,7 @@ function SignupForm() {
         <HomeButton
           disabled={isSigningUp}
           type={'submit'}
-          extraClasses={`py-2 rounded-md flex-grow ${isSigningUp && 'hover:translate-y-0 shadow-0'}`}
+          className={`flex-grow rounded-md py-2 ${isSigningUp && 'shadow-0 hover:translate-y-0'}`}
         >
           <span className="text-sm font-medium sm:text-lg">ثبت‌نام</span>
           {isSigningUp ? <SpinnerMini /> : <HiCheckCircle className="text-xl" />}

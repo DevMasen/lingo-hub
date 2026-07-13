@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
 
 import { signIn } from '../../api/services/auth.service';
+
+import { getErrorMessage } from '../../utils/getErrorMessage';
 //---
 
 export function useLogin() {
@@ -17,9 +19,7 @@ export function useLogin() {
     },
     onError: (error) => {
       console.error(error);
-      const message =
-        error?.message ??
-        ((typeof error === 'string' ? error : JSON.stringify(error)) || 'خطایی رخ داد');
+      const message = getErrorMessage(error);
       toast.error(message);
     },
   });
