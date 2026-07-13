@@ -12,7 +12,6 @@ import ReserveSubmit from './ReserveSubmit';
 import { useRooms } from '../reserve/useRooms';
 //---
 
-//TODO#2: render reservations per user and ability to pay/cancel
 function UserReserveList() {
   //! React Query
   const {

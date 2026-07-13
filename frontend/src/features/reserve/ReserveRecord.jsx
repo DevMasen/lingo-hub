@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { en2fa } from 'num2persian';
 
-import makePersianNumberString from '../../utils/makePersianNumbersString';
 import mapToPersianMonth from '../../utils/mapToPersianMonth';
 import mapTime from '../../utils/mapTime';
 import { toPersianDate } from '../../utils/toPersianDate';
@@ -46,7 +46,7 @@ function ReserveRecord({
     >
       <div className="flex gap-6">
         <span>
-          <span>{makePersianNumberString(number + '')}</span>
+          <span>{en2fa(number + '')}</span>
           <span>.</span>
         </span>
         <span className="flex gap-1">
@@ -61,9 +61,9 @@ function ReserveRecord({
           </span>
         )}
         <span className="flex gap-1">
-          <span>{makePersianNumberString(startTime)}</span>
+          <span>{en2fa(startTime)}</span>
           <span>تا</span>
-          <span>{makePersianNumberString(stopTime)}</span>
+          <span>{en2fa(stopTime)}</span>
         </span>
       </div>
       <span className="whitespace-nowrap">

@@ -1,11 +1,11 @@
 import { useRooms } from '../features/reserve/useRooms';
 import { useProfile } from '../features/setting/useProfile';
+import { en2fa } from 'num2persian';
 
 import ReserveTableData from '../features/reserve/ReserveTableData';
 import Spinner from '../ui/Spinner';
 import Error from '../ui/Error';
 
-import makePersianNumberString from '../utils/makePersianNumbersString';
 import mapTime from '../utils/mapTime';
 //---
 
@@ -61,15 +61,15 @@ function ReserveRoom() {
                   key={i}
                   className="w-24 whitespace-nowrap border-b border-[var(--color-slate-700)] px-3"
                 >
-                  {makePersianNumberString(mapTime(i).startTime)}
+                  {en2fa(mapTime(i).startTime)}
                   <span> تا </span>
-                  {makePersianNumberString(mapTime(i).stopTime)}
+                  {en2fa(mapTime(i).stopTime)}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {rooms.map((room) => (
+            {rooms?.map((room) => (
               <tr key={room.id}>
                 <th className="bg-[var(--color-slate-800)] py-5">{room.roomName}</th>
                 {timeParts.map((partIndex) => (

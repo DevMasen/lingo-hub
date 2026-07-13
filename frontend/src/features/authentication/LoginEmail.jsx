@@ -40,7 +40,7 @@ function LoginEmail() {
     },
   });
 
-  function onSuccess({ email, password }) {
+  function onSuccess({ email, password } = {}) {
     if (!email || !password) return;
     login({ email, password });
   }
