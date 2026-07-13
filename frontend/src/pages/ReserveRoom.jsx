@@ -32,7 +32,7 @@ function ReserveRoom() {
     return (
       <div className="flex items-center justify-center">
         <Error
-          extraClasses="w-[60%] h-[40%] "
+          className="h-[40%] w-[60%]"
           error={(roomsError?.message || profileError?.message) ?? ''}
         />
       </div>

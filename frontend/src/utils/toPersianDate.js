@@ -1,4 +1,4 @@
-export function toPersianDate(date = 'yyyy-MM-dd') {
+export function toPersianDate(date = new Date()) {
   const formatter = new Intl.DateTimeFormat('fa-IR-u-ca-persian', {
     year: 'numeric',
     month: '2-digit',

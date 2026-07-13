@@ -10,11 +10,12 @@ function ReserveRecord({
   focusReserveId = null,
   number = 0,
   reservationId = null,
+  rooms = [],
   roomId = null,
   date = null,
   timePart = null,
   status = '', // reserved/canceled/waiting
-  extraClasses = '',
+  className = '',
 }) {
   //! Local States
   const [recordBGColor, setRecordBGColor] = useState('bg-[var(--color-slate-700)]');
@@ -24,7 +25,7 @@ function ReserveRecord({
 
   const persianDate = date ? toPersianDate(date) : null;
 
-  const roomName = 'A';
+  const roomName = rooms?.find((room) => room.id === roomId)?.roomName;
 
   //! Effects
   useEffect(
@@ -41,7 +42,7 @@ function ReserveRecord({
   //! JSX
   return (
     <div
-      className={`flex justify-between gap-4 rounded-xl text-sm sm:text-base ${recordBGColor} bg-opacity-70 p-3 transition-colors duration-300 ${extraClasses}`}
+      className={`flex flex-grow justify-between gap-4 rounded-xl text-sm sm:text-base ${recordBGColor} bg-opacity-70 p-3 transition-colors duration-300 ${className}`}
     >
       <div className="flex gap-6">
         <span>

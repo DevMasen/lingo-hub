@@ -43,7 +43,7 @@ function Toggle({ id }) {
   }
 
   return (
-    <HomeButton extraClasses={'rounded-lg p-1'} onClick={handleToggle}>
+    <HomeButton className="rounded-lg p-1" onClick={handleToggle}>
       <HiEllipsisVertical className="h-[2rem] w-[2rem] text-slate-200" />
     </HomeButton>
   );

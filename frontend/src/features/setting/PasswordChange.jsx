@@ -159,7 +159,7 @@ function PasswordChange() {
           </div>
           {errors?.newPasswordRepeat && <Error error={errors.newPasswordRepeat.message} />}
         </div>
-        <PanelButton disabled={isChangingPassword} type="submit" extraClasses="px-4 py-3 text-sm">
+        <PanelButton disabled={isChangingPassword} type="submit" className="px-4 py-3 text-sm">
           تغییر رمز عبور
         </PanelButton>
       </form>

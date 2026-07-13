@@ -32,7 +32,7 @@ function Dashboard() {
           />
         ) : error ? (
           <Error
-            extraClasses={`${sectionPartsStyles} flex h-48 flex-col items-center gap-6 md:flex-row md:pl-9 lg:col-span-2`}
+            className={`${sectionPartsStyles} flex h-48 flex-col items-center gap-6 md:flex-row md:pl-9 lg:col-span-2`}
             error={error?.message || error?.message}
           />
         ) : (

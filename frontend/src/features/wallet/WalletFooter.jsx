@@ -19,7 +19,7 @@ function WalletFooter() {
       </div>
       <PanelButton
         disabled={currentPrice < 100000 || currentPrice > 10000000}
-        extraClasses="px-3 py-2 whitespace-nowrap"
+        className="whitespace-nowrap px-3 py-2"
       >
         {' '}
         پرداخت هزینه

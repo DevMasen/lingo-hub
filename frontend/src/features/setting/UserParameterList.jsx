@@ -1,23 +1,24 @@
 import { useContext, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router';
-import { addDays } from 'date-fns';
+import { addDays, endOfDay, isEqual } from 'date-fns';
 import { en2fa } from 'num2persian';
 
 import { useSession } from '../authentication/useSession';
 import { useProfile } from './useProfile';
 
 import UserParameter, { UserParameterContext } from './UserParameter';
-
+import UserReserveList from './UserReserveList';
 import Skeleton from '../../ui/Skeleton';
 import Error from '../../ui/Error';
-import UserReserveList from './UserReserveList';
+
 import { toPersianDate } from '../../utils/toPersianDate';
+import { useUserReservations } from './useUserReservations';
 //---
 
 const listItemStyles = 'flex gap-3';
 const skeletonStyles = 'h-10 w-40';
 const tomorrow = addDays(new Date(), 1);
-const PersianTomorrow = toPersianDate(tomorrow);
+const persianTomorrow = toPersianDate(tomorrow);
 
 function UserParameterList() {
   const [query] = useSearchParams();
@@ -25,22 +26,32 @@ function UserParameterList() {
 
   //! React Query
   const { email } = useSession();
-  const { profile, isLoading, error } = useProfile();
+  const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();
+  const {
+    userReservations,
+    isLoading: isLoadingUserReservations,
+    error: userReservationsError,
+  } = useUserReservations();
+
+  const isLoading = isLoadingProfile || isLoadingUserReservations;
+  const error = profileError || userReservationsError;
 
   //! Local Elements Ref
   const reserveRemainRef = useRef(null);
 
   //! Derived States
+  const userReservationCountForTomorrow = userReservations
+    ?.filter((reservation) =>
+      isEqual(endOfDay(new Date(reservation.reservationDate)), endOfDay(tomorrow))
+    )
+    ?.reduce(
+      (acc, reservation) =>
+        reservation.status === 'reserved' || reservation.status === 'waiting' ? acc + 1 : acc,
+      0
+    );
   const reserveRemainCount =
-    [].length === 0
-      ? profile?.maxReserveCount
-      : profile?.maxReserveCount -
-        []
-          // filter by [userId, date]
-          .reduce((acc, reserve) => {
-            if (reserve.status !== 'canceled') return acc + 1;
-            return acc;
-          }, 0);
+    Number(profile?.maxReserveCount ?? 3) - userReservationCountForTomorrow;
+
   const statusBGColor =
     profile?.signupStatus === 'pending'
       ? 'bg-yellow-500/65'
@@ -75,7 +86,7 @@ function UserParameterList() {
   if (error)
     return (
       <div className="flex items-center justify-center">
-        <Error extraClasses="w-full" error={error.message} />
+        <Error className="w-full" error={error.message} />
       </div>
     );
 
@@ -134,7 +145,7 @@ function UserParameterList() {
       </li>
       <li className={`${listItemStyles} flex-col`}>
         <UserParameter.Label>
-          اتاق های رزرو شده برای فردا {`(${PersianTomorrow.replaceAll('-', '/')})`} :
+          اتاق های رزرو شده برای فردا {`(${persianTomorrow.replaceAll('-', '/')})`} :
         </UserParameter.Label>
         <UserReserveList />
       </li>

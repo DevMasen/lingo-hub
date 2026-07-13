@@ -108,14 +108,14 @@ function UpdateAvatarForm({ onCloseModal }) {
         />
       </div>
       <div className="flex gap-4">
-        <PanelButton disabled={isUpdatingProfile} type="submit" extraClasses="px-5 py-2">
+        <PanelButton disabled={isUpdatingProfile} type="submit" className="px-5 py-2">
           {isUpdatingProfile ? <SpinnerMini /> : <span>تأیید</span>}
         </PanelButton>
         <PanelButton
           disabled={isUpdatingProfile}
           onClick={onCloseModal}
           type="button"
-          extraClasses="px-5 py-2 bg-[var(--color-red-800)] hover:bg-[var(--color-red-700)]"
+          className="bg-[var(--color-red-800)] px-5 py-2 hover:bg-[var(--color-red-700)]"
         >
           <span>لغو</span>
         </PanelButton>

@@ -57,7 +57,7 @@ function UserReserveList() {
   );
 
   return (
-    <ul ref={reserveListRef} className="space-y-3 overflow-x-auto">
+    <ul ref={reserveListRef} className="space-y-3">
       {isLoading ? (
         <Skeleton className="h-28 w-full rounded-xl" />
       ) : error ? (
@@ -66,22 +66,18 @@ function UserReserveList() {
         <ReserveNotFound>رزروی برای فردا وجود ندارد</ReserveNotFound>
       ) : (
         userTomorrowReservations?.map((reservation, i) => (
-          <li className="flex gap-3" key={reservation.id}>
+          <li className="flex flex-col gap-3 md:flex-row" key={reservation.id}>
             <ReserveRecord
               focusReserveId={focusReserveId}
               number={i + 1}
               reservationId={reservation.id}
+              rooms={rooms}
               roomId={reservation.roomId}
               timePart={reservation.timePart}
               status={reservation.status}
-              extraClasses="w-[525px]"
             />
             {reservation.status === 'waiting' && (
-              <ReserveSubmit
-                reservationId={reservation.id}
-                rooms={rooms}
-                roomId={reservation.roomId}
-              />
+              <ReserveSubmit reservation={reservation} rooms={rooms} roomId={reservation.roomId} />
             )}
           </li>
         ))

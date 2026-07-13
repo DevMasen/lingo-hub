@@ -33,7 +33,7 @@ function ProtectedRoute({ children }) {
   if (error) {
     return (
       <FullPage>
-        <Error extraClasses="w-80 h-36" error={error.message} />
+        <Error className="h-36 w-80" error={error.message} />
         <HomeButton to={'/home'}>
           <span>خانه</span>
           <HiOutlineHome />
