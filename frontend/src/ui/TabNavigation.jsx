@@ -13,6 +13,7 @@ function TabNavigation({ tabs = [] }) {
   useEffect(
     function () {
       if (searchParams.get('activeTab')) setActiveTab(+searchParams.get('activeTab'));
+      document.documentElement.style.setProperty('--tab-overlay-right', `${activeTab * 8}rem`);
     },
     [activeTab, searchParams]
   );
@@ -20,7 +21,7 @@ function TabNavigation({ tabs = [] }) {
     <nav className="flex items-center justify-between border-b border-[var(--color-slate-500)] bg-[var(--color-gray-900)] px-4 py-3">
       <ul className="relative flex gap-4 font-semibold text-[var(--color-slate-300)]">
         <div
-          className={`absolute right-[${activeTab * 8}rem] h-10 w-28 rounded-lg border-b-2 border-[var(--color-indigo-500)] bg-indigo-400/5 transition-all duration-300`}
+          className={`absolute right-[var(--tab-overlay-right)] h-10 w-28 rounded-lg border-b-2 border-[var(--color-indigo-500)] bg-indigo-400/5 transition-all duration-300`}
         ></div>
         {tabs.map((tab, i) => (
           <li
