@@ -11,22 +11,24 @@ function ReserveSubmit({ reservation, roomId, rooms }) {
 
   return (
     <Modal>
-      <div className="flex items-center gap-3 self-center">
+      <div className="flex items-center justify-between gap-3 px-4">
         <div className="whitespace-nowrap rounded-xl bg-[var(--color-slate-700)] px-3 py-2 text-sm sm:text-base">
           <span>{moneyFormat(currentRoomCost)}</span>
           <span> تومان </span>
         </div>
-        <Modal.Open opens={'confirm-payment'}>
-          <OpenConfirmButton className="px-3 py-2 text-sm text-slate-200 sm:text-base">
-            پرداخت
-          </OpenConfirmButton>
-        </Modal.Open>
+        <div className="flex gap-2">
+          <Modal.Open opens={'confirm-payment'}>
+            <OpenConfirmButton className="px-3 py-2 text-sm text-slate-200 sm:text-base">
+              پرداخت
+            </OpenConfirmButton>
+          </Modal.Open>
 
-        <Modal.Open opens={'confirm-cancel'}>
-          <OpenConfirmButton className="bg-[var(--color-red-800)] px-3 py-2 text-sm text-red-100 hover:bg-[var(--color-red-700)] sm:text-base">
-            لغو
-          </OpenConfirmButton>
-        </Modal.Open>
+          <Modal.Open opens={'confirm-cancel'}>
+            <OpenConfirmButton className="bg-[var(--color-red-800)] px-3 py-2 text-sm text-red-100 hover:bg-[var(--color-red-700)] sm:text-base">
+              لغو
+            </OpenConfirmButton>
+          </Modal.Open>
+        </div>
       </div>
       <Modal.Window name={'confirm-payment'}>
         <ConfirmPayment reservation={reservation} rooms={rooms} />

@@ -20,7 +20,7 @@ const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 
 // Protected
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const ReserveRoom = lazy(() => import('./pages/ReserveRoom'));
+const Reservation = lazy(() => import('./pages/Reservation'));
 const Wallet = lazy(() => import('./pages/Wallet'));
 const Setting = lazy(() => import('./pages/Setting'));
 const Support = lazy(() => import('./pages/Support'));
@@ -29,6 +29,8 @@ const LoginEmail = lazy(() => import('./features/authentication/LoginEmail'));
 const LoginVerifyOTP = lazy(() => import('./features/authentication/LoginVerifyOTP'));
 const UserInfo = lazy(() => import('./features/setting/UserInfo'));
 const PasswordChange = lazy(() => import('./features/setting/PasswordChange'));
+const ReserveRoom = lazy(() => import('./features/reserve/ReserveRoom'));
+const MyReservations = lazy(() => import('./features/reserve/MyReservations'));
 
 const queryClient = new QueryClient();
 
@@ -53,7 +55,11 @@ function App() {
               }
             >
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="reserve" element={<ReserveRoom />} />
+              <Route path="reserve" element={<Reservation />}>
+                <Route index element={<Navigate to="reserve-room" />} />
+                <Route path="reserve-room" element={<ReserveRoom />} />
+                <Route path="my-reservations" element={<MyReservations />} />
+              </Route>
               <Route path="wallet" element={<Wallet />} />
               {/* TODO #5: add new route: resume */}
               <Route path="setting" element={<Setting />}>

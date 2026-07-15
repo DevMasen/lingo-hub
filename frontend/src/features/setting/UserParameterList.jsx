@@ -1,57 +1,32 @@
-import { useContext, useEffect, useRef } from 'react';
-import { useSearchParams } from 'react-router';
-import { addDays, endOfDay, isEqual } from 'date-fns';
 import { en2fa } from 'num2persian';
 
 import { useSession } from '../authentication/useSession';
 import { useProfile } from './useProfile';
+import { useReserveRemainCount } from '../../hooks/useReserveRemainCount';
 
-import UserParameter, { UserParameterContext } from './UserParameter';
-import UserReserveList from './UserReserveList';
+import UserParameter from './UserParameter';
 import Skeleton from '../../ui/Skeleton';
 import Error from '../../ui/Error';
-
-import { toPersianDate } from '../../utils/toPersianDate';
-import { useUserReservations } from './useUserReservations';
 //---
 
 const listItemStyles = 'flex gap-3';
 const skeletonStyles = 'h-10 w-40';
-const tomorrow = addDays(new Date(), 1);
-const persianTomorrow = toPersianDate(tomorrow);
 
 function UserParameterList() {
-  const [query] = useSearchParams();
-  const { setValueBgColor } = useContext(UserParameterContext);
-
   //! React Query
   const { email } = useSession();
   const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();
+
+  //! Custom Hooks
   const {
-    userReservations,
-    isLoading: isLoadingUserReservations,
-    error: userReservationsError,
-  } = useUserReservations();
-
-  const isLoading = isLoadingProfile || isLoadingUserReservations;
-  const error = profileError || userReservationsError;
-
-  //! Local Elements Ref
-  const reserveRemainRef = useRef(null);
+    reserveRemainCount,
+    isLoading: isLoadingReserveRemainCount,
+    error: reserveRemainCountError,
+  } = useReserveRemainCount();
 
   //! Derived States
-  const userReservationCountForTomorrow = userReservations
-    ?.filter((reservation) =>
-      isEqual(endOfDay(new Date(reservation.reservationDate)), endOfDay(tomorrow))
-    )
-    ?.reduce(
-      (acc, reservation) =>
-        reservation.status === 'reserved' || reservation.status === 'waiting' ? acc + 1 : acc,
-      0
-    );
-  const reserveRemainCount =
-    Number(profile?.maxReserveCount ?? 3) - userReservationCountForTomorrow;
-
+  const isLoading = isLoadingProfile || isLoadingReserveRemainCount;
+  const error = profileError || reserveRemainCountError;
   const statusBGColor =
     profile?.signupStatus === 'pending'
       ? 'bg-yellow-500/65'
@@ -69,20 +44,6 @@ function UserParameterList() {
           ? 'مسدود شده'
           : '';
 
-  //! Effects
-  useEffect(
-    function () {
-      if (query.get('reserveCountLimit') === null) return;
-      const scrollPosition = reserveRemainRef.current.getBoundingClientRect().top;
-      window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-      setValueBgColor('bg-[var(--color-slate-600)]');
-      setTimeout(function () {
-        setValueBgColor('bg-[var(--color-slate-700)]');
-      }, 1000);
-    },
-    [query, setValueBgColor]
-  );
-
   if (error)
     return (
       <div className="flex items-center justify-center">
@@ -92,7 +53,7 @@ function UserParameterList() {
 
   //! JSX
   return (
-    <ul className="mt-5 space-y-7 text-lg">
+    <ul className="space-y-7 py-4 text-lg">
       <li className={`${listItemStyles} items-center`}>
         <UserParameter.Label> شماره تلفن : </UserParameter.Label>
         {isLoading ? (
@@ -138,16 +99,8 @@ function UserParameterList() {
         {isLoading ? (
           <Skeleton className={skeletonStyles} />
         ) : (
-          <UserParameter.Value hasShimmerEffect={true}>
-            {en2fa(reserveRemainCount)}
-          </UserParameter.Value>
+          <UserParameter.Value>{en2fa(reserveRemainCount)}</UserParameter.Value>
         )}
-      </li>
-      <li className={`${listItemStyles} flex-col`}>
-        <UserParameter.Label>
-          اتاق های رزرو شده برای فردا {`(${persianTomorrow.replaceAll('-', '/')})`} :
-        </UserParameter.Label>
-        <UserReserveList />
       </li>
     </ul>
   );

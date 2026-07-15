@@ -3,13 +3,13 @@ import { useSearchParams } from 'react-router';
 import { format, addDays } from 'date-fns';
 
 import { useUserReservations } from './useUserReservations';
+import { useRooms } from './useRooms';
 
-import ReserveRecord from '../../features/reserve/ReserveRecord';
-import ReserveNotFound from '../reserve/ReserveNotFound';
+import ReserveRecord from './ReserveRecord';
+import ReserveNotFound from './ReserveNotFound';
+import ReserveSubmit from './ReserveSubmit';
 import Skeleton from '../../ui/Skeleton';
 import Error from '../../ui/Error';
-import ReserveSubmit from './ReserveSubmit';
-import { useRooms } from '../reserve/useRooms';
 //---
 
 function UserReserveList() {
@@ -56,7 +56,10 @@ function UserReserveList() {
   );
 
   return (
-    <ul ref={reserveListRef} className="space-y-3">
+    <ul
+      ref={reserveListRef}
+      className="space-y-3 rounded-xl bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] p-3"
+    >
       {isLoading ? (
         <Skeleton className="h-28 w-full rounded-xl" />
       ) : error ? (
@@ -65,7 +68,10 @@ function UserReserveList() {
         <ReserveNotFound>رزروی برای فردا وجود ندارد</ReserveNotFound>
       ) : (
         userTomorrowReservations?.map((reservation, i) => (
-          <li className="flex flex-col gap-3 md:flex-row" key={reservation.id}>
+          <li
+            className={`flex flex-col gap-3 rounded-xl bg-[var(--color-slate-800)] lg:flex-row lg:bg-transparent ${reservation.status === 'waiting' && 'pb-2 lg:pb-0'}`}
+            key={reservation.id}
+          >
             <ReserveRecord
               focusReserveId={focusReserveId}
               number={i + 1}

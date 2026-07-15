@@ -62,14 +62,18 @@ function ProfileBox() {
       )}
       <ul className="mt-3 space-y-3 text-start">
         <li>
-          <LinkItem to={'/setting'} onClick={toggleProfile} className={linkItemStyles}>
+          <LinkItem
+            to={'/setting/user?activeTab=0'}
+            onClick={toggleProfile}
+            className={linkItemStyles}
+          >
             <HiOutlineUserCircle className="h-[1.25rem] w-[1.25rem] text-[var(--color-slate-500)]" />
             <span> پروفایل </span>
           </LinkItem>
         </li>
         <li>
           <LinkItem
-            to={'/setting/change-password'}
+            to={'/setting/change-password?activeTab=1'}
             onClick={toggleProfile}
             className={linkItemStyles}
           >

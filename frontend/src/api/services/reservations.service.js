@@ -45,7 +45,8 @@ export async function getReservationsForRoomOnDate(roomId, date) {
     .from('reservations')
     .select('*')
     .eq('room_id', roomId)
-    .eq('reservation_date', date);
+    .eq('reservation_date', date)
+    .order('created_at', { ascending: false });
 
   if (error) throw fromSupabaseError(error);
 
