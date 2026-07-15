@@ -1,19 +1,28 @@
+import { en2fa } from 'num2persian';
 import mapToPersianMonth from '../../utils/mapToPersianMonth';
+import { toPersianDate } from '../../utils/toPersianDate';
 //---
 
 function NewsItem({ newsItem }) {
+  const dateTimeParts = newsItem.publishedAt.split('T');
+  const formattedPersianPublishedAtDate = toPersianDate(new Date(dateTimeParts.at(0)));
+  const timeParts = en2fa(dateTimeParts.at(1).split('+').at(0)).split(':');
+  const dateParts = formattedPersianPublishedAtDate.split('-');
+
   return (
-    <li className="flex flex-col gap-2 rounded-lg bg-slate-700/70 p-3">
-      <h4 className="font-semibold">{newsItem.label}</h4>
+    <li className="flex flex-col gap-2 rounded-lg bg-[var(--color-slate-700)] p-3">
+      <h4 className="font-semibold text-[var(--color-slate-200)]">{newsItem.label}</h4>
       <p className="pr-2 text-[var(--color-slate-300)]">{newsItem.body}</p>
-      <div className="flex justify-between border-t border-[var(--color-indigo-200)] pt-2 text-sm text-[var(--color-indigo-200)]">
+      <div className="flex justify-between border-t border-[var(--color-indigo-400)] pt-2 text-sm">
         <div>
-          <span>{newsItem.time}</span>
+          <span>
+            {timeParts.at(0)}:{timeParts.at(1)}
+          </span>
         </div>
         <div className="flex gap-1">
-          <span>{newsItem.date.slice(6, 8)}</span>
-          <span>{mapToPersianMonth(newsItem.date.slice(4, 6))}</span>
-          <span>{newsItem.date.slice(0, 4)}</span>
+          <span>{dateParts.at(2)}</span>
+          <span>{mapToPersianMonth(dateParts.at(1))}</span>
+          <span>{dateParts.at(0)}</span>
         </div>
       </div>
     </li>

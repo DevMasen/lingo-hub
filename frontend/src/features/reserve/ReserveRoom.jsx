@@ -33,7 +33,7 @@ function ReserveRoom() {
 
   //!JSX
   return (
-    <div className="overflow-x-auto overflow-y-hidden p-5">
+    <div className="scrollbar overflow-x-auto overflow-y-auto p-5">
       <div className="text-xl">
         <span className="font-semibold text-[var(--color-slate-300)]">رزرو اتاق برای تاریخ : </span>
         <span className="rounded-lg bg-[var(--color-slate-800)] px-3 py-1">

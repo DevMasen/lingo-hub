@@ -17,8 +17,6 @@ function Dashboard() {
   const { profile, isLoading, error } = useProfile();
 
   //TODO #4: render reserve history and news with real data.
-  //! Fake Data
-  const news = [];
   const userReservedRooms = [];
 
   //! JSX
@@ -43,14 +41,13 @@ function Dashboard() {
         )}
         <div>
           <ReserveHistory
-            className={`${sectionPartsStyles} grid max-h-[20rem] min-h-[12rem] grid-cols-1 grid-rows-[auto_1fr] space-y-4 overflow-auto`}
+            className={`${sectionPartsStyles} scrollbar grid max-h-[20rem] min-h-[12rem] grid-cols-1 grid-rows-[auto_1fr] space-y-4 overflow-auto`}
             userReservedRooms={userReservedRooms}
           />
         </div>
         <div>
           <News
-            news={news}
-            className={`${sectionPartsStyles} grid max-h-[20rem] min-h-[12rem] grid-cols-1 grid-rows-[auto_1fr] space-y-4 overflow-auto`}
+            className={`${sectionPartsStyles} scrollbar grid max-h-[20rem] min-h-[12rem] grid-cols-1 grid-rows-[auto_1fr] space-y-4 overflow-auto`}
           />
         </div>
       </section>
