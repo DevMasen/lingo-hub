@@ -31,7 +31,7 @@ function UserReserveList() {
   );
 
   //! React Router
-  const [query] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   //! Local States
   const [focusReserveId, setFocusReserveId] = useState(null);
@@ -42,9 +42,9 @@ function UserReserveList() {
   //! Effects
   useEffect(
     function () {
-      setFocusReserveId(query.get('reservationId'));
+      setFocusReserveId(searchParams.get('reservationId'));
     },
-    [query]
+    [searchParams]
   );
   useEffect(
     function () {

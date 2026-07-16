@@ -13,6 +13,7 @@ import Error from '../../ui/Error';
 
 import { toPersianDate } from '../../utils/toPersianDate';
 import mapTime from '../../utils/mapTime';
+import { useSearchParams } from 'react-router';
 //---
 
 const valueStyles = 'rounded-xl bg-[var(--color-slate-700)] px-3 py-1';
@@ -30,6 +31,7 @@ function ConfirmPayment({ onCloseModal, reservation, rooms }) {
   const totalPrice = reservePricePerHalfHour * 3;
   const userCreditBalance = Number(profile?.creditBalance ?? '0');
   const { startTime, stopTime } = mapTime(reservation?.timePart);
+  const [, setSearchParams] = useSearchParams();
 
   function handlePayWithWallet() {
     if (userCreditBalance < totalPrice) {
@@ -45,6 +47,7 @@ function ConfirmPayment({ onCloseModal, reservation, rooms }) {
           submitReservation(reservation.id);
         },
         onSettled: () => {
+          setSearchParams({ reservationId: null });
           onCloseModal?.();
         },
       }

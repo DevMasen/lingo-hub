@@ -20,6 +20,8 @@ function ReserveRecord({
   //! Local States
   const [recordBGColor, setRecordBGColor] = useState('bg-[var(--color-slate-700)]');
 
+  console.log(focusReserveId, reservationId);
+
   //! Derived States
   const { startTime, stopTime } = mapTime(timePart);
 
@@ -30,11 +32,11 @@ function ReserveRecord({
   //! Effects
   useEffect(
     function () {
-      if (focusReserveId === null || focusReserveId !== reservationId) return;
+      if (focusReserveId === null || focusReserveId !== `${reservationId}`) return;
       setRecordBGColor('bg-[var(--color-slate-500)]');
       setTimeout(function () {
         setRecordBGColor('bg-[var(--color-slate-700)]');
-      }, 700);
+      }, 1000);
     },
     [focusReserveId, reservationId]
   );
@@ -42,7 +44,7 @@ function ReserveRecord({
   //! JSX
   return (
     <div
-      className={`flex flex-grow justify-between gap-4 rounded-xl text-sm sm:text-base ${recordBGColor} bg-opacity-70 p-3 transition-colors duration-300 ${className}`}
+      className={`flex flex-grow justify-between gap-4 rounded-xl bg-opacity-70 p-3 text-sm transition-colors duration-300 sm:text-base ${recordBGColor} ${className}`}
     >
       <div className="flex gap-6">
         <span>

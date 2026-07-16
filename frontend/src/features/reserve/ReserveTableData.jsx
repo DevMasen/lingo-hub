@@ -1,17 +1,21 @@
-import { useSearchParams } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 //---
 //! Global Styles
 const publicStyles =
   'text-slate-200  border-b border-[var(--color-slate-800)] transition-all duration-200';
 
 function ReserveTableData({ timePartIndex, userId, roomId, roomName, reservations, onOpenModal }) {
+  const navigate = useNavigate();
   const [, setSearchParams] = useSearchParams();
 
   const tableDataStatus = reservations?.find((res) => res.timePart === timePartIndex)?.status;
   const tableDataUserId = reservations?.find((res) => res.timePart === timePartIndex)?.userId;
+  const tableDataReservationId = reservations?.find((res) => res.timePart === timePartIndex)?.id;
 
   //! Handlers
-  function handleClickReserved() {}
+  function handleClickReserved() {
+    navigate(`/reserve/my-reservations?activeTab=1&reservationId=${tableDataReservationId}`);
+  }
 
   //! JSX
   if (
