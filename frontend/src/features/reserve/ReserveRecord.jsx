@@ -12,8 +12,8 @@ function ReserveRecord({
   reservationId = null,
   rooms = [],
   roomId = null,
-  date = null,
-  timePart = null,
+  date = null, //Date Object of js
+  timePart = null, //0-9
   status = '', // reserved/canceled/waiting
   className = '',
 }) {
@@ -67,9 +67,21 @@ function ReserveRecord({
         </span>
       </div>
       <span className="whitespace-nowrap">
-        {status === 'waiting' && 'در انتظار پرداخت ⌛'}
-        {status === 'reserved' && 'رزرو شد ✅'}
-        {status === 'canceled' && 'لغو شد ❌'}
+        {status === 'waiting' && (
+          <>
+            <span className="hidden sm:inline"> در انتظار پرداخت </span> <span>⌛</span>
+          </>
+        )}
+        {status === 'reserved' && (
+          <>
+            <span className="hidden sm:inline"> رزرو شد </span> <span>✅</span>
+          </>
+        )}
+        {status === 'canceled' && (
+          <>
+            <span className="hidden sm:inline"> لغو شد</span> <span> ❌</span>
+          </>
+        )}
       </span>
     </div>
   );
