@@ -1,12 +1,11 @@
 import { Outlet } from 'react-router';
-
 import { CgEnter } from 'react-icons/cg';
-
 import CloseFormButton from '../ui/CloseFormButton';
 import HeroBackground from '../ui/HeroBackground';
 //---
 
 function Login() {
+  //! Main JSX
   return (
     <HeroBackground
       src={'/home-bg.png'}

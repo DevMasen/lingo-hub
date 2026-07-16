@@ -1,8 +1,6 @@
 import { useForm } from 'react-hook-form';
-
-import { useProfile } from '../setting/useProfile';
 import { useUpdateProfile } from './useUpdateProfile';
-
+import { useProfile } from '../setting/useProfile';
 import FileUploader from '../../ui/FileUploader';
 import PanelButton from '../../ui/PanelButton';
 import Spinner from '../../ui/Spinner';
@@ -10,17 +8,18 @@ import SpinnerMini from '../../ui/SpinnerMini';
 import Error from '../../ui/Error';
 //---
 
+//! Global Const Variables
 const errorContainerStyles =
   'border-[var(--color-red-700)] focus-within:border-[var(--color-red-700)]';
 const inputStyles =
   'bg-inherit text-[var(--color-slate-200)] outline-none w-52 sm:w-80 md:w-96 disabled:cursor-not-allowed';
 
 function UpdateAvatarForm({ onCloseModal }) {
+  //! React Query
   const { profile, isLoading, error } = useProfile();
   const { updateProfile, isUpdatingProfile } = useUpdateProfile();
 
-  const inputContainerStyles = `flex w-fit items-center rounded-lg border px-3 py-2 border-[var(--color-slate-500)] transition-all duration-300 focus-within:border-[var(--color-indigo-700)] ${isUpdatingProfile && 'opacity-50'}`;
-
+  //! React Hook Form
   const {
     register,
     handleSubmit,
@@ -33,6 +32,10 @@ function UpdateAvatarForm({ onCloseModal }) {
     },
   });
 
+  //! Derived States
+  const inputContainerStyles = `flex w-fit items-center rounded-lg border px-3 py-2 border-[var(--color-slate-500)] transition-all duration-300 focus-within:border-[var(--color-indigo-700)] ${isUpdatingProfile && 'opacity-50'}`;
+
+  //! Handlers
   function onSuccess({ firstName, lastName, avatar }) {
     if (isLoading || error || !firstName || !lastName) return;
     const newProfile = {
@@ -46,18 +49,17 @@ function UpdateAvatarForm({ onCloseModal }) {
       resumeFile: null,
     });
   }
-
   function onError(errors) {
     console.error(errors);
   }
 
+  //! Conditional JSX
   if (isLoading)
     return (
       <div className="flex items-center justify-center">
         <Spinner />
       </div>
     );
-
   if (error)
     return (
       <div className="flex items-center justify-center">
@@ -65,6 +67,7 @@ function UpdateAvatarForm({ onCloseModal }) {
       </div>
     );
 
+  //! Main JSX
   return (
     <form className="space-y-5" onSubmit={handleSubmit(onSuccess, onError)}>
       <div className="space-y-4">

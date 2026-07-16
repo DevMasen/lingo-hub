@@ -1,12 +1,9 @@
 import { BiSolidPencil, BiUserCircle } from 'react-icons/bi';
-
 import { useProfile } from '../setting/useProfile';
-
 import UpdateAvatarForm from './UpdateAvatarForm';
 import Avatar from './Avatar';
 import UserName from './UserName';
 import SettingButton from './SettingButton';
-
 import Skeleton from '../../ui/Skeleton';
 import Modal from '../../ui/Modal';
 import Image from '../../ui/Image';
@@ -16,9 +13,7 @@ function UserInfoHeader() {
   //! React Query
   const { profile, isLoading, error } = useProfile();
 
-  // console.log(profile?.avatarUrl);
-
-  //! JSX
+  //! Main JSX
   return (
     <div className="flex items-center justify-between gap-5 rounded-2xl bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] px-5 py-2">
       <div className="flex items-center gap-5">

@@ -2,6 +2,7 @@ import HomeButton from './HomeButton';
 //---
 
 function Main() {
+  //! Main JSX
   return (
     <main className="flex flex-col items-center justify-center text-center">
       <section className="mt-28 px-5 text-slate-200">

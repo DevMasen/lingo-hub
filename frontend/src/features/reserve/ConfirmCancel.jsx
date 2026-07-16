@@ -1,10 +1,13 @@
 import { en2fa } from 'num2persian';
-import PanelButton from '../../ui/PanelButton';
 import { useCancelReservation } from './useCancelReservation';
+import PanelButton from '../../ui/PanelButton';
 //---
 
 function ConfirmCancel({ onCloseModal, reservationId = '0' }) {
+  //! React Query
   const { cancelReservation, isCancelingReservation } = useCancelReservation();
+
+  //! Main JSX
   return (
     <div className="space-y-8">
       <h2 className="text-xl text-[var(--color-slate-200)] sm:text-2xl">

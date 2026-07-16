@@ -2,6 +2,7 @@ import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 //---
 
 function HidePasswordButton({ isPassHidden, onPassHidden }) {
+  //! Main JSX
   return (
     <div className="flex w-16 items-center justify-center gap-2 pl-2 pr-5 pt-1 text-slate-800">
       <span className="w-full cursor-pointer" onClick={onPassHidden}>

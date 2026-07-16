@@ -1,13 +1,12 @@
-import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-
+import { useMutation } from '@tanstack/react-query';
 import { useLogout } from '../authentication/useLogout';
 import { changePassword as changePasswordApi } from '../../api/services/auth.service';
-
 import { getErrorMessage } from '../../utils/getErrorMessage';
 //---
 
 export function useChangePassword() {
+  //! React Query
   const { logout } = useLogout();
   const { mutate: changePassword, isPending: isChangingPassword } = useMutation({
     mutationFn: ({ newPassword, currentPassword }) =>

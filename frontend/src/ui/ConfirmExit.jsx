@@ -1,17 +1,21 @@
 import { useNavigate } from 'react-router';
-
 import { useLogout } from '../features/authentication/useLogout';
-
+import { useHeader } from '../features/header/HeaderContext';
 import SpinnerMini from './SpinnerMini';
 import PanelButton from './PanelButton';
-import { useHeader } from '../features/header/HeaderContext';
 //---
 
 function ConfirmExit({ onCloseModal }) {
+  //! React Router
   const navigate = useNavigate();
+
+  //! React Query
   const { logout, isLoggingOut } = useLogout();
+
+  //! Context
   const { isProfileOpen, toggleProfile } = useHeader();
 
+  //! Main JSX
   return (
     <div className="flex flex-col justify-between gap-10 text-center">
       <h1 className="text-xl font-semibold text-[var(--color-slate-300)]">

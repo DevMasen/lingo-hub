@@ -2,8 +2,10 @@ import { useState } from 'react';
 //---
 
 function Image({ src, placeholderSrc, alt, ...props }) {
+  //! Local States
   const [loaded, setLoaded] = useState(false);
 
+  //! Main JSX
   return (
     <div
       style={{ position: 'relative', overflow: 'hidden', zIndex: '40' }}

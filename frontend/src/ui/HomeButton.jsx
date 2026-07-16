@@ -10,11 +10,12 @@ function HomeButton({
   disabled,
   ref,
 }) {
+  //! Derived States
   const hasBackground = className?.includes('bg-');
   const hasHoverTranslate = className?.includes('hover:translate-');
   const hasShadow = className?.includes('shadow-');
 
-  //! JSX
+  //! Conditional JSX
   if (type === 'submit')
     return (
       <button
@@ -28,6 +29,7 @@ function HomeButton({
       </button>
     );
 
+  //! Main JSX
   return (
     <Link
       onClick={onClick}

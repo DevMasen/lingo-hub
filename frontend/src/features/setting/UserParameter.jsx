@@ -1,37 +1,22 @@
-import { createContext, useContext, useState } from 'react';
 import { BiSolidPencil } from 'react-icons/bi';
-
 import SettingButton from './SettingButton';
 //---
 
-export const UserParameterContext = createContext();
-
 function UserParameter({ children }) {
-  const [valueBgColor, setValueBgColor] = useState('bg-[var(--color-slate-700)]');
-
-  return (
-    <UserParameterContext.Provider value={{ valueBgColor, setValueBgColor }}>
-      {children}
-    </UserParameterContext.Provider>
-  );
+  return children;
 }
-
 function Label({ children }) {
   return <div>{children}</div>;
 }
-
-function Value({ children, bgColor = 'bg-[var(--color-slate-700)]', hasShimmerEffect = false }) {
-  const { valueBgColor } = useContext(UserParameterContext);
-
+function Value({ children, bgColor = 'bg-[var(--color-slate-700)]' }) {
   return (
     <span
-      className={`rounded-xl px-4 py-2 text-sm transition-colors duration-200 sm:text-base ${hasShimmerEffect ? valueBgColor : bgColor}`}
+      className={`rounded-xl px-4 py-2 text-sm transition-colors duration-200 sm:text-base ${bgColor}`}
     >
       {children}
     </span>
   );
 }
-
 function UpdateButton({ onClick }) {
   return (
     <SettingButton onClick={onClick}>
@@ -39,7 +24,6 @@ function UpdateButton({ onClick }) {
     </SettingButton>
   );
 }
-
 UserParameter.Label = Label;
 UserParameter.Value = Value;
 UserParameter.UpdateButton = UpdateButton;

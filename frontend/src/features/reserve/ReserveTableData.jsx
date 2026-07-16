@@ -1,28 +1,42 @@
-import { useNavigate } from 'react-router';
-
+import { useNavigate, useSearchParams } from 'react-router';
 //---
-
-//! Global Styles
+//! Global Const Variables
 const publicStyles =
-  'text-slate-200 rounded-xl border-b border-[var(--color-slate-800)] transition-all duration-200';
+  'text-slate-200  border-b border-[var(--color-slate-800)] transition-all duration-200';
 
-function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate, userId }) {
+function ReserveTableData({
+  timePartIndex = 0,
+  userId = '',
+  roomId = 0,
+  roomName = '',
+  reservations = [],
+  onOpenModal = () => {},
+}) {
   //! React Router
   const navigate = useNavigate();
+  const [, setSearchParams] = useSearchParams();
+
+  //! Derived States
+  const tableDataStatus = reservations?.find((res) => res.timePart === timePartIndex)?.status;
+  const tableDataUserId = reservations?.find((res) => res.timePart === timePartIndex)?.userId;
+  const tableDataReservationId = reservations?.find((res) => res.timePart === timePartIndex)?.id;
 
   //! Handlers
   function handleClickReserved() {
-    const query = `?roomName=${roomData.roomName}&timePart=${timePartIndex}&status=${timePartStatus?.at(1)}`;
-    navigate(`/setting/user${query}`);
+    navigate(`/reserve/my-reservations?activeTab=1&reservationId=${tableDataReservationId}`);
   }
 
-  //! JSX
-  if (timePartStatus === null || timePartStatus?.at(1) === 'canceled')
+  //! Conditional JSX
+  if (
+    tableDataStatus === undefined ||
+    tableDataUserId === undefined ||
+    tableDataStatus === 'canceled'
+  )
     return (
       <td
         onClick={() => {
-          // toggleConfirmWindow();
-          navigate(`/reserve?roomName=${roomData.roomName}&timePart=${timePartIndex}`);
+          setSearchParams({ roomId, roomName, timePart: timePartIndex });
+          onOpenModal?.();
         }}
         className={
           publicStyles +
@@ -32,7 +46,7 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
         <span>رزرو</span>
       </td>
     );
-  if (timePartStatus?.at(0) === userId && timePartStatus?.at(1) === 'reserved')
+  if (tableDataUserId === userId && tableDataStatus === 'reserved')
     return (
       <td
         onClick={handleClickReserved}
@@ -44,35 +58,25 @@ function ReserveTableData({ timePartIndex, timePartStatus, roomData, reserveDate
         <span> رزرو شد ✅</span>
       </td>
     );
-  if (timePartStatus?.at(0) === userId && timePartStatus?.at(1) === 'waiting')
+  if (tableDataUserId === userId && tableDataStatus === 'waiting')
     return (
       <td
         onClick={handleClickReserved}
-        className={
-          publicStyles +
-          ' cursor-pointer bg-[var(--color-yellow-600)] text-[var(--color-yellow-100)] hover:bg-[var(--color-yellow-500)]'
-        }
+        className={publicStyles + ' cursor-pointer bg-cyan-600 text-slate-200 hover:bg-cyan-500'}
       >
         <span> در انتظار پرداخت⏳ </span>
       </td>
     );
-  if (timePartStatus === 'untouchable')
+  if (tableDataUserId === null && tableDataStatus === 'out_of_service')
     return (
-      <td
-        className={
-          publicStyles +
-          ' cursor-not-allowed bg-[var(--color-gray-900)] text-[var(--color-gray-400)]'
-        }
-      >
+      <td className={publicStyles + ' cursor-not-allowed bg-slate-900 text-slate-500'}>
         <span> خارج از سرویس </span>
       </td>
     );
+
+  //! Main JSX
   return (
-    <td
-      className={
-        publicStyles + ' cursor-not-allowed bg-[var(--color-red-600)] text-[var(--color-red-100)]'
-      }
-    >
+    <td className={publicStyles + ' cursor-not-allowed bg-rose-600 text-[var(--color-red-100)]'}>
       <span> رزرو شده </span>
     </td>
   );

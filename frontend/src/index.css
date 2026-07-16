@@ -24,6 +24,8 @@
   --color-indigo-900: #312e81;
   --color-indigo-950: #312e81;
 
+  --tab-overlay-right: 0rem;
+
   &,
   &.dark-mode {
     --color-slate-50: #f8fafc;
@@ -150,6 +152,19 @@
 }
 
 @layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-400;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
+
   @keyframes shimmer {
     100% {
       transform: translateX(100%);

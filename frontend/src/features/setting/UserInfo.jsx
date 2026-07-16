@@ -4,7 +4,7 @@ import UserParameterList from './UserParameterList';
 //---
 
 function UserInfo() {
-  //! JSX
+  //! Main JSX
   return (
     <div className="space-y-5 border-b border-[var(--color-slate-500)] p-3">
       <UserInfoHeader />

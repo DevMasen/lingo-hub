@@ -1,18 +1,17 @@
+import { HiOutlineMenu } from 'react-icons/hi';
 import { useHeader } from './HeaderContext';
-
+import { useSidebar } from '../sidebar/SidebarContext';
 import SearchBar from './SearchBar';
 import HeaderOverlay from './HeaderOverlay';
 import LeftHeader from './LeftHeader';
-import { HiOutlineMenu } from 'react-icons/hi';
-import { useSidebar } from '../sidebar/SidebarContext';
 //---
 
 function Header() {
-  //! Context Data
+  //! Context
   const { isNotificationOpen, isProfileOpen } = useHeader();
   const { toggleSidebar } = useSidebar();
 
-  //! JSX
+  //! Main JSX
   return (
     <header className="flex items-center justify-between border-b border-[var(--color-slate-500)] px-4 py-4 sm:px-8">
       {(isNotificationOpen || isProfileOpen) && <HeaderOverlay />}

@@ -2,28 +2,27 @@ import { HiOutlineBookOpen } from 'react-icons/hi';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { AiOutlineSetting } from 'react-icons/ai';
 import { BiExit, BiWallet } from 'react-icons/bi';
-
 import { useSidebar } from './SidebarContext';
-
 import NavItem from './NavItem';
-
+import ExitNavItem from './ExitNavItem';
 import Modal from '../../ui/Modal';
 import ConfirmExit from '../../ui/ConfirmExit';
-import ExitNavItem from './ExitNavItem';
 //---
 
+//! Global Const Variables
 const navItemStyles =
   'flex items-center gap-3 p-2 font-semibold text-[var(--color-slate-300)] transition-all duration-300';
 
 function NavList() {
-  //! Context Data
+  //! Context
   const { isSidebarOpen, toggleSidebar } = useSidebar();
 
+  //! Handlers
   function handleToggleSidebar(isOpen) {
     if (isOpen) toggleSidebar();
   }
 
-  //!JSX
+  //! Main JSX
   return (
     <ul className="my-3 flex w-full flex-col justify-between gap-3">
       <section className="space-y-3 px-3">

@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router';
-
 import Image from './Image';
 //---
 
 function Logo() {
+  //! Main JSX
   return (
     <div>
       <NavLink to="/" className="flex items-center justify-center gap-3">

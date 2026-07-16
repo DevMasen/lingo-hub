@@ -1,31 +1,30 @@
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
-
 import { useSession } from '../authentication/useSession';
 import { useProfile } from '../setting/useProfile';
-
 import { useHeader } from './HeaderContext';
-
+import ExitButton from './ExitButton';
 import Modal from '../../ui/Modal';
 import ConfirmExit from '../../ui/ConfirmExit';
 import LinkItem from '../../ui/LinkItem';
 import Skeleton from '../../ui/Skeleton';
-import ExitButton from './ExitButton';
 import Image from '../../ui/Image';
 //---
 
+//! Global Const Variables
 const linkItemStyles =
   'flex items-center gap-2 rounded-lg p-3 transition-all duration-300 hover:bg-[var(--color-slate-800)]';
 
 function ProfileBox() {
-  //! Context Data
-  const { toggleProfile } = useHeader();
-
+  //! React Query
   const { email, isLoading: isLoadingSession, error: sessionError } = useSession();
   const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();
 
-  //!JSX
+  //! Context
+  const { toggleProfile } = useHeader();
+
+  //! Main JSX
   return (
     <>
       {!sessionError && !profileError && (
@@ -62,14 +61,18 @@ function ProfileBox() {
       )}
       <ul className="mt-3 space-y-3 text-start">
         <li>
-          <LinkItem to={'/setting'} onClick={toggleProfile} className={linkItemStyles}>
+          <LinkItem
+            to={'/setting/user?activeTab=0'}
+            onClick={toggleProfile}
+            className={linkItemStyles}
+          >
             <HiOutlineUserCircle className="h-[1.25rem] w-[1.25rem] text-[var(--color-slate-500)]" />
             <span> پروفایل </span>
           </LinkItem>
         </li>
         <li>
           <LinkItem
-            to={'/setting/change-password'}
+            to={'/setting/change-password?activeTab=1'}
             onClick={toggleProfile}
             className={linkItemStyles}
           >

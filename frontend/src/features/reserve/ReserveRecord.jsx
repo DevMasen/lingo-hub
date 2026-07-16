@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { en2fa } from 'num2persian';
-
 import mapToPersianMonth from '../../utils/mapToPersianMonth';
 import mapTime from '../../utils/mapTime';
 import { toPersianDate } from '../../utils/toPersianDate';
@@ -12,8 +11,8 @@ function ReserveRecord({
   reservationId = null,
   rooms = [],
   roomId = null,
-  date = null,
-  timePart = null,
+  date = null, //Date Object of js
+  timePart = null, //0-9
   status = '', // reserved/canceled/waiting
   className = '',
 }) {
@@ -22,27 +21,25 @@ function ReserveRecord({
 
   //! Derived States
   const { startTime, stopTime } = mapTime(timePart);
-
   const persianDate = date ? toPersianDate(date) : null;
-
   const roomName = rooms?.find((room) => room.id === roomId)?.roomName;
 
   //! Effects
   useEffect(
     function () {
-      if (focusReserveId === null || focusReserveId !== reservationId) return;
+      if (focusReserveId === null || focusReserveId !== `${reservationId}`) return;
       setRecordBGColor('bg-[var(--color-slate-500)]');
       setTimeout(function () {
         setRecordBGColor('bg-[var(--color-slate-700)]');
-      }, 700);
+      }, 1000);
     },
     [focusReserveId, reservationId]
   );
 
-  //! JSX
+  //! Main JSX
   return (
     <div
-      className={`flex flex-grow justify-between gap-4 rounded-xl text-sm sm:text-base ${recordBGColor} bg-opacity-70 p-3 transition-colors duration-300 ${className}`}
+      className={`flex flex-grow justify-between gap-4 rounded-xl bg-opacity-70 p-3 text-sm transition-colors duration-300 sm:text-base ${recordBGColor} ${className}`}
     >
       <div className="flex gap-6">
         <span>
@@ -67,9 +64,21 @@ function ReserveRecord({
         </span>
       </div>
       <span className="whitespace-nowrap">
-        {status === 'waiting' && 'در انتظار پرداخت ⌛'}
-        {status === 'reserved' && 'رزرو شد ✅'}
-        {status === 'canceled' && 'لغو شد ❌'}
+        {status === 'waiting' && (
+          <>
+            <span className="hidden sm:inline"> در انتظار پرداخت </span> <span>⌛</span>
+          </>
+        )}
+        {status === 'reserved' && (
+          <>
+            <span className="hidden sm:inline"> رزرو شد </span> <span>✅</span>
+          </>
+        )}
+        {status === 'canceled' && (
+          <>
+            <span className="hidden sm:inline"> لغو شد</span> <span> ❌</span>
+          </>
+        )}
       </span>
     </div>
   );

@@ -1,12 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { adjustCreditBalance } from '../../api/services/profiles.service';
-
 import { getErrorMessage } from '../../utils/getErrorMessage';
 //---
 
 export function useUpdateBalance() {
+  //! React Query
   const queryClient = useQueryClient();
   const { mutate: updateUserBalance, isPending: isUpdatingUserBalance } = useMutation({
     mutationFn: ({ userId, delta }) => adjustCreditBalance(userId, delta),
@@ -20,5 +19,6 @@ export function useUpdateBalance() {
       toast.error(message);
     },
   });
+
   return { updateUserBalance, isUpdatingUserBalance };
 }

@@ -2,8 +2,10 @@ import { useImageLoaded } from '../hooks/useImageLoaded';
 //---
 
 function HeroBackground({ src, placeholderSrc, children }) {
+  //! Custom Hooks
   const loaded = useImageLoaded(src);
 
+  //! Main JSX
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }} className="h-dvh">
       <div

@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-
-import { getCurrentSession } from '../../api/services/auth.service';
 import { useError } from '../../hooks/useError';
+import { getCurrentSession } from '../../api/services/auth.service';
 //---
 
 export function useSession() {
+  //! React Query
   const {
     data: session,
     isLoading,
@@ -14,6 +14,7 @@ export function useSession() {
     queryFn: getCurrentSession,
   });
 
+  //! Custom Hooks
   useError(error);
 
   return {

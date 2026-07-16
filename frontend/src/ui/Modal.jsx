@@ -1,43 +1,54 @@
 import { cloneElement, createContext, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { HiXMark } from 'react-icons/hi2';
-
 import { useOutsideClick } from '../hooks/useOutsideClick';
 import { useLockScroll } from '../hooks/useLockScroll';
 //---
 
+//! Context
 const ModalContext = createContext();
 
 function Modal({ children }) {
+  //! Local States
   const [openName, setOpenName] = useState('');
 
+  //! Derived States
+  const isModalOpen = openName.length > 0;
+
+  //! Handlers
   const close = () => setOpenName('');
   const open = setOpenName;
 
-  const isModalOpen = openName.length > 0;
-
+  //! Custom Hooks
   useLockScroll(isModalOpen, 'modal');
 
+  //! Main JSX
   return (
     <ModalContext.Provider value={{ openName, open, close }}>{children}</ModalContext.Provider>
   );
 }
 
 function Open({ children, opens: openModalName }) {
+  //! Context
   const { open } = useContext(ModalContext);
 
+  //! Main JSX
   return cloneElement(children, {
     onOpenModal: () => open(openModalName),
   });
 }
 
 function Window({ children, name }) {
+  //! Context
   const { openName, close } = useContext(ModalContext);
 
+  //! Custom Hooks
   const ref = useOutsideClick(close);
 
+  //! Conditional JSX
   if (openName !== name) return null;
 
+  //! Main JSX
   return createPortal(
     <div className="fixed left-0 top-0 z-[1000] h-dvh w-full bg-slate-900/65 backdrop-blur-sm transition-all duration-500">
       <div
@@ -50,13 +61,16 @@ function Window({ children, name }) {
         >
           <HiXMark className="h-[2rem] w-[2rem]" />
         </button>
-        <div>{cloneElement(children, { onCloseModal: close })}</div>
+        <div>
+          {cloneElement(children, {
+            onCloseModal: close,
+          })}
+        </div>
       </div>
     </div>,
     document.body
   );
 }
-
 Modal.Open = Open;
 Modal.Window = Window;
 

@@ -2,7 +2,7 @@ import PanelButton from '../../ui/PanelButton';
 //---
 
 function DashboardHeader() {
-  //! JSX
+  //! Main JSX
   return (
     <div className="flex items-center justify-between border-b border-[var(--color-slate-500)] p-4">
       <span className="text-xl"> داشبورد </span>

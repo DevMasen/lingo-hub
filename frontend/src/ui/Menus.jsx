@@ -4,15 +4,19 @@ import { HiEllipsisVertical } from 'react-icons/hi2';
 import HomeButton from './HomeButton';
 //---
 
+//! Context
 const MenusContext = createContext();
 
 function Menus({ children }) {
+  //! Local States
   const [openId, setOpenId] = useState('');
   const [toggleElement, setToggleElement] = useState(null);
-  const close = () => setOpenId('');
 
+  //! Handlers
+  const close = () => setOpenId('');
   const open = setOpenId;
 
+  //! Main JSX
   return (
     <MenusContext.Provider
       value={{
@@ -29,8 +33,10 @@ function Menus({ children }) {
 }
 
 function Toggle({ id }) {
+  //! Context
   const { openId, close, open, setToggleElement } = useContext(MenusContext);
 
+  //! Handlers
   function handleToggle(e) {
     setToggleElement(e.currentTarget);
 
@@ -42,6 +48,7 @@ function Toggle({ id }) {
     open(`${id}`);
   }
 
+  //! Main JSX
   return (
     <HomeButton className="rounded-lg p-1" onClick={handleToggle}>
       <HiEllipsisVertical className="h-[2rem] w-[2rem] text-slate-200" />
@@ -50,9 +57,13 @@ function Toggle({ id }) {
 }
 
 function List({ children, id }) {
-  const { openId, close, toggleElement } = useContext(MenusContext);
+  //! Local States
   const ref = useRef(null);
 
+  //! Context
+  const { openId, close, toggleElement } = useContext(MenusContext);
+
+  //! Effects
   useEffect(() => {
     function handleClick(e) {
       if (toggleElement && toggleElement.contains(e.target)) return;
@@ -63,8 +74,10 @@ function List({ children, id }) {
     return () => document.removeEventListener('click', handleClick, true);
   }, [close, toggleElement]);
 
+  //! Conditional JSX
   if (openId !== `${id}`) return null;
 
+  //! Main JSX
   return createPortal(
     <ul
       className={`fixed left-8 top-[5.5rem] z-[100] rounded-md bg-slate-900/90 text-slate-200 shadow-md shadow-slate-500`}
@@ -77,12 +90,16 @@ function List({ children, id }) {
 }
 
 function Button({ children, icon, onClick }) {
+  //! Context
   const { close } = useContext(MenusContext);
+
+  //! Handlers
   function handleClick() {
     onClick?.();
     close();
   }
 
+  //! Main JSX
   return (
     <li>
       <button
@@ -96,6 +113,7 @@ function Button({ children, icon, onClick }) {
 }
 
 function Menu({ children }) {
+  //! Main JSX
   return <div className="flex items-center justify-end sm:hidden">{children}</div>;
 }
 

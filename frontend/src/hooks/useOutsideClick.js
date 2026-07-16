@@ -2,8 +2,10 @@ import { useEffect, useRef } from 'react';
 //---
 
 export function useOutsideClick(handler, listenCapturing = true) {
+  //! Local States
   const ref = useRef(null);
 
+  //! Effects
   useEffect(
     function () {
       function handleClick(e) {

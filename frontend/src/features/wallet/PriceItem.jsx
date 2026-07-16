@@ -2,10 +2,10 @@ import { useWallet } from './WalletContext';
 //---
 
 function PriceItem({ price }) {
-  //! Context Data
+  //! Context
   const { currentPrice, setCurrentPrice } = useWallet();
 
-  //! JSX
+  //! Main JSX
   return (
     <li
       className="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--color-indigo-500)] px-3 py-4 text-sm sm:text-base"

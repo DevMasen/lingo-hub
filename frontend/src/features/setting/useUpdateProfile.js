@@ -1,12 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateProfile as updateProfileApi } from '../../api/services/profiles.service';
-
 import { getErrorMessage } from '../../utils/getErrorMessage';
 //---
 
 export function useUpdateProfile() {
+  //! React Query
   const queryClient = useQueryClient();
   const { mutate: updateProfile, isPending: isUpdatingProfile } = useMutation({
     mutationFn: ({ userId, changes, avatarFile, resumeFile }) =>

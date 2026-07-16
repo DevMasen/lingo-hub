@@ -1,15 +1,18 @@
 import { Link, useNavigate } from 'react-router';
-
+import { HiHome, HiOutlineInformationCircle } from 'react-icons/hi2';
 import Logo from './Logo';
 import HomeButton from './HomeButton';
 import Menus from './Menus';
-import { HiHome, HiOutlineInformationCircle } from 'react-icons/hi2';
 //---
 
+//! Global Const Variables
 const iconStyles = 'w-[1.6rem] h-[1.6rem] text-indigo-700 transition-all duration-[0.3s]';
 
 function PageNav() {
+  //! React Router
   const navigate = useNavigate();
+
+  //! Main JSX
   return (
     <nav className="m-3 flex items-center justify-between rounded-lg bg-slate-600/65 px-5 py-3 text-slate-200">
       <Logo />

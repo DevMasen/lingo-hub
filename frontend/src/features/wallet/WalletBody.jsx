@@ -1,24 +1,20 @@
 import { useEffect, useState } from 'react';
-
-import num2persian, { fa2en, moneyFormat } from 'num2persian';
 import { BsBank, BsCheckCircleFill } from 'react-icons/bs';
-
-import PriceItem from './PriceItem';
-
+import num2persian, { fa2en, moneyFormat } from 'num2persian';
 import { useWallet } from './WalletContext';
-
+import PriceItem from './PriceItem';
 import makeNumericInput from '../../utils/makeNumericInput';
 //---
 
-//! Global const var
+//! Global Const Variables
 const prices = [100000, 500000, 1000000, 2000000, 3000000, 5000000];
 
 function WalletBody() {
-  //! Context Data
-  const { setCurrentPrice } = useWallet();
-
   //! Controlled Elements
   const [desiredPriceInput, setDesiredPriceInput] = useState('');
+
+  //! Context
+  const { setCurrentPrice } = useWallet();
 
   //!Effects
   useEffect(
@@ -29,7 +25,7 @@ function WalletBody() {
     [desiredPriceInput, setCurrentPrice]
   );
 
-  //! JSX
+  //! Main JSX
   return (
     <section className="px-5">
       <p className="mt-6 flex items-center gap-3 rounded-xl border border-[var(--color-indigo-500)] px-4 py-2 shadow-md shadow-[var(--color-slate-900)]">

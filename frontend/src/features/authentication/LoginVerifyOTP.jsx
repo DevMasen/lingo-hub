@@ -1,22 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import { AiOutlineEnter } from 'react-icons/ai';
-
 import HomeButton from '../../ui/HomeButton';
 import Error from '../../ui/Error';
 //---
 
-//! Global Styles
+//! Global Const Variables
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
 
 function LoginVerifyOTP() {
-  //? handle errors with react-hook-form and auth.service.js
-  const errors = {};
-
-  //! Local States and Refs
+  //! Local States
   const recoveryCode1Ref = useRef(null);
   const recoveryCode2Ref = useRef(null);
   const recoveryCode3Ref = useRef(null);
@@ -28,6 +23,9 @@ function LoginVerifyOTP() {
   const [input2, setInput2] = useState('');
   const [input3, setInput3] = useState('');
   const [input4, setInput4] = useState('');
+
+  //! React Hook Form
+  const errors = {};
 
   //! Effects
   useEffect(function () {
@@ -50,7 +48,7 @@ function LoginVerifyOTP() {
     // login();
   }
 
-  //! JSX
+  //! Main JSX
   return (
     <form method="PATCH" onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
       <div>

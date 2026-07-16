@@ -1,4 +1,5 @@
 function FileUploader({ className = '', label = '', register, isUpdatingProfile }) {
+  //! Main JSX
   return (
     <>
       <div className={`${className} items-center gap-4 text-center text-[var(--color-slate-200)]`}>
