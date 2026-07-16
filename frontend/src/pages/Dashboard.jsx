@@ -4,12 +4,12 @@ import ReserveHistory from '../features/dashboard/ReserveHistory';
 import News from '../features/dashboard/News';
 //---
 
-//! Global Styles
+//! Global Const Variables
 const sectionPartsStyles =
   'bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] rounded-lg border border-[var(--color-slate-500)] p-3';
 
 function Dashboard() {
-  //! JSX
+  //! Main JSX
   return (
     <div className="grid grid-cols-1 grid-rows-[auto_1fr]">
       <DashboardHeader />

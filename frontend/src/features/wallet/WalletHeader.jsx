@@ -1,4 +1,5 @@
 function WalletHeader() {
+  //! Main JSX
   return (
     <section className="border-b-2 border-[var(--color-slate-700)] px-5 py-3">
       <h2 className="text-lg font-semibold text-[var(--color-slate-300)]"> افزایش وجه </h2>

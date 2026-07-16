@@ -9,9 +9,11 @@ function PanelButton({
   disabled = false,
   type = 'button',
 }) {
+  //! Derived States
   const hasBackground = className?.includes('bg-');
   const hasTextStyle = className?.includes('text-');
 
+  //! Conditional JSX
   if (to.length === 0)
     return (
       <button
@@ -24,6 +26,7 @@ function PanelButton({
       </button>
     );
 
+  //! Main JSX
   return (
     <Link
       to={to}

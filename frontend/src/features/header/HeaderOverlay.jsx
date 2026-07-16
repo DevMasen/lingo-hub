@@ -2,10 +2,10 @@ import { useHeader } from './HeaderContext';
 //---
 
 function HeaderOverlay() {
-  //! Context Data
+  //! Context
   const { isNotificationOpen, toggleNotification, isProfileOpen, toggleProfile } = useHeader();
 
-  //! JSX
+  //! Main JSX
   return (
     <div
       onClick={() => {

@@ -1,14 +1,14 @@
 import { useLatestNews } from './useLatestNews';
-
 import NewsItem from '../dashboard/NewsItem';
-
 import Error from '../../ui/Error';
 import Skeleton from '../../ui/Skeleton';
 //---
 
 function News({ className }) {
+  //! React Query
   const { news, isLoading, error } = useLatestNews(10);
 
+  //! Main JSX
   return (
     <div className={className}>
       <h3 className="border-b border-[var(--color-slate-500)] pb-3 text-lg font-semibold text-[var(--color-slate-400)]">

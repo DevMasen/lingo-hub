@@ -1,13 +1,22 @@
 import { useNavigate, useSearchParams } from 'react-router';
 //---
-//! Global Styles
+//! Global Const Variables
 const publicStyles =
   'text-slate-200  border-b border-[var(--color-slate-800)] transition-all duration-200';
 
-function ReserveTableData({ timePartIndex, userId, roomId, roomName, reservations, onOpenModal }) {
+function ReserveTableData({
+  timePartIndex = 0,
+  userId = '',
+  roomId = 0,
+  roomName = '',
+  reservations = [],
+  onOpenModal = () => {},
+}) {
+  //! React Router
   const navigate = useNavigate();
   const [, setSearchParams] = useSearchParams();
 
+  //! Derived States
   const tableDataStatus = reservations?.find((res) => res.timePart === timePartIndex)?.status;
   const tableDataUserId = reservations?.find((res) => res.timePart === timePartIndex)?.userId;
   const tableDataReservationId = reservations?.find((res) => res.timePart === timePartIndex)?.id;
@@ -17,7 +26,7 @@ function ReserveTableData({ timePartIndex, userId, roomId, roomName, reservation
     navigate(`/reserve/my-reservations?activeTab=1&reservationId=${tableDataReservationId}`);
   }
 
-  //! JSX
+  //! Conditional JSX
   if (
     tableDataStatus === undefined ||
     tableDataUserId === undefined ||
@@ -64,6 +73,8 @@ function ReserveTableData({ timePartIndex, userId, roomId, roomName, reservation
         <span> خارج از سرویس </span>
       </td>
     );
+
+  //! Main JSX
   return (
     <td className={publicStyles + ' cursor-not-allowed bg-rose-600 text-[var(--color-red-100)]'}>
       <span> رزرو شده </span>

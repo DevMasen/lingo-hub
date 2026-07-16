@@ -3,30 +3,22 @@ import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { BsListCheck } from 'react-icons/bs';
 import { AiOutlineEnter } from 'react-icons/ai';
-
-import { useKey } from '../../hooks/useKey';
 import { useLogin } from './useLogin';
-
+import { useKey } from '../../hooks/useKey';
 import HomeButton from '../../ui/HomeButton';
 import Error from '../../ui/Error';
 import HidePasswordButton from '../../ui/HidePasswordButton';
 import SpinnerMini from '../../ui/SpinnerMini';
 //---
 
-//! Global Styles
+//! Global Const Variables
 const inputContainerStyles = 'flex items-center justify-between w-full rounded-md bg-slate-300';
 const inputStyles =
   'w-full rounded-md bg-inherit p-3 text-slate-800 focus:bg-slate-100 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300 text-sm sm:text-base';
 
 function LoginEmail() {
-  //! Custom Hooks
-  useKey('enter', onSuccess);
-
   //! Local States
   const [isPassHidden, setIsPassHidden] = useState(true);
-
-  //! React Query
-  const { login, isLoggingIn } = useLogin();
 
   //! React Hook Form
   const {
@@ -40,6 +32,13 @@ function LoginEmail() {
     },
   });
 
+  //! React Query
+  const { login, isLoggingIn } = useLogin();
+
+  //! Custom Hooks
+  useKey('enter', onSuccess);
+
+  //! Handlers
   function onSuccess({ email, password } = {}) {
     if (!email || !password) return;
     login({ email, password });
@@ -48,7 +47,7 @@ function LoginEmail() {
     console.error(errors);
   }
 
-  //! JSX
+  //! Main JSX
   return (
     <form onSubmit={handleSubmit(onSuccess, onError)} className="flex flex-col gap-3">
       <div className={`${inputContainerStyles} ${isLoggingIn && 'opacity-50'}`}>

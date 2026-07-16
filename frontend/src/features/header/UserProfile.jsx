@@ -1,16 +1,14 @@
 import { HiOutlineUser } from 'react-icons/hi';
-
 import { useHeader } from './HeaderContext';
-
 import HeaderButton from './HeaderButton';
 import ProfileBox from './ProfileBox';
 //---
 
 function UserProfile() {
-  //! Context Data
+  //! Context
   const { isProfileOpen, toggleProfile } = useHeader();
 
-  //! JSX
+  //! Main JSX
   return (
     <div className={`relative flex items-center ${isProfileOpen ? 'z-[800]' : 'z-40'}`}>
       <HeaderButton onClick={toggleProfile}>

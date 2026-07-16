@@ -1,25 +1,18 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
-
+import { useChangePassword } from './useChangePassword';
 import PanelButton from '../../ui/PanelButton';
 import Error from '../../ui/Error';
-import { useChangePassword } from './useChangePassword';
 //---
 
-//! Global Styles
+//! Global Const Variables
 const rowStyles = 'flex flex-col gap-3 w-full md:flex-row md:items-center';
 const inputStyles = 'bg-inherit outline-none w-full disabled:cursor-not-allowed';
 const hideButtonStyles =
   'text-[var(--color-slate-500)] transition-colors duration-300 hover:text-[var(--color-indigo-700)]';
 
 function PasswordChange() {
-  //! React Query
-  const { changePassword, isChangingPassword } = useChangePassword();
-
-  const inputContainerStyles = `flex items-center rounded-lg border px-3 py-2 h-12 transition-all duration-300 md:min-w-80 focus-within:border-[var(--color-indigo-700)] ${isChangingPassword && 'opacity-50'}`;
-
   //! Local States
   const [isOldHidden, setIsOldHidden] = useState(true);
   const [isNewHidden, setIsNewHidden] = useState(true);
@@ -39,15 +32,22 @@ function PasswordChange() {
     },
   });
 
+  //! React Query
+  const { changePassword, isChangingPassword } = useChangePassword();
+
+  //! Derived States
+  const inputContainerStyles = `flex items-center rounded-lg border px-3 py-2 h-12 transition-all duration-300 md:min-w-80 focus-within:border-[var(--color-indigo-700)] ${isChangingPassword && 'opacity-50'}`;
+
+  //! Handlers
   function onSuccess({ oldPassword, newPassword }) {
     if (!oldPassword || !newPassword) return;
     changePassword({ newPassword: newPassword, currentPassword: oldPassword });
   }
-
   function onError(errors) {
     console.error(errors);
   }
-  //! JSX
+
+  //! Main JSX
   return (
     <div className="border-b border-[var(--color-slate-500)] p-3">
       <form

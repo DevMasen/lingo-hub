@@ -1,28 +1,28 @@
 import { useSearchParams } from 'react-router';
+import toast from 'react-hot-toast';
 import { addDays, format } from 'date-fns';
 import { en2fa } from 'num2persian';
-
-import { useSession } from '../authentication/useSession';
 import { useCreateReservation } from './useCreateReservation';
+import { useSession } from '../authentication/useSession';
 import { useReserveRemainCount } from '../../hooks/useReserveRemainCount';
-
 import Spinner from '../../ui/Spinner';
 import SpinnerMini from '../../ui/SpinnerMini';
 import Error from '../../ui/Error';
 import PanelButton from '../../ui/PanelButton';
-
 import mapTime from '../../utils/mapTime';
-import toast from 'react-hot-toast';
 //---
 
+//! Global Const Variables
+const tomorrow = addDays(new Date(), 1);
+const tomorrowISOString = format(tomorrow, 'yyyy-MM-dd');
+
 function ConfirmReserve({ onCloseModal }) {
+  //! React Router
+  const [searchParams] = useSearchParams();
+
   //! React Query
   const { userId, isLoading: isLoadingSession, error: sessionError } = useSession();
   const { createReservation, isCreatingReservation } = useCreateReservation();
-
-  //! React Router
-  const [searchParams] = useSearchParams();
-  const { startTime, stopTime } = mapTime(+searchParams.get('timePart'));
 
   //! Custom Hooks
   const {
@@ -32,12 +32,9 @@ function ConfirmReserve({ onCloseModal }) {
   } = useReserveRemainCount();
 
   //! Derived States
+  const { startTime, stopTime } = mapTime(+searchParams.get('timePart'));
   const isLoading = isLoadingSession || isLoadingReserveRemainCount;
   const error = sessionError || reserveRemainCountError;
-
-  //! Dates
-  const tomorrow = addDays(new Date(), 1);
-  const tomorrowISOString = format(tomorrow, 'yyyy-MM-dd');
 
   //! Handlers
   function handleReserve() {
@@ -57,14 +54,13 @@ function ConfirmReserve({ onCloseModal }) {
     onCloseModal?.();
   }
 
-  //! JSX
+  //! Conditional JSX
   if (isLoading)
     return (
       <div className="flex h-52 w-60 items-center justify-center sm:w-80">
         <Spinner />
       </div>
     );
-
   if (error)
     return (
       <div className="flex h-52 w-60 items-center justify-center sm:w-80">
@@ -72,6 +68,7 @@ function ConfirmReserve({ onCloseModal }) {
       </div>
     );
 
+  //! Main JSX
   return (
     <div className="w-60 sm:w-full">
       <h2 className="text-lg leading-10 text-[var(--color-slate-200)] sm:whitespace-nowrap sm:text-xl sm:leading-none md:text-2xl">

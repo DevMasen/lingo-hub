@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { en2fa } from 'num2persian';
-
 import mapToPersianMonth from '../../utils/mapToPersianMonth';
 import mapTime from '../../utils/mapTime';
 import { toPersianDate } from '../../utils/toPersianDate';
@@ -20,13 +19,9 @@ function ReserveRecord({
   //! Local States
   const [recordBGColor, setRecordBGColor] = useState('bg-[var(--color-slate-700)]');
 
-  console.log(focusReserveId, reservationId);
-
   //! Derived States
   const { startTime, stopTime } = mapTime(timePart);
-
   const persianDate = date ? toPersianDate(date) : null;
-
   const roomName = rooms?.find((room) => room.id === roomId)?.roomName;
 
   //! Effects
@@ -41,7 +36,7 @@ function ReserveRecord({
     [focusReserveId, reservationId]
   );
 
-  //! JSX
+  //! Main JSX
   return (
     <div
       className={`flex flex-grow justify-between gap-4 rounded-xl bg-opacity-70 p-3 text-sm transition-colors duration-300 sm:text-base ${recordBGColor} ${className}`}

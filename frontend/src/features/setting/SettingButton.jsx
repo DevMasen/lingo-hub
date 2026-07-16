@@ -1,4 +1,5 @@
 function SettingButton({ children, onClick, onOpenModal }) {
+  //! Main JSX
   return (
     <button
       onClick={() => {

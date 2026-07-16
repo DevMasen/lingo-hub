@@ -1,10 +1,14 @@
 import { addDays } from 'date-fns';
 import UserReserveList from './UserReserveList';
 import { toPersianDate } from '../../utils/toPersianDate';
+//---
+
+//! Global Const Variables
+const tomorrow = addDays(new Date(), 1);
+const persianTomorrow = toPersianDate(tomorrow);
 
 function MyReservations() {
-  const tomorrow = addDays(new Date(), 1);
-  const persianTomorrow = toPersianDate(tomorrow);
+  //! Main JSX
   return (
     <div className="m-5">
       <div className="pb-7 text-xl">

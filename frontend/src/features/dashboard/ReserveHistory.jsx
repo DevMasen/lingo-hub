@@ -1,13 +1,12 @@
 import { useUserReservations } from '../reserve/useUserReservations';
-
+import { useRooms } from '../reserve/useRooms';
 import ReserveRecord from '../reserve/ReserveRecord';
-
 import Skeleton from '../../ui/Skeleton';
 import Error from '../../ui/Error';
-import { useRooms } from '../reserve/useRooms';
 //---
 
 function ReserveHistory({ className }) {
+  //! React Query
   const {
     userReservations,
     isLoading: isLoadingReservations,
@@ -15,9 +14,11 @@ function ReserveHistory({ className }) {
   } = useUserReservations();
   const { rooms, isLoading: isLoadingRooms, error: roomsError } = useRooms();
 
+  //! Derived States
   const isLoading = isLoadingReservations || isLoadingRooms;
   const error = reservationsError || roomsError;
 
+  //! Main JSX
   return (
     <div className={className}>
       <h3 className="flex border-b border-[var(--color-slate-500)] pb-3 text-lg font-semibold text-[var(--color-slate-400)]">

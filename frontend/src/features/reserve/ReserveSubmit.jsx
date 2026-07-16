@@ -1,5 +1,4 @@
 import { moneyFormat } from 'num2persian';
-
 import OpenConfirmButton from './OpenConfirmButton';
 import ConfirmPayment from './ConfirmPayment';
 import ConfirmCancel from './ConfirmCancel';
@@ -7,8 +6,10 @@ import Modal from '../../ui/Modal';
 //---
 
 function ReserveSubmit({ reservation, roomId, rooms }) {
+  //! Derived States
   const currentRoomCost = rooms?.find((room) => room.id === roomId)?.reservePricePerHalfHour * 3;
 
+  //! Main JSX
   return (
     <Modal>
       <div className="flex items-center justify-between gap-3 px-4">

@@ -2,18 +2,15 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { HiCheckCircle, HiOutlineClipboardList } from 'react-icons/hi';
 import { CgEnter } from 'react-icons/cg';
-
 import { useSignup } from './useSignup';
-
 import HomeButton from '../../ui/HomeButton';
 import Error from '../../ui/Error';
 import HidePasswordButton from '../../ui/HidePasswordButton';
 import SpinnerMini from '../../ui/SpinnerMini';
-
 import toEnglishDigits from '../../utils/toEnglishDigits';
 //---
 
-//! Global Styles
+//! Global Const Variables
 const inputContainerStyles = 'rounded-md bg-slate-300 text-slate-800 flex';
 const inputStyles =
   'w-full rounded-md bg-inherit px-3 py-3 focus:bg-slate-50 focus:outline-none focus:ring focus:ring-slate-700 focus:ring-offset-1 disabled:cursor-not-allowed transition-all duration-300';
@@ -23,8 +20,6 @@ function SignupForm() {
   //! Local States
   const [isPassHidden, setIsPassHidden] = useState(true);
   const [isPassRepHidden, setIsPassRepHidden] = useState(true);
-
-  const { signup, isSigningUp } = useSignup();
 
   //! React Hook Form
   const {
@@ -46,6 +41,10 @@ function SignupForm() {
     },
   });
 
+  //! React Query
+  const { signup, isSigningUp } = useSignup();
+
+  //! Handlers
   function onSuccess({
     firstName,
     lastName,
@@ -72,11 +71,11 @@ function SignupForm() {
     };
     signup({ email, password, profile: newProfile });
   }
-
   function onError(errors) {
     console.error(errors);
   }
 
+  //! Main JSX
   return (
     <form
       onSubmit={handleSubmit(onSuccess, onError)}

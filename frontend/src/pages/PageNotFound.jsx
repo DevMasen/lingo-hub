@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
-
 import { HiOutlineHome } from 'react-icons/hi';
 //---
 
 function PageNotFound() {
+  //! Main JSX
   return (
     <div dir="ltr" className="flex h-dvh flex-col items-center justify-center gap-4 bg-slate-900">
       <span className="text-5xl text-slate-100">404 : Not Found!</span>

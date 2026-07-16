@@ -1,13 +1,15 @@
-import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-hot-toast';
-
+import { useMutation } from '@tanstack/react-query';
 import { signUp as signupApi } from '../../api/services/auth.service';
-
 import { getErrorMessage } from '../../utils/getErrorMessage';
 //---
+
 export function useSignup() {
+  //! React Router
   const navigate = useNavigate();
+
+  //! React Query
   const { mutate: signup, isPending: isSigningUp } = useMutation({
     mutationFn: ({ email, password, profile }) => signupApi({ email, password, profile }),
     onSuccess: (data) => {

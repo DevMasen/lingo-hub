@@ -4,6 +4,7 @@ import HeroBackground from '../ui/HeroBackground';
 //---
 
 function HomePage() {
+  //! Main JSX
   return (
     <HeroBackground
       src={'/home-bg.png'}

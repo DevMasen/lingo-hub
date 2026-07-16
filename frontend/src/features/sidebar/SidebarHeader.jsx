@@ -1,17 +1,15 @@
 import { Link } from 'react-router';
 import { BsLayoutSidebarInsetReverse } from 'react-icons/bs';
 import { CgClose } from 'react-icons/cg';
-
 import { useSidebar } from './SidebarContext';
-
 import Image from '../../ui/Image';
 //---
 
 function SidebarHeader() {
-  //! Context Data
+  //! Context
   const { isSidebarOpen, toggleSidebar } = useSidebar();
 
-  //! JSX
+  //! Main JSX
   return (
     <div
       className={`flex items-center gap-5 ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b-[1px] border-[var(--color-slate-500)] px-3 py-1`}

@@ -1,4 +1,5 @@
 function ExitNavItem({ children, onOpenModal, className }) {
+  //! Main JSX
   return (
     <li>
       <button className={className} onClick={onOpenModal}>

@@ -1,12 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { submitReservation as submitReservationApi } from '../../api/services/reservations.service';
-
 import { getErrorMessage } from '../../utils/getErrorMessage';
 //---
 
 export function useSubmitReservation() {
+  //! React Query
   const queryClient = useQueryClient();
   const { mutate: submitReservation, isPending: isSubmittingReservation } = useMutation({
     mutationFn: submitReservationApi,
@@ -20,5 +19,6 @@ export function useSubmitReservation() {
       toast.error(message);
     },
   });
+
   return { submitReservation, isSubmittingReservation };
 }

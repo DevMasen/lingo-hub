@@ -3,6 +3,7 @@ import PageNav from '../ui/PageNav';
 //---
 
 function AboutUs() {
+  //! Main JSX
   return (
     <div className="overflow-y-hidden">
       <HeroBackground

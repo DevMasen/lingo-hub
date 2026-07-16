@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-
-import { getReservationsForRoomOnDate } from '../../api/services/reservations.service';
-
 import { useError } from '../../hooks/useError';
+import { getReservationsForRoomOnDate } from '../../api/services/reservations.service';
 //---
 
 export function useReservations(roomId, date) {
+  //! React Query
   const {
     data: reservations,
     isLoading,
@@ -15,6 +14,7 @@ export function useReservations(roomId, date) {
     queryFn: () => getReservationsForRoomOnDate(roomId, date),
   });
 
+  //! Custom Hooks
   useError(error);
 
   return { reservations, isLoading, error };

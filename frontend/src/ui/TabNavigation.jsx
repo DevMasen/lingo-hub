@@ -3,13 +3,13 @@ import { Link, useSearchParams } from 'react-router';
 //---
 
 function TabNavigation({ tabs = [] }) {
-  //! React Router
-  const [searchParams] = useSearchParams();
-
   //! Local States
   const [activeTab, setActiveTab] = useState(0);
 
-  // //! Effects
+  //! React Router
+  const [searchParams] = useSearchParams();
+
+  //! Effects
   useEffect(
     function () {
       if (searchParams.get('activeTab')) setActiveTab(+searchParams.get('activeTab'));
@@ -17,6 +17,8 @@ function TabNavigation({ tabs = [] }) {
     },
     [activeTab, searchParams]
   );
+
+  //! Main JSX
   return (
     <nav className="flex items-center justify-between border-b border-[var(--color-slate-500)] bg-[var(--color-gray-900)] px-4 py-3">
       <ul className="relative flex gap-4 font-semibold text-[var(--color-slate-300)]">

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { HiOutlineSearch } from 'react-icons/hi';
 import HeaderOverlay from './HeaderOverlay';
 //---
@@ -8,7 +7,7 @@ function SearchBar() {
   //! Local States
   const [searchQuery, setSearchQuery] = useState('');
 
-  //! JSX
+  //! Main JSX
   return (
     <>
       {searchQuery.length > 0 && <HeaderOverlay />}

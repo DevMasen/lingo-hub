@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { format, addDays } from 'date-fns';
-
 import { useUserReservations } from './useUserReservations';
 import { useRooms } from './useRooms';
-
 import ReserveRecord from './ReserveRecord';
 import ReserveNotFound from './ReserveNotFound';
 import ReserveSubmit from './ReserveSubmit';
@@ -12,7 +10,18 @@ import Skeleton from '../../ui/Skeleton';
 import Error from '../../ui/Error';
 //---
 
+//! Global Const Variables
+const tomorrow = addDays(new Date(), 1);
+const tomorrowFormatted = format(tomorrow, 'yyyy-MM-dd');
+
 function UserReserveList() {
+  //! Local States
+  const [focusReserveId, setFocusReserveId] = useState(null);
+  const reserveListRef = useRef(null);
+
+  //! React Router
+  const [searchParams] = useSearchParams();
+
   //! React Query
   const {
     userReservations,
@@ -21,23 +30,12 @@ function UserReserveList() {
   } = useUserReservations();
   const { rooms, isLoading: isLoadingRooms, error: roomsError } = useRooms();
 
-  const isLoading = isLoadingReservations || isLoadingRooms;
-  const error = reservationsError || roomsError;
-
-  const tomorrow = addDays(new Date(), 1);
-  const tomorrowFormatted = format(tomorrow, 'yyyy-MM-dd');
+  //! Derived States
   const userTomorrowReservations = userReservations?.filter(
     (reservation) => reservation.reservationDate === tomorrowFormatted
   );
-
-  //! React Router
-  const [searchParams] = useSearchParams();
-
-  //! Local States
-  const [focusReserveId, setFocusReserveId] = useState(null);
-
-  //! Local Element Refs
-  const reserveListRef = useRef(null);
+  const isLoading = isLoadingReservations || isLoadingRooms;
+  const error = reservationsError || roomsError;
 
   //! Effects
   useEffect(
@@ -55,6 +53,7 @@ function UserReserveList() {
     [focusReserveId]
   );
 
+  //! Main JSX
   return (
     <ul
       ref={reserveListRef}

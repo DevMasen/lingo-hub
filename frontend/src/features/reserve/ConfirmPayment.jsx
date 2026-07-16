@@ -1,29 +1,33 @@
+import { useSearchParams } from 'react-router';
 import toast from 'react-hot-toast';
+import { BiWallet } from 'react-icons/bi';
 import { addDays } from 'date-fns';
 import { en2fa, moneyFormat } from 'num2persian';
-import { BiWallet } from 'react-icons/bi';
-
 import { useUpdateBalance } from './useUpdateBalance';
-import { useProfile } from '../setting/useProfile';
 import { useSubmitReservation } from '../reserve/useSubmitReservation';
-
+import { useProfile } from '../setting/useProfile';
 import PanelButton from '../../ui/PanelButton';
 import Spinner from '../../ui/Spinner';
 import Error from '../../ui/Error';
-
 import { toPersianDate } from '../../utils/toPersianDate';
 import mapTime from '../../utils/mapTime';
-import { useSearchParams } from 'react-router';
 //---
 
+//! Global Const Variables
 const valueStyles = 'rounded-xl bg-[var(--color-slate-700)] px-3 py-1';
+const tomorrow = addDays(new Date(), 1);
+const persianTomorrow = toPersianDate(tomorrow);
 
 function ConfirmPayment({ onCloseModal, reservation, rooms }) {
+  //! React Router
+  const [, setSearchParams] = useSearchParams();
+
+  //! React Query
   const { profile, isLoading, error } = useProfile();
   const { updateUserBalance, isUpdatingUserBalance } = useUpdateBalance();
   const { submitReservation, isSubmittingReservation } = useSubmitReservation();
-  const tomorrow = addDays(new Date(), 1);
-  const persianTomorrow = toPersianDate(tomorrow);
+
+  //! Derived States
   const roomName = rooms?.find((room) => room.id === reservation.roomId)?.roomName;
   const reservePricePerHalfHour = Number(
     rooms?.find((room) => room.id === reservation.roomId)?.reservePricePerHalfHour ?? '0'
@@ -31,8 +35,8 @@ function ConfirmPayment({ onCloseModal, reservation, rooms }) {
   const totalPrice = reservePricePerHalfHour * 3;
   const userCreditBalance = Number(profile?.creditBalance ?? '0');
   const { startTime, stopTime } = mapTime(reservation?.timePart);
-  const [, setSearchParams] = useSearchParams();
 
+  //! Handlers
   function handlePayWithWallet() {
     if (userCreditBalance < totalPrice) {
       onCloseModal?.();
@@ -54,13 +58,13 @@ function ConfirmPayment({ onCloseModal, reservation, rooms }) {
     );
   }
 
+  //! Conditional JSX
   if (isLoading)
     return (
       <div className="flex w-60 items-center justify-center sm:w-80">
         <Spinner />
       </div>
     );
-
   if (error)
     return (
       <div className="flex w-60 items-center justify-center sm:w-80">
@@ -68,6 +72,7 @@ function ConfirmPayment({ onCloseModal, reservation, rooms }) {
       </div>
     );
 
+  //! Main JSX
   return (
     <div className="w-60 space-y-5 sm:w-80">
       <h2 className="text-2xl text-[var(--color-slate-200)]">جزئیات رزرو شما:</h2>

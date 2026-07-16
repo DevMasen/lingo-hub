@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-
 import { getErrorMessage } from '../utils/getErrorMessage';
 //---
 
 export function useError(queryError) {
+  //! Effects
   useEffect(() => {
     if (queryError) {
       console.error(queryError);

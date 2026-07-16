@@ -1,19 +1,17 @@
 import { Outlet } from 'react-router';
-
-import { useSidebar } from '../features/sidebar/SidebarContext';
-
 import MainContent from './MainContent';
+import Footer from './Footer';
+import { useSidebar } from '../features/sidebar/SidebarContext';
 import Header from '../features/header/Header';
 import Sidebar from '../features/sidebar/Sidebar';
-import Footer from './Footer';
 import HeaderOverlay from '../features/header/HeaderOverlay';
 //---
 
 function AppLayout() {
-  //! Context Data
+  //! Context
   const { isSidebarOpen } = useSidebar();
 
-  //! JSX
+  //! Main JSX
   return (
     <div
       className={`grid h-full min-h-dvh grid-cols-1 overflow-hidden ${isSidebarOpen ? 'sm:grid-cols-[10rem_1fr] md:grid-cols-[14rem_1fr]' : 'sm:grid-cols-[4rem_1fr]'} bg-[var(--color-slate-900)] text-[var(--color-slate-200)] transition-all duration-300`}

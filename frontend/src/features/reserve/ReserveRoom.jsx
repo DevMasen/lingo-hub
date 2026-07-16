@@ -1,26 +1,27 @@
+import { addDays } from 'date-fns';
+import { en2fa } from 'num2persian';
 import { useRooms } from './useRooms';
 import { useProfile } from '../setting/useProfile';
-import { en2fa } from 'num2persian';
-import { addDays } from 'date-fns';
-
 import ReserveTableRow from './ReserveTableRow';
+import ConfirmReserve from './ConfirmReserve';
 import Spinner from '../../ui/Spinner';
 import Error from '../../ui/Error';
 import Modal from '../../ui/Modal';
-
 import mapTime from '../../utils/mapTime';
 import { toPersianDate } from '../../utils/toPersianDate';
 import { timeParts } from '../../utils/timeParts';
-import ConfirmReserve from './ConfirmReserve';
 //---
 
+//! Global Const Variables
+const tomorrow = addDays(new Date(), 1);
+const persianTomorrow = toPersianDate(tomorrow);
+
 function ReserveRoom() {
+  //! React Query
   const { rooms, isLoading: isLoadingRooms, error: roomsError } = useRooms();
   const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();
 
-  const tomorrow = addDays(new Date(), 1);
-  const persianTomorrow = toPersianDate(tomorrow);
-
+  //! Conditional JSX
   if (roomsError || profileError)
     return (
       <div className="flex items-center justify-center">
@@ -31,7 +32,7 @@ function ReserveRoom() {
       </div>
     );
 
-  //!JSX
+  //! Main JSX
   return (
     <div className="scrollbar overflow-x-auto overflow-y-auto p-5">
       <div className="text-xl">

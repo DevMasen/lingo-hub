@@ -1,14 +1,13 @@
 import { en2fa } from 'num2persian';
-
-import { useSession } from '../authentication/useSession';
 import { useProfile } from './useProfile';
+import { useSession } from '../authentication/useSession';
 import { useReserveRemainCount } from '../../hooks/useReserveRemainCount';
-
 import UserParameter from './UserParameter';
 import Skeleton from '../../ui/Skeleton';
 import Error from '../../ui/Error';
 //---
 
+//! Global Const Variables
 const listItemStyles = 'flex gap-3';
 const skeletonStyles = 'h-10 w-40';
 
@@ -44,14 +43,15 @@ function UserParameterList() {
           ? 'مسدود شده'
           : '';
 
+  //! Conditional JSX
   if (error)
     return (
       <div className="flex items-center justify-center">
-        <Error className="w-full" error={error.message} />
+        <Error className="w-full" error={error?.message} />
       </div>
     );
 
-  //! JSX
+  //! Main JSX
   return (
     <ul className="space-y-7 py-4 text-lg">
       <li className={`${listItemStyles} items-center`}>

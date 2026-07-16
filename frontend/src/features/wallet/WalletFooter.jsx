@@ -1,15 +1,13 @@
 import num2persian from 'num2persian';
-
-import PanelButton from '../../ui/PanelButton';
-
 import { useWallet } from './WalletContext';
+import PanelButton from '../../ui/PanelButton';
 //---
 
 function WalletFooter() {
-  //! Context Data
+  //! Context
   const { currentPrice } = useWallet();
 
-  //! JSX
+  //! Main JSX
   return (
     <section className="flex items-center justify-between gap-3 border-t-2 border-[var(--color-slate-700)] px-5 py-6">
       <div>

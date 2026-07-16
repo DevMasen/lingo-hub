@@ -1,20 +1,20 @@
 import { addDays, format } from 'date-fns';
-
 import { useReservations } from './useReservations';
-
 import ReserveTableData from './ReserveTableData';
 import Modal from '../../ui/Modal';
 import Skeleton from '../../ui/Skeleton';
-
 import { timeParts } from '../../utils/timeParts';
 //---
 
-function ReserveTableRow({ userId, room }) {
-  const tomorrow = addDays(new Date(), 1);
-  const tomorrowISOString = format(tomorrow, 'yyyy-MM-dd');
+//! Global Const Variables
+const tomorrow = addDays(new Date(), 1);
+const tomorrowISOString = format(tomorrow, 'yyyy-MM-dd');
 
+function ReserveTableRow({ userId, room }) {
+  //! React Query
   const { reservations, isLoading, error } = useReservations(room.id, tomorrowISOString);
 
+  //! Conditional JSX
   if (isLoading)
     return (
       <tr>
@@ -26,9 +26,9 @@ function ReserveTableRow({ userId, room }) {
         ))}
       </tr>
     );
-
   if (error) return;
 
+  //! Main JSX
   return (
     <tr>
       <th className="bg-[var(--color-slate-800)] py-5">{room.roomName}</th>

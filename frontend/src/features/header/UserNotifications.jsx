@@ -1,16 +1,13 @@
 import { HiOutlineBell } from 'react-icons/hi';
-
 import { useHeader } from './HeaderContext';
-
 import HeaderButton from './HeaderButton';
-
 //---
 
 function UserNotifications() {
-  //! Context Data
+  //! Context
   const { isNotificationOpen, toggleNotification } = useHeader();
 
-  //! JSX
+  //! Main JSX
   return (
     <div
       className={`relative flex items-center border-r-2 border-[var(--color-slate-600)] pr-4 ${isNotificationOpen ? 'z-[800]' : 'z-50'}`}

@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { HiOutlineHome } from 'react-icons/hi';
-
 import { useSession } from '../features/authentication/useSession';
-
 import FullPage from './FullPage';
 import Spinner from './Spinner';
 import Error from './Error';
@@ -11,9 +9,13 @@ import HomeButton from './HomeButton';
 //---
 
 function ProtectedRoute({ children }) {
+  //! React Router
   const navigate = useNavigate();
+
+  //! React Query
   const { isAuthenticated, isLoading, error } = useSession();
 
+  //! Effects
   useEffect(
     function () {
       if (!isLoading && !isAuthenticated) {
@@ -23,13 +25,13 @@ function ProtectedRoute({ children }) {
     [isAuthenticated, isLoading, navigate]
   );
 
+  //! Conditional JSX
   if (isLoading)
     return (
       <FullPage>
         <Spinner />
       </FullPage>
     );
-
   if (error) {
     return (
       <FullPage>
@@ -41,6 +43,8 @@ function ProtectedRoute({ children }) {
       </FullPage>
     );
   }
+
+  //! Main JSX
   return children;
 }
 

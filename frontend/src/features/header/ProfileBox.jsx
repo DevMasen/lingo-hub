@@ -1,31 +1,30 @@
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import { CgPassword } from 'react-icons/cg';
 import { BiExit } from 'react-icons/bi';
-
 import { useSession } from '../authentication/useSession';
 import { useProfile } from '../setting/useProfile';
-
 import { useHeader } from './HeaderContext';
-
+import ExitButton from './ExitButton';
 import Modal from '../../ui/Modal';
 import ConfirmExit from '../../ui/ConfirmExit';
 import LinkItem from '../../ui/LinkItem';
 import Skeleton from '../../ui/Skeleton';
-import ExitButton from './ExitButton';
 import Image from '../../ui/Image';
 //---
 
+//! Global Const Variables
 const linkItemStyles =
   'flex items-center gap-2 rounded-lg p-3 transition-all duration-300 hover:bg-[var(--color-slate-800)]';
 
 function ProfileBox() {
-  //! Context Data
-  const { toggleProfile } = useHeader();
-
+  //! React Query
   const { email, isLoading: isLoadingSession, error: sessionError } = useSession();
   const { profile, isLoading: isLoadingProfile, error: profileError } = useProfile();
 
-  //!JSX
+  //! Context
+  const { toggleProfile } = useHeader();
+
+  //! Main JSX
   return (
     <>
       {!sessionError && !profileError && (
