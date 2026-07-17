@@ -18,6 +18,7 @@ const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Reservation = lazy(() => import('./pages/Reservation'));
 const Wallet = lazy(() => import('./pages/Wallet'));
+const Resume = lazy(() => import('./pages/Resume'));
 const Setting = lazy(() => import('./pages/Setting'));
 const Support = lazy(() => import('./pages/Support'));
 const LoginEmail = lazy(() => import('./features/authentication/LoginEmail'));
@@ -57,7 +58,7 @@ function App() {
                 <Route path="my-reservations" element={<MyReservations />} />
               </Route>
               <Route path="wallet" element={<Wallet />} />
-              {/* TODO #5: add new route: resume */}
+              <Route path="resume" element={<Resume />} />
               <Route path="setting" element={<Setting />}>
                 <Route index element={<Navigate to="user" replace />} />
                 <Route path="user" element={<UserInfo />} />

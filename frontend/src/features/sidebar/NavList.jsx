@@ -1,7 +1,7 @@
 import { HiOutlineBookOpen } from 'react-icons/hi';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { AiOutlineSetting } from 'react-icons/ai';
-import { BiExit, BiWallet } from 'react-icons/bi';
+import { BiExit, BiFile, BiWallet } from 'react-icons/bi';
 import { useSidebar } from './SidebarContext';
 import NavItem from './NavItem';
 import ExitNavItem from './ExitNavItem';
@@ -49,6 +49,14 @@ function NavList() {
         >
           <BiWallet />
           {isSidebarOpen && <span> افزایش وجه </span>}
+        </NavItem>
+        <NavItem
+          className={`nav-link ${navItemStyles}`}
+          to={'resume'}
+          onClick={() => handleToggleSidebar(isSidebarOpen)}
+        >
+          <BiFile />
+          {isSidebarOpen && <span> رزومه معلم </span>}
         </NavItem>
       </section>
 
