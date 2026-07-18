@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { BsListCheck } from 'react-icons/bs';
 import { AiOutlineEnter } from 'react-icons/ai';
@@ -114,14 +113,6 @@ function LoginEmail() {
             </>
           )}
         </HomeButton>
-      </div>
-      <div className="flex h-6 justify-between px-5 font-medium text-indigo-400">
-        <Link
-          to={isLoggingIn ? '' : '/login/otp'}
-          className={`text-sm transition-colors duration-200 hover:text-indigo-300 sm:text-lg ${isLoggingIn && 'cursor-not-allowed'}`}
-        >
-          فراموشی رمز عبور
-        </Link>
       </div>
       {errors?.email && <Error error={errors.email.message} />}
       {errors?.password && <Error error={errors.password.message} />}
