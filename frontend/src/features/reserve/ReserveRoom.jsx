@@ -7,6 +7,7 @@ import ConfirmReserve from './ConfirmReserve';
 import Spinner from '../../ui/Spinner';
 import Error from '../../ui/Error';
 import Modal from '../../ui/Modal';
+import PanelButton from '../../ui/PanelButton';
 import mapTime from '../../utils/mapTime';
 import { toPersianDate } from '../../utils/toPersianDate';
 import { timeParts } from '../../utils/timeParts';
@@ -34,18 +35,29 @@ function ReserveRoom() {
 
   //! Main JSX
   return (
-    <div className="scrollbar overflow-x-auto overflow-y-auto p-5">
-      <div className="text-xl">
+    <div className="scrollbar flex flex-col overflow-x-auto overflow-y-auto p-5">
+      <div className="text-sm sm:text-xl">
         <span className="font-semibold text-[var(--color-slate-300)]">رزرو اتاق برای تاریخ : </span>
         <span className="rounded-lg bg-[var(--color-slate-800)] px-3 py-1">
           {persianTomorrow.replaceAll('-', '/')}
         </span>
       </div>
       {isLoadingRooms || isLoadingProfile ? (
-        <div className="flex h-full items-center justify-center">
+        <div className="flex items-center justify-center">
           <Spinner />
         </div>
-      ) : profile?.signupStatus === 'confirmed' ? (
+      ) : profile?.signupStatus !== 'confirmed' ? (
+        <div className="flex h-full items-center justify-center font-semibold text-[var(--color-slate-300)]">
+          <span className="sm:text-lg"> امکان دسترسی به این بخش وجود ندارد⛔ </span>
+        </div>
+      ) : profile?.resumeUrl === null ? (
+        <div className="flex h-full flex-col items-center justify-center gap-2 font-semibold text-[var(--color-slate-300)]">
+          <span className="sm:text-lg"> لطفا ابتدا رزومه خود را بارگذاری کنید. </span>
+          <PanelButton className="px-3 py-2 text-sm font-normal text-slate-200" to="/resume">
+            ارسال رزومه
+          </PanelButton>
+        </div>
+      ) : (
         <Modal>
           <table className="mt-6 bg-[linear-gradient(45deg,var(--color-slate-700),var(--color-slate-800))] text-center shadow-lg shadow-[var(--shadow-color)]">
             <thead>
@@ -75,10 +87,6 @@ function ReserveRoom() {
             <ConfirmReserve />
           </Modal.Window>
         </Modal>
-      ) : (
-        <p className="flex h-full items-center justify-center text-xl font-semibold text-[var(--color-slate-300)]">
-          <span> امکان دسترسی به این بخش وجود ندارد⛔ </span>
-        </p>
       )}
     </div>
   );

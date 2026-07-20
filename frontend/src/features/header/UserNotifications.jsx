@@ -18,6 +18,7 @@ function UserNotifications() {
       <div
         className={`absolute left-0 top-9 z-[800] w-64 rounded-lg border-[var(--color-slate-500)] bg-[var(--color-gray-900)] transition-all duration-100 ${isNotificationOpen ? 'h-auto border p-3' : 'h-0 border-0 p-0'}`}
       >
+        {/* TODO#4: Implement this feature using Claud instructions  */}
         {isNotificationOpen && (
           <p className="text-[var(--color-slate-300)]"> پیام خوانده نشده ندارید. </p>
         )}

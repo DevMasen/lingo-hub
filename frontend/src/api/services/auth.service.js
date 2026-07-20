@@ -81,10 +81,15 @@ function toSession(supabaseSession, supabaseUser) {
  * @param {string} params.email
  * @param {string} params.password
  * @param {Omit<import('../types/profile.types').NewProfile, 'id'>} params.profile
+ * @param {string} [params.emailRedirectTo] //where Supabase sends the user after they click the confirmation link e.g. `${window.location.origin}/auth/confirmed`
  * @returns {Promise<{ session: Session | null, profile: import('../types/profile.types').Profile }>}
  */
-export async function signUp({ email, password, profile }) {
-  const { data, error } = await supabase.auth.signUp({ email, password });
+export async function signUp({ email, password, profile, emailRedirectTo }) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: emailRedirectTo ? { emailRedirectTo } : undefined,
+  });
 
   if (error) throw fromSupabaseError(error);
 
@@ -107,12 +112,14 @@ export async function signUp({ email, password, profile }) {
  * link expired).
  *
  * @param {string} email
+ * @param {string} [params.emailRedirectTo] // where Supabase sends the user after they click the confirmation link e.g. `${window.location.origin}/auth/confirmed`
  * @returns {Promise<void>}
  */
-export async function resendEmailConfirmation(email) {
+export async function resendEmailConfirmation(email, { emailRedirectTo } = {}) {
   const { error } = await supabase.auth.resend({
     type: 'signup',
     email,
+    options: emailRedirectTo ? { emailRedirectTo } : undefined,
   });
 
   if (error) throw fromSupabaseError(error);

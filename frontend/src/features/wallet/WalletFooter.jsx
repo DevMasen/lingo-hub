@@ -15,6 +15,7 @@ function WalletFooter() {
         <span> {new Intl.NumberFormat('fa-IR').format(currentPrice)} تومان </span>{' '}
         <span>( {num2persian(currentPrice)} تومان )</span>
       </div>
+      {/* TODO#7: implement this feature when the host and domain was ready */}
       <PanelButton
         disabled={currentPrice < 100000 || currentPrice > 10000000}
         className="whitespace-nowrap px-3 py-2"

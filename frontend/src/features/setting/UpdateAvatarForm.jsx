@@ -104,10 +104,12 @@ function UpdateAvatarForm({ onCloseModal }) {
           />
         </div>
         <FileUploader
+          id="avatar"
           register={register}
-          className={inputContainerStyles}
-          label="انتخاب عکس"
+          registerParams={['avatar']}
+          accept=".png,.jpg"
           isUpdatingProfile={isUpdatingProfile}
+          className={inputContainerStyles}
         />
       </div>
       <div className="flex gap-4">

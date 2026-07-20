@@ -88,55 +88,58 @@ export async function updateProfile(userId, changes, avatarFile, resumeFile) {
 
   if (error1) throw fromSupabaseError(error1);
 
-  if (!avatarFile) return toProfile(data1);
+  if (!avatarFile && !resumeFile) return toProfile(data1);
 
-  // 2. upload avatar to supabase
-  const avatarFileName = `avatar-${data1.id}-${Math.floor(Math.random() * 100000)}`;
+  if (avatarFile) {
+    // 2. upload avatar to supabase
+    const avatarFileName = `avatar-${data1.id}-${Math.floor(Math.random() * 100000)}`;
 
-  const { error: storageError1 } = await supabase.storage
-    .from('avatars')
-    .upload(avatarFileName, avatarFile);
+    const { error: storageError1 } = await supabase.storage
+      .from('avatars')
+      .upload(avatarFileName, avatarFile);
 
-  if (storageError1) throw fromSupabaseError(storageError1);
+    if (storageError1) throw fromSupabaseError(storageError1);
 
-  // 3. update avatar url
+    // 3. update avatar url
 
-  const { data: data2, error: error2 } = await supabase
-    .from('profiles')
-    .update({
-      avatar_url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarFileName}`,
-    })
-    .eq('id', userId)
-    .select()
-    .single();
+    const { data: data2, error: error2 } = await supabase
+      .from('profiles')
+      .update({
+        avatar_url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarFileName}`,
+      })
+      .eq('id', userId)
+      .select()
+      .single();
 
-  if (error2) throw fromSupabaseError(error2);
+    if (error2) throw fromSupabaseError(error2);
+    if (!resumeFile) return toProfile(data2);
+  }
 
-  if (!resumeFile) return toProfileRow(data2);
+  if (resumeFile) {
+    // 4. upload resume to supabase
+    const resumeFileName = `resume-${data1.id}-${Math.floor(Math.random() * 100000)}`;
 
-  // 4. upload resume to supabase
-  const resumeFileName = `resume-${data1.id}-${Math.floor(Math.random() * 100000)}`;
+    const { error: storageError2 } = await supabase.storage
+      .from('resumes')
+      .upload(resumeFileName, resumeFile);
 
-  const { error: storageError2 } = await supabase.storage
-    .from('resumes')
-    .upload(resumeFileName, resumeFile);
+    if (storageError2) throw fromSupabaseError(storageError2);
 
-  if (storageError2) throw fromSupabaseError(storageError2);
+    // 5. update resume url
 
-  // 5. update resume url
+    const { data: data3, error: error3 } = await supabase
+      .from('profiles')
+      .update({
+        resume_url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/resumes/${resumeFileName}`,
+      })
+      .eq('id', userId)
+      .select()
+      .single();
 
-  const { data: data3, error: error3 } = await supabase
-    .from('profiles')
-    .update({
-      resume_url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/resumes/${resumeFileName}`,
-    })
-    .eq('id', userId)
-    .select()
-    .single();
+    if (error3) throw fromSupabaseError(error3);
 
-  if (error3) throw fromSupabaseError(error3);
-
-  return toProfileRow(data3);
+    return toProfileRow(data3);
+  }
 }
 
 /**
