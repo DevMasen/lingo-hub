@@ -1,27 +1,69 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useProfile } from '../features/setting/useProfile';
+import { useUpdateProfile } from '../features/setting/useUpdateProfile';
+import FileUploader from '../ui/FileUploader';
+import PanelButton from '../ui/PanelButton';
+import Error from '../ui/Error';
+import Spinner from '../ui/Spinner';
+import SpinnerMini from '../ui/SpinnerMini';
 //---
 
-//TODO#1: Implement this feature
 function Resume() {
-  const [statusMessage, setStatusMessage] = useState('');
+  //! React Query
+  const { profile, isLoading, error } = useProfile();
+  const { updateProfile, isUpdatingProfile } = useUpdateProfile();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const file = e.currentTarget.elements.resumeFile.files?.[0];
+  //! React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      resume: null,
+      experience: '',
+      explanation: profile?.explanation,
+      ielts: '',
+      toelf: '',
+    },
+  });
 
-    if (!file) {
-      setStatusMessage('لطفاً فایل رزومه خود را بارگذاری کنید.');
-      return;
-    }
-
-    setStatusMessage(`رزومه شما با موفقیت ثبت شد. فایل انتخابی: ${file.name}`);
+  //! Handlers
+  function onSuccess({ resume, experience, explanation, ielts, toelf }) {
+    if (!resume) return;
+    const newProfile = {
+      explanation: `تجربیات : ${experience}, توضیخات تکمیلی : ${explanation}, نمره آیلتس : ${ielts}, نمره تافل : ${toelf}`,
+    };
+    updateProfile({
+      userId: profile?.id,
+      changes: newProfile,
+      avatarFile: null,
+      resumeFile: resume[0],
+    });
   }
+  function onError(errors) {
+    console.error(errors);
+  }
+
+  //!Conditional JSX
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  if (error)
+    return (
+      <div className="flex items-center justify-center">
+        <Error error={error?.message} />
+      </div>
+    );
 
   //! Main JSX
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 p-4 sm:p-6">
       <section className="rounded-2xl bg-[var(--color-slate-800)] p-5 shadow-lg">
-        <h1 className="text-xl font-bold text-[var(--color-slate-200)]">ارسال رزومه معلم</h1>
+        <h1 className="text-xl font-bold text-[var(--color-slate-200)]">ارسال رزومه </h1>
         <p className="mt-2 text-sm leading-7 text-[var(--color-slate-300)]">
           برای ثبت درخواست همکاری، فایل رزومه خود را بارگذاری کنید و در صورت تمایل اطلاعات تکمیلی
           درباره سابقه و مهارت‌های خود را وارد نمایید.
@@ -29,7 +71,7 @@ function Resume() {
       </section>
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSuccess, onError)}
         className="space-y-5 rounded-2xl border border-[var(--color-slate-700)] bg-[var(--color-slate-800)] p-5 shadow-lg"
       >
         <div className="space-y-2">
@@ -39,14 +81,17 @@ function Resume() {
           >
             فایل رزومه <span className="text-red-400">*</span>
           </label>
-          <input
-            id="resumeFile"
-            name="resumeFile"
-            type="file"
+          <FileUploader
+            id="resume"
+            register={register}
+            registerParams={['resume', { required: 'لطفاً فایل رزومه خود را بارگذاری کنید.' }]}
             accept=".pdf,.doc,.docx"
-            required
-            className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)] file:mr-3 file:rounded file:border-0 file:bg-[var(--color-slate-600)] file:px-3 file:py-2 file:text-sm file:text-[var(--color-slate-100)]"
+            isUpdatingProfile={isUpdatingProfile}
+            className={`w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)] file:mr-3 file:rounded file:border-0 file:bg-[var(--color-slate-600)] file:px-3 file:py-2 file:text-sm file:text-[var(--color-slate-100)] ${isUpdatingProfile && 'opacity-50'}`}
           />
+          <p className="text-sm text-[var(--color-slate-300)]">
+            فایل‌های PDF، DOC و DOCX پشتیبانی می‌شوند.
+          </p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
@@ -62,7 +107,27 @@ function Resume() {
               name="experience"
               rows="4"
               placeholder="سابقه آموزشی، دوره‌ها و تجربه‌های قبلی"
-              className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)]"
+              disabled={isUpdatingProfile}
+              className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)] disabled:opacity-50"
+              {...register('experience')}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label
+              className="block text-sm font-semibold text-[var(--color-slate-200)]"
+              htmlFor="explanation"
+            >
+              توضیحات تکمیلی
+            </label>
+            <textarea
+              id="explanation"
+              name="explanation"
+              rows="4"
+              placeholder="گواهی‌ها، مهارت‌های تخصصی و توضیحات اضافی"
+              disabled={isUpdatingProfile}
+              className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)] disabled:opacity-50"
+              {...register('explanation')}
             />
           </div>
 
@@ -78,7 +143,9 @@ function Resume() {
               name="ielts"
               type="text"
               placeholder="مثلاً 7.5"
-              className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)]"
+              disabled={isUpdatingProfile}
+              className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)] disabled:opacity-50"
+              {...register('ielts')}
             />
           </div>
 
@@ -94,45 +161,30 @@ function Resume() {
               name="toefl"
               type="text"
               placeholder="مثلاً 90"
-              className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)]"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label
-              className="block text-sm font-semibold text-[var(--color-slate-200)]"
-              htmlFor="notes"
-            >
-              توضیحات تکمیلی
-            </label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows="4"
-              placeholder="گواهی‌ها، مهارت‌های تخصصی و توضیحات اضافی"
-              className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)]"
+              disabled={isUpdatingProfile}
+              className="w-full rounded-lg border border-[var(--color-slate-600)] bg-[var(--color-slate-700)] px-3 py-2 text-sm text-[var(--color-slate-200)] disabled:opacity-50"
+              {...register('toefl')}
             />
           </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <button
+          <PanelButton
+            disabled={isUpdatingProfile}
             type="submit"
-            className="rounded-lg bg-[var(--color-slate-200)] px-4 py-2 font-semibold text-[var(--color-slate-900)] transition hover:bg-[var(--color-slate-100)]"
+            className="px-3 py-2 text-sm text-slate-200 sm:text-base"
           >
-            ارسال رزومه
-          </button>
-          <p className="text-sm text-[var(--color-slate-300)]">
-            فایل‌های PDF، DOC و DOCX پشتیبانی می‌شوند.
-          </p>
+            {isUpdatingProfile ? (
+              <span className="px-4">
+                <SpinnerMini />
+              </span>
+            ) : (
+              'ارسال رزومه'
+            )}
+          </PanelButton>
         </div>
+        {errors?.resume && <Error error={errors.resume?.message} />}
       </form>
-
-      {statusMessage && (
-        <p className="rounded-lg border border-[var(--color-slate-700)] bg-[var(--color-slate-800)] px-4 py-3 text-sm text-[var(--color-slate-200)]">
-          {statusMessage}
-        </p>
-      )}
     </div>
   );
 }

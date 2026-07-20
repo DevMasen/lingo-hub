@@ -87,6 +87,18 @@ function UserParameterList() {
         )}
       </li>
       <li className={`${listItemStyles} items-center`}>
+        <UserParameter.Label> وضعیت ارسال رزومه : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value
+            bgColor={profile?.resumeUrl ? 'bg-green-500/65' : 'bg-yellow-500/65'}
+          >
+            {profile?.resumeUrl ? 'ارسال شده' : 'ارسال نشده '}
+          </UserParameter.Value>
+        )}
+      </li>
+      <li className={`${listItemStyles} items-center`}>
         <UserParameter.Label> وضعیت ثبت نام : </UserParameter.Label>
         {isLoading ? (
           <Skeleton className={skeletonStyles} />

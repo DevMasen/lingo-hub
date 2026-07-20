@@ -11,7 +11,7 @@ function MyReservations() {
   //! Main JSX
   return (
     <div className="m-5">
-      <div className="pb-7 text-xl">
+      <div className="pb-7 text-sm sm:text-xl">
         <span className="font-semibold text-[var(--color-slate-300)]">
           اتاق های رزرو شده برای تاریخ :{' '}
         </span>

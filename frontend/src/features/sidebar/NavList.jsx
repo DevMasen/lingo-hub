@@ -56,7 +56,7 @@ function NavList() {
           onClick={() => handleToggleSidebar(isSidebarOpen)}
         >
           <BiFile />
-          {isSidebarOpen && <span> رزومه معلم </span>}
+          {isSidebarOpen && <span> رزومه </span>}
         </NavItem>
       </section>
 
