@@ -2,7 +2,6 @@ import HeroBackground from '../ui/HeroBackground';
 import PageNav from '../ui/PageNav';
 //---
 
-//TODO#2: generate this page using AI with a placeholder data
 function AboutUs() {
   //! Main JSX
   return (

@@ -7,6 +7,8 @@ import Menus from './Menus';
 
 //! Global Const Variables
 const iconStyles = 'w-[1.6rem] h-[1.6rem] text-indigo-700 transition-all duration-[0.3s]';
+const linkStyles =
+  'transition-all text-slate-300 duration-300 hover:translate-y-[-3px] hover:scale-110 hover:text-slate-100';
 
 function PageNav() {
   //! React Router
@@ -18,11 +20,17 @@ function PageNav() {
       <Logo />
       <div className="flex gap-5">
         <ul className="hidden items-center gap-6 font-medium sm:flex">
-          <li>
-            <Link to="/home">خانه</Link>
+          <li className={linkStyles}>
+            <Link to="/home" className="group relative">
+              خانه
+              <div className="absolute bottom-0 right-0 h-[2px] w-0 rounded-full bg-slate-200 transition-all duration-300 group-hover:w-full"></div>
+            </Link>
           </li>
-          <li>
-            <Link to="/about-us">درباره ما</Link>
+          <li className={linkStyles}>
+            <Link to="/about-us" className="group relative">
+              درباره ما
+              <div className="absolute bottom-0 right-0 h-[2px] w-0 rounded-full bg-slate-200 transition-all duration-300 group-hover:w-full"></div>
+            </Link>
           </li>
         </ul>
         <HomeButton to={'/login'} className={'rounded-lg px-3 py-2'}>
