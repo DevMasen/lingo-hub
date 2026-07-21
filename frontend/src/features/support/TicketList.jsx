@@ -1,24 +1,26 @@
-import { useTickets } from './useTickets';
+import StatusBadge from './StatusBadge';
+import Error from '../../ui/Error';
+//---
 
-function statusBadge(status) {
-  const base = 'px-2 py-1 rounded-full text-xs';
-  if (status === 'open') return <span className={base + ' bg-green-600'}>باز</span>;
-  if (status === 'pending') return <span className={base + ' bg-yellow-500'}>در دست بررسی</span>;
-  if (status === 'closed') return <span className={base + ' bg-slate-600'}>بسته شده</span>;
-  return <span className={base + ' bg-slate-600'}>{status}</span>;
-}
+function SupportList() {
+  // const { tickets, isLoading, error } = useTickets();
+  const tickets = [];
+  const isLoading = false;
+  const error = undefined;
 
-export default function SupportList() {
-  const { tickets, isLoading } = useTickets();
-
-  if (isLoading)
-    return <div className="p-4">در حال بارگذاری تیکت ها...</div>;
+  if (isLoading) return <div className="p-4">در حال بارگذاری تیکت ها...</div>;
+  if (error)
+    return (
+      <div>
+        <Error error={error.message} />
+      </div>
+    );
 
   if (!tickets.length)
     return <div className="p-4">تیکتی وجود ندارد. اولین تیکت را ارسال کنید!</div>;
 
   return (
-    <div className="p-4 overflow-auto">
+    <div className="overflow-auto p-4">
       <table className="w-full table-auto text-sm">
         <thead>
           <tr className="text-left text-[var(--color-slate-300)]">
@@ -32,7 +34,9 @@ export default function SupportList() {
             <tr key={t.id} className="border-b border-[var(--color-slate-600)]">
               <td className="py-3">{t.id}</td>
               <td className="py-3">{t.subject}</td>
-              <td className="py-3">{statusBadge(t.status)}</td>
+              <td className="py-3">
+                <StatusBadge status={t.status} />
+              </td>
             </tr>
           ))}
         </tbody>
@@ -40,3 +44,5 @@ export default function SupportList() {
     </div>
   );
 }
+
+export default SupportList;

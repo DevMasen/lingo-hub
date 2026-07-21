@@ -1,6 +1,4 @@
-// src/api/mappers/support.mapper.js
-// Placeholder mapper file. For now tickets are already camelCase. Keep the
-// file so swapping to Supabase or Django later is straightforward.
+// src/api/mappers/ticket.mapper.js
 
 export function toTicket(row) {
   return {
@@ -17,7 +15,6 @@ export function toTickets(rows) {
 }
 
 export function toTicketRow(ticket) {
-  // If switching to Supabase this will convert camelCase -> snake_case.
   return {
     subject: ticket.subject,
     body: ticket.body,
