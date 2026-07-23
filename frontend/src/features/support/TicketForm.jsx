@@ -1,3 +1,6 @@
+import PanelButton from '../../ui/PanelButton';
+//---
+
 function TicketForm() {
   // const { createTicket, isCreatingTicket } = useCreateTicket();
   const isCreatingTicket = false;
@@ -6,26 +9,31 @@ function TicketForm() {
     <form className="flex flex-col gap-3 p-4">
       <label className="flex flex-col">
         <span className="mb-2 text-sm">موضوع</span>
-        <input placeholder="موضوع تیکت" className="rounded-md bg-[var(--color-slate-700)] p-2" />
+        <input
+          placeholder="موضوع تیکت"
+          maxLength={30}
+          className="rounded-md border border-[var(--color-slate-700)] bg-[var(--color-slate-700)] p-2 outline-none transition-all duration-300 focus:border-indigo-600"
+        />
       </label>
 
       <label className="flex flex-col">
         <span className="mb-2 text-sm">متن</span>
         <textarea
           placeholder="توضیحات بیشتر (اختیاری)"
+          maxLength={300}
           rows={6}
-          className="rounded-md bg-[var(--color-slate-700)] p-2"
+          className="rounded-md border border-[var(--color-slate-700)] bg-[var(--color-slate-700)] p-2 outline-none focus:border-indigo-600"
         />
       </label>
 
       <div className="flex justify-end">
-        <button
+        <PanelButton
           type="submit"
           disabled={isCreatingTicket}
-          className="rounded-md bg-indigo-500 px-4 py-2 text-white disabled:opacity-60"
+          className="px-3 py-2 text-sm text-slate-200 sm:text-base"
         >
           ارسال
-        </button>
+        </PanelButton>
       </div>
     </form>
   );

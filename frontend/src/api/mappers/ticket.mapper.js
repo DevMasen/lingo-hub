@@ -1,12 +1,14 @@
 // src/api/mappers/ticket.mapper.js
 
+import '../types/ticket.types';
+
 export function toTicket(row) {
   return {
     id: row.id,
+    userId: row.user_id,
     subject: row.subject,
-    body: row.body,
     status: row.status,
-    createdAt: row.created_at || row.createdAt,
+    body: row.body,
   };
 }
 
@@ -16,8 +18,9 @@ export function toTickets(rows) {
 
 export function toTicketRow(ticket) {
   return {
+    user_id: ticket.userId,
     subject: ticket.subject,
-    body: ticket.body,
     status: ticket.status,
+    body: ticket.body,
   };
 }

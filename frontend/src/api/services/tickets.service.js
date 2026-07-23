@@ -1,27 +1,37 @@
 // src/api/services/tickets.service.js
 
-export async function getTickets() {
-  const tickets = [
-    { id: 1001, subject: 'ورود به حساب کاربری', status: 'open', createdAt: '2026-07-20T12:00:00Z' },
-    { id: 1002, subject: 'پرداخت ناموفق', status: 'closed', createdAt: '2026-07-19T09:30:00Z' },
-    { id: 1003, subject: 'درخواست حذف حساب', status: 'pending', createdAt: '2026-07-18T15:10:00Z' },
-  ];
+import { supabase } from '../supabase';
+import { fromSupabaseError } from '../errors/apiError';
+import { toTicket, toTickets, toTicketRow } from '../mappers/ticket.mapper';
 
-  return Promise.resolve(tickets);
+/**
+ *
+ * @param {string} userId - UUID
+ * @returns {Promise<import('../types/ticket.types').Ticket[]>}
+ */
+
+export async function getUserTickets(userId) {
+  const { data, error } = await supabase
+    .from('tickets')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+
+  if (error) throw fromSupabaseError(error);
+
+  return toTickets(data);
 }
 
 /**
  *
- * @param {{ subject: string, body: string }} payload
+ * @param {import('../types/ticket.types').NewTicket} ticket
+ * @returns {Promise<import('../types/ticket.types').Ticket}
  */
-export async function createTicket(payload) {
-  const created = {
-    id: Date.now(),
-    subject: payload.subject,
-    body: payload.body,
-    status: 'open',
-    createdAt: new Date().toISOString(),
-  };
+export async function createTicket(ticket) {
+  const row = toTicketRow(ticket);
+  const { data, error } = await supabase.from('tickets').insert(row).select().single();
 
-  return Promise.resolve(created);
+  if (error) throw fromSupabaseError(error);
+
+  return toTicket(data);
 }
