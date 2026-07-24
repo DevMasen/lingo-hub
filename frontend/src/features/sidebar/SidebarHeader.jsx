@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
 import { BsLayoutSidebarInsetReverse } from 'react-icons/bs';
-import { CgClose } from 'react-icons/cg';
 import { useSidebar } from './SidebarContext';
 import Image from '../../ui/Image';
+import { AiFillCloseCircle } from 'react-icons/ai';
 //---
 
 function SidebarHeader() {
@@ -33,10 +33,10 @@ function SidebarHeader() {
         <BsLayoutSidebarInsetReverse className="h-[20px] w-[20px] text-[var(--color-slate-500)] transition-all duration-300 hover:text-[var(--color-indigo-700)]" />
       </button>
       <button
-        className="flex items-center justify-center rounded-md p-1 text-center text-2xl text-[var(--color-red-700)] transition-all duration-200 hover:translate-y-[-2px] hover:bg-[var(--color-slate-700)] sm:hidden"
+        className="flex items-center justify-center rounded-md p-1 text-center text-xl text-[var(--color-slate-500)] transition-all duration-200 hover:translate-y-[-2px] hover:text-[var(--color-red-700)] sm:hidden"
         onClick={toggleSidebar}
       >
-        <CgClose />
+        <AiFillCloseCircle />
       </button>
     </div>
   );
