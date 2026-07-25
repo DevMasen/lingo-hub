@@ -51,7 +51,7 @@ function Toggle({ id }) {
   //! Main JSX
   return (
     <HomeButton className="rounded-lg p-1" onClick={handleToggle}>
-      <HiEllipsisVertical className="h-[2rem] w-[2rem] text-slate-200" />
+      <HiEllipsisVertical className="h-[1.75rem] w-[1.75rem] text-slate-200" />
     </HomeButton>
   );
 }
@@ -80,7 +80,7 @@ function List({ children, id }) {
   //! Main JSX
   return createPortal(
     <ul
-      className={`fixed left-8 top-[5.5rem] z-[100] rounded-md bg-slate-900/90 text-slate-200 shadow-md shadow-slate-500`}
+      className={`fixed left-8 top-[5.5rem] z-[100] rounded-md bg-slate-900/90 text-slate-200`}
       ref={ref}
     >
       {children}

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router';
+import { useSidebar } from '../features/sidebar/SidebarContext';
 import MainContent from './MainContent';
 import Footer from './Footer';
-import { useSidebar } from '../features/sidebar/SidebarContext';
 import Header from '../features/header/Header';
 import Sidebar from '../features/sidebar/Sidebar';
 import HeaderOverlay from '../features/header/HeaderOverlay';
@@ -14,7 +14,7 @@ function AppLayout() {
   //! Main JSX
   return (
     <div
-      className={`grid h-full min-h-dvh grid-cols-1 overflow-hidden ${isSidebarOpen ? 'sm:grid-cols-[10rem_1fr] md:grid-cols-[14rem_1fr]' : 'sm:grid-cols-[4rem_1fr]'} bg-[var(--color-slate-900)] text-[var(--color-slate-200)] transition-all duration-300`}
+      className={`grid h-dvh min-h-dvh grid-cols-1 overflow-hidden ${isSidebarOpen ? 'sm:grid-cols-[10rem_1fr] md:grid-cols-[14rem_1fr]' : 'sm:grid-cols-[4rem_1fr]'} bg-[var(--color-slate-900)] text-[var(--color-slate-200)] transition-all duration-300`}
     >
       <div className="fixed right-0 top-0 z-[900] sm:hidden">
         {isSidebarOpen && <HeaderOverlay />}
@@ -22,7 +22,9 @@ function AppLayout() {
       <Sidebar />
       <MainContent>
         <Header />
-        <Outlet />
+        <div className="min-h-0 overflow-y-auto">
+          <Outlet />
+        </div>
         <Footer />
       </MainContent>
     </div>

@@ -11,7 +11,7 @@ function WalletBalance() {
 
   //! Main JSX
   return (
-    <div className="ml-3 hidden items-center gap-2 rounded-lg border border-[var(--color-slate-500)] p-2 md:flex">
+    <div className="ml-3 hidden items-center gap-2 rounded-lg border border-[var(--color-slate-500)] p-2 sm:flex">
       <BiWallet className="h-6 w-6 text-[var(--color-slate-200)]" />
       {isLoading ? (
         <Skeleton className="h-4 w-16" />

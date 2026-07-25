@@ -7,7 +7,7 @@ function HeroBackground({ src, placeholderSrc, children }) {
 
   //! Main JSX
   return (
-    <div style={{ position: 'relative', overflow: 'hidden' }} className="h-dvh">
+    <div style={{ position: 'relative', overflow: 'hidden' }} className="min-h-dvh">
       <div
         style={{
           position: 'absolute',

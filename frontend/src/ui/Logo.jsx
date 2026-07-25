@@ -18,7 +18,7 @@ function Logo() {
           className="w-14 rounded-lg sm:w-16"
         />
 
-        <h1 className="text-xl font-semibold text-[var(--color-slate-300)]"> لینگوهاب </h1>
+        <h1 className="text-xl font-semibold text-slate-300"> لینگوهاب </h1>
       </NavLink>
     </div>
   );

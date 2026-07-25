@@ -1,4 +1,4 @@
-import { en2fa } from 'num2persian';
+import { en2fa, moneyFormat } from 'num2persian';
 import { useProfile } from './useProfile';
 import { useSession } from '../authentication/useSession';
 import { useReserveRemainCount } from '../../hooks/useReserveRemainCount';
@@ -112,6 +112,14 @@ function UserParameterList() {
           <Skeleton className={skeletonStyles} />
         ) : (
           <UserParameter.Value>{en2fa(reserveRemainCount)}</UserParameter.Value>
+        )}
+      </li>
+      <li className={`${listItemStyles} items-center`}>
+        <UserParameter.Label> موجودی کیف پول : </UserParameter.Label>
+        {isLoading ? (
+          <Skeleton className={skeletonStyles} />
+        ) : (
+          <UserParameter.Value> {moneyFormat(profile?.creditBalance)} تومان</UserParameter.Value>
         )}
       </li>
     </ul>

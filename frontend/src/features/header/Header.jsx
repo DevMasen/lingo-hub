@@ -17,7 +17,7 @@ function Header() {
       {(isNotificationOpen || isProfileOpen) && <HeaderOverlay />}
       <div className="flex items-center justify-between gap-3 pl-3">
         <button className="block sm:hidden" onClick={toggleSidebar}>
-          <HiOutlineMenu className="text-2xl text-[var(--color-slate-500)] transition-colors duration-300 hover:text-[var(--color-slate-200)]" />
+          <HiOutlineMenu className="text-2xl text-[var(--color-slate-200)] transition-colors duration-300 hover:text-[var(--color-slate-200)]" />
         </button>
         <SearchBar />
       </div>

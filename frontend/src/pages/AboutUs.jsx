@@ -3,6 +3,7 @@ import HomeButton from '../ui/HomeButton';
 import PageNav from '../ui/PageNav';
 //---
 
+//! Global Const Variables
 const aboutHighlights = [
   {
     title: 'هدف ما',
@@ -21,7 +22,7 @@ const aboutHighlights = [
 function AboutUs() {
   //! Main JSX
   return (
-    <div className="min-h-dvh overflow-y-auto">
+    <div className="w-full">
       <HeroBackground
         src={'/aboutus-bg.png'}
         placeholderSrc={
@@ -29,8 +30,8 @@ function AboutUs() {
         }
       >
         <PageNav />
-        <main className="flex items-center justify-center px-4 pb-10 pt-6 sm:px-6 sm:pt-4">
-          <section className="w-full max-w-4xl rounded-[2rem] border border-white/15 bg-slate-800/70 p-6 shadow-2xl shadow-slate-950/35 backdrop-blur-sm sm:p-8 lg:p-10">
+        <main className="flex min-h-full items-center justify-center px-4 pb-10 pt-6 sm:px-6 sm:pt-4">
+          <section className="w-full max-w-4xl overflow-y-auto rounded-[2rem] border border-white/15 bg-slate-800/70 p-6 shadow-2xl shadow-slate-950/35 backdrop-blur-sm sm:p-8 lg:p-10">
             <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-2xl">
                 <p className="text-sm font-semibold tracking-[0.3em] text-indigo-300">
