@@ -18,26 +18,29 @@ function PageNav() {
   return (
     <nav className="m-3 flex items-center justify-between rounded-lg bg-slate-600/65 px-5 py-3 text-slate-200">
       <Logo />
-      <div className="flex gap-5">
-        <ul className="hidden items-center gap-6 font-medium sm:flex">
-          <li className={linkStyles}>
-            <Link to="/home" className="group relative">
-              خانه
-              <div className="absolute bottom-0 right-0 h-[2px] w-0 rounded-full bg-slate-200 transition-all duration-300 group-hover:w-full"></div>
-            </Link>
-          </li>
-          <li className={linkStyles}>
-            <Link to="/about-us" className="group relative">
-              درباره ما
-              <div className="absolute bottom-0 right-0 h-[2px] w-0 rounded-full bg-slate-200 transition-all duration-300 group-hover:w-full"></div>
-            </Link>
-          </li>
-        </ul>
-        <HomeButton to={'/login'} className={'rounded-lg px-3 py-2'}>
-          ورود / ثبت‌نام
-        </HomeButton>
-      </div>
       <Menus>
+        <div className="flex gap-5">
+          <ul className="hidden items-center gap-6 font-medium sm:flex">
+            <li className={linkStyles}>
+              <Link to="/home" className="group relative">
+                خانه
+                <div className="absolute bottom-0 right-0 h-[2px] w-0 rounded-full bg-slate-200 transition-all duration-300 group-hover:w-full"></div>
+              </Link>
+            </li>
+            <li className={linkStyles}>
+              <Link to="/about-us" className="group relative">
+                درباره ما
+                <div className="absolute bottom-0 right-0 h-[2px] w-0 rounded-full bg-slate-200 transition-all duration-300 group-hover:w-full"></div>
+              </Link>
+            </li>
+          </ul>
+          <HomeButton
+            to={'/login'}
+            className={'whitespace-nowrap rounded-lg px-3 py-2 text-xs sm:text-base'}
+          >
+            ورود / ثبت‌نام
+          </HomeButton>
+        </div>
         <Menus.Menu>
           <Menus.Toggle id={'homeMenu'} />
           <Menus.List id={'homeMenu'}>

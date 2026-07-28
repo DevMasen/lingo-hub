@@ -5,8 +5,8 @@ function Main() {
   //! Main JSX
   return (
     <main className="flex flex-col items-center justify-center text-center">
-      <section className="mt-28 px-5 text-slate-200">
-        <h1 className="text-4xl font-bold sm:text-7xl"> آکادمی زبان لینگوهاب </h1>
+      <section className="mt-10 h-full px-5 text-slate-200">
+        <h1 className="text-4xl font-bold sm:text-6xl"> آکادمی زبان لینگوهاب </h1>
         <h2 className="mt-8 font-mono text-lg font-semibold sm:text-2xl">
           اینجا زبان مزه دیگه ای می‌ده!😉{' '}
         </h2>

@@ -14,7 +14,7 @@ function AppLayout() {
   //! Main JSX
   return (
     <div
-      className={`grid h-dvh min-h-dvh grid-cols-1 overflow-hidden ${isSidebarOpen ? 'sm:grid-cols-[10rem_1fr] md:grid-cols-[14rem_1fr]' : 'sm:grid-cols-[4rem_1fr]'} bg-[var(--color-slate-900)] text-[var(--color-slate-200)] transition-all duration-300`}
+      className={`grid min-h-dvh grid-cols-1 ${isSidebarOpen ? 'sm:grid-cols-[10rem_1fr] md:grid-cols-[14rem_1fr]' : 'sm:grid-cols-[4rem_1fr]'} bg-[var(--color-slate-900)] text-[var(--color-slate-200)] transition-all duration-300`}
     >
       <div className="fixed right-0 top-0 z-[900] sm:hidden">
         {isSidebarOpen && <HeaderOverlay />}
@@ -22,9 +22,7 @@ function AppLayout() {
       <Sidebar />
       <MainContent>
         <Header />
-        <div className="min-h-0 overflow-y-auto">
-          <Outlet />
-        </div>
+        <Outlet />
         <Footer />
       </MainContent>
     </div>

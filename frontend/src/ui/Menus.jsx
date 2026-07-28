@@ -51,7 +51,7 @@ function Toggle({ id }) {
   //! Main JSX
   return (
     <HomeButton className="rounded-lg p-1" onClick={handleToggle}>
-      <HiEllipsisVertical className="h-[1.75rem] w-[1.75rem] text-slate-200" />
+      <HiEllipsisVertical className="h-[1.25rem] w-[1.25rem] text-slate-200" />
     </HomeButton>
   );
 }
@@ -103,7 +103,7 @@ function Button({ children, icon, onClick }) {
   return (
     <li>
       <button
-        className="flex w-full items-center gap-[1.6rem] border-0 border-transparent bg-transparent bg-none px-[2.4rem] py-[1.2rem] text-left text-xl transition-all duration-[0.2s] hover:bg-slate-800/90"
+        className="flex w-full items-center gap-[1rem] border-0 border-transparent bg-transparent bg-none px-[2rem] py-[0.75rem] text-left text-sm transition-all duration-[0.2s] hover:bg-slate-800/90"
         onClick={handleClick}
       >
         {icon} <span>{children}</span>
