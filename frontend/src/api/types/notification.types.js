@@ -28,7 +28,7 @@
  * @property {'reservation'|'wallet'|'system'} type
  * @property {string} [createdAt]
  * @property {string} title
- * @property {string} body
+ * @property {string} [body]
  */
 
 export {};
