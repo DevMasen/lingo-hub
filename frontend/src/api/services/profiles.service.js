@@ -102,11 +102,13 @@ export async function updateProfile(userId, changes, avatarFile, resumeFile) {
 
     // 3. update avatar url
 
+    const row = toProfileUpdateRow({
+      avatarUrl: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarFileName}`,
+    });
+
     const { data: data2, error: error2 } = await supabase
       .from('profiles')
-      .update({
-        avatar_url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/avatars/${avatarFileName}`,
-      })
+      .update(row)
       .eq('id', userId)
       .select()
       .single();
@@ -127,18 +129,20 @@ export async function updateProfile(userId, changes, avatarFile, resumeFile) {
 
     // 5. update resume url
 
+    const row = toProfileUpdateRow({
+      resumeUrl: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/resumes/${resumeFileName}`,
+    });
+
     const { data: data3, error: error3 } = await supabase
       .from('profiles')
-      .update({
-        resume_url: `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/resumes/${resumeFileName}`,
-      })
+      .update(row)
       .eq('id', userId)
       .select()
       .single();
 
     if (error3) throw fromSupabaseError(error3);
 
-    return toProfileRow(data3);
+    return toProfile(data3);
   }
 }
 

@@ -10,6 +10,7 @@
 /**
  * @typedef {Object} Profile
  * @property {string} id - UUID, matches auth.users.id
+ * @property {'user'|'admin'} role
  * @property {string} firstName
  * @property {string} lastName
  * @property {string} phoneNumber
@@ -34,14 +35,9 @@
  * @property {string} firstName
  * @property {string} lastName
  * @property {string} phoneNumber
- * @property {string} [language]
- * @property {string} [level]
+ * @property {string} language
+ * @property {string} level
  * @property {string} [explanation]
- * @property {'confirmed'|'pending'|'rejected'} [signupStatus]
- * @property {number} [creditBalance]
- * @property {number} [maxReserveCount]
- * @property {string} [avatarUrl]
- * @property {string} [resumeUrl]
  */
 
 export {};

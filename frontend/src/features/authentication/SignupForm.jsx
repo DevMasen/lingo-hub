@@ -63,11 +63,6 @@ function SignupForm() {
       language,
       level,
       explanation,
-      signupStatus: 'pending',
-      creditBalance: 0,
-      maxReserveCount: 3,
-      avatarUrl: '',
-      resumeUrl: '',
     };
     signup({ email, password, profile: newProfile });
   }

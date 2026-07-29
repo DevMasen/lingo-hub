@@ -8,6 +8,7 @@
 export function toProfile(row) {
   return {
     id: row.id,
+    role: row.role,
     firstName: row.first_name,
     lastName: row.last_name,
     phoneNumber: row.phone_number,
@@ -41,11 +42,6 @@ export function toProfileRow(profile) {
     language: profile.language,
     level: profile.level,
     explanation: profile.explanation,
-    signup_status: profile.signupStatus,
-    credit_balance: profile.creditBalance,
-    max_reserve_count: profile.maxReserveCount,
-    avatar_url: profile.avatarUrl,
-    resume_url: profile.resumeUrl,
   };
 }
 
@@ -60,15 +56,10 @@ export function toProfileUpdateRow(partialProfile) {
 
   if (partialProfile.firstName !== undefined) row.first_name = partialProfile.firstName;
   if (partialProfile.lastName !== undefined) row.last_name = partialProfile.lastName;
-  if (partialProfile.phoneNumber !== undefined) row.phone_number = partialProfile.phoneNumber;
-  if (partialProfile.language !== undefined) row.language = partialProfile.language;
-  if (partialProfile.level !== undefined) row.level = partialProfile.level;
   if (partialProfile.explanation !== undefined) row.explanation = partialProfile.explanation;
-  if (partialProfile.signupStatus !== undefined) row.signup_status = partialProfile.signupStatus;
   if (partialProfile.creditBalance !== undefined) row.credit_balance = partialProfile.creditBalance;
   if (partialProfile.maxReserveCount !== undefined)
-    row.max_reserve_count = partialProfile.maxReserveCount;
-  if (partialProfile.avatarUrl !== undefined) row.avatar_url = partialProfile.avatarUrl;
+    if (partialProfile.avatarUrl !== undefined) row.avatar_url = partialProfile.avatarUrl;
   if (partialProfile.resumeUrl !== undefined) row.resume_url = partialProfile.resumeUrl;
 
   return row;
