@@ -11,7 +11,7 @@
  * @property {number} id
  * @property {string} roomName
  * @property {number} reservePricePerHalfHour - in Tomans
- * @property {'active'|'out_of_service'} [status]
+ * @property {'active'|'out_of_service'} status
  */
 
 /**
