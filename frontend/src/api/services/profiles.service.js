@@ -121,10 +121,15 @@ export async function updateProfile(userId, changes, avatarFile, resumeFile) {
     // 4. upload resume to supabase
     const resumeFileName = `resume-${data1.id}-${Math.floor(Math.random() * 100000)}`;
 
-    const { data: storageData, error: storageError2 } = await supabase.storage
+    const { error: storageError2 } = await supabase.storage
+      .from('resumes')
+      .upload(resumeFileName, resumeFile);
+    if (storageError2) throw fromSupabaseError(storageError2);
+
+    const { data: storageData, error: storageError3 } = await supabase.storage
       .from('resumes')
       .createSignedUrl(resumeFileName, 60 * 10);
-    if (storageError2) throw fromSupabaseError(storageError2);
+    if (storageError3) throw fromSupabaseError(storageError3);
 
     // 5. update resume url
 

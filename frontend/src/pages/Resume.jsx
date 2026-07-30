@@ -22,7 +22,7 @@ function Resume() {
     defaultValues: {
       resume: null,
       experience: '',
-      explanation: profile?.explanation,
+      explanation: '',
       ielts: '',
       toelf: '',
     },
