@@ -17,9 +17,8 @@ function UserNotifications() {
         <HiOutlineBell className="h-8 w-8 rounded-xl p-1 text-[var(--color-slate-200)] transition-all duration-300 hover:bg-[var(--color-slate-800)] hover:text-[var(--color-indigo-700)]" />
       </HeaderButton>
       <div
-        className={`absolute left-0 top-9 z-[800] w-96 rounded-lg border-[var(--color-slate-500)] bg-[var(--color-gray-900)] transition-all duration-100 ${isNotificationOpen ? 'h-auto border p-3' : 'h-0 border-0 p-0'}`}
+        className={`absolute left-[-5rem] top-9 z-[800] w-80 rounded-lg border-[var(--color-slate-500)] bg-[var(--color-gray-900)] transition-all duration-100 sm:left-0 sm:w-96 ${isNotificationOpen ? 'h-auto border p-3' : 'h-0 border-0 p-0'}`}
       >
-        {/* TODO#4: Implement this feature using Claud instructions  */}
         {isNotificationOpen && <NotificationBox />}
       </div>
     </div>
